@@ -21,11 +21,9 @@ class Tile:
                        'bottom': None,
                        'left': None,
                        'right': None }
-    self.verts = [None]*8
-    self.faces = { 'top': None,
-                   'bottom': None,
-                   'left': None,
-                   'right': None }
+
+    self.verts = self.init_verts()
+    self.faces = self.init_faces()
 
   def set_neighbors(self, **kwargs):
     if 'top' in kwargs:
@@ -36,6 +34,27 @@ class Tile:
       self.neighbors['left'] = kwargs['left']
     if 'right' in kwargs:
       self.neighbors['right'] = kwargs['right']
+
+  def blend(self, interval, ratio):
+    return (1 - ratio) * interval[0] + ratio * interval[1]
+
+  def set_neighbor_vert(self, neighbor_keys, index, value):
+    tile = self
+    for key in neighbor_keys:
+      if not tile.neighbors[key]:
+        return None
+      tile = tile.neighbors[key]
+    tile.verts[index] = value
+
+class HexTile(Tile):
+  def init_verts(self):
+    return [None]*8
+
+  def init_faces(self):
+    return { 'top': None,
+             'bottom': None,
+             'left': None,
+             'right': None }
 
   def calculate_verts(self):
     #  0...1
@@ -128,17 +147,6 @@ class Tile:
       bvert = self.bm.verts.new(co)
       self.verts[5] = bvert
 
-  def blend(self, interval, ratio):
-    return (1 - ratio) * interval[0] + ratio * interval[1]
-
-  def set_neighbor_vert(self, neighbor_keys, index, value):
-    tile = self
-    for key in neighbor_keys:
-      if not tile.neighbors[key]:
-        return None
-      tile = tile.neighbors[key]
-    tile.verts[index] = value
-
   def calculate_faces(self):
     #        top
     #
@@ -210,6 +218,7 @@ class Tile:
 class Tessagon:
   def __init__(self, f, **kwargs):
     self.f = f
+    self.tile_class = self.init_tile_class()
     self.u_range = self.v_range = None
     self.u_num = self.v_num = None
     self.bm = None
@@ -247,8 +256,8 @@ class Tessagon:
         v_ratio1 = float(v + 1) / self.v_num
         v0 = self.v_range[0] * (1.0 - v_ratio0) + self.v_range[1] * v_ratio0
         v1 = self.v_range[0] * (1.0 - v_ratio1) + self.v_range[1] * v_ratio1
-        self.tiles[u][v] = Tile(self.f, u_range=[u0, u1], v_range=[v0, v1],
-                                bm=self.bm)
+        self.tiles[u][v] = self.tile_class(self.f, u_range=[u0, u1], v_range=[v0, v1],
+                                           bm=self.bm)
 
   def initialize_neighbors(self):
     for u in range(self.u_num):
@@ -273,3 +282,7 @@ class Tessagon:
       for v in range(self.v_num):
         self.tiles[u][v].calculate_faces()
     bmesh.ops.recalc_face_normals(self.bm, faces=self.bm.faces)
+
+class HexTessagon(Tessagon):
+  def init_tile_class(self):
+    return HexTile
