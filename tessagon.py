@@ -215,6 +215,125 @@ class HexTile(Tile):
                                                    self.neighbors['bottom'].verts[4],
                                                    self.neighbors['bottom'].verts[2]])
 
+class TriTile(Tile):
+  def init_verts(self):
+    return [None]*5
+
+  def init_faces(self):
+    return { 'top1': None,
+             'top2': None,
+             'bottom1': None,
+             'bottom2': None,
+             'left': None,
+             'right': None }
+
+  def calculate_verts(self):
+    #  0.|.1   This is the topology of the tile.
+    #  |\|/|   (Not a Dead Kennedy's logo ...).
+    #  |.2.|
+    #  |/|\|   Here's how multiple ones fit together ...
+    #  3.|.4
+
+    #  0.|.1---0.|.1
+    #  |\|/|   |\|/|
+    #  |.2.|   |.2.|
+    #  |/|\|   |/|\|
+    #  3.|.4---3.|.4 That X thingy in the middle tells us that
+    #  | | |\ /| | | vert zero is the same vert as a number of other verts
+    #  | | | X | | | on neighboring tiles.
+    #  | | |/ \| | |
+    #  0.|.1---0.|.1
+    #  |\|/|   |\|/|
+    #  |.2.|   |.2.|
+    #  |/|\|   |/|\|
+    #  3.|.4---3.|.4
+
+    self.vert_0()
+    self.vert_2()
+
+  def vert_0(self):
+    if not self.verts[0]:
+      u = self.u_range[0]
+      v = self.v_range[0]
+      co = self.f(u,v)
+      bvert = self.bm.verts.new(co)
+      self.verts[0] = bvert
+      self.set_neighbor_vert(['left'], 1, bvert)
+      self.set_neighbor_vert(['top'], 3, bvert)
+      self.set_neighbor_vert(['left', 'top'], 4, bvert)
+
+  def vert_2(self):
+    if not self.verts[2]:
+      u = self.blend(self.u_range, 0.5)
+      v = self.blend(self.v_range, 0.5)
+      co = self.f(u,v)
+      bvert = self.bm.verts.new(co)
+      self.verts[2] = bvert
+
+  def calculate_faces(self):
+    #     top1   top2
+    #        0.|.1
+    #        |\|/|         top1 and top2 faces are only added if there is a top
+    #   left |.2.| right   neighbor.
+    #        |/|\|         bottom1 and bottom2 faces are only added if there is a
+    #        3.|.4         bottom neighbor.
+    #  bottom1   bottom2
+
+    self.top1_face()
+    self.top2_face()
+    self.left_face()
+    self.right_face()
+    self.bottom1_face()
+    self.bottom2_face()
+
+  def top1_face(self):
+    if self.neighbors['top']:
+      if self.faces['top1']:
+        return
+      self.faces['top1'] = self.neighbors['top'].faces['bottom1'] = [None]
+      self.faces['top1'][0] = self.bm.faces.new([self.verts[0],
+                                                 self.verts[2],
+                                                 self.neighbors['top'].verts[2]])
+  def top2_face(self):
+    if self.neighbors['top']:
+      if self.faces['top2']:
+        return
+      self.faces['top2'] = self.neighbors['top'].faces['bottom2'] = [None]
+      self.faces['top2'][0] = self.bm.faces.new([self.verts[2],
+                                                 self.verts[1],
+                                                 self.neighbors['top'].verts[2]])
+
+  def left_face(self):
+    if self.faces['left']:
+      return
+    self.faces['left'] = self.bm.faces.new([self.verts[0],
+                                            self.verts[3],
+                                            self.verts[2]])
+
+  def right_face(self):
+    if self.faces['right']:
+      return
+    self.faces['right'] = self.bm.faces.new([self.verts[2],
+                                             self.verts[4],
+                                             self.verts[1]])
+
+  def bottom1_face(self):
+    if self.neighbors['bottom']:
+      if self.faces['bottom1']:
+        return
+      self.faces['bottom1'] = self.neighbors['bottom'].faces['top1'] = [None]
+      self.faces['top1'][0] = self.bm.faces.new([self.verts[3],
+                                                 self.verts[2],
+                                                 self.neighbors['bottom'].verts[2]])
+  def bottom2_face(self):
+    if self.neighbors['bottom']:
+      if self.faces['bottom2']:
+        return
+      self.faces['bottom2'] = self.neighbors['bottom'].faces['top2'] = [None]
+      self.faces['bottom2'][0] = self.bm.faces.new([self.verts[4],
+                                                 self.verts[2],
+                                                 self.neighbors['bottom'].verts[2]])
+
 class Tessagon:
   def __init__(self, f, **kwargs):
     self.f = f
@@ -286,3 +405,7 @@ class Tessagon:
 class HexTessagon(Tessagon):
   def init_tile_class(self):
     return HexTile
+
+class TriTessagon(Tessagon):
+  def init_tile_class(self):
+    return TriTile
