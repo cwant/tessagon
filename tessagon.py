@@ -167,53 +167,55 @@ class HexTile(Tile):
     self.right_face()
     self.bottom_face()
 
+  def add_face_if_verts_present(self, verts):
+    for vert in verts:
+      if not vert:
+        return None
+    return self.bm.faces.new(verts)
+
   def top_face(self):
-    if self.neighbors['top']:
-      if self.faces['top']:
-        return
-      self.faces['top'] = self.neighbors['top'].faces['bottom'] = [None]
-      self.faces['top'][0] = self.bm.faces.new([self.verts[0],
-                                                self.verts[2],
-                                                self.verts[4],
-                                                self.verts[3],
-                                                self.verts[1],
-                                                self.neighbors['top'].verts[5]])
+    if not self.neighbors['top'] or self.faces['top']:
+      return
+    face = self.add_face_if_verts_present([self.verts[0],
+                                           self.verts[2],
+                                           self.verts[4],
+                                           self.verts[3],
+                                           self.verts[1],
+                                           self.neighbors['top'].verts[5]])
+    self.faces['top'] = self.neighbors['top'].faces['bottom'] = [face]
 
   def left_face(self):
-    if self.neighbors['left']:
-      if self.faces['left']:
-        return
-      self.faces['left'] = self.neighbors['left'].faces['right'] = [None]
-      self.faces['left'][0] = self.bm.faces.new([self.verts[2],
-                                                 self.verts[4],
-                                                 self.verts[5],
-                                                 self.verts[6],
-                                                 self.neighbors['left'].verts[5],
-                                                 self.neighbors['left'].verts[4]])
+    if not self.neighbors['left'] or self.faces['left']:
+      return
+    face = self.add_face_if_verts_present([self.verts[2],
+                                           self.verts[4],
+                                           self.verts[5],
+                                           self.verts[6],
+                                           self.neighbors['left'].verts[5],
+                                           self.neighbors['left'].verts[4]])
+    self.faces['left'] = self.neighbors['left'].faces['right'] = [face]
 
   def right_face(self):
-    if self.neighbors['right']:
-      if self.faces['right']:
-        return
-      self.faces['right'] = self.neighbors['right'].faces['left'] = [None]
-      self.faces['right'][0] = self.bm.faces.new([self.verts[7],
-                                                  self.verts[5],
-                                                  self.verts[4],
-                                                  self.verts[3],
-                                                  self.neighbors['right'].verts[4],
-                                                  self.neighbors['right'].verts[5]])
+    if not self.neighbors['right'] or self.faces['right']:
+      return
+    face = self.add_face_if_verts_present([self.verts[7],
+                                           self.verts[5],
+                                           self.verts[4],
+                                           self.verts[3],
+                                           self.neighbors['right'].verts[4],
+                                           self.neighbors['right'].verts[5]])
+    self.faces['right'] = self.neighbors['right'].faces['left'] = [None]
 
   def bottom_face(self):
-    if self.neighbors['bottom']:
-      if self.faces['bottom']:
-        return
-      self.faces['bottom'] = self.neighbors['bottom'].faces['top'] = [None]
-      self.faces['bottom'][0] = self.bm.faces.new([self.verts[6],
-                                                   self.verts[5],
-                                                   self.verts[7],
-                                                   self.neighbors['bottom'].verts[3],
-                                                   self.neighbors['bottom'].verts[4],
-                                                   self.neighbors['bottom'].verts[2]])
+    if not self.neighbors['bottom'] or self.faces['bottom']:
+      return
+    face = self.add_face_if_verts_present([self.verts[6],
+                                           self.verts[5],
+                                           self.verts[7],
+                                           self.neighbors['bottom'].verts[3],
+                                           self.neighbors['bottom'].verts[4],
+                                           self.neighbors['bottom'].verts[2]])
+    self.faces['bottom'] = self.neighbors['bottom'].faces['top'] = [face]
 
 class TriTile(Tile):
   def init_verts(self):
@@ -341,6 +343,8 @@ class Tessagon:
     self.u_range = self.v_range = None
     self.u_num = self.v_num = None
     self.bm = None
+    self.u_cyclic = True
+    self.v_cyclic = True
     if 'u_range' in kwargs:
       self.u_range = kwargs['u_range']
     if 'v_range' in kwargs:
@@ -353,6 +357,10 @@ class Tessagon:
       self.v_num = kwargs['v_num']
     if not self.u_num or not self.v_num:
       raise ValueError("Make sure u_num and v_num intervals are set")
+    if 'u_cyclic' in kwargs:
+      self.u_cyclic = kwargs['u_cyclic']
+    if 'v_cyclic' in kwargs:
+      self.v_cyclic = kwargs['v_cyclic']
 
     self.tiles = [[None for i in range(self.v_num)] for j in range(self.u_num)]
     self.bm = bmesh.new()
@@ -386,10 +394,23 @@ class Tessagon:
         v_prev = (v - 1) % self.v_num
         v_next = (v + 1) % self.v_num
         tile = self.tiles[u][v]
-        tile.set_neighbors(left=self.tiles[u_prev][v],
-                           right=self.tiles[u_next][v],
-                           top=self.tiles[u][v_prev],
-                           bottom=self.tiles[u][v_next])
+        if not self.u_cyclic and u == 0:
+          left = None
+        else:
+          left = self.tiles[u_prev][v]
+        if not self.v_cyclic and v == 0:
+          top = None
+        else:
+          top = self.tiles[u][v_prev]
+        if not self.u_cyclic and u == self.u_num - 1:
+          right = None
+        else:
+          right=self.tiles[u_next][v]
+        if not self.v_cyclic and v == self.v_num - 1:
+          bottom = None
+        else:
+          bottom=self.tiles[u][v_next]
+        tile.set_neighbors(left=left, right=right, top=top, bottom=bottom)
         
   def calculate_verts(self):
     for u in range(self.u_num):
