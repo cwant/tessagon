@@ -38,204 +38,242 @@ class Tile:
   def blend(self, interval, ratio):
     return (1 - ratio) * interval[0] + ratio * interval[1]
 
-  def set_neighbor_vert(self, neighbor_keys, index, value):
+  def get_vert(self, vert_index):
+    return self.verts[vert_index]
+
+  def set_vert(self, vert_index, value):
+    self.verts[vert_index] = value
+
+  def get_face(self, face_index):
+    return self.faces[face_index]
+
+  def set_face(self, face_index, value):
+    self.faces[face_index] = value
+
+  def get_neighbor_path(self, neighbor_keys):
     tile = self
     for key in neighbor_keys:
       if not tile.neighbors[key]:
         return None
       tile = tile.neighbors[key]
-    tile.verts[index] = value
+    return tile
 
-class HexTile(Tile):
-  def init_verts(self):
-    return [None]*8
+  def get_neighbor_vert(self, neighbor_keys, neighbor_vert_index):
+    tile = self.get_neighbor_path(neighbor_keys)
+    if not tile:
+      return None
+    return tile.get_vert(neighbor_vert_index)
 
-  def init_faces(self):
-    return { 'top': None,
-             'bottom': None,
-             'left': None,
-             'right': None }
+  def add_vert(self, index, u, v):
+    if self.get_vert(index):
+      return None
+    co = self.f(u,v)
+    vert = self.bm.verts.new(co)
+    self.set_vert(index, vert)
+    return vert
 
-  def calculate_verts(self):
-    #  0...1
-    #  |...|   This is the topology of the tile.
-    #  2...3   The numbers are the verts we want to make,
-    #  .\./.   and the lines are the edges between faces.
-    #  ..4..   We order our verts going in typical reading order
-    #  ..|..   (each line from top to bottom going left to right).
-    #  ..5..   Verts are only created if a neighboring tile can
-    #  ./.\.   have a face, check out this expanded ASCII art to get
-    #  6...7   a sense of how the hexagons fit with adjacent tiles ...
+  def set_equivalent_vert(self, neighbor_keys, neighbor_vert_index, vert):
+    if not vert:
+      return None
+    tile = self.get_neighbor_path(neighbor_keys)
+    if not tile:
+      return None
+    tile.set_vert(neighbor_vert_index, vert)
 
-    # 0...1---0...1
-    # |...|   |...|
-    # 2...3---2...3
-    # .\./.   .\./.
-    # ..4..   ..4..
-    # ..|..   ..|..
-    # ..5..   ..5..
-    # ./.\.   ./.\.
-    # 6...7---6...7  This illustates which vertices are
-    # |   |\ /|   |  equivalent to vertices on neighboring
-    # |   | X |   |  faces. As such, this reduces which verts we
-    # |   |/ \|   |  have to calculate.
-    # 0...1---0...1
-    # |...|   |...|
-    # 2...3---2...3
-    # .\./.   .\./.
-    # ..4..   ..4..
-    # ..|..   ..|..
-    # ..5..   ..5..
-    # ./.\.   ./.\.
-    # 6...7---6...7
-    self.vert_0()
-    self.vert_2()
-    self.vert_4()
-    self.vert_5()
-
-  def vert_0(self):
-    # Vert 0 gets created if a top or left neighbor.
-    # It is top left corner.
-    # If left neighbor, it gets added there as Vert 1
-    # If top neighbor, it gets added there as Vert 6
-    # If top-left neighbor, it gets added there as Vert 7
-    if not self.verts[0]:
-      if self.neighbors['left'] or self.neighbors['top']:
-        u = self.u_range[0]
-        v = self.v_range[0]
-        co = self.f(u,v)
-        bvert = self.bm.verts.new(co)
-        self.verts[0] = bvert
-        self.set_neighbor_vert(['left'], 1, bvert)
-        self.set_neighbor_vert(['top'], 6, bvert)
-        self.set_neighbor_vert(['left', 'top'], 7, bvert)
-
-  def vert_2(self):
-    # Vert 2 gets created if a top or left neighbor.
-    # It is 0.25 down left edge
-    # If left neighbor, it gets added there too as Vert 3
-    if not self.verts[2]:
-      if self.neighbors['left'] or self.neighbors['top']:
-        u = self.u_range[0]
-        v = self.blend(self.v_range, 0.25)
-        co = self.f(u,v)
-        bvert = self.bm.verts.new(co)
-        self.verts[2] = bvert
-        self.set_neighbor_vert(['left'], 3, bvert)
-
-  def vert_4(self):
-    # Verts 4 gets created if there is a left, right, or top neighbor.
-    # Vert 4 is 0.5 in the u interval.
-    # Vert 4 is 0.5 in the v interval
-    if self.neighbors['left'] or self.neighbors['right'] or \
-       self.neighbors['top']:
-      u = self.blend(self.u_range, 0.5)
-      v = self.blend(self.v_range, 0.5)
-      co = self.f(u,v)
-      bvert = self.bm.verts.new(co)
-      self.verts[4] = bvert
-
-  def vert_5(self):
-    # Verts 4 and 5 get created if there is a left, right, or bottom neighbor.
-    # Vert 5 is 0.5 in the u interval.
-    # Vert 5 is 0.75 in the v intervalx
-    if self.neighbors['left'] or self.neighbors['right'] or \
-       self.neighbors['bottom']:
-      u = self.blend(self.u_range, 0.5)
-      v = self.blend(self.v_range, 0.75)
-      co = self.f(u,v)
-      bvert = self.bm.verts.new(co)
-      self.verts[5] = bvert
-
-  def calculate_faces(self):
-    #        top
-    #
-    #       0...1
-    #       |...|
-    #       2...3
-    #       .\./.
-    # left  ..4.. right
-    #       ..|..
-    #       ..5..
-    #       ./.\.
-    #       6...7
-    #
-    #      bottom
-    #
-    self.top_face()
-    self.left_face()
-    self.right_face()
-    self.bottom_face()
-
-  def add_face_if_verts_present(self, verts):
+  def add_face(self, index, verts):
+    if self.get_face(index):
+      return None
     for vert in verts:
       if not vert:
         return None
-    return self.bm.faces.new(verts)
+    face = self.bm.faces.new(verts)
+    self.set_face(index, face)
+    return face
 
-  def top_face(self):
-    if not self.neighbors['top'] or self.faces['top']:
-      return
-    face = self.add_face_if_verts_present([self.verts[0],
-                                           self.verts[2],
-                                           self.verts[4],
-                                           self.verts[3],
-                                           self.verts[1],
-                                           self.neighbors['top'].verts[5]])
-    self.faces['top'] = self.neighbors['top'].faces['bottom'] = [face]
+  def set_equivalent_face(self, neighbor_keys, neighbor_face_index, face):
+    tile = self.get_neighbor_path(neighbor_keys)
+    if not tile:
+      return None
+    tile.set_face(neighbor_face_index, face)
 
-  def left_face(self):
-    if not self.neighbors['left'] or self.faces['left']:
-      return
-    face = self.add_face_if_verts_present([self.verts[2],
-                                           self.verts[4],
-                                           self.verts[5],
-                                           self.verts[6],
-                                           self.neighbors['left'].verts[5],
-                                           self.neighbors['left'].verts[4]])
-    self.faces['left'] = self.neighbors['left'].faces['right'] = [face]
+class EquivalentCornersTile(Tile):
+  def init_faces(self):
+    return { 'middle': None,
+             'lefttop': None,
+             'leftbottom': None,
+             'rightbottom': None,
+             'righttop': None }
 
-  def right_face(self):
-    if not self.neighbors['right'] or self.faces['right']:
-      return
-    face = self.add_face_if_verts_present([self.verts[7],
-                                           self.verts[5],
-                                           self.verts[4],
-                                           self.verts[3],
-                                           self.neighbors['right'].verts[4],
-                                           self.neighbors['right'].verts[5]])
-    self.faces['right'] = self.neighbors['right'].faces['left'] = [None]
+  def calculate_faces(self):
+    self.middle_face()
+    self.lefttop_face()
+    self.leftbottom_face()
+    self.rightbottom_face()
+    self.righttop_face()
 
-  def bottom_face(self):
-    if not self.neighbors['bottom'] or self.faces['bottom']:
-      return
-    face = self.add_face_if_verts_present([self.verts[6],
-                                           self.verts[5],
-                                           self.verts[7],
-                                           self.neighbors['bottom'].verts[3],
-                                           self.neighbors['bottom'].verts[4],
-                                           self.neighbors['bottom'].verts[2]])
-    self.faces['bottom'] = self.neighbors['bottom'].faces['top'] = [face]
+  def leftbottom_face(self):
+    tile = self.get_neighbor_path(['bottom'])
+    if not tile:
+      return None
+    tile.lefttop_face()
+
+  def rightbottom_face(self):
+    tile = self.get_neighbor_path(['bottom', 'right'])
+    if not tile:
+      return None
+    tile.lefttop_face()
+
+  def righttop_face(self):
+    tile =  self.neighbors['right']
+    if not tile:
+      return None
+    tile.lefttop_face()
+
+class HexTile(EquivalentCornersTile):
+  def init_verts(self):
+    return { 'top': None,
+             'lefttop': None,
+             'leftbottom': None,
+             'bottom': None,
+             'rightbottom': None,
+             'righttop': None
+    }
+
+  def calculate_verts(self):
+    #  ..|..   Topology:
+    #  ..0..
+    #  ./.\.   0 = top
+    #  1...2   1 = lefttop
+    #  |...|   2 = righttop
+    #  3...4   3 = leftbottom
+    #  .\./.   4 = rightbottom
+    #  ..5..   6 = bottom 
+    #  ..|.. 
+
+    # ..|..   ..|..
+    # ..0..   ..0..
+    # ./.\.   ./.\.
+    # 1...2 = 1...2
+    # |...|   |...|
+    # 3...4 = 3...4
+    # .\./.   .\./.
+    # ..5..   ..5..
+    # ..|..   ..|.. This illustates which vertices are
+    #   |   F   |     equivalent to vertices on neighboring
+    #   |   A   |     faces. As such, this reduces which verts we
+    #   |   C   |     have to calculate.
+    # ..|.. E ..|..
+    # ..0..   ..0..
+    # ./.\.   ./.\.
+    # 1...2 = 1...2
+    # |...|   |...|
+    # 3...4 = 3...4
+    # .\./.   .\./.
+    # ..5..   ..5..
+    # ..|..   ..|..
+    self.top_vert()
+    self.lefttop_vert()
+    self.leftbottom_vert()
+    self.bottom_vert()
+    self.rightbottom_vert()
+    self.righttop_vert()
+
+  def top_vert(self):
+    self.add_vert('top', \
+                  self.blend(self.u_range, 0.5),
+                  self.blend(self.v_range, 1.0/6.0))
+
+  def lefttop_vert(self):
+    vert = self.add_vert('lefttop', \
+                         self.u_range[0],
+                         self.blend(self.v_range, 1.0/3.0))
+    self.set_equivalent_vert(['left'], 'righttop', vert)
+
+  def leftbottom_vert(self):
+    vert = self.add_vert('leftbottom', \
+                         self.u_range[0],
+                         self.blend(self.v_range, 2.0/3.0))
+    self.set_equivalent_vert(['left'], 'rightbottom', vert)
+
+  def bottom_vert(self):
+    self.add_vert('bottom',
+                  self.blend(self.u_range, 0.5),
+                  self.blend(self.v_range, 5.0/6.0))
+
+  def rightbottom_vert(self):
+    vert = self.add_vert('rightbottom',
+                         self.u_range[1],
+                         self.blend(self.v_range, 2.0/3.0))
+    self.set_equivalent_vert(['right'], 'leftbottom', vert)
+
+  def righttop_vert(self):
+    vert = self.add_vert('righttop',
+                         self.u_range[1],
+                         self.blend(self.v_range, 1.0/3.0))
+    self.set_equivalent_vert(['right'], 'lefttop', vert)
+
+  #
+  #         .....o...
+  #         ..../.\....
+  #   LEFTTOP../...\.RIGHTTOP
+  #         ../.....\..
+  #         ./.......\.
+  #         o.........o
+  #         |.MIDDLE..|
+  #         o.........o    
+  #         .\..... ./.
+  #         ..\...../..
+  # LEFTBOTTOM.\.../.RIGHTBOTTOM
+  #         ....\./....
+  #         .....o.....
+  #
+
+  def middle_face(self):
+    self.add_face('middle', [self.get_vert('top'),
+                             self.get_vert('lefttop'),
+                             self.get_vert('leftbottom'),
+                             self.get_vert('bottom'),
+                             self.get_vert('rightbottom'),
+                             self.get_vert('righttop')])
+        
+  def lefttop_face(self):
+    face = self.add_face('lefttop', \
+                         [self.get_vert('lefttop'),
+                          self.get_vert('top'),
+                          self.get_neighbor_vert(['top'], 'bottom'),
+                          self.get_neighbor_vert(['top'], 'leftbottom'),
+                          self.get_neighbor_vert(['top', 'left'], 'bottom'),
+                          self.get_neighbor_vert(['left'], 'top')])
+
+    self.set_equivalent_face(['top'], 'leftbottom', face)
+    self.set_equivalent_face(['top', 'left'], 'rightbottom', face)
+    self.set_equivalent_face(['left'], 'righttop', face)
 
 class TriTile(Tile):
   def init_verts(self):
-    return [None]*5
+    return { 'lefttop': None,
+             'righttop': None,
+             'middle': None,
+             'leftbottom': None,
+             'rightbottom': None }
 
   def init_faces(self):
-    return { 'top1': None,
-             'top2': None,
-             'bottom1': None,
-             'bottom2': None,
+    return { 'lefttop': None,
+             'righttop': None,
+             'leftbottom': None,
+             'rightbottom': None,
              'left': None,
              'right': None }
 
   def calculate_verts(self):
     #  0.|.1   This is the topology of the tile.
     #  |\|/|   (Not a Dead Kennedy's logo ...).
-    #  |.2.|
-    #  |/|\|   Here's how multiple ones fit together ...
-    #  3.|.4
-
+    #  |.2.|   0 = lefttop
+    #  |/|\|   1 = righttop
+    #  3.|.4   2 = middle
+    #          3 = leftbottom
+    #          4 = rightbottom
+    #           
     #  0.|.1---0.|.1
     #  |\|/|   |\|/|
     #  |.2.|   |.2.|
@@ -250,91 +288,100 @@ class TriTile(Tile):
     #  |/|\|   |/|\|
     #  3.|.4---3.|.4
 
-    self.vert_0()
-    self.vert_2()
+    self.lefttop_vert()
+    self.righttop_vert()
+    self.middle_vert()
+    self.leftbottom_vert()
+    self.rightbottom_vert()
 
-  def vert_0(self):
-    if not self.verts[0]:
-      u = self.u_range[0]
-      v = self.v_range[0]
-      co = self.f(u,v)
-      bvert = self.bm.verts.new(co)
-      self.verts[0] = bvert
-      self.set_neighbor_vert(['left'], 1, bvert)
-      self.set_neighbor_vert(['top'], 3, bvert)
-      self.set_neighbor_vert(['left', 'top'], 4, bvert)
+  def lefttop_vert(self):
+    vert = self.add_vert('lefttop',
+                         self.u_range[0],
+                         self.v_range[0])
+    self.set_equivalent_vert(['left'], 'righttop', vert)
+    self.set_equivalent_vert(['top'], 'leftbottom', vert)
+    self.set_equivalent_vert(['left', 'top'], 'rightbottom', vert)
 
-  def vert_2(self):
-    if not self.verts[2]:
-      u = self.blend(self.u_range, 0.5)
-      v = self.blend(self.v_range, 0.5)
-      co = self.f(u,v)
-      bvert = self.bm.verts.new(co)
-      self.verts[2] = bvert
+  def righttop_vert(self):
+    vert = self.add_vert('righttop',
+                         self.u_range[1],
+                         self.v_range[0])
+    self.set_equivalent_vert(['right'], 'lefttop', vert)
+    self.set_equivalent_vert(['top'], 'rightbottom', vert)
+    self.set_equivalent_vert(['right', 'top'], 'leftbottom', vert)
+
+  def middle_vert(self):
+    self.add_vert('middle',
+                  self.blend(self.u_range, 0.5),
+                  self.blend(self.v_range, 0.5))
+
+  def leftbottom_vert(self):
+    vert = self.add_vert('leftbottom',
+                         self.u_range[0],
+                         self.v_range[1])
+    self.set_equivalent_vert(['left'], 'rightbottom', vert)
+    self.set_equivalent_vert(['bottom'], 'lefttop', vert)
+    self.set_equivalent_vert(['left', 'bottom'], 'righttop', vert)
+
+  def rightbottom_vert(self):
+    vert = self.add_vert('rightbottom',
+                         self.u_range[1],
+                         self.v_range[1])
+    self.set_equivalent_vert(['right'], 'leftbottom', vert)
+    self.set_equivalent_vert(['bottom'], 'righttop', vert)
+    self.set_equivalent_vert(['right', 'bottom'], 'lefttop', vert)
 
   def calculate_faces(self):
-    #     top1   top2
-    #        0.|.1
-    #        |\|/|         top1 and top2 faces are only added if there is a top
-    #   left |.2.| right   neighbor.
-    #        |/|\|         bottom1 and bottom2 faces are only added if there is a
-    #        3.|.4         bottom neighbor.
-    #  bottom1   bottom2
+    #     lefttop   righttop
+    #           0.|.1
+    #           |\|/|
+    #      left |.2.| right   
+    #           |/|\|         
+    #           3.|.4         
+    #  leftbottom   rightbottom
 
-    self.top1_face()
-    self.top2_face()
+    self.lefttop_face()
+    self.righttop_face()
     self.left_face()
     self.right_face()
-    self.bottom1_face()
-    self.bottom2_face()
+    self.leftbottom_face()
+    self.rightbottom_face()
 
-  def top1_face(self):
-    if self.neighbors['top']:
-      if self.faces['top1']:
-        return
-      self.faces['top1'] = self.neighbors['top'].faces['bottom1'] = [None]
-      self.faces['top1'][0] = self.bm.faces.new([self.verts[0],
-                                                 self.verts[2],
-                                                 self.neighbors['top'].verts[2]])
-  def top2_face(self):
-    if self.neighbors['top']:
-      if self.faces['top2']:
-        return
-      self.faces['top2'] = self.neighbors['top'].faces['bottom2'] = [None]
-      self.faces['top2'][0] = self.bm.faces.new([self.verts[2],
-                                                 self.verts[1],
-                                                 self.neighbors['top'].verts[2]])
+  def lefttop_face(self):
+    face = self.add_face('lefttop',
+                         [self.get_vert('lefttop'),
+                          self.get_vert('middle'),
+                          self.get_neighbor_vert(['top'], 'middle')])
+    self.set_equivalent_face(['top'], 'leftbottom', face)
 
+  def righttop_face(self):
+    face = self.add_face('righttop',
+                         [self.get_vert('middle'),
+                          self.get_vert('righttop'),
+                          self.get_neighbor_vert(['top'], 'middle')])
+    self.set_equivalent_face(['top'], 'rightbottom', face)
+ 
   def left_face(self):
-    if self.faces['left']:
-      return
-    self.faces['left'] = self.bm.faces.new([self.verts[0],
-                                            self.verts[3],
-                                            self.verts[2]])
+    self.add_face('left', [self.get_vert('lefttop'),
+                           self.get_vert('leftbottom'),
+                           self.get_vert('middle')])
 
   def right_face(self):
-    if self.faces['right']:
-      return
-    self.faces['right'] = self.bm.faces.new([self.verts[2],
-                                             self.verts[4],
-                                             self.verts[1]])
+    self.add_face('right', [self.get_vert('middle'),
+                            self.get_vert('rightbottom'),
+                            self.get_vert('righttop')])
 
-  def bottom1_face(self):
-    if self.neighbors['bottom']:
-      if self.faces['bottom1']:
-        return
-      self.faces['bottom1'] = self.neighbors['bottom'].faces['top1'] = [None]
-      self.faces['top1'][0] = self.bm.faces.new([self.verts[3],
-                                                 self.verts[2],
-                                                 self.neighbors['bottom'].verts[2]])
-  def bottom2_face(self):
-    if self.neighbors['bottom']:
-      if self.faces['bottom2']:
-        return
-      self.faces['bottom2'] = self.neighbors['bottom'].faces['top2'] = [None]
-      self.faces['bottom2'][0] = self.bm.faces.new([self.verts[4],
-                                                 self.verts[2],
-                                                 self.neighbors['bottom'].verts[2]])
+  def leftbottom_face(self):
+    tile = self.get_neighbor_path(['bottom'])
+    if not tile:
+      return None
+    tile.lefttop_face()
+
+  def rightbottom_face(self):
+    tile = self.get_neighbor_path(['bottom'])
+    if not tile:
+      return None
+    tile.righttop_face()
 
 class Tessagon:
   def __init__(self, f, **kwargs):
@@ -345,6 +392,8 @@ class Tessagon:
     self.bm = None
     self.u_cyclic = True
     self.v_cyclic = True
+    self.u_twist = False
+    self.v_twist = False
     if 'u_range' in kwargs:
       self.u_range = kwargs['u_range']
     if 'v_range' in kwargs:
@@ -361,6 +410,10 @@ class Tessagon:
       self.u_cyclic = kwargs['u_cyclic']
     if 'v_cyclic' in kwargs:
       self.v_cyclic = kwargs['v_cyclic']
+    if 'u_twist' in kwargs:
+      self.u_twist = kwargs['u_twist']
+    if 'v_twist' in kwargs:
+      self.v_twist = kwargs['v_twist']
 
     self.tiles = [[None for i in range(self.v_num)] for j in range(self.u_num)]
     self.bm = bmesh.new()
@@ -405,11 +458,17 @@ class Tessagon:
         if not self.u_cyclic and u == self.u_num - 1:
           right = None
         else:
-          right=self.tiles[u_next][v]
+          if self.u_twist and u == self.u_num - 1:
+            right = self.tiles[u_next][0]
+          else:
+            right = self.tiles[u_next][v]
         if not self.v_cyclic and v == self.v_num - 1:
           bottom = None
         else:
-          bottom=self.tiles[u][v_next]
+          if self.v_twist and v == self.v_num - 1:
+            bottom = self.tiles[self.u_num - u - 1][v_next]
+          else:
+            bottom = self.tiles[u][v_next]
         tile.set_neighbors(left=left, right=right, top=top, bottom=bottom)
         
   def calculate_verts(self):
