@@ -34,17 +34,34 @@ class Tile:
   def blend(self, interval, ratio):
     return (1 - ratio) * interval[0] + ratio * interval[1]
 
-  def get_vert(self, vert_index):
-    return self.verts[vert_index]
+  def get_nested_list_value(self, nested_list, index_path):
+    if not isinstance(index_path, list):
+      return nested_list[index_path]
+    value = nested_list
+    for index in index_path:
+      value = value[index]
+    return value
 
-  def set_vert(self, vert_index, value):
-    self.verts[vert_index] = value
+  def set_nested_list_value(self, nested_list, index_path, value):
+    if not isinstance(index_path, list):
+      nested_list[index_path] = value
+      return
+    reference = nested_list
+    for index in index_path[0:-1]:
+      reference = reference[index]
+    reference[index_path[-1]] = value
 
-  def get_face(self, face_index):
-    return self.faces[face_index]
+  def get_vert(self, index_path):
+    return self.get_nested_list_value(self.verts, index_path)
 
-  def set_face(self, face_index, value):
-    self.faces[face_index] = value
+  def set_vert(self, index_path, value):
+    self.set_nested_list_value(self.verts, index_path, value)
+
+  def get_face(self, index_path):
+    return self.get_nested_list_value(self.faces, index_path)
+
+  def set_face(self, index_path, value):
+    self.set_nested_list_value(self.faces, index_path, value)
 
   def get_neighbor_path(self, neighbor_keys):
     tile = self
@@ -91,36 +108,3 @@ class Tile:
     if not tile:
       return None
     tile.set_face(neighbor_face_index, face)
-
-class EquivalentCornersTile(Tile):
-  def init_faces(self):
-    return { 'middle': None,
-             'lefttop': None,
-             'leftbottom': None,
-             'rightbottom': None,
-             'righttop': None }
-
-  def calculate_faces(self):
-    self.middle_face()
-    self.lefttop_face()
-    self.leftbottom_face()
-    self.rightbottom_face()
-    self.righttop_face()
-
-  def leftbottom_face(self):
-    tile = self.get_neighbor_path(['bottom'])
-    if not tile:
-      return None
-    tile.lefttop_face()
-
-  def rightbottom_face(self):
-    tile = self.get_neighbor_path(['bottom', 'right'])
-    if not tile:
-      return None
-    tile.lefttop_face()
-
-  def righttop_face(self):
-    tile =  self.neighbors['right']
-    if not tile:
-      return None
-    tile.lefttop_face()
