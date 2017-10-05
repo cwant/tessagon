@@ -4,6 +4,7 @@ from mathutils import Matrix, Vector
 
 from tri_tessagon import TriTessagon
 from hex_tessagon import HexTessagon
+from hex_tri_tessagon import HexTriTessagon
 from octo_tessagon import OctoTessagon
 from rhombus_tessagon import RhombusTessagon
 

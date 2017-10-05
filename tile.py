@@ -71,40 +71,40 @@ class Tile:
       tile = tile.neighbors[key]
     return tile
 
-  def get_neighbor_vert(self, neighbor_keys, neighbor_vert_index):
+  def get_neighbor_vert(self, neighbor_keys, index_path):
     tile = self.get_neighbor_path(neighbor_keys)
     if not tile:
       return None
-    return tile.get_vert(neighbor_vert_index)
+    return tile.get_vert(index_path)
 
-  def add_vert(self, index, u, v):
-    if self.get_vert(index):
+  def add_vert(self, index_path, u, v):
+    if self.get_vert(index_path):
       return None
     co = self.f(u,v)
     vert = self.bm.verts.new(co)
-    self.set_vert(index, vert)
+    self.set_vert(index_path, vert)
     return vert
 
-  def set_equivalent_vert(self, neighbor_keys, neighbor_vert_index, vert):
+  def set_equivalent_vert(self, neighbor_keys, index_path, vert):
     if not vert:
       return None
     tile = self.get_neighbor_path(neighbor_keys)
     if not tile:
       return None
-    tile.set_vert(neighbor_vert_index, vert)
+    tile.set_vert(index_path, vert)
 
-  def add_face(self, index, verts):
-    if self.get_face(index):
+  def add_face(self, index_path, verts):
+    if self.get_face(index_path):
       return None
     for vert in verts:
       if not vert:
         return None
     face = self.bm.faces.new(verts)
-    self.set_face(index, face)
+    self.set_face(index_path, face)
     return face
 
-  def set_equivalent_face(self, neighbor_keys, neighbor_face_index, face):
+  def set_equivalent_face(self, neighbor_keys, index_path, face):
     tile = self.get_neighbor_path(neighbor_keys)
     if not tile:
       return None
-    tile.set_face(neighbor_face_index, face)
+    tile.set_face(index_path, face)
