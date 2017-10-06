@@ -1,3 +1,7 @@
+from importlib import reload
+import tile
+reload(tile)
+
 from tile import Tile
 
 class EquivalentCornersTile(Tile):

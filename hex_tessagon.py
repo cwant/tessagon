@@ -1,3 +1,8 @@
+from importlib import reload
+import equivalent_corners_tile, tessagon
+reload(equivalent_corners_tile)
+reload(tessagon)
+
 from equivalent_corners_tile import EquivalentCornersTile
 from tessagon import Tessagon
 

@@ -1,3 +1,9 @@
+from importlib import reload
+
+import tile, tessagon
+reload(tile)
+reload(tessagon)
+
 from tessagon import Tile, Tessagon
 
 class TriTile(Tile):

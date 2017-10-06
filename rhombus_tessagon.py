@@ -1,3 +1,8 @@
+from importlib import reload
+import equivalent_corners_tile, tessagon
+reload(equivalent_corners_tile)
+reload(tessagon)
+
 from equivalent_corners_tile import EquivalentCornersTile
 from tessagon import Tessagon
 
@@ -128,39 +133,46 @@ class RhombusTile(EquivalentCornersTile):
     self.righttop_face()
 
   def middle_face(self):
-    self.add_face('middle', [self.get_vert('middletop'),
-                             self.get_vert('leftmiddle'),
-                             self.get_vert('middlebottom'),
-                             self.get_vert('rightmiddle')])
+    self.add_face('middle',
+                  [self.get_vert('middletop'),
+                   self.get_vert('leftmiddle'),
+                   self.get_vert('middlebottom'),
+                   self.get_vert('rightmiddle')], face_type='horizontal')
         
   def leftmiddletop_face(self):
-    self.add_face('leftmiddletop', [self.get_vert('top'),
-                                    self.get_vert('lefttop'),
-                                    self.get_vert('leftmiddle'),
-                                    self.get_vert('middletop')])
+    self.add_face('leftmiddletop',
+                  [self.get_vert('top'),
+                   self.get_vert('lefttop'),
+                   self.get_vert('leftmiddle'),
+                   self.get_vert('middletop')], face_type='upward')
+
   def rightmiddletop_face(self):
-    self.add_face('rightmiddletop', [self.get_vert('top'),
-                                     self.get_vert('righttop'),
-                                     self.get_vert('rightmiddle'),
-                                     self.get_vert('middletop')])
+    self.add_face('rightmiddletop',
+                  [self.get_vert('top'),
+                   self.get_vert('righttop'),
+                   self.get_vert('rightmiddle'),
+                   self.get_vert('middletop')], face_type='downward')
 
   def leftmiddlebottom_face(self):
-    self.add_face('leftmiddlebottom', [self.get_vert('bottom'),
-                                       self.get_vert('leftbottom'),
-                                       self.get_vert('leftmiddle'),
-                                       self.get_vert('middlebottom')])
+    self.add_face('leftmiddlebottom',
+                  [self.get_vert('bottom'),
+                   self.get_vert('leftbottom'),
+                   self.get_vert('leftmiddle'),
+                   self.get_vert('middlebottom')], face_type='downward')
   def rightmiddlebottom_face(self):
-    self.add_face('rightmiddlebottom', [self.get_vert('bottom'),
-                                        self.get_vert('rightbottom'),
-                                        self.get_vert('rightmiddle'),
-                                        self.get_vert('middlebottom')])
+    self.add_face('rightmiddlebottom',
+                  [self.get_vert('bottom'),
+                   self.get_vert('rightbottom'),
+                   self.get_vert('rightmiddle'),
+                   self.get_vert('middlebottom')], face_type='upward')
 
   def lefttop_face(self):
     face = self.add_face('lefttop', \
                          [self.get_vert('top'),
                           self.get_vert('lefttop'),
                           self.get_neighbor_vert(['left'], 'top'),
-                          self.get_neighbor_vert(['top'], 'leftbottom')])
+                          self.get_neighbor_vert(['top'], 'leftbottom')],
+                         face_type='horizontal')
 
     self.set_equivalent_face(['top'], 'leftbottom', face)
     self.set_equivalent_face(['top', 'left'], 'rightbottom', face)

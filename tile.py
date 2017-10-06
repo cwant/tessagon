@@ -21,6 +21,9 @@ class Tile:
     self.verts = self.init_verts()
     self.faces = self.init_faces()
 
+    self.face_types = {}
+    self.vert_types = {}
+
   def set_neighbors(self, **kwargs):
     if 'top' in kwargs:
       self.neighbors['top'] = kwargs['top']
@@ -77,12 +80,17 @@ class Tile:
       return None
     return tile.get_vert(index_path)
 
-  def add_vert(self, index_path, u, v):
+  def add_vert(self, index_path, u, v, **kwargs):
     if self.get_vert(index_path):
       return None
     co = self.f(u,v)
     vert = self.bm.verts.new(co)
     self.set_vert(index_path, vert)
+    if 'vert_type' in kwargs:
+      if not kwargs['vert_type'] in self.vert_types:
+        self.face_types[kwargs['vert_type']] = []
+      self.vert_types[kwargs['vert_type']].append(face)
+
     return vert
 
   def set_equivalent_vert(self, neighbor_keys, index_path, vert):
@@ -93,7 +101,7 @@ class Tile:
       return None
     tile.set_vert(index_path, vert)
 
-  def add_face(self, index_path, verts):
+  def add_face(self, index_path, verts, **kwargs):
     if self.get_face(index_path):
       return None
     for vert in verts:
@@ -101,6 +109,11 @@ class Tile:
         return None
     face = self.bm.faces.new(verts)
     self.set_face(index_path, face)
+    if 'face_type' in kwargs:
+      if not kwargs['face_type'] in self.face_types:
+        self.face_types[kwargs['face_type']] = []
+      self.face_types[kwargs['face_type']].append(face)
+
     return face
 
   def set_equivalent_face(self, neighbor_keys, index_path, face):

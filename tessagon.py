@@ -1,6 +1,15 @@
 import bpy, bmesh
 from math import sqrt, sin, cos, atan2, pi
 from mathutils import Matrix, Vector
+from importlib import reload
+
+import tri_tessagon, hex_tessagon, hex_tri_tessagon, octo_tessagon, \
+  rhombus_tessagon
+reload(tri_tessagon)
+reload(hex_tessagon)
+reload(hex_tri_tessagon)
+reload(octo_tessagon)
+reload(rhombus_tessagon)
 
 from tri_tessagon import TriTessagon
 from hex_tessagon import HexTessagon
@@ -48,6 +57,7 @@ class Tessagon:
     self.initialize_neighbors()
     self.calculate_verts()
     self.calculate_faces()
+    self.post_process()
     return self.bm
 
   def initialize_tiles(self):
@@ -106,3 +116,7 @@ class Tessagon:
       for v in range(self.v_num):
         self.tiles[u][v].calculate_faces()
     bmesh.ops.recalc_face_normals(self.bm, faces=self.bm.faces)
+
+  def post_process(self):
+    # Override in child class
+    pass
