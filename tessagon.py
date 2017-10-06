@@ -4,18 +4,20 @@ from mathutils import Matrix, Vector
 from importlib import reload
 
 import tri_tessagon, hex_tessagon, hex_tri_tessagon, octo_tessagon, \
-  rhombus_tessagon
+  rhombus_tessagon, hex_square_tri_tessagon
 reload(tri_tessagon)
 reload(hex_tessagon)
 reload(hex_tri_tessagon)
 reload(octo_tessagon)
 reload(rhombus_tessagon)
+reload(hex_square_tri_tessagon)
 
 from tri_tessagon import TriTessagon
 from hex_tessagon import HexTessagon
 from hex_tri_tessagon import HexTriTessagon
 from octo_tessagon import OctoTessagon
 from rhombus_tessagon import RhombusTessagon
+from hex_square_tri_tessagon import HexSquareTriTessagon
 
 class Tessagon:
   def __init__(self, f, **kwargs):
