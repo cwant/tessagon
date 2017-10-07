@@ -1,26 +1,12 @@
 from abstract_tile import AbstractTile
+from value_blend import ValueBlend
 
-class Tile(AbstractTile):
+class Tile(AbstractTile, ValueBlend):
   def __init__(self, tessagon, **kwargs):
     super().__init__(tessagon, **kwargs)
 
     self.verts = self.init_verts()
     self.faces = self.init_faces()
-
-  def blend_verts(self, vert1, vert2, ratio):
-    out = [None, None]
-    for i in range(2):
-      out[i] = (1 - ratio) * vert1[i] + ratio * vert2[i]
-    return out
-
-  def blend(self, ratio_u, ratio_v):
-    uv0 = self.blend_verts(self.corners[0],
-                           self.corners[1],
-                           ratio_u)
-    uv1 = self.blend_verts(self.corners[2],
-                           self.corners[3],
-                           ratio_u)
-    return self.blend_verts(uv0, uv1, ratio_v)
 
   def get_vert(self, index_path):
     return self.get_nested_list_value(self.verts, index_path)
