@@ -21,6 +21,11 @@ class Tile:
       self.bm = kwargs['bm']
     if not self.bm:
       raise ValueError("Make sure bm is set (output BMesh)")
+    if 'tessagon' in kwargs:
+      self.tessagon = kwargs['tessagon']
+    if not self.tessagon:
+      raise ValueError("Make sure tessagon is set")
+
 
     self.neighbors = { 'top': None,
                        'bottom': None,
@@ -29,9 +34,6 @@ class Tile:
 
     self.verts = self.init_verts()
     self.faces = self.init_faces()
-
-    self.face_types = {}
-    self.vert_types = {}
 
   def set_neighbors(self, **kwargs):
     if 'top' in kwargs:
@@ -108,9 +110,9 @@ class Tile:
     vert = self.bm.verts.new(co)
     self.set_vert(index_path, vert)
     if 'vert_type' in kwargs:
-      if not kwargs['vert_type'] in self.vert_types:
-        self.face_types[kwargs['vert_type']] = []
-      self.vert_types[kwargs['vert_type']].append(face)
+      if not kwargs['vert_type'] in self.tessagon.vert_types:
+        self.tessagon.face_types[kwargs['vert_type']] = []
+      self.tessagon.vert_types[kwargs['vert_type']].append(face)
 
     return vert
 
@@ -131,9 +133,9 @@ class Tile:
     face = self.bm.faces.new(verts)
     self.set_face(index_path, face)
     if 'face_type' in kwargs:
-      if not kwargs['face_type'] in self.face_types:
-        self.face_types[kwargs['face_type']] = []
-      self.face_types[kwargs['face_type']].append(face)
+      if not kwargs['face_type'] in self.tessagon.face_types:
+        self.tessagon.face_types[kwargs['face_type']] = []
+      self.tessagon.face_types[kwargs['face_type']].append(face)
 
     return face
 

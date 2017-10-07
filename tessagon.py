@@ -35,6 +35,9 @@ class Tessagon:
     if 'v_twist' in kwargs:
       self.v_twist = kwargs['v_twist']
 
+    self.face_types = {}
+    self.vert_types = {}
+
     self.tiles = [[None for i in range(self.v_num)] for j in range(self.u_num)]
     self.bm = bmesh.new()
 
@@ -57,7 +60,9 @@ class Tessagon:
         v_ratio1 = float(v + 1) / self.v_num
         v0 = self.v_range[0] * (1.0 - v_ratio0) + self.v_range[1] * v_ratio0
         v1 = self.v_range[0] * (1.0 - v_ratio1) + self.v_range[1] * v_ratio1
-        self.tiles[u][v] = self.tile_class(self.f, u_range=[u0, u1], v_range=[v0, v1],
+        self.tiles[u][v] = self.tile_class(self.f,
+                                           u_range=[u0, u1], v_range=[v0, v1],
+                                           tessagon=self,
                                            bm=self.bm)
 
   def initialize_neighbors(self):
