@@ -1,5 +1,21 @@
 class ValueBlend:
 
+  def init_corners(self, **kwargs):
+    if 'corners' in kwargs:
+      self.corners = kwargs['corners']
+      if len(self.corners) != 4 or any (len(v) != 2 for v in self.corners):
+        raise ValueError("corner should be a list of four tuples, "\
+                         "set either option "\
+                         "'corners' or options 'u_range' and 'v_range'")
+    elif 'u_range' in kwargs and 'v_range' in kwargs:
+      self.corners = [ [kwargs['u_range'][0], kwargs['v_range'][0]],
+                       [kwargs['u_range'][1], kwargs['v_range'][0]],
+                       [kwargs['u_range'][0], kwargs['v_range'][1]],
+                       [kwargs['u_range'][1], kwargs['v_range'][1]] ]
+    else:
+      raise ValueError("Must set either option "\
+                       "'corners' or options 'u_range' and 'v_range'")
+
   def blend_tuples(self, tuple1, tuple2, ratio):
     out = [None, None]
     for i in range(2):

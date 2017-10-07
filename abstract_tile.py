@@ -1,4 +1,6 @@
-class AbstractTile:
+from value_blend import ValueBlend
+
+class AbstractTile(ValueBlend):
   def __init__(self, tessagon, **kwargs):
     self.tessagon = tessagon
     self.f = tessagon.f
@@ -6,20 +8,7 @@ class AbstractTile:
 
     # Corners is list of tuples [topleft, topright, bottomleft, bottomright]
     self.corners = None
-    if 'corners' in kwargs:
-      self.corners = kwargs['corners']
-      if len(self.corners) != 4 or any (len(v) != 2 for v in self.corners):
-        raise ValueError("corner should be a list of four tuples, "\
-                         "set either option "\
-                         "'corners' or options 'u_range' and 'v_range'")
-    elif 'u_range' in kwargs and 'v_range' in kwargs:
-      self.corners = [ [kwargs['u_range'][0], kwargs['v_range'][0]],
-                       [kwargs['u_range'][1], kwargs['v_range'][0]],
-                       [kwargs['u_range'][0], kwargs['v_range'][1]],
-                       [kwargs['u_range'][1], kwargs['v_range'][1]] ]
-    else:
-      raise ValueError("Must set either option "\
-                       "'corners' or options 'u_range' and 'v_range'")
+    self.init_corners(**kwargs)
 
     self.neighbors = { 'top': None,
                        'bottom': None,

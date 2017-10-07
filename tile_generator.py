@@ -1,20 +1,19 @@
-class TileGenerator:
+from value_blend import ValueBlend
+
+class TileGenerator(ValueBlend):
   def __init__(self, tessagon, **kwargs):
     self.tessagon = tessagon
 
-    self.u_range = self.v_range = None
+    # Corners is list of tuples [topleft, topright, bottomleft, bottomright]
+    self.corners = None
+    self.init_corners(**kwargs)
+
     self.u_num = self.v_num = None
     self.u_cyclic = True
     self.v_cyclic = True
     self.u_twist = False
     self.v_twist = False
 
-    if 'u_range' in kwargs:
-      self.u_range = kwargs['u_range']
-    if 'v_range' in kwargs:
-      self.v_range = kwargs['v_range']
-    if not self.u_range or not self.v_range:
-      raise ValueError("Make sure u_range and v_range intervals are set")
     if 'u_num' in kwargs:
       self.u_num = kwargs['u_num']
     if 'v_num' in kwargs:
@@ -36,16 +35,15 @@ class TileGenerator:
     for u in range(self.u_num):
       u_ratio0 = float(u) / self.u_num
       u_ratio1 = float(u + 1) / self.u_num
-      u0 = self.u_range[0] * (1.0 - u_ratio0) + self.u_range[1] * u_ratio0
-      u1 = self.u_range[0] * (1.0 - u_ratio1) + self.u_range[1] * u_ratio1
       for v in range(self.v_num):
         v_ratio0 = float(v) / self.v_num
         v_ratio1 = float(v + 1) / self.v_num
-        v0 = self.v_range[0] * (1.0 - v_ratio0) + self.v_range[1] * v_ratio0
-        v1 = self.v_range[0] * (1.0 - v_ratio1) + self.v_range[1] * v_ratio1
-        range_args = { 'u_range': [u0, u1], 'v_range': [v0, v1] }
+        corners_arg = { 'corners': [self.blend(u_ratio0, v_ratio0),
+                                    self.blend(u_ratio1, v_ratio0),
+                                    self.blend(u_ratio0, v_ratio1),
+                                    self.blend(u_ratio1, v_ratio1)] }
         tiles[u][v] = self.tessagon.tile_class(self.tessagon,
-                                               **{**kwargs, **range_args})
+                                               **{**kwargs, **corners_arg})
     return tiles
 
   def initialize_neighbors(self, tiles, **kwargs):

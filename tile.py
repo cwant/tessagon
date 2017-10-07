@@ -1,7 +1,6 @@
 from abstract_tile import AbstractTile
-from value_blend import ValueBlend
 
-class Tile(AbstractTile, ValueBlend):
+class Tile(AbstractTile):
   def __init__(self, tessagon, **kwargs):
     super().__init__(tessagon, **kwargs)
 
