@@ -1,6 +1,9 @@
 class Tile:
-  def __init__(self, f, **kwargs):
-    self.f = f
+  def __init__(self, tessagon, **kwargs):
+    self.tessagon = tessagon
+    self.f = tessagon.f
+    self.bm = tessagon.bm
+
     # Corners is list of tuples [topleft, topright, bottomleft, bottomright]
     self.corners = None
     if 'corners' in kwargs:
@@ -17,15 +20,6 @@ class Tile:
     else:
       raise ValueError("Must set either option "\
                        "'corners' or options 'u_range' and 'v_range'")
-    if 'bm' in kwargs:
-      self.bm = kwargs['bm']
-    if not self.bm:
-      raise ValueError("Make sure bm is set (output BMesh)")
-    if 'tessagon' in kwargs:
-      self.tessagon = kwargs['tessagon']
-    if not self.tessagon:
-      raise ValueError("Make sure tessagon is set")
-
 
     self.neighbors = { 'top': None,
                        'bottom': None,
