@@ -42,49 +42,50 @@ class HexSquareTriTile(Tile):
     }
 
   def calculate_verts(self):
-    ulen = 1.0 / (1.0 + sqrt(3))
-    u0 = self.u_range[0]
-    u1 = self.blend(self.u_range, 0.5*ulen)
-    u2 = self.blend(self.u_range, 0.5*(1.0-ulen))
-    u3 = self.blend(self.u_range, 0.5)
-    u4 = self.blend(self.u_range, 0.5*(1.0+ulen))
-    u5 = self.blend(self.u_range, 1.0 - 0.5*ulen)
-    u6 = self.u_range[1]
+    # u_unit is the length of the edges expressed as a proportion of the tile
+    u_unit = 1.0 / (1.0 + sqrt(3))
+    u0 = 0
+    u1 = 0.5*u_unit
+    u2 = 0.5*(1.0-u_unit)
+    u3 = 0.5
+    u4 = 0.5*(1.0+u_unit)
+    u5 = 1.0 - 0.5*u_unit
+    u6 = 1
 
-    vlen = 1.0 / (3.0 + sqrt(3))
-    v0 = self.blend(self.v_range, 0.5*vlen)
-    v1 = self.blend(self.v_range, vlen)
-    v2 = self.blend(self.v_range, 0.5 - vlen)
-    v3 = self.blend(self.v_range, 2.0*vlen)
-    v4 = self.blend(self.v_range, 1.0 - 2.0*vlen)
-    v5 = self.blend(self.v_range, 0.5 + vlen)
-    v6 = self.blend(self.v_range, 1.0 - vlen)
-    v7 = self.blend(self.v_range, 1.0 - 0.5*vlen)
+    v_unit = 1.0 / (3.0 + sqrt(3))
+    v0 = 0.5*v_unit
+    v1 = v_unit
+    v2 = 0.5 - v_unit
+    v3 = 2.0*v_unit
+    v4 = 1.0 - 2.0*v_unit
+    v5 = 0.5 + v_unit
+    v6 = 1.0 - v_unit
+    v7 = 1.0 - 0.5*v_unit
 
     # Top triangle
-    self.add_vert(['top', 'left'], u2, v0)
-    self.add_vert(['top', 'middle'], u3, v2)
-    self.add_vert(['top', 'right'], u4, v0)
+    self.add_vert(['top', 'left'], *self.blend(u2, v0))
+    self.add_vert(['top', 'middle'], *self.blend(u3, v2))
+    self.add_vert(['top', 'right'], *self.blend(u4, v0))
 
     # Bottom triangle
-    self.add_vert(['bottom', 'left'], u2, v7)
-    self.add_vert(['bottom', 'middle'], u3, v5)
-    self.add_vert(['bottom', 'right'], u4, v7)
+    self.add_vert(['bottom', 'left'], *self.blend(u2, v7))
+    self.add_vert(['bottom', 'middle'], *self.blend(u3, v5))
+    self.add_vert(['bottom', 'right'], *self.blend(u4, v7))
 
     # Left verts
-    vert = self.add_vert(['left','top'], u0, v1)
+    vert = self.add_vert(['left','top'], *self.blend(u0, v1))
     self.set_equivalent_vert(['left'], ['right', 'top'], vert)
-    self.add_vert(['left','uppermiddle'], u1, v3)
-    self.add_vert(['left','lowermiddle'], u1, v4)
-    vert = self.add_vert(['left','bottom'], u0, v6)
+    self.add_vert(['left','uppermiddle'], *self.blend(u1, v3))
+    self.add_vert(['left','lowermiddle'], *self.blend(u1, v4))
+    vert = self.add_vert(['left','bottom'], *self.blend(u0, v6))
     self.set_equivalent_vert(['left'], ['right', 'bottom'], vert)
 
     # Right verts
-    vert = self.add_vert(['right','top'], u6, v1)
+    vert = self.add_vert(['right','top'], *self.blend(u6, v1))
     self.set_equivalent_vert(['right'], ['left', 'top'], vert)
-    self.add_vert(['right','uppermiddle'], u5, v3)
-    self.add_vert(['right','lowermiddle'], u5, v4)
-    vert = self.add_vert(['right','bottom'], u6, v6)
+    self.add_vert(['right','uppermiddle'], *self.blend(u5, v3))
+    self.add_vert(['right','lowermiddle'], *self.blend(u5, v4))
+    vert = self.add_vert(['right','bottom'], *self.blend(u6, v6))
     self.set_equivalent_vert(['right'], ['left', 'bottom'], vert)
 
   def init_faces(self):

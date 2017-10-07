@@ -1,10 +1,9 @@
 from importlib import reload
-import equivalent_corners_tile, tessagon
-reload(equivalent_corners_tile)
-reload(tessagon)
+import equivalent_corners_tile
+import tessagon
 
-from equivalent_corners_tile import EquivalentCornersTile
 from tessagon import Tessagon
+from equivalent_corners_tile import EquivalentCornersTile
 
 class HexTile(EquivalentCornersTile):
   def init_verts(self):
@@ -56,37 +55,25 @@ class HexTile(EquivalentCornersTile):
     self.righttop_vert()
 
   def top_vert(self):
-    self.add_vert('top', \
-                  self.blend(self.u_range, 0.5),
-                  self.blend(self.v_range, 1.0/6.0))
+    self.add_vert('top', *self.blend(0.5, 1.0/6.0))
 
   def lefttop_vert(self):
-    vert = self.add_vert('lefttop', \
-                         self.u_range[0],
-                         self.blend(self.v_range, 1.0/3.0))
+    vert = self.add_vert('lefttop', *self.blend(0, 1.0/3.0))
     self.set_equivalent_vert(['left'], 'righttop', vert)
 
   def leftbottom_vert(self):
-    vert = self.add_vert('leftbottom', \
-                         self.u_range[0],
-                         self.blend(self.v_range, 2.0/3.0))
+    vert = self.add_vert('leftbottom', *self.blend(0, 2.0/3.0))
     self.set_equivalent_vert(['left'], 'rightbottom', vert)
 
   def bottom_vert(self):
-    self.add_vert('bottom',
-                  self.blend(self.u_range, 0.5),
-                  self.blend(self.v_range, 5.0/6.0))
+    self.add_vert('bottom', *self.blend(0.5, 5.0/6.0))
 
   def rightbottom_vert(self):
-    vert = self.add_vert('rightbottom',
-                         self.u_range[1],
-                         self.blend(self.v_range, 2.0/3.0))
+    vert = self.add_vert('rightbottom', *self.blend(1, 2.0/3.0))
     self.set_equivalent_vert(['right'], 'leftbottom', vert)
 
   def righttop_vert(self):
-    vert = self.add_vert('righttop',
-                         self.u_range[1],
-                         self.blend(self.v_range, 1.0/3.0))
+    vert = self.add_vert('righttop', *self.blend(1, 1.0/3.0))
     self.set_equivalent_vert(['right'], 'lefttop', vert)
 
   #

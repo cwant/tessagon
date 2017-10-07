@@ -45,67 +45,45 @@ class RhombusTile(EquivalentCornersTile):
     self.bottom_vert()
 
   def top_vert(self):
-    vert = self.add_vert('top', \
-                         self.blend(self.u_range, 0.5),
-                         self.v_range[0])
+    vert = self.add_vert('top', *self.blend(0.5, 0))
     self.set_equivalent_vert(['top'], 'bottom', vert)
 
   def lefttop_vert(self):
-    vert = self.add_vert('lefttop', \
-                         self.u_range[0],
-                         self.blend(self.v_range, 1.0/6.0))
+    vert = self.add_vert('lefttop', *self.blend(0, 1.0/6.0))
     self.set_equivalent_vert(['left'], 'righttop', vert)
 
   def righttop_vert(self):
-    vert = self.add_vert('righttop',
-                         self.u_range[1],
-                         self.blend(self.v_range, 1.0/6.0))
+    vert = self.add_vert('righttop', *self.blend(1, 1.0/6.0))
     self.set_equivalent_vert(['right'], 'lefttop', vert)
 
   def middletop_vert(self):
-    self.add_vert('middletop',
-                  self.blend(self.u_range, 0.5),
-                  self.blend(self.v_range, 1.0/3.0))
+    self.add_vert('middletop', *self.blend(0.5, 1.0/3.0))
 
   def leftmiddle_vert(self):
-    vert = self.add_vert('leftmiddle', \
-                         self.u_range[0],
-                         self.blend(self.v_range, 1.0/2.0))
+    vert = self.add_vert('leftmiddle', *self.blend(0, 1.0/2.0))
     self.set_equivalent_vert(['left'], 'rightmiddle', vert)
 
   def rightmiddle_vert(self):
-    vert = self.add_vert('rightmiddle', \
-                         self.u_range[1],
-                         self.blend(self.v_range, 1.0/2.0))
+    vert = self.add_vert('rightmiddle', *self.blend(1, 1.0/2.0))
     self.set_equivalent_vert(['right'], 'leftmiddle', vert)
 
   def righttop_vert(self):
-    vert = self.add_vert('righttop',
-                         self.u_range[1],
-                         self.blend(self.v_range, 1.0/6.0))
+    vert = self.add_vert('righttop', *self.blend(1, 1.0/6.0))
     self.set_equivalent_vert(['right'], 'lefttop', vert)
 
   def middlebottom_vert(self):
-    self.add_vert('middlebottom',
-                  self.blend(self.u_range, 0.5),
-                  self.blend(self.v_range, 2.0/3.0))
+    self.add_vert('middlebottom', *self.blend(0.5, 2.0/3.0))
 
   def leftbottom_vert(self):
-    vert = self.add_vert('leftbottom', \
-                         self.u_range[0],
-                         self.blend(self.v_range, 5.0/6.0))
+    vert = self.add_vert('leftbottom', *self.blend(0, 5.0/6.0))
     self.set_equivalent_vert(['left'], 'rightbottom', vert)
 
   def rightbottom_vert(self):
-    vert = self.add_vert('rightbottom',
-                         self.u_range[1],
-                         self.blend(self.v_range, 5.0/6.0))
+    vert = self.add_vert('rightbottom', *self.blend(1, 5.0/6.0))
     self.set_equivalent_vert(['right'], 'leftbottom', vert)
 
   def bottom_vert(self):
-    vert = self.add_vert('bottom',
-                         self.blend(self.u_range, 0.5),
-                         self.v_range[1])
+    vert = self.add_vert('bottom', *self.blend(0.5, 1))
 
     self.set_equivalent_vert(['bottom'], 'top', vert)
 

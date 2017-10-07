@@ -28,36 +28,30 @@ class HexTriTile(Tile):
     # --o---o--
     # ...\./...
     # ....o ...
-    u_quarter = self.blend(self.u_range, 0.25)
-    u_half = self.blend(self.u_range, 0.5)
-    u_3_quarter = self.blend(self.u_range, 0.75)
-    v_quarter = self.blend(self.v_range, 0.25)
-    v_half = self.blend(self.v_range, 0.5)
-    v_3_quarter = self.blend(self.v_range, 0.75)
 
     # top vert
-    vert = self.add_vert('top', u_half, self.v_range[0])
+    vert = self.add_vert('top', *self.blend(0.5, 0))
     self.set_equivalent_vert(['top'], 'bottom', vert)
 
     # bottom vert
-    vert = self.add_vert('bottom', u_half, self.v_range[1])
+    vert = self.add_vert('bottom', *self.blend(0.5, 1))
     self.set_equivalent_vert(['bottom'], 'top', vert)
 
     # left verts
-    self.add_vert(['left', 'top'], u_quarter, v_quarter)
+    self.add_vert(['left', 'top'], *self.blend(0.25, 0.25))
 
-    vert = self.add_vert(['left', 'middle'], self.u_range[0], v_half)
+    vert = self.add_vert(['left', 'middle'], *self.blend(0, 0.5))
     self.set_equivalent_vert(['left'], ['right', 'middle'], vert)
 
-    self.add_vert(['left', 'bottom'], u_quarter, v_3_quarter)
+    self.add_vert(['left', 'bottom'], *self.blend(0.25, 0.75))
 
     # right verts
-    self.add_vert(['right', 'top'], u_3_quarter, v_quarter)
+    self.add_vert(['right', 'top'], *self.blend(0.75, 0.25))
 
-    vert = self.add_vert(['right', 'middle'], self.u_range[1], v_half)
+    vert = self.add_vert(['right', 'middle'], *self.blend(1, 0.5))
     self.set_equivalent_vert(['right'], ['left', 'middle'], vert)
 
-    self.add_vert(['right', 'bottom'], u_3_quarter, v_3_quarter)
+    self.add_vert(['right', 'bottom'], *self.blend(0.75, 0.75))
 
   # .6..o..6.
   # .../3\...

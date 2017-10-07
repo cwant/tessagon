@@ -4,7 +4,8 @@ import tile, tessagon
 reload(tile)
 reload(tessagon)
 
-from tessagon import Tile, Tessagon
+from tile import Tile
+from tessagon import Tessagon
 
 class TriTile(Tile):
   def init_verts(self):
@@ -52,38 +53,28 @@ class TriTile(Tile):
     self.rightbottom_vert()
 
   def lefttop_vert(self):
-    vert = self.add_vert('lefttop',
-                         self.u_range[0],
-                         self.v_range[0])
+    vert = self.add_vert('lefttop', *self.blend(0, 0))
     self.set_equivalent_vert(['left'], 'righttop', vert)
     self.set_equivalent_vert(['top'], 'leftbottom', vert)
     self.set_equivalent_vert(['left', 'top'], 'rightbottom', vert)
 
   def righttop_vert(self):
-    vert = self.add_vert('righttop',
-                         self.u_range[1],
-                         self.v_range[0])
+    vert = self.add_vert('righttop', *self.blend(1, 0))
     self.set_equivalent_vert(['right'], 'lefttop', vert)
     self.set_equivalent_vert(['top'], 'rightbottom', vert)
     self.set_equivalent_vert(['right', 'top'], 'leftbottom', vert)
 
   def middle_vert(self):
-    self.add_vert('middle',
-                  self.blend(self.u_range, 0.5),
-                  self.blend(self.v_range, 0.5))
+    self.add_vert('middle', *self.blend(0.5, 0.5))
 
   def leftbottom_vert(self):
-    vert = self.add_vert('leftbottom',
-                         self.u_range[0],
-                         self.v_range[1])
+    vert = self.add_vert('leftbottom', *self.blend(0, 1))
     self.set_equivalent_vert(['left'], 'rightbottom', vert)
     self.set_equivalent_vert(['bottom'], 'lefttop', vert)
     self.set_equivalent_vert(['left', 'bottom'], 'righttop', vert)
 
   def rightbottom_vert(self):
-    vert = self.add_vert('rightbottom',
-                         self.u_range[1],
-                         self.v_range[1])
+    vert = self.add_vert('rightbottom', *self.blend(1, 1))
     self.set_equivalent_vert(['right'], 'leftbottom', vert)
     self.set_equivalent_vert(['bottom'], 'righttop', vert)
     self.set_equivalent_vert(['right', 'bottom'], 'lefttop', vert)

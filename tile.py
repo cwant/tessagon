@@ -1,13 +1,22 @@
 class Tile:
   def __init__(self, f, **kwargs):
     self.f = f
-    self.u_range = self.v_range = None
-    if 'u_range' in kwargs:
-      self.u_range = kwargs['u_range']
-    if 'v_range' in kwargs:
-      self.v_range = kwargs['v_range']
-    if not self.u_range or not self.v_range:
-      raise ValueError("Make sure u_range and v_range intervals are set")
+    # Corners is list of tuples [topleft, topright, bottomleft, bottomright]
+    self.corners = None
+    if 'corners' in kwargs:
+      self.corners = kwargs['corners']
+      if len(self.corners) != 4 or any (len(v) != 2 for v in self.corners):
+        raise ValueError("corner should be a list of four tuples, "\
+                         "set either option "\
+                         "'corners' or options 'u_range' and 'v_range'")
+    elif 'u_range' in kwargs and 'v_range' in kwargs:
+      self.corners = [ [kwargs['u_range'][0], kwargs['v_range'][0]],
+                       [kwargs['u_range'][1], kwargs['v_range'][0]],
+                       [kwargs['u_range'][0], kwargs['v_range'][1]],
+                       [kwargs['u_range'][1], kwargs['v_range'][1]] ]
+    else:
+      raise ValueError("Must set either option "\
+                       "'corners' or options 'u_range' and 'v_range'")
     if 'bm' in kwargs:
       self.bm = kwargs['bm']
     if not self.bm:
@@ -34,8 +43,20 @@ class Tile:
     if 'right' in kwargs:
       self.neighbors['right'] = kwargs['right']
 
-  def blend(self, interval, ratio):
-    return (1 - ratio) * interval[0] + ratio * interval[1]
+  def blend_verts(self, vert1, vert2, ratio):
+    out = [None, None]
+    for i in range(2):
+      out[i] = (1 - ratio) * vert1[i] + ratio * vert2[i]
+    return out
+
+  def blend(self, ratio_u, ratio_v):
+    uv0 = self.blend_verts(self.corners[0],
+                           self.corners[1],
+                           ratio_u)
+    uv1 = self.blend_verts(self.corners[2],
+                           self.corners[3],
+                           ratio_u)
+    return self.blend_verts(uv0, uv1, ratio_v)
 
   def get_nested_list_value(self, nested_list, index_path):
     if not isinstance(index_path, list):
