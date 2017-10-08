@@ -1,5 +1,6 @@
 import bmesh
 from grid_tile_generator import GridTileGenerator
+from rotate_tile_generator import RotateTileGenerator
 
 class Tessagon:
   def __init__(self, f, **kwargs):
@@ -8,6 +9,8 @@ class Tessagon:
 
     if 'tile_generator' in kwargs:
       self.tile_generator = kwargs['tile_generator'](self, **kwargs)
+    elif 'rot_factor' in kwargs:
+      self.tile_generator = RotateTileGenerator(self, **kwargs)
     else:
       self.tile_generator = GridTileGenerator(self, **kwargs)
 
