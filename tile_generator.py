@@ -42,8 +42,7 @@ class TileGenerator(ValueBlend):
                                     self.blend(u_ratio1, v_ratio0),
                                     self.blend(u_ratio0, v_ratio1),
                                     self.blend(u_ratio1, v_ratio1)] }
-        tiles[u][v] = self.tessagon.tile_class(self.tessagon,
-                                               **{**kwargs, **corners_arg})
+        tiles[u][v] = tile_class(self.tessagon, **{**kwargs, **corners_arg})
     return tiles
 
   def initialize_neighbors(self, tiles, **kwargs):
