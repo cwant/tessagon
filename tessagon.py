@@ -1,4 +1,9 @@
 import bmesh
+
+from importlib import reload
+import rotate_tile_generator
+reload(rotate_tile_generator)
+
 from grid_tile_generator import GridTileGenerator
 from rotate_tile_generator import RotateTileGenerator
 
