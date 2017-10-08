@@ -18,18 +18,26 @@ class SquareTile(Tile):
   def lefttop_vert(self):
     vert = self.add_vert('lefttop', *self.blend(0, 0))
     self.set_equivalent_vert(['left'], 'righttop', vert)
+    self.set_equivalent_vert(['left', 'top'], 'rightbottom', vert)
+    self.set_equivalent_vert(['top'], 'leftbottom', vert)
 
   def leftbottom_vert(self):
     vert = self.add_vert('leftbottom', *self.blend(0, 1))
     self.set_equivalent_vert(['left'], 'rightbottom', vert)
+    self.set_equivalent_vert(['left', 'bottom'], 'righttop', vert)
+    self.set_equivalent_vert(['bottom'], 'lefttop', vert)
 
   def rightbottom_vert(self):
     vert = self.add_vert('rightbottom', *self.blend(1, 1))
     self.set_equivalent_vert(['right'], 'leftbottom', vert)
+    self.set_equivalent_vert(['right', 'bottom'], 'lefttop', vert)
+    self.set_equivalent_vert(['bottom'], 'righttop', vert)
 
   def righttop_vert(self):
     vert = self.add_vert('righttop', *self.blend(1, 0))
     self.set_equivalent_vert(['right'], 'lefttop', vert)
+    self.set_equivalent_vert(['right', 'top'], 'leftbottom', vert)
+    self.set_equivalent_vert(['top'], 'rightbottom', vert)
 
   def init_faces(self):
     return { 'middle': None }
