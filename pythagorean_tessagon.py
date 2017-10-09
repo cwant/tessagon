@@ -20,7 +20,7 @@ from tile import Tile
 #
 class PythagoreanTile(Tile):
   def init_verts(self):
-    # [col, row], these read like rows
+    # [col, row], these read like columns
     return { 1: {1: None, 2: None, 3: None, 5: None, 6: None},
              2: {2: None, 3: None, 4: None, 5: None},
              3: {1: None, 2: None, 4: None, 5: None, 6: None},
@@ -38,6 +38,15 @@ class PythagoreanTile(Tile):
           6: 1.0 }
     for col in self.verts.keys():
       for row in self.verts[col].keys():
+        # Some verts only get created if neighbors exist
+        if col==1:
+          if not self.get_neighbor_path(['left']):
+            if row==1 and not self.get_neighbor_path(['top']):
+              continue
+            if row==5: continue
+            if row==6 and not self.get_neighbor_path(['bottom']):
+              continue
+
         vert = self.add_vert([col, row], *self.blend(c[col], c[row]))
         if col == 1:
           self.set_equivalent_vert(['left'], [6, row], vert)
