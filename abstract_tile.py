@@ -56,10 +56,13 @@ class AbstractTile(ValueBlend):
       tile = tile.neighbors[key]
     return tile
 
-  def inspect(self):
+  def inspect(self, **kwargs):
     # For debugging topology
     if not self.id: return
-    print("Tile: %s (%s)" % (self.id, self.__class__.__name__))
+    prefix = 'Tile'
+    if 'tile_number' in kwargs:
+      prefix += "(%s)" % (kwargs['tile_number'])
+    print("%s: %s (%s)" % (prefix, self.id, self.__class__.__name__))
     print("  corners: (%2.4f, %2.4f)  (%2.4f, %2.4f)" %
           tuple(self.corners[0] + self.corners[1]))
     print("           (%2.4f, %2.4f)  (%2.4f, %2.4f)" %
