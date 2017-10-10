@@ -48,3 +48,8 @@ class Tessagon:
     for tile in self.tiles:
       tile.calculate_faces()
     bmesh.ops.recalc_face_normals(self.bm, faces=self.bm.faces)
+
+  def inspect(self):
+    print("=== %s ===" % (self.__class__.__name__))
+    for tile in self.tiles:
+      tile.inspect()

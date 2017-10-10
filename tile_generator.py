@@ -29,6 +29,10 @@ class TileGenerator(ValueBlend):
     if 'v_twist' in kwargs:
       self.v_twist = kwargs['v_twist']
 
+    self.id_prefix = self.tessagon.__class__.__name__
+    if 'id_prefix' in kwargs:
+      self.id_prefix = kwargs['id_prefix']
+
   def initialize_tiles(self, tile_class, **kwargs):
     tiles = [[None for i in range(self.v_num)] for j in range(self.u_num)]
 
@@ -38,11 +42,13 @@ class TileGenerator(ValueBlend):
       for v in range(self.v_num):
         v_ratio0 = float(v) / self.v_num
         v_ratio1 = float(v + 1) / self.v_num
-        corners_arg = { 'corners': [self.blend(u_ratio0, v_ratio0),
-                                    self.blend(u_ratio1, v_ratio0),
-                                    self.blend(u_ratio0, v_ratio1),
-                                    self.blend(u_ratio1, v_ratio1)] }
-        tiles[u][v] = tile_class(self.tessagon, **{**kwargs, **corners_arg})
+        extra_args = { 'corners': [self.blend(u_ratio0, v_ratio0),
+                                   self.blend(u_ratio1, v_ratio0),
+                                   self.blend(u_ratio0, v_ratio1),
+                                   self.blend(u_ratio1, v_ratio1)] }
+        if self.id_prefix:
+          extra_args['id'] = "%s[%d][%d]" % (self.id_prefix, u, v)
+        tiles[u][v] = tile_class(self.tessagon, **{**kwargs, **extra_args})
     return tiles
 
   def initialize_neighbors(self, tiles, **kwargs):

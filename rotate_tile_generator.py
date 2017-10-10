@@ -14,6 +14,7 @@ class RotateTileGenerator(TileGenerator):
     # Maximum tiles generated per rot_tile is rot_index^2 + 1 tiles
     # With this in mind, you'll want to set u_num and v_num lower than
     # you would with the grid tile generator
+    self.id_prefix = 'RotTile'
     self.rot_tiles = None
     self.tiles = []
 
@@ -76,7 +77,8 @@ class RotTile(AbstractTile):
     generator = TileGenerator(self.tessagon,
                               corners=self.interior_corners,
                               u_num=self.n-1, v_num=self.n-1,
-                              u_cyclic=False, v_cyclic=False)
+                              u_cyclic=False, v_cyclic=False,
+                              id_prefix=self.id + '(interior)')
 
     self.interior = generator.initialize_tiles(self.tessagon.tile_class)
     generator.initialize_neighbors(self.interior)
@@ -93,12 +95,13 @@ class RotTile(AbstractTile):
     return tiles
     
   def initialize_boundary(self):
-    self.initialize_left_boundary()
-    self.initialize_right_boundary()
-    self.initialize_top_boundary()
-    self.initialize_bottom_boundary()
+    prefix_base = self.id
+    self.initialize_left_boundary(self.id + '(left)')
+    self.initialize_right_boundary(self.id + '(right)')
+    self.initialize_top_boundary(self.id + '(top)')
+    self.initialize_bottom_boundary(self.id + '(bottom)')
 
-  def initialize_left_boundary(self):
+  def initialize_left_boundary(self, id_prefix):
     if not self.boundary['left']:
       tile = self.get_neighbor_path(['left'])
       if tile:
@@ -109,14 +112,15 @@ class RotTile(AbstractTile):
         generator = TileGenerator(self.tessagon,
                                   corners=corners,
                                   u_num=1, v_num=self.n,
-                                  u_cyclic=False, v_cyclic=False)
+                                  u_cyclic=False, v_cyclic=False,
+                                  id_prefix=id_prefix)
         tiles = generator.initialize_tiles(self.tessagon.tile_class)
         generator.initialize_neighbors(tiles)
 
         self.boundary['left'] = tiles
         tile.boundary['right'] = self.boundary['left'] 
 
-  def initialize_bottom_boundary(self):
+  def initialize_bottom_boundary(self, id_prefix):
     if not self.boundary['bottom']:
       tile = self.get_neighbor_path(['bottom'])
       if tile:
@@ -132,24 +136,25 @@ class RotTile(AbstractTile):
         generator = TileGenerator(self.tessagon,
                                   corners=corners,
                                   u_num=self.n, v_num=1,
-                                  u_cyclic=False, v_cyclic=False)
+                                  u_cyclic=False, v_cyclic=False,
+                                  id_prefix=id_prefix)
         tiles = generator.initialize_tiles(self.tessagon.tile_class)
         generator.initialize_neighbors(tiles)
 
         self.boundary['bottom'] = tiles
         tile.boundary['top'] = self.boundary['bottom']
 
-  def initialize_right_boundary(self):
+  def initialize_right_boundary(self, id_prefix):
     if not self.boundary['right']:
       tile = self.get_neighbor_path(['right'])
       if tile:
-        tile.initialize_left_boundary()
+        tile.initialize_left_boundary(id_prefix)
 
-  def initialize_top_boundary(self):
+  def initialize_top_boundary(self, id_prefix):
     if not self.boundary['top']:
       tile = self.get_neighbor_path(['top'])
       if tile:
-        tile.initialize_bottom_boundary()
+        tile.initialize_bottom_boundary(id_prefix)
 
   def calculate_boundary_neighbors(self):
     self.calculate_left_boundary_neighbors()
