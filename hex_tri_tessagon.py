@@ -7,6 +7,17 @@ from tile import Tile
 from tessagon import Tessagon
 
 class HexTriTile(Tile):
+  #    ....o....  .6..o..6.
+  #    .../.\...  .../3\...
+  #  ^ --o---o--  --o---o--
+  #  | ./.....\.  3/.....\3
+  #  | o.......o  o...6...o
+  #  | .\...../.  3\...../3
+  #  | --o---o--  --o---o--
+  #    ...\./...  ...\3/...
+  #  V ....o ...  .6..o..6.
+  #
+  #     U ------>
   def init_verts(self):
     return { 'top': None,
              'left': { 'top': None,
@@ -18,50 +29,6 @@ class HexTriTile(Tile):
              'bottom': None
     }
 
-  def calculate_verts(self):
-    # ....o....
-    # .../.\...
-    # --o---o--
-    # ./.....\.
-    # o.......o
-    # .\...../.
-    # --o---o--
-    # ...\./...
-    # ....o ...
-
-    # top vert
-    vert = self.add_vert('top', *self.blend(0.5, 0))
-    self.set_equivalent_vert(['top'], 'bottom', vert)
-
-    # bottom vert
-    vert = self.add_vert('bottom', *self.blend(0.5, 1))
-    self.set_equivalent_vert(['bottom'], 'top', vert)
-
-    # left verts
-    self.add_vert(['left', 'top'], *self.blend(0.25, 0.25))
-
-    vert = self.add_vert(['left', 'middle'], *self.blend(0, 0.5))
-    self.set_equivalent_vert(['left'], ['right', 'middle'], vert)
-
-    self.add_vert(['left', 'bottom'], *self.blend(0.25, 0.75))
-
-    # right verts
-    self.add_vert(['right', 'top'], *self.blend(0.75, 0.25))
-
-    vert = self.add_vert(['right', 'middle'], *self.blend(1, 0.5))
-    self.set_equivalent_vert(['right'], ['left', 'middle'], vert)
-
-    self.add_vert(['right', 'bottom'], *self.blend(0.75, 0.75))
-
-  # .6..o..6.
-  # .../3\...
-  # --o---o--
-  # 3/.....\3
-  # o...6...o
-  # 3\...../3
-  # --o---o--
-  # ...\3/...
-  # .6..o..6.
   def init_faces(self):
     return { 'center': { 'top': None,
                          'middle': None,
@@ -74,6 +41,31 @@ class HexTriTile(Tile):
                         'uppermiddle': None,
                         'lowermiddle': None,
                         'bottom': None } }
+
+  def calculate_verts(self):
+    # top vert
+    vert = self.add_vert('top', *self.blend(0.5, 1))
+    self.set_equivalent_vert(['top'], 'bottom', vert)
+
+    # bottom vert
+    vert = self.add_vert('bottom', *self.blend(0.5, 0))
+    self.set_equivalent_vert(['bottom'], 'top', vert)
+
+    # left verts
+    self.add_vert(['left', 'top'], *self.blend(0.25, 0.75))
+
+    vert = self.add_vert(['left', 'middle'], *self.blend(0, 0.5))
+    self.set_equivalent_vert(['left'], ['right', 'middle'], vert)
+
+    self.add_vert(['left', 'bottom'], *self.blend(0.25, 0.25))
+
+    # right verts
+    self.add_vert(['right', 'top'], *self.blend(0.75, 0.75))
+
+    vert = self.add_vert(['right', 'middle'], *self.blend(1, 0.5))
+    self.set_equivalent_vert(['right'], ['left', 'middle'], vert)
+
+    self.add_vert(['right', 'bottom'], *self.blend(0.75, 0.25))
 
   def calculate_faces(self):
     self.center_faces()

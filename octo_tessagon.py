@@ -24,14 +24,15 @@ class OctoTile(EquivalentCornersTile):
 
   def calculate_verts(self):
     #            Topology:
-    #  ..0-1..      0 = topleft
-    #  ./...\.      1 = topright
-    #  2.....3      2 = lefttop
-    #  |.....|      3 = righttop
-    #  4.....5      4 = leftbottom
-    #  .\.../.      5 = rightbottom
-    #  ..6-7..      6 = bottomleft
-    #               7 = leftbottom
+    # ^  ..0-1..      0 = topleft
+    # |  ./...\.      1 = topright
+    # |  2.....3      2 = lefttop
+    # |  |.....|      3 = righttop
+    # |  4.....5      4 = leftbottom
+    # |  .\.../.      5 = rightbottom
+    #    ..6-7..      6 = bottomleft
+    # V               7 = leftbottom
+    #    U ------>
 
     # ..0-1....0-1.. This illustates which vertices are
     # ./...\../...\. equivalent to vertices on neighboring
@@ -57,40 +58,42 @@ class OctoTile(EquivalentCornersTile):
     self.righttop_vert()
 
   def topleft_vert(self):
-    vert = self.add_vert('topleft', *self.blend(self.CORNER_TO_VERT_RATIO, 0))
+    vert = self.add_vert('topleft', *self.blend(self.CORNER_TO_VERT_RATIO, 1))
     self.set_equivalent_vert(['top'], 'bottomleft', vert)
 
   def topright_vert(self):
     vert = self.add_vert('topright',
-                         *self.blend(1.0 - self.CORNER_TO_VERT_RATIO, 0))
+                         *self.blend(1.0 - self.CORNER_TO_VERT_RATIO, 1))
     self.set_equivalent_vert(['top'], 'bottomright', vert)
 
   def lefttop_vert(self):
-    vert = self.add_vert('lefttop', *self.blend(0, self.CORNER_TO_VERT_RATIO))
+    vert = self.add_vert('lefttop',
+                         *self.blend(0, 1.0 - self.CORNER_TO_VERT_RATIO))
     self.set_equivalent_vert(['left'], 'righttop', vert)
 
   def righttop_vert(self):
-    vert = self.add_vert('righttop', *self.blend(1, self.CORNER_TO_VERT_RATIO))
+    vert = self.add_vert('righttop',
+                         *self.blend(1, 1.0 - self.CORNER_TO_VERT_RATIO))
     self.set_equivalent_vert(['right'], 'lefttop', vert)
 
   def leftbottom_vert(self):
     vert = self.add_vert('leftbottom',
-                         *self.blend(0, 1.0 - self.CORNER_TO_VERT_RATIO))
+                         *self.blend(0, self.CORNER_TO_VERT_RATIO))
     self.set_equivalent_vert(['left'], 'rightbottom', vert)
 
   def rightbottom_vert(self):
     vert = self.add_vert('rightbottom',
-                         *self.blend(1, 1.0 - self.CORNER_TO_VERT_RATIO))
+                         *self.blend(1, self.CORNER_TO_VERT_RATIO))
     self.set_equivalent_vert(['right'], 'leftbottom', vert)
 
   def bottomleft_vert(self):
     vert = self.add_vert('bottomleft',
-                         *self.blend(self.CORNER_TO_VERT_RATIO, 1))
+                         *self.blend(self.CORNER_TO_VERT_RATIO, 0))
     self.set_equivalent_vert(['bottom'], 'topleft', vert)
 
   def bottomright_vert(self):
     vert = self.add_vert('bottomright',
-                         *self.blend(1.0 - self.CORNER_TO_VERT_RATIO, 1)) 
+                         *self.blend(1.0 - self.CORNER_TO_VERT_RATIO, 0))
     self.set_equivalent_vert(['bottom'], 'topright', vert)
 
   #

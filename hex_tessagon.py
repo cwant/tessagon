@@ -16,16 +16,18 @@ class HexTile(EquivalentCornersTile):
     }
 
   def calculate_verts(self):
-    #  ..|..   Topology:
-    #  ..0..
-    #  ./.\.   0 = top
-    #  1...2   1 = lefttop
-    #  |...|   2 = righttop
-    #  3...4   3 = leftbottom
-    #  .\./.   4 = rightbottom
-    #  ..5..   6 = bottom 
-    #  ..|.. 
-
+    #    ..|..   Topology:
+    #    ..0..
+    # ^  ./.\.   0 = top
+    # |  1...2   1 = lefttop
+    # |  |...|   2 = righttop
+    # |  3...4   3 = leftbottom
+    # |  .\./.   4 = rightbottom
+    #    ..5..   6 = bottom 
+    # V  ..|.. 
+    #
+    #     U --->
+    #
     # ..|..   ..|..
     # ..0..   ..0..
     # ./.\.   ./.\.
@@ -55,25 +57,25 @@ class HexTile(EquivalentCornersTile):
     self.righttop_vert()
 
   def top_vert(self):
-    self.add_vert('top', *self.blend(0.5, 1.0/6.0))
+    self.add_vert('top', *self.blend(0.5, 5.0/6.0))
 
   def lefttop_vert(self):
-    vert = self.add_vert('lefttop', *self.blend(0, 1.0/3.0))
+    vert = self.add_vert('lefttop', *self.blend(0, 2.0/3.0))
     self.set_equivalent_vert(['left'], 'righttop', vert)
 
   def leftbottom_vert(self):
-    vert = self.add_vert('leftbottom', *self.blend(0, 2.0/3.0))
+    vert = self.add_vert('leftbottom', *self.blend(0, 1.0/3.0))
     self.set_equivalent_vert(['left'], 'rightbottom', vert)
 
   def bottom_vert(self):
-    self.add_vert('bottom', *self.blend(0.5, 5.0/6.0))
+    self.add_vert('bottom', *self.blend(0.5, 1.0/6.0))
 
   def rightbottom_vert(self):
-    vert = self.add_vert('rightbottom', *self.blend(1, 2.0/3.0))
+    vert = self.add_vert('rightbottom', *self.blend(1, 1.0/3.0))
     self.set_equivalent_vert(['right'], 'leftbottom', vert)
 
   def righttop_vert(self):
-    vert = self.add_vert('righttop', *self.blend(1, 1.0/3.0))
+    vert = self.add_vert('righttop', *self.blend(1, 2.0/3.0))
     self.set_equivalent_vert(['right'], 'lefttop', vert)
 
   #

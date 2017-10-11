@@ -12,18 +12,19 @@ class HexSquareTriTile(Tile):
   # 14 verts, 19 faces (7 internal, 12 on boundary)
   # The angles make it hard to draw all edges, some excluded
   #
-  #  ...|...|...  6..|.4.|..6
-  #  ...o---o...  ...o---o...
-  #  o ..\./...o  o.4.\3/.4.o
-  #  .\...o.../.  3\...o.../3 Numbers are faces with # sides
-  #  --o.....o--  --o.....o--
-  #  ..|.....|..  4.|..6..|.4
-  #  --o.... o--  --o.... o--
-  #  ./.. o...\.  3/.. o...\3
-  #  o.../.\...o  o.4./3\.4.o
-  #  ...o---o...  ...o---o...
-  #  ...|...|...  6..|.4.|..6
-
+  #     ...|...|...  6..|.4.|..6
+  #     ...o---o...  ...o---o...
+  #  ^  o ..\./...o  o.4.\3/.4.o
+  #  |  .\...o.../.  3\...o.../3 Numbers are faces with # sides
+  #  |  --o.....o--  --o.....o--
+  #  |  ..|.....|..  4.|..6..|.4
+  #  |  --o.... o--  --o.... o--
+  #     ./.. o...\.  3/.. o...\3
+  #  V  o.../.\...o  o.4./3\.4.o
+  #     ...o---o...  ...o---o...
+  #     ...|...|...  6..|.4.|..6
+  #
+  #       U ---->
   def init_verts(self):
     return { 'left': { 'top': None,
                        'uppermiddle': None,
@@ -41,6 +42,27 @@ class HexSquareTriTile(Tile):
                          'right': None }
     }
 
+  def init_faces(self):
+    return { 'hex': { 'lefttop': None,
+                      'righttop': None,
+                      'middle': None,
+                      'leftbottom': None,
+                      'rightbottom': None },
+             'tri': { 'top': None,
+                      'lefttop': None,
+                      'righttop': None,
+                      'leftbottom': None,
+                      'rightbottom': None,
+                      'bottom': None },
+             'square': { 'top': None,
+                         'lefttop': None,
+                         'righttop': None,
+                         'left': None,
+                         'right': None,
+                         'leftbottom': None,
+                         'rightbottom': None,
+                         'bottom': None } }
+
   def calculate_verts(self):
     # u_unit is the length of the edges expressed as a proportion of the tile
     u_unit = 1.0 / (1.0 + sqrt(3))
@@ -53,14 +75,14 @@ class HexSquareTriTile(Tile):
     u6 = 1
 
     v_unit = 1.0 / (3.0 + sqrt(3))
-    v0 = 0.5*v_unit
-    v1 = v_unit
-    v2 = 0.5 - v_unit
-    v3 = 2.0*v_unit
-    v4 = 1.0 - 2.0*v_unit
-    v5 = 0.5 + v_unit
-    v6 = 1.0 - v_unit
-    v7 = 1.0 - 0.5*v_unit
+    v0 = 1.0 - 0.5*v_unit
+    v1 = 1.0 - v_unit
+    v2 = 0.5 + v_unit
+    v3 = 1.0 - 2.0*v_unit
+    v4 = 2.0*v_unit
+    v5 = 0.5 - v_unit
+    v6 = v_unit
+    v7 = 0.5*v_unit
 
     # Top triangle
     self.add_vert(['top', 'left'], *self.blend(u2, v0))
@@ -87,27 +109,6 @@ class HexSquareTriTile(Tile):
     self.add_vert(['right','lowermiddle'], *self.blend(u5, v4))
     vert = self.add_vert(['right','bottom'], *self.blend(u6, v6))
     self.set_equivalent_vert(['right'], ['left', 'bottom'], vert)
-
-  def init_faces(self):
-    return { 'hex': { 'lefttop': None,
-                      'righttop': None,
-                      'middle': None,
-                      'leftbottom': None,
-                      'rightbottom': None },
-             'tri': { 'top': None,
-                      'lefttop': None,
-                      'righttop': None,
-                      'leftbottom': None,
-                      'rightbottom': None,
-                      'bottom': None },
-             'square': { 'top': None,
-                         'lefttop': None,
-                         'righttop': None,
-                         'left': None,
-                         'right': None,
-                         'leftbottom': None,
-                         'rightbottom': None,
-                         'bottom': None } }
 
   def calculate_faces(self):
     self.outer_faces()

@@ -59,26 +59,25 @@ class TileGenerator(ValueBlend):
         v_prev = (v - 1) % self.v_num
         v_next = (v + 1) % self.v_num
         tile = tiles[u][v]
+
         if not self.u_cyclic and u == 0:
           left = None
         else:
           left = tiles[u_prev][v]
+
         if not self.v_cyclic and v == 0:
           top = None
         else:
-          top = tiles[u][v_prev]
+          top = tiles[u][v_next]
+
         if not self.u_cyclic and u == self.u_num - 1:
           right = None
         else:
-          if self.u_twist and u == self.u_num - 1:
-            right = tiles[u_next][0]
-          else:
-            right = tiles[u_next][v]
+          right = tiles[u_next][v]
+
         if not self.v_cyclic and v == self.v_num - 1:
           bottom = None
         else:
-          if self.v_twist and v == self.v_num - 1:
-            bottom = tiles[self.u_num - u - 1][v_next]
-          else:
-            bottom = tiles[u][v_next]
+          bottom = tiles[u][v_prev]
+
         tile.set_neighbors(left=left, right=right, top=top, bottom=bottom)
