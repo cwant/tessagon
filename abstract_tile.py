@@ -12,7 +12,7 @@ class AbstractTile(ValueBlend):
     if 'id' in kwargs:
       self.id = kwargs['id']
 
-    # Corners is list of tuples [topleft, topright, bottomleft, bottomright]
+    # Corners is list of tuples [bottomleft, bottomright, topleft, topright]
     self.corners = None
     self.init_corners(**kwargs)
 

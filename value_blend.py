@@ -1,6 +1,7 @@
 class ValueBlend:
 
   def init_corners(self, **kwargs):
+    # Corners is list of tuples [bottomleft, bottomright, topleft, topright]
     if 'corners' in kwargs:
       self.corners = kwargs['corners']
       if len(self.corners) != 4 or any (len(v) != 2 for v in self.corners):
