@@ -108,9 +108,8 @@ class HexTriTile(Tile):
     self.left_top_face()
 
     tile = self.get_neighbor_path(['bottom'])
-    if not tile:
-      return None
-    tile.left_top_face()
+    if tile:
+      tile.left_top_face()
 
     # Triangles
     verts = [self.get_vert(['left', 'top']),
