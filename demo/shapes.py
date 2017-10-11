@@ -33,6 +33,9 @@ def cylinder(u, v):
   h = 5.0
   return general_cylinder(r, h, u, v)
 
+def other_cylinder(u, v):
+  return cylinder(v, u)
+
 def general_mobius(r, h, u, v):
    
   offset = h*(v-0.5)*sin(u*pi)
