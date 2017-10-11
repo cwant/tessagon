@@ -14,7 +14,7 @@ class RotateTileGenerator(TileGenerator):
     # Maximum tiles generated per rot_tile is rot_index^2 + 1 tiles
     # With this in mind, you'll want to set u_num and v_num lower than
     # you would with the grid tile generator
-    self.id_prefix = 'RotTile'
+    self.id_prefix = 'rot_tiles'
     self.rot_tiles = None
 
   def create_tiles(self):
@@ -77,7 +77,7 @@ class RotTile(AbstractTile):
                               corners=self.interior_corners,
                               u_num=self.n-1, v_num=self.n-1,
                               u_cyclic=False, v_cyclic=False,
-                              id_prefix=self.id + '(interior)')
+                              id_prefix=self.id + '.interior')
 
     self.interior = generator.initialize_tiles(self.tessagon.tile_class)
     generator.initialize_neighbors(self.interior)
@@ -88,10 +88,10 @@ class RotTile(AbstractTile):
     
   def initialize_boundary(self):
     prefix_base = self.id
-    self.initialize_left_boundary(self.id + '(left)')
-    self.initialize_right_boundary(self.id + '(right)')
-    self.initialize_top_boundary(self.id + '(top)')
-    self.initialize_bottom_boundary(self.id + '(bottom)')
+    self.initialize_left_boundary(self.id + ".boundary['left']")
+    self.initialize_right_boundary(self.id + ".boundary['right']")
+    self.initialize_top_boundary(self.id + ".boundary['top']")
+    self.initialize_bottom_boundary(self.id + ".boundary['bottom']")
 
   def initialize_left_boundary(self, id_prefix):
     if not self.boundary['left']:
