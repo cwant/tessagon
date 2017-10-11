@@ -71,9 +71,9 @@ class AbstractTile(ValueBlend):
         if tile.id:
           print("    - %s" % (self.neighbor_str(key)))
     print("  - corners: (%2.4f, %2.4f)  (%2.4f, %2.4f)" %
-          tuple(self.corners[0] + self.corners[1]))
-    print("             (%2.4f, %2.4f)  (%2.4f, %2.4f)" %
           tuple(self.corners[2] + self.corners[3]))
+    print("             (%2.4f, %2.4f)  (%2.4f, %2.4f)" %
+          tuple(self.corners[0] + self.corners[1]))
     print('')
 
   def neighbor_str(self, key):
