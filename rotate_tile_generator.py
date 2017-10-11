@@ -67,10 +67,10 @@ class RotTile(AbstractTile):
     self.tiles = []
 
   def initialize_interior(self):
-    self.interior_corners = [ self.blend(self.c1, self.c3),
-                              self.blend(self.c3, self.c4),
-                              self.blend(self.c2, self.c1),
-                              self.blend(self.c4, self.c2) ]
+    self.interior_corners = [ self.blend(self.c2, self.c1),
+                              self.blend(self.c4, self.c2),
+                              self.blend(self.c1, self.c3),
+                              self.blend(self.c3, self.c4) ]
     if self.n < 2:
       return
     generator = TileGenerator(self.tessagon,
@@ -97,10 +97,10 @@ class RotTile(AbstractTile):
     if not self.boundary['left']:
       tile = self.get_neighbor_path(['left'])
       if tile:
-        corners = [ self.blend(self.c3 - 1.0, self.c4),
-                    self.blend(0, 1),
-                    self.blend(0, 0),
-                    self.interior_corners[2] ]
+        corners = [ self.blend(0, 0),
+                    self.blend(self.c2, self.c1),
+                    self.blend(self.c3 - 1.0, self.c4),
+                    self.blend(0, 1) ]
         generator = TileGenerator(self.tessagon,
                                   corners=corners,
                                   u_num=1, v_num=self.n,
@@ -110,22 +110,17 @@ class RotTile(AbstractTile):
         generator.initialize_neighbors(tiles)
 
         self.boundary['left'] = tiles
-        tile.boundary['right'] = self.boundary['left']
+        tile.boundary['right'] = tiles
         self.tiles += self.flatten_list(tiles)
 
   def initialize_bottom_boundary(self, id_prefix):
     if not self.boundary['bottom']:
       tile = self.get_neighbor_path(['bottom'])
       if tile:
-        corners = [ self.blend(0, 0),
-                    self.interior_corners[3],
-                    # This next one conceptually seems fine, in practice
-                    # though, it's a wee bit off (don't know why, the
-                    # similar calculation in the left boundary works fine)
-                    # The damage gets worse for higher values of v_num
-                    # (the v_num that the tessagon was initialized with).
-                    self.blend(self.c1, self.c3 - 1.0),
-                    self.blend(1, 0) ]
+        corners = [ self.blend(self.c1, -self.c2),
+                    self.blend(1, 0),
+                    self.blend(0, 0),
+                    self.blend(self.c4, self.c2) ]
         generator = TileGenerator(self.tessagon,
                                   corners=corners,
                                   u_num=self.n, v_num=1,
@@ -135,7 +130,7 @@ class RotTile(AbstractTile):
         generator.initialize_neighbors(tiles)
 
         self.boundary['bottom'] = tiles
-        tile.boundary['top'] = self.boundary['bottom']
+        tile.boundary['top'] = tiles
         self.tiles += self.flatten_list(tiles)
 
   def initialize_right_boundary(self, id_prefix):
@@ -159,12 +154,15 @@ class RotTile(AbstractTile):
   def calculate_left_boundary_neighbors(self):
     if self.boundary['left']:
       for i in range(self.n - 1):
-        boundary_tile = self.boundary['left'][0][i+1]
-        other_tile = self.interior[0][i]
-        boundary_tile.neighbors['right'] = other_tile
-        other_tile.neighbors['left'] = boundary_tile
+        boundary_tile = self.boundary['left'][0][i]
+        other_tile = None
+        if self.n > 1:
+          other_tile = self.interior[0][i]
+        if other_tile:
+          boundary_tile.neighbors['right'] = other_tile
+          other_tile.neighbors['left'] = boundary_tile
       if self.boundary['top']:
-        boundary_tile = self.boundary['left'][0][0]
+        boundary_tile = self.boundary['left'][0][self.n-1]
         other_tile = self.boundary['top'][0][0]
         boundary_tile.neighbors['right'] = other_tile
         other_tile.neighbors['left'] = boundary_tile
@@ -173,24 +171,30 @@ class RotTile(AbstractTile):
     if self.boundary['bottom']:
       for i in range(self.n - 1):
         boundary_tile = self.boundary['bottom'][i+1][0]
-        other_tile = self.interior[i][self.n-2]
-        boundary_tile.neighbors['top'] = other_tile
-        other_tile.neighbors['bottom'] = boundary_tile
+        other_tile = None
+        if self.n > 1:
+          other_tile = self.interior[i][0]
+        if other_tile:
+          boundary_tile.neighbors['top'] = other_tile
+          other_tile.neighbors['bottom'] = boundary_tile
       if self.boundary['left']:
         boundary_tile = self.boundary['bottom'][0][0]
-        other_tile = self.boundary['left'][0][self.n-1]
+        other_tile = self.boundary['left'][0][0]
         boundary_tile.neighbors['top'] = other_tile
         other_tile.neighbors['bottom'] = boundary_tile
         
   def calculate_right_boundary_neighbors(self):
     if self.boundary['right']:
       for i in range(self.n - 1):
-        boundary_tile = self.boundary['right'][0][i]
-        other_tile = self.interior[self.n-2][i]
-        boundary_tile.neighbors['left'] = other_tile
-        other_tile.neighbors['right'] = boundary_tile
+        boundary_tile = self.boundary['right'][0][i+1]
+        other_tile = None
+        if self.n > 1:
+          other_tile = self.interior[self.n-2][i]
+        if other_tile:
+          boundary_tile.neighbors['left'] = other_tile
+          other_tile.neighbors['right'] = boundary_tile
       if self.boundary['bottom']:
-        boundary_tile = self.boundary['right'][0][self.n-1]
+        boundary_tile = self.boundary['right'][0][0]
         other_tile = self.boundary['bottom'][self.n-1][0]
         boundary_tile.neighbors['left'] = other_tile
         other_tile.neighbors['right'] = boundary_tile
@@ -199,12 +203,15 @@ class RotTile(AbstractTile):
     if self.boundary['top']:
       for i in range(self.n - 1):
         boundary_tile = self.boundary['top'][i][0]
-        other_tile = self.interior[i][0]
-        boundary_tile.neighbors['bottom'] = other_tile
-        other_tile.neighbors['top'] = boundary_tile
+        other_tile = None
+        if self.n > 1:
+          other_tile = self.interior[i][0]
+        if other_tile:
+          boundary_tile.neighbors['bottom'] = other_tile
+          other_tile.neighbors['top'] = boundary_tile
       if self.boundary['right']:
         boundary_tile = self.boundary['top'][self.n-1][0]
-        other_tile = self.boundary['right'][0][0]
+        other_tile = self.boundary['right'][0][self.n-1]
         boundary_tile.neighbors['bottom'] = other_tile
         other_tile.neighbors['top'] = boundary_tile
 
