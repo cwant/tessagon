@@ -44,9 +44,8 @@ class PythagoreanTile(Tile):
           if not self.get_neighbor_path(['left']):
             if row==6 and not self.get_neighbor_path(['top']):
               continue
-            if row==2: continue
-            if row==1 and not self.get_neighbor_path(['bottom']):
-              continue
+            if not self.get_neighbor_path(['bottom']):
+              if row==1 or row==2: continue
 
         vert = self.add_vert([col, row], *self.blend(c[col], c[row]))
         if col == 1:

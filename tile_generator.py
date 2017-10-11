@@ -65,7 +65,7 @@ class TileGenerator(ValueBlend):
         else:
           left = tiles[u_prev][v]
 
-        if not self.v_cyclic and v == 0:
+        if not self.v_cyclic and v == self.v_num - 1:
           top = None
         else:
           top = tiles[u][v_next]
@@ -75,7 +75,7 @@ class TileGenerator(ValueBlend):
         else:
           right = tiles[u_next][v]
 
-        if not self.v_cyclic and v == self.v_num - 1:
+        if not self.v_cyclic and v == 0:
           bottom = None
         else:
           bottom = tiles[u][v_prev]
