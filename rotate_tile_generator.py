@@ -117,7 +117,7 @@ class RotTile(AbstractTile):
     if not self.boundary['bottom']:
       tile = self.get_neighbor_path(['bottom'])
       if tile:
-        corners = [ self.blend(self.c1, -self.c2),
+        corners = [ self.blend(self.c1, self.c3 - 1.0),
                     self.blend(1, 0),
                     self.blend(0, 0),
                     self.blend(self.c4, self.c2) ]
