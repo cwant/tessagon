@@ -205,7 +205,7 @@ class RotTile(AbstractTile):
         boundary_tile = self.boundary['top'][i][0]
         other_tile = None
         if self.n > 1:
-          other_tile = self.interior[i][0]
+          other_tile = self.interior[i][self.n-2]
         if other_tile:
           boundary_tile.neighbors['bottom'] = other_tile
           other_tile.neighbors['top'] = boundary_tile
