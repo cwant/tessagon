@@ -28,8 +28,10 @@ class Tile(AbstractTile):
   def add_vert(self, index_path, u, v, **kwargs):
     if self.get_vert(index_path):
       return None
-    co = self.f(u,v)
-    vert = self.bm.verts.new(co)
+    coords = self.f(u,v)
+
+    vert = self.mesh_adaptor.create_vert(coords)
+
     self.set_vert(index_path, vert)
     if 'vert_type' in kwargs:
       if not kwargs['vert_type'] in self.tessagon.vert_types:
@@ -52,7 +54,9 @@ class Tile(AbstractTile):
     for vert in verts:
       if not vert:
         return None
-    face = self.bm.faces.new(verts)
+
+    face = self.mesh_adaptor.create_face(verts)
+
     self.set_face(index_path, face)
     if 'face_type' in kwargs:
       if not kwargs['face_type'] in self.tessagon.face_types:

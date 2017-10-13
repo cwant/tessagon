@@ -4,7 +4,7 @@ class AbstractTile(ValueBlend):
   def __init__(self, tessagon, **kwargs):
     self.tessagon = tessagon
     self.f = tessagon.f
-    self.bm = tessagon.bm
+    self.mesh_adaptor = tessagon.mesh_adaptor
     self.id = None
 
     # This is not necessary to any of the calculations, just
