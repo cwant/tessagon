@@ -28,10 +28,6 @@ try:
 except:
   print('Could not load wire_skin, some demoes skipped')
 
-def main2():
-  layer9()
-  #layer11()
-  
 def main():
   # A bunch of layers have demos
 
@@ -62,22 +58,15 @@ def main():
   # BrickTessagon
   layer9()
 
-  # Rotated Tiles
-  layer11()
-  
-  if is_wire_skin_loaded:
-    # WireSkin demo, hexagons
-    layer16()
-
-    # WireSkin demo, triangles and booleans
-    layer17()
-    pass
-
   # Non-cyclic Torus
   layer18()
 
   # Mobius Tessagon
   layer19()
+
+  if is_wire_skin_loaded:
+    # WireSkin demo, hexagons
+    layer20()
 
 def tessellate(out_name, f, tessagon_class, **kwargs):
   output_object = bpy.data.objects[out_name]
@@ -281,28 +270,6 @@ def layer9():
   }
   tessellate("BrickPlane1", plane, BrickTessagon, **options)
 
-def layer10():
-  options = {
-    'u_range': [0.0, 1.0],
-    'v_range': [0.0, 1.0],
-    'u_num': 10,
-    'v_num': 2,
-    #'u_cyclic': False,
-    #'v_cyclic': False,
-    'rot_factor': 3
-  }
-  tessellate("Test", torus, BrickTessagon, **options)
-
-def layer11():
-  options = {
-    'u_range': [0.0, 1.0],
-    'v_range': [0.0, 1.0],
-    'u_num': 10,
-    'v_num': 4,
-    'rot_factor': 1
-  }
-  tessellate("HexTessagonRot", torus, SquareTessagon, **options)
-
 def wire_to_skin(in_name, out_name, **kwargs):
   input_object = bpy.data.objects[in_name]
   output_object = bpy.data.objects[out_name]
@@ -325,7 +292,7 @@ def layer18():
     'u_cyclic': True,
     'v_cyclic': False
   }
-  tessellate("Tessagon7", cylinder, HexTessagon, **options)
+  tessellate("HexCylinder1", cylinder, HexTessagon, **options)
 
 def layer19():
   options = {
@@ -337,16 +304,16 @@ def layer19():
     #'u_twist': True,
     'v_cyclic': False
   }
-  tessellate("Tessagon8", mobius, HexTessagon, **options)
+  tessellate("HexMobius1", mobius, HexTessagon, **options)
 
-def layer16():
+def layer20():
   options = {
     'u_range': [0.0, 1.0],
     'v_range': [0.0, 1.0],
     'u_num': 8,
     'v_num': 20
   }
-  tessellate("Tessagon5", other_torus, HexTessagon, **options)
+  tessellate("HexTorusIn", other_torus, HexTessagon, **options)
 
   options = {
     'width': 0.1,
@@ -356,23 +323,4 @@ def layer16():
     'dist': 0.1,
     'crease': 1.0
   }
-  wire_to_skin("Tessagon5", "WireSkin5", **options)
-
-def layer17():
-  options = {
-    'u_range': [0.0, 1.0],
-    'v_range': [0.0, 1.0],
-    'u_num': 35,
-    'v_num': 12
-  }
-  tessellate("Tessagon6", torus, BrickTessagon, **options)
-
-  options = {
-    'width': 0.2,
-    'height': 0.2,
-    'inside_radius': 0.3,
-    'outside_radius': 0.3,
-    'dist': 0.4,
-    'proportional_scale': True
-  }
-  wire_to_skin("Tessagon6", "WireSkin6", **options)
+  wire_to_skin("HexTorusIn", "WireTorusOut", **options)
