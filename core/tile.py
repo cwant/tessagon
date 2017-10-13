@@ -4,6 +4,8 @@ class Tile(AbstractTile):
   def __init__(self, tessagon, **kwargs):
     super().__init__(tessagon, **kwargs)
 
+    self.mesh_adaptor = tessagon.mesh_adaptor
+
     self.verts = self.init_verts()
     self.faces = self.init_faces()
 
