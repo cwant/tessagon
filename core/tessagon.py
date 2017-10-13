@@ -1,9 +1,5 @@
-from importlib import reload
-import rotate_tile_generator
-reload(rotate_tile_generator)
-
-from grid_tile_generator import GridTileGenerator
-from rotate_tile_generator import RotateTileGenerator
+from tessagon.core.grid_tile_generator import GridTileGenerator
+from tessagon.core.rotate_tile_generator import RotateTileGenerator
 
 class Tessagon:
   def __init__(self, f, **kwargs):

@@ -1,9 +1,5 @@
-from importlib import reload
-import equivalent_corners_tile
-import tessagon
-
-from tessagon import Tessagon
-from equivalent_corners_tile import EquivalentCornersTile
+from tessagon.core.tessagon import Tessagon
+from tessagon.core.equivalent_corners_tile import EquivalentCornersTile
 
 class HexTile(EquivalentCornersTile):
   def init_verts(self):

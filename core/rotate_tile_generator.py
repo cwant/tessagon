@@ -1,5 +1,5 @@
-from tile_generator import TileGenerator
-from abstract_tile import AbstractTile
+from tessagon.core.tile_generator import TileGenerator
+from tessagon.core.abstract_tile import AbstractTile
 
 class RotateTileGenerator(TileGenerator):
   def __init__(self, tessagon, **kwargs):

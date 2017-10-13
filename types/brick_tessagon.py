@@ -1,9 +1,5 @@
-from importlib import reload
-import tile
-import tessagon
-
-from tessagon import Tessagon
-from tile import Tile
+from tessagon.core.tessagon import Tessagon
+from tessagon.core.tile import Tile
 
 class BrickTile(Tile):
   #                 top

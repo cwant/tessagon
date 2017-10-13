@@ -1,4 +1,4 @@
-from tile_generator import TileGenerator
+from tessagon.core.tile_generator import TileGenerator
 
 class GridTileGenerator(TileGenerator):
   def __init__(self, tessagon, **kwargs):

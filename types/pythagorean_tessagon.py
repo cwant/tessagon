@@ -1,5 +1,5 @@
-from tessagon import Tessagon
-from tile import Tile
+from tessagon.core.tessagon import Tessagon
+from tessagon.core.tile import Tile
 
 # 29 verts in six rows, six columns
 # 12 faces (2 sets shared with neighbors)

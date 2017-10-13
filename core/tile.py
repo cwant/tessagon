@@ -1,4 +1,4 @@
-from abstract_tile import AbstractTile
+from tessagon.core.abstract_tile import AbstractTile
 
 class Tile(AbstractTile):
   def __init__(self, tessagon, **kwargs):

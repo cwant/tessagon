@@ -1,12 +1,7 @@
 from math import sqrt
 
-from importlib import reload
-import equivalent_corners_tile, tessagon
-reload(equivalent_corners_tile)
-reload(tessagon)
-
-from equivalent_corners_tile import EquivalentCornersTile
-from tessagon import Tessagon
+from tessagon.core.equivalent_corners_tile import EquivalentCornersTile
+from tessagon.core.tessagon import Tessagon
 
 class OctoTile(EquivalentCornersTile):
   CORNER_TO_VERT_RATIO = 1.0 / (2.0 + sqrt(2))

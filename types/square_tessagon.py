@@ -1,5 +1,5 @@
-from tessagon import Tessagon
-from tile import Tile
+from tessagon.core.tessagon import Tessagon
+from tessagon.core.tile import Tile
 
 class SquareTile(Tile):
   def init_verts(self):

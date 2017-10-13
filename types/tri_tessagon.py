@@ -1,11 +1,5 @@
-from importlib import reload
-
-import tile, tessagon
-reload(tile)
-reload(tessagon)
-
-from tile import Tile
-from tessagon import Tessagon
+from tessagon.core.tile import Tile
+from tessagon.core.tessagon import Tessagon
 
 class TriTile(Tile):
   def init_verts(self):

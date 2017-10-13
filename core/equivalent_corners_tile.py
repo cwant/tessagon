@@ -1,8 +1,4 @@
-from importlib import reload
-import tile
-reload(tile)
-
-from tile import Tile
+from tessagon.core.tile import Tile
 
 class EquivalentCornersTile(Tile):
   def init_faces(self):

@@ -1,4 +1,4 @@
-from value_blend import ValueBlend
+from tessagon.core.value_blend import ValueBlend
 
 class AbstractTile(ValueBlend):
   def __init__(self, tessagon, **kwargs):

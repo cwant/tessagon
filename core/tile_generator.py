@@ -1,4 +1,4 @@
-from value_blend import ValueBlend
+from tessagon.core.value_blend import ValueBlend
 
 class TileGenerator(ValueBlend):
   def __init__(self, tessagon, **kwargs):

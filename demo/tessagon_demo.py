@@ -3,18 +3,19 @@ from importlib import reload
 import tessagon
 reload(tessagon)
 
-from blender_adaptor import BlenderAdaptor
-from hex_tessagon import HexTessagon
-from tri_tessagon import TriTessagon
-from octo_tessagon import OctoTessagon
-from rhombus_tessagon import RhombusTessagon
-from hex_tri_tessagon import HexTriTessagon
-from hex_square_tri_tessagon import HexSquareTriTessagon
-from square_tessagon import SquareTessagon
-from pythagorean_tessagon import PythagoreanTessagon
-from brick_tessagon import BrickTessagon
+from tessagon.adaptors.blender_adaptor import BlenderAdaptor
+from tessagon.types.hex_tessagon import HexTessagon
+from tessagon.types.tri_tessagon import TriTessagon
+from tessagon.types.octo_tessagon import OctoTessagon
+from tessagon.types.rhombus_tessagon import RhombusTessagon
+from tessagon.types.hex_tri_tessagon import HexTriTessagon
+from tessagon.types.hex_square_tri_tessagon import HexSquareTriTessagon
+from tessagon.types.square_tessagon import SquareTessagon
+from tessagon.types.pythagorean_tessagon import PythagoreanTessagon
+from tessagon.types.brick_tessagon import BrickTessagon
 
-from shapes import torus, other_torus, cylinder, other_cylinder, mobius, plane
+from tessagon.misc.shapes import torus, other_torus, cylinder, \
+  other_cylinder, mobius, plane
 
 # Optional, for the wire_skin demos
 # https://github.com/cwant/wire_skin

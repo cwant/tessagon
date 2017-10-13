@@ -1,12 +1,7 @@
 from math import sqrt
 
-from importlib import reload
-import tile, tessagon
-reload(tile)
-reload(tessagon)
-
-from tile import Tile
-from tessagon import Tessagon
+from tessagon.core.tile import Tile
+from tessagon.core.tessagon import Tessagon
 
 class HexSquareTriTile(Tile):
   # 14 verts, 19 faces (7 internal, 12 on boundary)
