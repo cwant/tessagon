@@ -1,156 +1,66 @@
-from tessagon.core.equivalent_corners_tile import EquivalentCornersTile
+from tessagon.core.tile import Tile
 from tessagon.core.tessagon import Tessagon
 
-class RhombusTile(EquivalentCornersTile):
+class RhombusTile(Tile):
+  #    ..o..
+  #    ./|\.
+  #    o.|.o
+  # ^  |.o.|
+  # |  |/.\|
+  # |  o...o
+  # |  |\./|
+  # |  |.o.|
+  # |  o.|.o
+  #    .\|/.
+  # V  ..o..
+  #
+  #   U --->
+
+  def __init__(self, tessagon, **kwargs):
+    super().__init__(tessagon, **kwargs)
+    self.u_symmetric = True
+    self.v_symmetric = True
+
   def init_verts(self):
-    return { 'top': None,
-             'lefttop': None,
-             'righttop': None,
-             'middletop': None,
-             'leftmiddle': None,
-             'rightmiddle': None,
-             'middlebottom': None,
-             'leftbottom': None,
-             'rightbottom': None,
-             'bottom': None
-    }
-
-  def calculate_verts(self):
-    #    ..0..  Topology:
-    #    ./|\.
-    #    1.|.2   0 = top
-    # ^  |.3.|   1 = lefttop
-    # |  |/.\|   2 = righttop
-    # |  4...5   3 = middletop
-    # |  |\./|   4 = leftmiddle
-    # |  |.6.|   5 = rightmiddle
-    # |  7.|.8   6 = middlebottom
-    #    .\|/.   7 = leftbottom
-    # V  ..9..   8 = rightbottom
-    #            9 = bottom
-    #   U --->
-    self.top_vert()
-    self.lefttop_vert()
-    self.righttop_vert()
-    self.middletop_vert()
-    self.leftmiddle_vert()
-    self.rightmiddle_vert()
-    self.middlebottom_vert()
-    self.leftbottom_vert()
-    self.rightbottom_vert()
-    self.bottom_vert()
-
-  def top_vert(self):
-    vert = self.add_vert('top', *self.blend(0.5, 1))
-    self.set_equivalent_vert(['top'], 'bottom', vert)
-
-  def lefttop_vert(self):
-    vert = self.add_vert('lefttop', *self.blend(0, 5.0/6.0))
-    self.set_equivalent_vert(['left'], 'righttop', vert)
-
-  def righttop_vert(self):
-    vert = self.add_vert('righttop', *self.blend(1, 5.0/6.0))
-    self.set_equivalent_vert(['right'], 'lefttop', vert)
-
-  def middletop_vert(self):
-    self.add_vert('middletop', *self.blend(0.5, 2.0/3.0))
-
-  def leftmiddle_vert(self):
-    vert = self.add_vert('leftmiddle', *self.blend(0, 1.0/2.0))
-    self.set_equivalent_vert(['left'], 'rightmiddle', vert)
-
-  def rightmiddle_vert(self):
-    vert = self.add_vert('rightmiddle', *self.blend(1, 1.0/2.0))
-    self.set_equivalent_vert(['right'], 'leftmiddle', vert)
-
-  def righttop_vert(self):
-    vert = self.add_vert('righttop', *self.blend(1, 5.0/6.0))
-    self.set_equivalent_vert(['right'], 'lefttop', vert)
-
-  def middlebottom_vert(self):
-    self.add_vert('middlebottom', *self.blend(0.5, 1.0/3.0))
-
-  def leftbottom_vert(self):
-    vert = self.add_vert('leftbottom', *self.blend(0, 1.0/6.0))
-    self.set_equivalent_vert(['left'], 'rightbottom', vert)
-
-  def rightbottom_vert(self):
-    vert = self.add_vert('rightbottom', *self.blend(1, 1.0/6.0))
-    self.set_equivalent_vert(['right'], 'leftbottom', vert)
-
-  def bottom_vert(self):
-    vert = self.add_vert('bottom', *self.blend(0.5, 0))
-
-    self.set_equivalent_vert(['bottom'], 'top', vert)
+    return { 'left': {'top': None, 'middle': None, 'bottom': None },
+             'center': {'top': {'boundary': None, 'interior': None},
+                        'bottom': {'boundary': None, 'interior': None}},
+             'right': {'top': None, 'middle': None, 'bottom': None } }
 
   def init_faces(self):
     return { 'middle': None,
-             'leftmiddletop': None,
-             'leftmiddlebottom': None,
-             'rightmiddlebottom': None,
-             'rightmiddletop': None ,
-             'lefttop': None,
-             'leftbottom': None,
-             'rightbottom': None,
-             'righttop': None }
+             'left': {'top': {'interior': None, 'exterior': None},
+                      'bottom': {'interior': None, 'exterior': None}},
+             'right': {'top': {'interior': None, 'exterior': None},
+                      'bottom': {'interior': None, 'exterior': None}} }
 
+  def calculate_verts(self):
+    # 10 verts, do top left quadrant, others via symmetry
+    self.add_vert(['center', 'top', 'boundary'], 0.5, 1, v_boundary=True)
+    self.add_vert(['left', 'top'], 0, 5.0/6.0, u_boundary=True)
+    self.add_vert(['center', 'top', 'interior'], 0.5, 2.0/3.0)
+    self.add_vert(['left', 'middle'], 0, 1.0/2.0, u_boundary=True)
 
   def calculate_faces(self):
-    self.middle_face()
-    self.leftmiddletop_face()
-    self.rightmiddlebottom_face()
-    self.leftmiddlebottom_face()
-    self.rightmiddletop_face()
-    self.lefttop_face()
-    self.leftbottom_face()
-    self.rightbottom_face()
-    self.righttop_face()
-
-  def middle_face(self):
+    # One middle face
     self.add_face('middle',
-                  [self.get_vert('middletop'),
-                   self.get_vert('leftmiddle'),
-                   self.get_vert('middlebottom'),
-                   self.get_vert('rightmiddle')], face_type='horizontal')
-        
-  def leftmiddletop_face(self):
-    self.add_face('leftmiddletop',
-                  [self.get_vert('top'),
-                   self.get_vert('lefttop'),
-                   self.get_vert('leftmiddle'),
-                   self.get_vert('middletop')], face_type='upward')
-
-  def rightmiddletop_face(self):
-    self.add_face('rightmiddletop',
-                  [self.get_vert('top'),
-                   self.get_vert('righttop'),
-                   self.get_vert('rightmiddle'),
-                   self.get_vert('middletop')], face_type='downward')
-
-  def leftmiddlebottom_face(self):
-    self.add_face('leftmiddlebottom',
-                  [self.get_vert('bottom'),
-                   self.get_vert('leftbottom'),
-                   self.get_vert('leftmiddle'),
-                   self.get_vert('middlebottom')], face_type='downward')
-  def rightmiddlebottom_face(self):
-    self.add_face('rightmiddlebottom',
-                  [self.get_vert('bottom'),
-                   self.get_vert('rightbottom'),
-                   self.get_vert('rightmiddle'),
-                   self.get_vert('middlebottom')], face_type='upward')
-
-  def lefttop_face(self):
-    face = self.add_face('lefttop', \
-                         [self.get_vert('top'),
-                          self.get_vert('lefttop'),
-                          self.get_neighbor_vert(['left'], 'top'),
-                          self.get_neighbor_vert(['top'], 'leftbottom')],
-                         face_type='horizontal')
-
-    self.set_equivalent_face(['top'], 'leftbottom', face)
-    self.set_equivalent_face(['top', 'left'], 'rightbottom', face)
-    self.set_equivalent_face(['left'], 'righttop', face)
+                  [['center', 'top', 'interior'],
+                   ['left', 'middle'],
+                   ['center', 'bottom', 'interior'],
+                   ['right', 'middle']], face_type='horizontal')
+    # Eight others, define only left top, others by symmetry
+    self.add_face(['left', 'top', 'interior'],
+                  [['center', 'top', 'boundary'],
+                   ['left', 'top'],
+                   ['left', 'middle'],
+                   ['center', 'top', 'interior'],], face_type='upward')
+    self.add_face(['left', 'top', 'exterior'],
+                  [['center', 'top', 'boundary'],
+                   ['left', 'top'],
+                   # Verts on neighbor tile
+                   [['left'], ['center', 'top', 'boundary']],
+                   [['top'], ['left', 'bottom']]],
+                  face_type='horizontal', corner=True)
 
 class RhombusTessagon(Tessagon):
   def init_tile_class(self):
