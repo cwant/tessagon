@@ -1,128 +1,64 @@
 from math import sqrt
 
-from tessagon.core.equivalent_corners_tile import EquivalentCornersTile
+from tessagon.core.tile import Tile
 from tessagon.core.tessagon import Tessagon
 
-class OctoTile(EquivalentCornersTile):
+class OctoTile(Tile):
+  # ^  ..o-o..
+  # |  ./...\.
+  # |  o.....o
+  # |  |.....|
+  # |  o.....o
+  # |  .\.../.
+  #    ..o-o..
+  # V
+  #    U ---->
+
   CORNER_TO_VERT_RATIO = 1.0 / (2.0 + sqrt(2))
 
+  def __init__(self, tessagon, **kwargs):
+    super().__init__(tessagon, **kwargs)
+    self.u_symmetric = True
+    self.v_symmetric = True
+
   def init_verts(self):
-    return { 'topleft': None,
-             'lefttop': None,
-             'leftbottom': None,
-             'bottomleft': None,
-             'bottomright': None,
-             'rightbottom': None,
-             'righttop': None,
-             'topright': None
-    }
+    return { 'left': {'top': {'u_boundary': None, 'v_boundary': None},
+                      'bottom': {'u_boundary': None, 'v_boundary': None}},
+             'right': {'top': {'u_boundary': None, 'v_boundary': None},
+                       'bottom': {'u_boundary': None, 'v_boundary': None}}}
+
+  def init_faces(self):
+    return { 'middle': None,
+             'left': {'top': None,
+                      'bottom': None},
+             'right': {'top': None,
+                       'bottom': None} }
 
   def calculate_verts(self):
-    #            Topology:
-    # ^  ..0-1..      0 = topleft
-    # |  ./...\.      1 = topright
-    # |  2.....3      2 = lefttop
-    # |  |.....|      3 = righttop
-    # |  4.....5      4 = leftbottom
-    # |  .\.../.      5 = rightbottom
-    #    ..6-7..      6 = bottomleft
-    # V               7 = leftbottom
-    #    U ------>
+    self.add_vert(['left', 'top', 'v_boundary'],
+                  self.CORNER_TO_VERT_RATIO, 1, v_boundary=True)
+    self.add_vert(['left', 'top', 'u_boundary'],
+                  0, 1.0 - self.CORNER_TO_VERT_RATIO, u_boundary=True)
 
-    # ..0-1....0-1.. This illustates which vertices are
-    # ./...\../...\. equivalent to vertices on neighboring
-    # 2.....32.....3 faces. As such, this reduces which verts we
-    # |.....||.....| have to calculate.
-    # 4.....54.....5
-    # .\.../..\.../.
-    # ..6-7....6-7..
-    # ..0-1....0-1..
-    # ./...\../...\.
-    # 2.....32.....3
-    # |.....||.....|
-    # 4.....54.....5
-    # .\.../..\.../.
-    # ..6-7....6-7..
-    self.topleft_vert()
-    self.topright_vert()
-    self.lefttop_vert()
-    self.leftbottom_vert()
-    self.bottomleft_vert()
-    self.bottomright_vert()
-    self.rightbottom_vert()
-    self.righttop_vert()
+  def calculate_faces(self):
+    # Middle interior face
+    self.add_face('middle', [['left', 'top', 'v_boundary'],
+                             ['left', 'top', 'u_boundary'],
+                             ['left', 'bottom', 'u_boundary'],
+                             ['left', 'bottom', 'v_boundary'],
+                             ['right', 'bottom', 'v_boundary'],
+                             ['right', 'bottom', 'u_boundary'],
+                             ['right', 'top', 'u_boundary'],
+                             ['right', 'top', 'v_boundary']])
 
-  def topleft_vert(self):
-    vert = self.add_vert('topleft', *self.blend(self.CORNER_TO_VERT_RATIO, 1))
-    self.set_equivalent_vert(['top'], 'bottomleft', vert)
-
-  def topright_vert(self):
-    vert = self.add_vert('topright',
-                         *self.blend(1.0 - self.CORNER_TO_VERT_RATIO, 1))
-    self.set_equivalent_vert(['top'], 'bottomright', vert)
-
-  def lefttop_vert(self):
-    vert = self.add_vert('lefttop',
-                         *self.blend(0, 1.0 - self.CORNER_TO_VERT_RATIO))
-    self.set_equivalent_vert(['left'], 'righttop', vert)
-
-  def righttop_vert(self):
-    vert = self.add_vert('righttop',
-                         *self.blend(1, 1.0 - self.CORNER_TO_VERT_RATIO))
-    self.set_equivalent_vert(['right'], 'lefttop', vert)
-
-  def leftbottom_vert(self):
-    vert = self.add_vert('leftbottom',
-                         *self.blend(0, self.CORNER_TO_VERT_RATIO))
-    self.set_equivalent_vert(['left'], 'rightbottom', vert)
-
-  def rightbottom_vert(self):
-    vert = self.add_vert('rightbottom',
-                         *self.blend(1, self.CORNER_TO_VERT_RATIO))
-    self.set_equivalent_vert(['right'], 'leftbottom', vert)
-
-  def bottomleft_vert(self):
-    vert = self.add_vert('bottomleft',
-                         *self.blend(self.CORNER_TO_VERT_RATIO, 0))
-    self.set_equivalent_vert(['bottom'], 'topleft', vert)
-
-  def bottomright_vert(self):
-    vert = self.add_vert('bottomright',
-                         *self.blend(1.0 - self.CORNER_TO_VERT_RATIO, 0))
-    self.set_equivalent_vert(['bottom'], 'topright', vert)
-
-  #
-  #   LEFTTOP..o---o...RIGHTTOP
-  #         ../.....\..
-  #         ./.......\.
-  #         o.........o
-  #         |.MIDDLE..|
-  #         o.........o    
-  #         .\..... ./.
-  #         ..\...../..
-  # LEFTBOTTOM.o---o.RIGHTBOTTOM
-  #
-
-  def middle_face(self):
-    self.add_face('middle', [self.get_vert('topleft'),
-                             self.get_vert('lefttop'),
-                             self.get_vert('leftbottom'),
-                             self.get_vert('bottomleft'),
-                             self.get_vert('bottomright'),
-                             self.get_vert('rightbottom'), 
-                             self.get_vert('righttop'),
-                             self.get_vert('topright')])
-       
-  def lefttop_face(self):
-    face = self.add_face('lefttop', \
-                         [self.get_vert('lefttop'),
-                          self.get_vert('topleft'),
-                          self.get_neighbor_vert(['top'], 'leftbottom'),
-                          self.get_neighbor_vert(['left'], 'topright')])
-
-    self.set_equivalent_face(['top'], 'leftbottom', face)
-    self.set_equivalent_face(['top', 'left'], 'rightbottom', face)
-    self.set_equivalent_face(['left'], 'righttop', face)
+    # Four faces, define top left corner, others via symmetry
+    face = self.add_face(['left', 'top'],
+                         [['left', 'top', 'v_boundary'],
+                          ['left', 'top', 'u_boundary'],
+                          # Verts on neighbor tiles
+                          [['left'], ['right', 'top', 'v_boundary']],
+                          [['top'], ['left', 'bottom', 'u_boundary']]],
+                         corner=True)
 
 class OctoTessagon(Tessagon):
   def init_tile_class(self):
