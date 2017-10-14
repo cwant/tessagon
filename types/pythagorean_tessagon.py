@@ -47,7 +47,7 @@ class PythagoreanTile(Tile):
             if not self.get_neighbor_path(['bottom']):
               if row==1 or row==2: continue
 
-        vert = self.add_vert([col, row], *self.blend(c[col], c[row]))
+        vert = self.add_vert([col, row], c[col], c[row])
         if col == 1:
           self.set_equivalent_vert(['left'], [6, row], vert)
           if row == 6:
@@ -70,97 +70,97 @@ class PythagoreanTile(Tile):
              7: None, 8: None, 9: None, 10: None, 11: None, 12: None }
 
   def calculate_faces(self):
-    face = self.add_face(1, [self.get_vert([1,6]),
-                             self.get_vert([1,5]),
-                             self.get_vert([2,5]),
-                             self.get_vert([3,5]),
-                             self.get_vert([3,6]),
-                             self.get_neighbor_vert(['top'], [3,2]),
-                             self.get_neighbor_vert(['top'], [2,2]),
-                             self.get_neighbor_vert(['top'], [1,2])])
+    face = self.add_face(1, [[1,6],
+                             [1,5],
+                             [2,5],
+                             [3,5],
+                             [3,6],
+                             [['top'], [3,2]],
+                             [['top'], [2,2]],
+                             [['top'], [1,2]]])
     self.set_equivalent_face(['top'], 11, face)
 
-    self.add_face(2, [self.get_vert([3,6]),
-                      self.get_vert([4,6]),
-                      self.get_vert([4,5]),
-                      self.get_vert([3,5])])
+    self.add_face(2, [[3,6],
+                      [4,6],
+                      [4,5],
+                      [3,5]])
 
-    self.add_face(3, [self.get_vert([4,6]),
-                      self.get_vert([5,6]),
-                      self.get_vert([6,6]),
-                      self.get_vert([6,5]),
-                      self.get_vert([6,4]),
-                      self.get_vert([5,4]),
-                      self.get_vert([4,4]),
-                      self.get_vert([4,5])])
+    self.add_face(3, [[4,6],
+                      [5,6],
+                      [6,6],
+                      [6,5],
+                      [6,4],
+                      [5,4],
+                      [4,4],
+                      [4,5]])
 
-    self.add_face(4, [self.get_vert([1,5]),
-                      self.get_vert([2,5]),
-                      self.get_vert([2,4]),
-                      self.get_vert([1,4])])
+    self.add_face(4, [[1,5],
+                      [2,5],
+                      [2,4],
+                      [1,4]])
 
-    self.add_face(5, [self.get_vert([2,5]),
-                      self.get_vert([3,5]),
-                      self.get_vert([4,5]),
-                      self.get_vert([4,4]),
-                      self.get_vert([4,3]),
-                      self.get_vert([3,3]),
-                      self.get_vert([2,3]),
-                      self.get_vert([2,4])])
+    self.add_face(5, [[2,5],
+                      [3,5],
+                      [4,5],
+                      [4,4],
+                      [4,3],
+                      [3,3],
+                      [2,3],
+                      [2,4]])
 
-    face = self.add_face(6, [self.get_vert([1,4]),
-                             self.get_vert([2,4]),
-                             self.get_vert([2,3]),
-                             self.get_vert([2,2]),
-                             self.get_vert([1,2]),
-                             self.get_neighbor_vert(['left'], [5,2]),
-                             self.get_neighbor_vert(['left'], [5,3]),
-                             self.get_neighbor_vert(['left'], [5,4])])
+    face = self.add_face(6, [[1,4],
+                             [2,4],
+                             [2,3],
+                             [2,2],
+                             [1,2],
+                             [['left'], [5,2]],
+                             [['left'], [5,3]],
+                             [['left'], [5,4]]])
     self.set_equivalent_face(['left'], 8, face)
 
-    self.add_face(7, [self.get_vert([4,4]),
-                      self.get_vert([5,4]),
-                      self.get_vert([5,3]),
-                      self.get_vert([4,3])])
+    self.add_face(7, [[4,4],
+                      [5,4],
+                      [5,3],
+                      [4,3]])
 
-    face = self.add_face(8, [self.get_vert([6,4]),
-                             self.get_vert([5,4]),
-                             self.get_vert([5,3]),
-                             self.get_vert([5,2]),
-                             self.get_vert([6,2]),
-                             self.get_neighbor_vert(['right'], [2,2]),
-                             self.get_neighbor_vert(['right'], [2,3]),
-                             self.get_neighbor_vert(['right'], [2,4])])
+    face = self.add_face(8, [[6,4],
+                             [5,4],
+                             [5,3],
+                             [5,2],
+                             [6,2],
+                             [['right'], [2,2]],
+                             [['right'], [2,3]],
+                             [['right'], [2,4]]])
     self.set_equivalent_face(['right'], 6, face)
 
-    self.add_face(9, [self.get_vert([2,3]),
-                      self.get_vert([3,3]),
-                      self.get_vert([3,2]),
-                      self.get_vert([2,2])])
+    self.add_face(9, [[2,3],
+                      [3,3],
+                      [3,2],
+                      [2,2]])
 
-    self.add_face(10, [self.get_vert([3,3]),
-                       self.get_vert([4,3]),
-                       self.get_vert([5,3]),
-                       self.get_vert([5,2]),
-                       self.get_vert([5,1]),
-                       self.get_vert([4,1]),
-                       self.get_vert([3,1]),
-                       self.get_vert([3,2])])
+    self.add_face(10, [[3,3],
+                       [4,3],
+                       [5,3],
+                       [5,2],
+                       [5,1],
+                       [4,1],
+                       [3,1],
+                       [3,2]])
 
-    face = self.add_face(11, [self.get_vert([1,1]),
-                              self.get_vert([1,2]),
-                              self.get_vert([2,2]),
-                              self.get_vert([3,2]),
-                              self.get_vert([3,1]),
-                              self.get_neighbor_vert(['bottom'], [3,5]),
-                              self.get_neighbor_vert(['bottom'], [2,5]),
-                              self.get_neighbor_vert(['bottom'], [1,5])])
+    face = self.add_face(11, [[1,1],
+                              [1,2],
+                              [2,2],
+                              [3,2],
+                              [3,1],
+                              [['bottom'], [3,5]],
+                              [['bottom'], [2,5]],
+                              [['bottom'], [1,5]]])
     self.set_equivalent_face(['bottom'], 1, face)
 
-    self.add_face(12, [self.get_vert([5,2]),
-                       self.get_vert([6,2]),
-                       self.get_vert([6,1]),
-                       self.get_vert([5,1])])
+    self.add_face(12, [[5,2],
+                       [6,2],
+                       [6,1],
+                       [5,1]])
 
 class PythagoreanTessagon(Tessagon):
   def init_tile_class(self):
