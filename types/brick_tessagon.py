@@ -12,6 +12,11 @@ class BrickTile(Tile):
   # V
   #   U --->       bottom
 
+  def __init__(self, tessagon, **kwargs):
+    super().__init__(tessagon, **kwargs)
+    self.u_symmetric = True
+    self.v_symmetric = True
+
   def init_verts(self):
     return { 'left': {'top': None, 'middle': None, 'bottom': None },
              'right': {'top': None, 'middle': None, 'bottom': None } }
@@ -20,59 +25,32 @@ class BrickTile(Tile):
     return { 'left': None, 'right': None, 'top': None, 'bottom': None }
 
   def calculate_verts(self):
-    # corners
-    vert = self.add_vert(['left', 'bottom'], *self.blend(0.25, 0.0))
-    self.set_equivalent_vert(['bottom'], ['left', 'top'], vert)
+    # corners: set bottom-left ... symmetry takes care of other 3 corners
+    self.add_vert(['left', 'bottom'], 0.25, 0.0, v_boundary=True)
 
-    vert = self.add_vert(['right', 'bottom'], *self.blend(0.75, 0.0))
-    self.set_equivalent_vert(['bottom'], ['right', 'top'], vert)
-
-    vert = self.add_vert(['left', 'top'], *self.blend(0.25, 1.0))
-    self.set_equivalent_vert(['top'], ['left', 'bottom'], vert)
-
-    vert = self.add_vert(['right', 'top'], *self.blend(0.75, 1.0))
-    self.set_equivalent_vert(['top'], ['right', 'bottom'], vert)
-
-    # middle
-    self.add_vert(['left', 'middle'], *self.blend(0.25, 0.5))
-    self.add_vert(['right', 'middle'], *self.blend(0.75, 0.5))
+    # left middle, symmetry also creates right middle
+    self.add_vert(['left', 'middle'], 0.25, 0.5)
 
   def calculate_faces(self):
+    # Add left, symmetry gives the right side face
     face = self.add_face('left',
-                         [self.get_vert(['left','top']),
-                          self.get_vert(['left', 'middle']),
-                          self.get_vert(['left', 'bottom']),
-                          self.get_neighbor_vert(['left'], ['right', 'bottom']),
-                          self.get_neighbor_vert(['left'], ['right', 'middle']),
-                          self.get_neighbor_vert(['left'], ['right', 'top'])])
-    self.set_equivalent_face(['left'], 'right', face)
+                         [['left','top'],
+                          ['left', 'middle'],
+                          ['left', 'bottom'],
+                          # Verts on neighbor tiles:
+                          [['left'], ['right', 'bottom']],
+                          [['left'], ['right', 'middle']],
+                          [['left'], ['right', 'top']]], u_boundary=True)
 
-    face = self.add_face('right',
-                         [self.get_vert(['right','top']),
-                          self.get_vert(['right', 'middle']),
-                          self.get_vert(['right', 'bottom']),
-                          self.get_neighbor_vert(['right'], ['left', 'bottom']),
-                          self.get_neighbor_vert(['right'], ['left', 'middle']),
-                          self.get_neighbor_vert(['right'], ['left', 'top'])])
-    self.set_equivalent_face(['right'], 'left', face)
-
+    # Add bottom, symmetry gives the top face
     face = self.add_face('bottom',
-                         [self.get_vert(['left', 'middle']),
-                          self.get_vert(['left', 'bottom']),
-                          self.get_neighbor_vert(['bottom'], ['left', 'middle']),
-                          self.get_neighbor_vert(['bottom'], ['right', 'middle']),
-                          self.get_vert(['right', 'bottom']),
-                          self.get_vert(['right', 'middle'])])
-    self.set_equivalent_face(['bottom'], 'top', face)
-
-    face = self.add_face('top',
-                         [self.get_vert(['left', 'middle']),
-                          self.get_vert(['left', 'top']),
-                          self.get_neighbor_vert(['top'], ['left', 'middle']),
-                          self.get_neighbor_vert(['top'], ['right', 'middle']),
-                          self.get_vert(['right', 'top']),
-                          self.get_vert(['right', 'middle'])])
-    self.set_equivalent_face(['top'], 'bottom', face)
+                         [['right', 'bottom'],
+                          ['right', 'middle'],
+                          ['left', 'middle'],
+                          ['left', 'bottom'],
+                          # Verts on neighbor tiles:
+                          [['bottom'], ['left', 'middle']],
+                          [['bottom'], ['right', 'middle']]], v_boundary=True)
 
 class BrickTessagon(Tessagon):
   def init_tile_class(self):

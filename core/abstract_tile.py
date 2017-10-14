@@ -5,6 +5,16 @@ class AbstractTile(ValueBlend):
     self.tessagon = tessagon
     self.f = tessagon.f
 
+    # Verts/faces indexed with 'left', 'right', 'center'
+    self.u_symmetric = False
+    # Verts/faces indexed with 'bottom', 'middle', 'top'
+    self.v_symmetric = False
+
+    if 'u_symmetric' in kwargs:
+      self.u_symmetric = kwargs['u_symmetric']
+    if 'v_symmetric' in kwargs:
+      self.u_symmetric = kwargs['u_symmetric']
+
     self.id = None
     # This is not necessary to any of the calculations, just
     # makes debugging easier
@@ -54,6 +64,31 @@ class AbstractTile(ValueBlend):
         return None
       tile = tile.neighbors[key]
     return tile
+
+  def swap_value(self, index_path, val1, val2):
+    if isinstance(index_path, list):
+      return [self.swap_value(u, val1, val2) for u in index_path]
+    if index_path == val1: return val2
+    if index_path == val2: return val1
+    return index_path
+
+  def u_flip(self, index_path):
+    if not self.u_symmetric: return index_path
+    return self.swap_value(index_path, 'left', 'right')
+
+  def v_flip(self, index_path):
+    if not self.v_symmetric: return index_path
+    return self.swap_value(index_path, 'bottom', 'top')
+
+  def v_index(self, index_path):
+    if ('bottom' in index_path): return 'bottom'
+    if ('top' in index_path): return 'top'
+    raise ValueError('no v_index found')
+
+  def u_index(self, index_path):
+    if ('left' in index_path): return 'left'
+    if ('right' in index_path): return 'right'
+    raise ValueError('no u_index found')
 
   def inspect(self, **kwargs):
     # For debugging topology
