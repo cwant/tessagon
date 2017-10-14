@@ -28,34 +28,34 @@ class Tile(AbstractTile):
     return tile.get_vert(index_path)
 
   def add_vert(self, index_path, ratio_u, ratio_v, **kwargs):
-    if self.get_vert(index_path):
-      # Already added
-      return None
+    vert = self.get_vert(index_path)
+    if not vert:
+      coords = self.f(*self.blend(ratio_u, ratio_v))
+      vert = self.mesh_adaptor.create_vert(coords)
 
-    coords = self.f(*self.blend(ratio_u, ratio_v))
-
-    vert = self.mesh_adaptor.create_vert(coords)
-
-    self.set_vert(index_path, vert)
-    if 'vert_type' in kwargs:
-      if not kwargs['vert_type'] in self.tessagon.vert_types:
-        self.tessagon.vert_types[kwargs['vert_type']] = []
-      self.tessagon.vert_types[kwargs['vert_type']].append(face)
+      self.set_vert(index_path, vert)
+      if 'vert_type' in kwargs:
+        if not kwargs['vert_type'] in self.tessagon.vert_types:
+          self.tessagon.vert_types[kwargs['vert_type']] = []
+          self.tessagon.vert_types[kwargs['vert_type']].append(face)
 
     if not 'symmetry' in kwargs:
       extra_args = { 'symmetry': True}
       if self.u_symmetric:
         # Add reflection about u
         u_flip_path = self.u_flip(index_path)
-        self.add_vert(u_flip_path, 1.0 - ratio_u, ratio_v, **{**kwargs, **extra_args})
+        self.add_vert(u_flip_path, 1.0 - ratio_u, ratio_v,
+                      **{**kwargs, **extra_args})
         if self.v_symmetric:
           # Add diagonally across
           uv_flip_path = self.v_flip(u_flip_path)
-          self.add_vert(uv_flip_path, 1.0 - ratio_u, 1.0 - ratio_v, **{**kwargs, **extra_args})
+          self.add_vert(uv_flip_path, 1.0 - ratio_u, 1.0 - ratio_v,
+                        **{**kwargs, **extra_args})
       if self.v_symmetric:
         # Add reflection about v
         v_flip_path = self.v_flip(index_path)
-        self.add_vert(v_flip_path, ratio_u, 1.0 - ratio_v, **{**kwargs, **extra_args})
+        self.add_vert(v_flip_path, ratio_u, 1.0 - ratio_v,
+                      **{**kwargs, **extra_args})
     
     # Make sure equivalent symmetric vertices are set
     if 'u_boundary' in kwargs:
