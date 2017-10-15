@@ -13,6 +13,7 @@ from tessagon.types.hex_square_tri_tessagon import HexSquareTriTessagon
 from tessagon.types.square_tessagon import SquareTessagon
 from tessagon.types.pythagorean_tessagon import PythagoreanTessagon
 from tessagon.types.brick_tessagon import BrickTessagon
+from tessagon.types.dodeca_tessagon import DodecaTessagon
 
 from tessagon.misc.shapes import torus, other_torus, cylinder, \
   other_cylinder, mobius, plane
@@ -57,6 +58,9 @@ def main():
 
   # BrickTessagon
   layer9()
+
+  # DodecaTessagon
+  layer10()
 
   # Non-cyclic Torus
   layer18()
@@ -269,6 +273,25 @@ def layer9():
     'v_cyclic': False
   }
   tessellate("BrickPlane1", plane, BrickTessagon, **options)
+
+def layer10():
+  options = {
+    'u_range': [0.0, 1.0],
+    'v_range': [0.0, 1.0],
+    'u_num': 25,
+    'v_num': 3,
+  }
+  tessellate("DodecaTorus1", torus, DodecaTessagon, **options)
+
+  options = {
+    'u_range': [0.0, 1.0],
+    'v_range': [0.0, 1.0],
+    'u_num': 3,
+    'v_num': 2,
+    'u_cyclic': False,
+    'v_cyclic': False
+  }
+  tessellate("DodecaPlane1", plane, DodecaTessagon, **options)
 
 def wire_to_skin(in_name, out_name, **kwargs):
   input_object = bpy.data.objects[in_name]
