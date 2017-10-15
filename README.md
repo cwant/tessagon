@@ -3,6 +3,12 @@ Now there is no excuse not to tessellate your favorite 2D manifolds with triangl
 
 ![Animation of tessellated torii](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/tessagon_demo.gif)
 
+(Individual images from the above gif are below.)
+
+## TL;DR
+
+Check out the repository and look in the `demo` directory. There you'll find a blender file and `tessagon_blender_demo.py` which creates the meshes in the demo.
+
 ## How it works
 
 Three things are needed to use tessagon to tessellate the surface of a 2D-manifold (or more accurately, a patch on a 2D-manifold in 3-space):
