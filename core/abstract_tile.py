@@ -83,12 +83,12 @@ class AbstractTile(ValueBlend):
   def v_index(self, index_path):
     if ('bottom' in index_path): return 'bottom'
     if ('top' in index_path): return 'top'
-    raise ValueError('no v_index found')
+    raise ValueError("no v_index found in %s" % (index_path))
 
   def u_index(self, index_path):
     if ('left' in index_path): return 'left'
     if ('right' in index_path): return 'right'
-    raise ValueError('no u_index found')
+    raise ValueError("no u_index found in %s" % (index_path))
 
   def inspect(self, **kwargs):
     # For debugging topology
