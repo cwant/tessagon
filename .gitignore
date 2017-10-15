@@ -103,3 +103,4 @@ ENV/
 *.blend[0-9]
 
 wire_skin.py
+tmp/
