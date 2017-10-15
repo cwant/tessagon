@@ -16,12 +16,31 @@ Three things are needed to use tessagon to tessellate the surface of a 2D-manifo
 Additional tessagon classes can be added by deconstructing how a tessellation fits within a rectangular patch in the plane (check out the ASCII art in each source file in `tessagon.types`). The current `Tessagon` subclasses include:
 
 ### `HexTessagon`
+![HexTessagon](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/hex_tessagon.png)
+
 ### `TriTessagon`
+![TriTessagon](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/tri_tessagon.png)
+
 ### `RhombusTessagon`
+![RhombusTessagon](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/rhombus_tessagon.png)
+
 ### `OctoTessagon`
+![OctoTessagon](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/octo_tessagon.png)
+
 ### `HexTriTessagon` (Star of David)
+![HexTriTessagon](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/hex_tri_tessagon.png)
+
 ### `HexSquareTriTessagon`
+![HexSquareTriTessagon](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/hex_square_tri_tessagon.png)
+
 ### `SquareTessagon`
+![SquareTessagon](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/square_tessagon.png)
+
 ### `PythagoreanTessagon`
+![PythagoreanTessagon](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/pythagorean_tessagon.png)
+
 ### `BrickTessagon`
+![BrickTessagon](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/brick_tessagon.png)
+
 ### `DodecaTessagon`
+![DodecaTessagon](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/dodeca_tessagon.png)
