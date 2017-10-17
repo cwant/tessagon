@@ -9,7 +9,10 @@ Now there is no excuse not to tessellate your favorite 2D manifolds with triangl
 
 ## TL;DR
 
-Check out the repository and look in the `demo` directory. There you'll find a blender file and `tessagon_blender_demo.py` which creates the meshes in the demo. The demo has examples of each tessagon class, and an example that uses tessagon with one of my other projects, ![wire_skin](https://github.com/cwant/wire_skin).
+Check out the repository and look in the `demo` directory.
+
+* **Blender**: you'll find a blender file and `tessagon_blender_demo.py` which creates the meshes in the demo. The demo has examples of each tessagon class, and an example that uses tessagon with one of my other projects, ![wire_skin](https://github.com/cwant/wire_skin).
+* **VTK**: Take a look at `tessagon_vtk_demo.py` for a script that creates all of the current tessagon classes (as torii).
 
 ## How it works
 
@@ -17,7 +20,9 @@ Three things are needed to use tessagon to tessellate the surface of a 2D-manifo
 
 * Tessagon provides a bunch of classes (subclasses of a class called `Tessagon`) that will tessellate a portion of UV-space with mesh patterns. Parameters provide the details of the bounds in UV-space, the resolution of the tiling, whether the tiling is cyclic, whether it is rotated, etc. These classes are in the `tessagon.types` module.
 * The programmer must provide a function that maps UV-space into 3-dimensional space that is defined on the tiled domain. There are some demo functions in `tessagon.misc.shapes`.
-* Finally, an adaptor is chosen to create a mesh in a supported 3D software package. Currently only Blender is supported, with the adaptor `BlenderAdaptor` from the module `tessagon.adaptors.blender`. Support for VTK is also planned.
+* Finally, an adaptor is chosen to create a mesh in a supported 3D software package. Currently only Blender and VTK are supported:
+* * adaptor `BlenderAdaptor` from the module `tessagon.adaptors.blender`
+* * adaptor `VtkAdaptor` from the module `tessagon.adaptors.vtk`
 
 ## Tessagon classes
 
