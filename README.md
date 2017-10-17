@@ -21,8 +21,8 @@ Three things are needed to use tessagon to tessellate the surface of a 2D-manifo
 * Tessagon provides a bunch of classes (subclasses of a class called `Tessagon`) that will tessellate a portion of UV-space with mesh patterns. Parameters provide the details of the bounds in UV-space, the resolution of the tiling, whether the tiling is cyclic, whether it is rotated, etc. These classes are in the `tessagon.types` module.
 * The programmer must provide a function that maps UV-space into 3-dimensional space that is defined on the tiled domain. There are some demo functions in `tessagon.misc.shapes`.
 * Finally, an adaptor is chosen to create a mesh in a supported 3D software package. Currently only Blender and VTK are supported:
-* * adaptor `BlenderAdaptor` from the module `tessagon.adaptors.blender`
-* * adaptor `VtkAdaptor` from the module `tessagon.adaptors.vtk`
+  * adaptor `BlenderAdaptor` from the module `tessagon.adaptors.blender`
+  * adaptor `VtkAdaptor` from the module `tessagon.adaptors.vtk`
 
 ## Tessagon classes
 
