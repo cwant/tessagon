@@ -16,7 +16,7 @@ from tessagon.types.brick_tessagon import BrickTessagon
 from tessagon.types.dodeca_tessagon import DodecaTessagon
 
 from tessagon.misc.shapes import torus, other_torus, cylinder, \
-  other_cylinder, mobius, plane
+  other_cylinder, mobius, plane, klein
 
 # Optional, for the wire_skin demos
 # https://github.com/cwant/wire_skin
@@ -324,10 +324,18 @@ def layer19():
     'u_num': 5,
     'v_num': 40,
     'u_cyclic': False,
-    #'u_twist': True,
     'v_cyclic': False
   }
   tessellate("HexMobius1", mobius, HexTessagon, **options)
+
+  options = {
+    'u_range': [0.0, 1.0],
+    'v_range': [0.0, 1.0],
+    'u_num': 40,
+    'v_num': 10,
+    'u_cyclic': False,
+  }
+  #tessellate("Klein1", klein, BrickTessagon, **options)
 
 def layer20():
   options = {
