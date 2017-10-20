@@ -58,6 +58,9 @@ def other_cylinder(u, v):
   # u_cyclic = False, v_cyclic = True
   return cylinder(v, u)
 
+def paraboloid(u, v):
+  return [u, v, u**2 + v**2]
+
 def general_mobius(r, h, u, v):
   offset = h*(v-0.5)*sin(u*pi)
   x = (r + offset)*cos(u*2*pi)
