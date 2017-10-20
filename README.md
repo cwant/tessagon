@@ -83,7 +83,7 @@ Additional tessagon classes can be added by deconstructing how a tessellation fi
 ### `DodecaTessagon`
 ![DodecaTessagon](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/dodeca_tessagon.png)
 
-## Usage Options
+## Usage and Options
 
 Each tessagon class is initialized with a function for the first argument, and a number of keyword options, e.g.:
 
@@ -100,6 +100,13 @@ tessagon = DodecaTessagon(my_func,
                           adaptor_class=VtkAdaptor)
 poly_data = tessagon.create_mesh()
 ```
-The `create_mesh()` method creates a tessellated mesh using your provided function and the tile type corresponding to the tessagon class used.
+The `create_mesh()` method creates a tessellated mesh using your provided function and the tile type corresponding to the tessagon class used. The chosen adaptor dictates the 3D data type the mesh will be (for the `BlenderAdaptor` the output is `BMesh`, for the `VTKAdaptor` the output is `vtkPolyData`).
 
+Here are the options:
 
+* `u_range`: a list with two items indicating the minimum and maximum values for u (the first argument to the function passed);
+* `v_range`: a list with two items indicating the minimum and maximum values for v (the second argument to the function passed);
+* `u_num`: the number of tiles to be created in the u-direction;
+* `v_num`: the number of tiles to be created in the v-direction;
+* `u_cyclic`: a boolean indicating whether the u-direction is cyclic (wraps around to the beginning again;
+* `v_cyclic`: a boolean indicating whether the v-direction is cyclic;
