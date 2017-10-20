@@ -12,17 +12,42 @@ Now there is no excuse not to tessellate your favorite 2D manifolds with triangl
 Check out the repository and look in the `demo` directory.
 
 * **Blender**: you'll find a blender file and `tessagon_blender_demo.py` which creates the meshes in the demo. The demo has examples of each tessagon class, and an example that uses tessagon with one of my other projects, ![wire_skin](https://github.com/cwant/wire_skin).
-* **VTK**: Take a look at `tessagon_vtk_demo.py` for a script that creates all of the current tessagon classes (as torii).
+* **VTK**: Take a look at `tessagon_vtk_demo.py` for a script that creates all of the current tessagon classes.
 
 ## How it works
 
 Three things are needed to use tessagon to tessellate the surface of a 2D-manifold (or more accurately, a patch on a 2D-manifold in 3-space):
 
-* Tessagon provides a bunch of classes (subclasses of a class called `Tessagon`) that will tessellate a portion of UV-space with mesh patterns. Parameters provide the details of the bounds in UV-space, the resolution of the tiling, whether the tiling is cyclic, whether it is rotated, etc. These classes are in the `tessagon.types` module.
+* Tessagon provides a bunch of classes (subclasses of a class called `Tessagon`) that will tessellate a portion of UV-space with mesh patterns. Parameters provide the details of the bounds in UV-space, the resolution of the tiling, whether the tiling is cyclic, whether a cyclic domain "twists" (think a topological identification space, like a Mobius strip or a Klein bottle), whether it is rotated, etc. These classes are in the `tessagon.types` module.
 * The programmer must provide a function that maps UV-space into 3-dimensional space that is defined on the tiled domain. There are some demo functions in `tessagon.misc.shapes`.
 * Finally, an adaptor is chosen to create a mesh in a supported 3D software package. Currently only Blender and VTK are supported:
   * adaptor `BlenderAdaptor` from the module `tessagon.adaptors.blender`
   * adaptor `VtkAdaptor` from the module `tessagon.adaptors.vtk`
+
+The reader should check out the demos, but here is some very basic usage using blender:
+
+```python
+from tessagon.types.hex_tessagon import HexTessagon
+from tessagon.adaptors.blender_adaptor import BlenderAdaptor
+
+def my_func(u,v):
+  return [u, v, u**2 + v**2]
+  
+options = {
+    'u_range': [0.0, 1.0],
+    'v_range': [0.0, 1.0],
+    'u_num': 8,
+    'v_num': 20,
+    'u_cyclic': False,
+    'v_cyclic': False,
+    'adaptor_class' : BlenderAdaptor
+  }
+tessagon = HexTessagon(my_func, **options)
+
+bmesh = tessagon.create_mesh()
+
+# Do something with the bmesh ...
+```
 
 ## Tessagon classes
 
