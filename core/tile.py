@@ -22,10 +22,15 @@ class Tile(AbstractTile):
     self.set_nested_list_value(self.faces, index_path, value)
 
   def get_neighbor_vert(self, neighbor_keys, index_path):
-    tile = self.get_neighbor_path(neighbor_keys)
+    tile = self.get_neighbor_tile(neighbor_keys)
     if not tile:
       return None
-    return tile.get_vert(index_path)
+    path = index_path
+    if self.should_twist_u(neighbor_keys):
+      path = self.u_flip(path)
+    if self.should_twist_v(neighbor_keys):
+      path = self.v_flip(path)
+    return tile.get_vert(path)
 
   def add_vert(self, index_path, ratio_u, ratio_v, **kwargs):
     vert = self.get_vert(index_path)
@@ -72,10 +77,15 @@ class Tile(AbstractTile):
   def set_equivalent_vert(self, neighbor_keys, index_path, vert, **kwargs):
     if not vert:
       return None
-    tile = self.get_neighbor_path(neighbor_keys)
+    tile = self.get_neighbor_tile(neighbor_keys)
     if not tile:
       return None
-    tile.set_vert(index_path, vert)
+    path = index_path
+    if self.should_twist_u(neighbor_keys):
+      path = self.u_flip(path)
+    if self.should_twist_v(neighbor_keys):
+      path = self.v_flip(path)
+    tile.set_vert(path, vert)
 
   def set_u_equivalent_vert(self, index_path, vert, **kwargs):
     u_index = self.u_index(index_path)
@@ -146,10 +156,15 @@ class Tile(AbstractTile):
     return face
 
   def set_equivalent_face(self, neighbor_keys, index_path, face, **kwargs):
-    tile = self.get_neighbor_path(neighbor_keys)
+    tile = self.get_neighbor_tile(neighbor_keys)
     if not tile:
       return None
-    tile.set_face(index_path, face)
+    path = index_path
+    if self.should_twist_u(neighbor_keys):
+      path = self.u_flip(path)
+    if self.should_twist_v(neighbor_keys):
+      path = self.v_flip(path)
+    tile.set_face(path, face)
 
   def set_u_equivalent_face(self, index_path, face, **kwargs):
     u_index = self.u_index(index_path)

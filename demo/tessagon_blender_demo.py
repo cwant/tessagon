@@ -16,7 +16,7 @@ from tessagon.types.brick_tessagon import BrickTessagon
 from tessagon.types.dodeca_tessagon import DodecaTessagon
 
 from tessagon.misc.shapes import torus, other_torus, cylinder, \
-  other_cylinder, mobius, plane, klein
+  other_cylinder, mobius, other_mobius, plane, klein
 
 # Optional, for the wire_skin demos
 # https://github.com/cwant/wire_skin
@@ -81,6 +81,10 @@ def tessellate(out_name, f, tessagon_class, **kwargs):
   tessagon = tessagon_class(f, **{**kwargs, **extra_args})
 
   bm = tessagon.create_mesh()
+
+  # To debug:
+  #tessagon.inspect()
+
   bm.to_mesh(me)
   output_object.data = me
   me.update()
@@ -310,32 +314,36 @@ def layer18():
   options = {
     'u_range': [0.0, 1.0],
     'v_range': [0.0, 1.0],
-    'u_num': 40,
-    'v_num': 5,
+    'u_num': 10,
+    'v_num': 2,
     'u_cyclic': True,
-    'v_cyclic': False
+    'v_cyclic': False,
+    'rot_factor': 2
   }
-  tessellate("HexCylinder1", cylinder, HexTessagon, **options)
+  tessellate("Cylinder1", cylinder, PythagoreanTessagon, **options)
 
 def layer19():
   options = {
     'u_range': [0.0, 1.0],
     'v_range': [0.0, 1.0],
-    'u_num': 5,
+    'u_num': 4,
     'v_num': 40,
+    'v_cyclic': True,
     'u_cyclic': False,
-    'v_cyclic': False
+    'u_twist': True
   }
-  tessellate("HexMobius1", mobius, HexTessagon, **options)
+  tessellate("Mobius1", mobius, BrickTessagon, **options)
 
   options = {
     'u_range': [0.0, 1.0],
     'v_range': [0.0, 1.0],
     'u_num': 40,
-    'v_num': 10,
-    'u_cyclic': False,
+    'v_num': 6,
+    #'u_cyclic': False,
+    #'v_cyclic': False,
+    'v_twist': True
   }
-  #tessellate("Klein1", klein, BrickTessagon, **options)
+  tessellate("Klein1", klein, RhombusTessagon, **options)
 
 def layer20():
   options = {

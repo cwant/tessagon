@@ -1,5 +1,13 @@
 from math import sin, cos, sqrt, pi
 
+def plane(u, v):
+  # u_cyclic = False, v_cyclic = False
+  return [u, v, 0]
+
+def other_plane(u, v):
+  # u_cyclic = False, v_cyclic = False
+  return [v, u, 0]
+
 def general_torus(r1, r2, u, v):
   x = (r1 + r2*cos(v*2*pi))*cos(u*2*pi)
   y = (r1 + r2*cos(v*2*pi))*sin(u*2*pi)
@@ -25,11 +33,13 @@ def warp_var(v, factor):
   return 0.5*(1.0 + i / (1.0 + factor))
 
 def torus(u, v):
+  # u_cyclic = True, v_cyclic = True
   r1 = 5.0
   r2 = 1.0
   return general_torus(r1, r2, u, warp_var(v, 0.2))
 
 def other_torus(u, v):
+  # u_cyclic = True, v_cyclic = True
   return torus(v, u)
 
 def general_cylinder(r, h, u, v):
@@ -39,15 +49,16 @@ def general_cylinder(r, h, u, v):
   return [x, y, z]
 
 def cylinder(u, v):
+  # u_cyclic = True, v_cyclic = False
   r = 5.0
   h = 5.0
   return general_cylinder(r, h, u, v)
 
 def other_cylinder(u, v):
+  # u_cyclic = False, v_cyclic = True
   return cylinder(v, u)
 
 def general_mobius(r, h, u, v):
-   
   offset = h*(v-0.5)*sin(u*pi)
   x = (r + offset)*cos(u*2*pi)
   y = (r + offset)*sin(u*2*pi)
@@ -55,19 +66,23 @@ def general_mobius(r, h, u, v):
   return [x, y, z]
 
 def mobius(u, v):
+  # u_cyclic = False, v_cyclic = True
+  # u_twist = True, v_twist = False
   r = 5.0
   h = 2.0
   return general_mobius(r, h, v, u)
 
-def plane(u, v):
-  return [u, v, 0]
-
+def other_mobius(u, v):
+  # u_cyclic = True, v_cyclic = False
+  # u_twist = False, v_twist = True
+  return mobius(v, u)
 
 def general_klein(scale, u, v):
   # Adapted from http://paulbourke.net/geometry/klein/
-  u1 = 2*pi*normalize_value(warp_var(u + 0.5, 0.4)-0.5)
+  u1 = 2*pi*normalize_value(warp_var(u + 0.5, 0.6)-0.5)
+  #u1 = 2*pi*normalize_value(u)
 
-  v1 = 2*pi*normalize_value(v)
+  v1 = 2*pi*normalize_value(v+0.25)
 
   c1 = cos(u1)
   c2 = sin(u1)
@@ -83,4 +98,11 @@ def general_klein(scale, u, v):
   return [scale*x, scale*y, scale*z]
 
 def klein(u,v):
+  # u_cyclic = True, v_cyclic = True
+  # u_twist = False, v_twist = True
   return general_klein(0.25, u, v)
+
+def other_klein(u, v):
+  # u_cyclic = True, v_cyclic = True
+  # u_twist = True, v_twist = False
+  return general_klein(0.25, v, u)

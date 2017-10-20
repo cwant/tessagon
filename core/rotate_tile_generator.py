@@ -95,7 +95,7 @@ class RotTile(AbstractTile):
 
   def initialize_left_boundary(self, id_prefix):
     if not self.boundary['left']:
-      tile = self.get_neighbor_path(['left'])
+      tile = self.get_neighbor_tile(['left'])
       if tile:
         corners = [ self.blend(0, 0),
                     self.blend(self.c2, self.c1),
@@ -115,7 +115,7 @@ class RotTile(AbstractTile):
 
   def initialize_bottom_boundary(self, id_prefix):
     if not self.boundary['bottom']:
-      tile = self.get_neighbor_path(['bottom'])
+      tile = self.get_neighbor_tile(['bottom'])
       if tile:
         corners = [ self.blend(self.c1, self.c3 - 1.0),
                     self.blend(1, 0),
@@ -135,13 +135,13 @@ class RotTile(AbstractTile):
 
   def initialize_right_boundary(self, id_prefix):
     if not self.boundary['right']:
-      tile = self.get_neighbor_path(['right'])
+      tile = self.get_neighbor_tile(['right'])
       if tile:
         tile.initialize_left_boundary(id_prefix)
 
   def initialize_top_boundary(self, id_prefix):
     if not self.boundary['top']:
-      tile = self.get_neighbor_path(['top'])
+      tile = self.get_neighbor_tile(['top'])
       if tile:
         tile.initialize_bottom_boundary(id_prefix)
 

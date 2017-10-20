@@ -18,7 +18,7 @@ from tessagon.types.pythagorean_tessagon import PythagoreanTessagon
 from tessagon.types.brick_tessagon import BrickTessagon
 from tessagon.types.dodeca_tessagon import DodecaTessagon
 
-from tessagon.misc.shapes import torus
+from tessagon.misc.shapes import *
 
 def main():
   ren = vtk.vtkRenderer()
@@ -65,11 +65,13 @@ def hex_tessagon():
   options = {
     'u_range': [0.0, 1.0],
     'v_range': [0.0, 1.0],
-    'u_num': 35,
+    'u_num': 40,
     'v_num': 5,
+    'u_cyclic': True,
+    'v_cyclic': False,
     'position': [0, 0, 0]
   }
-  return tessellate(torus, HexTessagon, **options)
+  return tessellate(cylinder, HexTessagon, **options)
 
 def tri_tessagon():
   options = {
@@ -85,21 +87,25 @@ def rhombus_tessagon():
   options = {
     'u_range': [0.0, 1.0],
     'v_range': [0.0, 1.0],
-    'u_num': 30,
-    'v_num': 4,
+    'u_num': 40,
+    'v_num': 6,
+    'v_twist': True,
     'position': [0, 30, 0]
   }
-  return tessellate(torus, RhombusTessagon, **options)
+  return tessellate(klein, RhombusTessagon, **options)
 
 def octo_tessagon():
   options = {
     'u_range': [0.0, 1.0],
     'v_range': [0.0, 1.0],
-    'u_num': 40,
-    'v_num': 8,
+    'u_num': 4,
+    'v_num': 40,
+    'v_cyclic': True,
+    'u_cyclic': False,
+    'u_twist': True,
     'position': [0, 45, 0]
   }
-  return tessellate(torus, OctoTessagon, **options)
+  return tessellate(mobius, OctoTessagon, **options)
 
 def hex_tri_tessagon():
   options = {

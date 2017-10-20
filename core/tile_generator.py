@@ -29,6 +29,7 @@ class TileGenerator(ValueBlend):
     if 'v_twist' in kwargs:
       self.v_twist = kwargs['v_twist']
 
+    # Note: id_prefix is not used for calculation, just debugging
     self.id_prefix = self.tessagon.__class__.__name__
     if 'id_prefix' in kwargs:
       self.id_prefix = kwargs['id_prefix']
@@ -62,21 +63,33 @@ class TileGenerator(ValueBlend):
 
         if not self.u_cyclic and u == 0:
           left = None
+        elif self.v_twist and u == 0:
+          left = tiles[u_prev][self.v_num - v - 1]
+          tile.twist['left'] = True
         else:
           left = tiles[u_prev][v]
 
         if not self.v_cyclic and v == self.v_num - 1:
           top = None
+        elif self.u_twist and v == self.v_num - 1:
+          top = tiles[self.u_num - u - 1][v_next]
+          tile.twist['top'] = True
         else:
           top = tiles[u][v_next]
 
         if not self.u_cyclic and u == self.u_num - 1:
           right = None
+        elif self.v_twist and u == self.u_num - 1:
+          right = tiles[u_next][self.v_num - v - 1]
+          tile.twist['right'] = True
         else:
           right = tiles[u_next][v]
 
         if not self.v_cyclic and v == 0:
           bottom = None
+        elif self.u_twist and v == 0:
+          bottom = tiles[self.u_num - u - 1][v_prev]
+          tile.twist['bottom'] = True
         else:
           bottom = tiles[u][v_prev]
 

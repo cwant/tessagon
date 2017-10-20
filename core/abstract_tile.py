@@ -30,6 +30,13 @@ class AbstractTile(ValueBlend):
                        'left': None,
                        'right': None }
 
+    self.twist = {
+      'top': False,
+      'bottom': False,
+      'left': False,
+      'right': False
+    }
+
   def set_neighbors(self, **kwargs):
     if 'top' in kwargs:
       self.neighbors['top'] = kwargs['top']
@@ -57,9 +64,20 @@ class AbstractTile(ValueBlend):
       reference = reference[index]
     reference[index_path[-1]] = value
 
-  def get_neighbor_path(self, neighbor_keys):
+  def neighbor_path(self, neighbor_keys):
+    # Note: it is assumed that len(neighbor_keys) <= 2
+    if len(neighbor_keys) < 2: return neighbor_keys
+    if self.should_twist_u(neighbor_keys):
+      if (neighbor_keys[0] in ['top', 'bottom']):
+        return [neighbor_keys[1], neighbor_keys[0]]
+    elif self.should_twist_v(neighbor_keys):
+      if (neighbor_keys[0] in ['left', 'right']):
+        return [neighbor_keys[1], neighbor_keys[0]]
+    return neighbor_keys
+
+  def get_neighbor_tile(self, neighbor_keys):
     tile = self
-    for key in neighbor_keys:
+    for key in self.neighbor_path(neighbor_keys):
       if not tile.neighbors[key]:
         return None
       tile = tile.neighbors[key]
@@ -90,6 +108,16 @@ class AbstractTile(ValueBlend):
     if ('right' in index_path): return 'right'
     raise ValueError("no u_index found in %s" % (index_path))
 
+  def should_twist_u(self, neighbor_keys):
+    for twist in ['top', 'bottom']:
+      if self.twist[twist] and twist in neighbor_keys: return True
+    return False
+
+  def should_twist_v(self, neighbor_keys):
+    for twist in ['left', 'right']:
+      if self.twist[twist] and twist in neighbor_keys: return True
+    return False
+
   def inspect(self, **kwargs):
     # For debugging topology
     if not self.id: return
@@ -108,6 +136,7 @@ class AbstractTile(ValueBlend):
           tuple(self.corners[2] + self.corners[3]))
     print("             (%2.4f, %2.4f)  (%2.4f, %2.4f)" %
           tuple(self.corners[0] + self.corners[1]))
+    print("  - twist:", self.twist)
     print('')
 
   def neighbor_str(self, key):
