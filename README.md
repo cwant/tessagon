@@ -82,3 +82,24 @@ Additional tessagon classes can be added by deconstructing how a tessellation fi
 
 ### `DodecaTessagon`
 ![DodecaTessagon](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/dodeca_tessagon.png)
+
+## Usage Options
+
+Each tessagon class is initialized with a function for the first argument, and a number of keyword options, e.g.:
+
+```
+from tessagon.types.dodeca_tessagon import DodecaTessagon
+from tessagon.adaptors.vtk_adaptor import VtkAdaptor
+tessagon = DodecaTessagon(my_func,
+                          u_range=[0.0, 1.0],
+                          v_range=[0.0, 1.0],
+                          u_num=8,
+                          v_num=20,
+                          u_cyclic=True,
+                          v_cyclic=False,
+                          adaptor_class=VtkAdaptor)
+poly_data = tessagon.create_mesh()
+```
+The `create_mesh()` method creates a tessellated mesh using your provided function and the tile type corresponding to the tessagon class used.
+
+
