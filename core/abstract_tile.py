@@ -30,6 +30,11 @@ class AbstractTile(ValueBlend):
                        'left': None,
                        'right': None }
 
+    # Are the neighbors ordered backwards?
+    # e.g., a tile with twist['right'] set to True:
+    #   self tile: right edge has v=0 at the bottom and v=1 at the top
+    #   right neighbor: left edge has v=1 at the bottom and v=0 at the top
+    #   (the right tile has twist['left'] true
     self.twist = {
       'top': False,
       'bottom': False,
@@ -47,6 +52,8 @@ class AbstractTile(ValueBlend):
     if 'right' in kwargs:
       self.neighbors['right'] = kwargs['right']
 
+  # A couple of abstract methods that will be useful for finding
+  # and setting the vertices and faces on a tile
   def get_nested_list_value(self, nested_list, index_path):
     if not isinstance(index_path, list):
       return nested_list[index_path]
@@ -65,7 +72,14 @@ class AbstractTile(ValueBlend):
     reference[index_path[-1]] = value
 
   def neighbor_path(self, neighbor_keys):
-    # Note: it is assumed that len(neighbor_keys) <= 2
+    # Note: it is assumed that len(neighbor_keys) in [1, 2]
+    # if len(neighbor_keys) == 1, the neighbor meets on an edge
+    # if len(neighbor_keys) == 2, the neighbor meets at a corner,
+    #   and are diagonal for each other, e.g., ['left', 'top']
+    # If the boundary is twisted, need to be careful because
+    # left and become right, or top can become bottom on the
+    # other side of the twisted boundary: try to traverse the
+    # non-twisted boundary first to make the math easier
     if len(neighbor_keys) < 2: return neighbor_keys
     if self.should_twist_u(neighbor_keys):
       if (neighbor_keys[0] in ['top', 'bottom']):
@@ -84,6 +98,8 @@ class AbstractTile(ValueBlend):
     return tile
 
   def swap_value(self, index_path, val1, val2):
+    # abstract function to swap two values in a list
+    # e.g., 'left' and 'right' in u_flip below
     if isinstance(index_path, list):
       return [self.swap_value(u, val1, val2) for u in index_path]
     if index_path == val1: return val2
@@ -91,29 +107,35 @@ class AbstractTile(ValueBlend):
     return index_path
 
   def u_flip(self, index_path):
+    # swap each left with right (and vice versa) in list
     if not self.u_symmetric: return index_path
     return self.swap_value(index_path, 'left', 'right')
 
   def v_flip(self, index_path):
+    # swap each top with bottom (and vice versa) in list
     if not self.v_symmetric: return index_path
     return self.swap_value(index_path, 'bottom', 'top')
 
   def v_index(self, index_path):
+    # find either 'top' or 'bottom' in the list
     if ('bottom' in index_path): return 'bottom'
     if ('top' in index_path): return 'top'
     raise ValueError("no v_index found in %s" % (index_path))
 
   def u_index(self, index_path):
+    # find either 'right' or 'left' in the list
     if ('left' in index_path): return 'left'
     if ('right' in index_path): return 'right'
     raise ValueError("no u_index found in %s" % (index_path))
 
   def should_twist_u(self, neighbor_keys):
+    # e.g., twist['bottom'] is True, and neigbor_keys has 'bottom' in it
     for twist in ['top', 'bottom']:
       if self.twist[twist] and twist in neighbor_keys: return True
     return False
 
   def should_twist_v(self, neighbor_keys):
+    # e.g., twist['left'] is True, and neigbor_keys has 'left' in it
     for twist in ['left', 'right']:
       if self.twist[twist] and twist in neighbor_keys: return True
     return False

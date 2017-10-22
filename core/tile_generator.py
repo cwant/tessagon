@@ -1,6 +1,9 @@
 from tessagon.core.value_blend import ValueBlend
 
 class TileGenerator(ValueBlend):
+  # This is intended to be an abstract class to generate tiles,
+  # but it's quite tied to a grid structure, so it might make
+  # sense to merge with GridTileGenerator
   def __init__(self, tessagon, **kwargs):
     self.tessagon = tessagon
 

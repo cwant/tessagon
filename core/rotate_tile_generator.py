@@ -2,20 +2,23 @@ from tessagon.core.tile_generator import TileGenerator
 from tessagon.core.abstract_tile import AbstractTile
 
 class RotateTileGenerator(TileGenerator):
+  # This generates tiles that are rotated from a regular
+  # grid arrangement.
   def __init__(self, tessagon, **kwargs):
     super().__init__(tessagon, **kwargs)
 
     self.rot_factor = kwargs['rot_factor']
 
     # Rot tiles are not tiles, they are a collection of tiles.
-    # They generate interior tiles ((rot_index - 1)^2 of them) and #
-    # up to 2 * rot_index boundary tiles that are shared with neighbors
+    # They generate interior tiles ((rot_factor - 1)^2 of them) and
+    # up to 2 * rot_factor boundary tiles that are shared with neighbors
     # (if they exist).
-    # Maximum tiles generated per rot_tile is rot_index^2 + 1 tiles
+    # Maximum tiles generated per rot_tile is rot_factor^2 + 1 tiles
     # With this in mind, you'll want to set u_num and v_num lower than
     # you would with the grid tile generator
-    self.id_prefix = 'rot_tiles'
     self.rot_tiles = None
+
+    self.id_prefix = 'rot_tiles'
 
   def create_tiles(self):
     self.rot_tiles = self.initialize_tiles(RotTile,
@@ -51,13 +54,16 @@ class RotTile(AbstractTile):
     super().__init__(tessagon, **kwargs)
     self.n = kwargs['rot_factor']
 
+    # the interior and each boundary is a collection of tiles
     self.interior = None
-    self.interior_corners = None
     self.boundary = { 'left': None,
                       'right': None,
                       'top': None,
                       'bottom': None }
-    # We'll use these a lot
+
+    self.interior_corners = None
+
+    # We'll use these constants a lot
     n2_p1 = self.n**2 + 1.0
     self.c1 = 1.0 / n2_p1
     self.c2 = self.n / n2_p1
