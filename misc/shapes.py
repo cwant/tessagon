@@ -59,7 +59,18 @@ def other_cylinder(u, v):
   return cylinder(v, u)
 
 def paraboloid(u, v):
+  # u_cyclic = False, v_cyclic = False
   return [u, v, u**2 + v**2]
+
+def general_ellipsoid(r1, r2, r3, u, v):
+  # u_cyclic = True, v_cyclic = False
+  u1 = 2*pi*u
+  v1 = pi*normalize_value(warp_var(v + 0.5, 0.8)-0.5)
+  sinv1 = sin(v1)
+  return [r1 * cos(u1) * sinv1, r2 * sin(u1) * sinv1, r3 * cos(v1)]
+
+def sphere(u, v):
+  return general_ellipsoid(4, 4, 4, u, v)
 
 def general_mobius(r, h, u, v):
   offset = h*(v-0.5)*sin(u*pi)
