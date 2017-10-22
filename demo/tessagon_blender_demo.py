@@ -14,6 +14,7 @@ from tessagon.types.square_tessagon import SquareTessagon
 from tessagon.types.pythagorean_tessagon import PythagoreanTessagon
 from tessagon.types.brick_tessagon import BrickTessagon
 from tessagon.types.dodeca_tessagon import DodecaTessagon
+from tessagon.types.square_tri_tessagon import SquareTriTessagon
 
 from tessagon.misc.shapes import torus, other_torus, cylinder, \
   other_cylinder, mobius, other_mobius, plane, klein
@@ -28,6 +29,9 @@ try:
   is_wire_skin_loaded = True
 except:
   print('Could not load wire_skin, some demoes skipped')
+
+def main2():
+  layer11()
 
 def main():
   # A bunch of layers have demos
@@ -61,6 +65,9 @@ def main():
 
   # DodecaTessagon
   layer10()
+
+  # SquareTriTessagon
+  layer11()
 
   # Non-cyclic Torus
   layer18()
@@ -296,6 +303,25 @@ def layer10():
     'v_cyclic': False
   }
   tessellate("DodecaPlane1", plane, DodecaTessagon, **options)
+
+def layer11():
+  options = {
+    'u_range': [0.0, 1.0],
+    'v_range': [0.0, 1.0],
+    'u_num': 20,
+    'v_num': 4,
+  }
+  tessellate("SquareTriTorus1", torus, SquareTriTessagon, **options)
+
+  options = {
+    'u_range': [0.0, 1.0],
+    'v_range': [0.0, 1.0],
+    'u_num': 2,
+    'v_num': 2,
+    'u_cyclic': False,
+    'v_cyclic': False
+  }
+  tessellate("SquareTriPlane1", plane, SquareTriTessagon, **options)
 
 def wire_to_skin(in_name, out_name, **kwargs):
   input_object = bpy.data.objects[in_name]
