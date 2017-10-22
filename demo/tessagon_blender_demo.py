@@ -4,18 +4,7 @@ import tessagon
 reload(tessagon)
 
 from tessagon.adaptors.blender_adaptor import BlenderAdaptor
-from tessagon.types.hex_tessagon import HexTessagon
-from tessagon.types.tri_tessagon import TriTessagon
-from tessagon.types.octo_tessagon import OctoTessagon
-from tessagon.types.rhombus_tessagon import RhombusTessagon
-from tessagon.types.hex_tri_tessagon import HexTriTessagon
-from tessagon.types.hex_square_tri_tessagon import HexSquareTriTessagon
-from tessagon.types.square_tessagon import SquareTessagon
-from tessagon.types.pythagorean_tessagon import PythagoreanTessagon
-from tessagon.types.brick_tessagon import BrickTessagon
-from tessagon.types.dodeca_tessagon import DodecaTessagon
-from tessagon.types.square_tri_tessagon import SquareTriTessagon
-from tessagon.types.weave_tessagon import WeaveTessagon
+from tessagon.types import *
 
 from tessagon.misc.shapes import torus, other_torus, cylinder, \
   other_cylinder, mobius, other_mobius, plane, klein
