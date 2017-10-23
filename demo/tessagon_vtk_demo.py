@@ -17,16 +17,18 @@ def main():
   iren = vtk.vtkRenderWindowInteractor()
   iren.SetRenderWindow(renWin)
 
-  ren.AddActor(hex_tessagon())
-  ren.AddActor(tri_tessagon())
-  ren.AddActor(rhombus_tessagon())
-  ren.AddActor(octo_tessagon())
-  ren.AddActor(hex_tri_tessagon())
-  ren.AddActor(hex_square_tri_tessagon())
-  ren.AddActor(square_tessagon())
-  ren.AddActor(pythagorean_tessagon())
-  ren.AddActor(brick_tessagon())
-  ren.AddActor(dodeca_tessagon())
+  ren.AddActor(hex_tessagon([0, 0, 0]))
+  ren.AddActor(tri_tessagon([0, 15, 0]))
+  ren.AddActor(rhombus_tessagon([0, 30, 0]))
+  ren.AddActor(octo_tessagon([0, 45, 0]))
+  ren.AddActor(hex_tri_tessagon([15, 0, 0]))
+  ren.AddActor(hex_square_tri_tessagon([15, 15, 0]))
+  ren.AddActor(square_tessagon([15, 30, 0]))
+  ren.AddActor(pythagorean_tessagon([15, 45, 0]))
+  ren.AddActor(brick_tessagon([30, 0, 0]))
+  ren.AddActor(dodeca_tessagon([30, 15, 0]))
+  ren.AddActor(square_tri_tessagon([30, 30, 0]))
+  ren.AddActor(weave_tessagon([30, 45, 0]))
 
   ren.SetBackground(0.3, 0.3, 0.3)
   renWin.SetSize(800, 600)
@@ -51,7 +53,7 @@ def tessellate(f, tessagon_class, **kwargs):
 
   return actor
 
-def hex_tessagon():
+def hex_tessagon(position):
   options = {
     'u_range': [0.0, 1.0],
     'v_range': [0.0, 1.0],
@@ -59,32 +61,32 @@ def hex_tessagon():
     'v_num': 5,
     'u_cyclic': True,
     'v_cyclic': False,
-    'position': [0, 0, 0]
+    'position': position
   }
   return tessellate(cylinder, HexTessagon, **options)
 
-def tri_tessagon():
+def tri_tessagon(position):
   options = {
     'u_range': [0.0, 1.0],
     'v_range': [0.0, 1.0],
     'u_num': 35,
     'v_num': 12,
-    'position': [0, 15, 0]
+    'position': position
   }
   return tessellate(torus, TriTessagon, **options)
 
-def rhombus_tessagon():
+def rhombus_tessagon(position):
   options = {
     'u_range': [0.0, 1.0],
     'v_range': [0.0, 1.0],
     'u_num': 40,
     'v_num': 6,
     'v_twist': True,
-    'position': [0, 30, 0]
+    'position': position
   }
   return tessellate(klein, RhombusTessagon, **options)
 
-def octo_tessagon():
+def octo_tessagon(position):
   options = {
     'u_range': [0.0, 1.0],
     'v_range': [0.0, 1.0],
@@ -93,70 +95,92 @@ def octo_tessagon():
     'v_cyclic': True,
     'u_cyclic': False,
     'u_twist': True,
-    'position': [0, 45, 0]
+    'position': position
   }
   return tessellate(mobius, OctoTessagon, **options)
 
-def hex_tri_tessagon():
+def hex_tri_tessagon(position):
   options = {
     'u_range': [0.0, 1.0],
     'v_range': [0.0, 1.0],
     'u_num': 40,
     'v_num': 6,
-    'position': [0, 60, 0]
+    'position': position
   }
   return tessellate(torus, HexTriTessagon, **options)
 
-def hex_square_tri_tessagon():
+def hex_square_tri_tessagon(position):
   options = {
     'u_range': [0.0, 1.0],
     'v_range': [0.0, 1.0],
     'u_num': 45,
     'v_num': 5,
-    'position': [15, 0, 0]
+    'position': position
   }
   return tessellate(torus, HexSquareTriTessagon, **options)
 
-def square_tessagon():
+def square_tessagon(position):
   options = {
     'u_range': [0.0, 1.0],
     'v_range': [0.0, 1.0],
     'u_num': 15,
     'v_num': 4,
     'rot_factor': 2,
-    'position': [15, 15, 0]
+    'position': position
   }
   return tessellate(torus, SquareTessagon, **options)
 
-def pythagorean_tessagon():
+def pythagorean_tessagon(position):
   options = {
     'u_range': [0.0, 1.0],
     'v_range': [0.0, 1.0],
     'u_num': 25,
     'v_num': 6,
-    'position': [15, 30, 0]
+    'position': position
   }
   return tessellate(torus, PythagoreanTessagon, **options)
 
-def brick_tessagon():
+def brick_tessagon(position):
   options = {
     'u_range': [0.0, 1.0],
     'v_range': [0.0, 1.0],
     'u_num': 15,
     'v_num': 3,
     'rot_factor': 3,
-    'position': [15, 45, 0]
+    'position': position
   }
   return tessellate(torus, BrickTessagon, **options)
 
-def dodeca_tessagon():
+def dodeca_tessagon(position):
   options = {
     'u_range': [0.0, 1.0],
     'v_range': [0.0, 1.0],
     'u_num': 25,
     'v_num': 3,
-    'position': [15, 60, 0]
+    'position': position
   }
   return tessellate(torus, DodecaTessagon, **options)
+
+def square_tri_tessagon(position):
+  options = {
+    'u_range': [0.0, 1.0],
+    'v_range': [0.0, 1.0],
+    'u_num': 20,
+    'v_num': 4,
+    'position': position
+  }
+  return tessellate(torus, SquareTriTessagon, **options)
+
+def weave_tessagon(position):
+  options = {
+    'u_range': [0.0, 1.0],
+    'v_range': [0.0, 1.0],
+    'u_num': 8,
+    'v_num': 6,
+    'v_cyclic': False,
+    'rot_factor': 1,
+    'position': position
+  }
+  return tessellate(sphere, WeaveTessagon, **options)
 
 main()
