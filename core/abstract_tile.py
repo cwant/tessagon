@@ -85,22 +85,22 @@ class AbstractTile(ValueBlend):
 
   # A couple of abstract methods that will be useful for finding
   # and setting the vertices and faces on a tile
-  def _get_nested_list_value(self, nested_list, index_path):
-    if not isinstance(index_path, list):
-      return nested_list[index_path]
+  def _get_nested_list_value(self, nested_list, index_keys):
+    if not isinstance(index_keys, list):
+      return nested_list[index_keys]
     value = nested_list
-    for index in index_path:
+    for index in index_keys:
       value = value[index]
     return value
 
-  def _set_nested_list_value(self, nested_list, index_path, value):
-    if not isinstance(index_path, list):
-      nested_list[index_path] = value
+  def _set_nested_list_value(self, nested_list, index_keys, value):
+    if not isinstance(index_keys, list):
+      nested_list[index_keys] = value
       return
     reference = nested_list
-    for index in index_path[0:-1]:
+    for index in index_keys[0:-1]:
       reference = reference[index]
-    reference[index_path[-1]] = value
+    reference[index_keys[-1]] = value
 
   def _neighbor_path(self, neighbor_keys):
     # Note: it is assumed that len(neighbor_keys) in [1, 2]
@@ -128,36 +128,36 @@ class AbstractTile(ValueBlend):
       path = self._v_flip(path)
     return path
     
-  def _swap_value(self, index_path, val1, val2):
+  def _swap_value(self, index_keys, val1, val2):
     # abstract function to swap two values in a list
     # e.g., 'left' and 'right' in u_flip below
-    if isinstance(index_path, list):
-      return [self._swap_value(u, val1, val2) for u in index_path]
-    if index_path == val1: return val2
-    if index_path == val2: return val1
-    return index_path
+    if isinstance(index_keys, list):
+      return [self._swap_value(u, val1, val2) for u in index_keys]
+    if index_keys == val1: return val2
+    if index_keys == val2: return val1
+    return index_keys
 
-  def _u_flip(self, index_path):
+  def _u_flip(self, index_keys):
     # swap each left with right (and vice versa) in list
-    if not self.u_symmetric: return index_path
-    return self._swap_value(index_path, 'left', 'right')
+    if not self.u_symmetric: return index_keys
+    return self._swap_value(index_keys, 'left', 'right')
 
-  def _v_flip(self, index_path):
+  def _v_flip(self, index_keys):
     # swap each top with bottom (and vice versa) in list
-    if not self.v_symmetric: return index_path
-    return self._swap_value(index_path, 'bottom', 'top')
+    if not self.v_symmetric: return index_keys
+    return self._swap_value(index_keys, 'bottom', 'top')
 
-  def _v_index(self, index_path):
+  def _v_index(self, index_keys):
     # find either 'top' or 'bottom' in the list
-    if ('bottom' in index_path): return 'bottom'
-    if ('top' in index_path): return 'top'
-    raise ValueError("no v_index found in %s" % (index_path))
+    if ('bottom' in index_keys): return 'bottom'
+    if ('top' in index_keys): return 'top'
+    raise ValueError("no v_index found in %s" % (index_keys))
 
-  def _u_index(self, index_path):
+  def _u_index(self, index_keys):
     # find either 'right' or 'left' in the list
-    if ('left' in index_path): return 'left'
-    if ('right' in index_path): return 'right'
-    raise ValueError("no u_index found in %s" % (index_path))
+    if ('left' in index_keys): return 'left'
+    if ('right' in index_keys): return 'right'
+    raise ValueError("no u_index found in %s" % (index_keys))
 
   def _should_twist_u(self, neighbor_keys):
     # e.g., twist['bottom'] is True, and neigbor_keys has 'bottom' in it
