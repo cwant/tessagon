@@ -34,6 +34,7 @@ def my_func(u,v):
   return [u, v, u**2 + v**2]
   
 options = {
+    'function': my_func,
     'u_range': [0.0, 1.0],
     'v_range': [0.0, 1.0],
     'u_num': 8,
@@ -42,7 +43,7 @@ options = {
     'v_cyclic': False,
     'adaptor_class' : BlenderAdaptor
   }
-tessagon = HexTessagon(my_func, **options)
+tessagon = HexTessagon(**options)
 
 bmesh = tessagon.create_mesh()
 
@@ -85,12 +86,12 @@ Additional tessagon classes can be added by deconstructing how a tessellation fi
 
 ## Usage and Options
 
-Each tessagon class is initialized with a function for the first argument, and a number of keyword options, e.g.:
+Each tessagon class is initialized with number of keyword options, e.g.:
 
 ```
 from tessagon.types.dodeca_tessagon import DodecaTessagon
 from tessagon.adaptors.vtk_adaptor import VtkAdaptor
-tessagon = DodecaTessagon(my_func,
+tessagon = DodecaTessagon(function=my_func,
                           u_range=[0.0, 1.0],
                           v_range=[0.0, 1.0],
                           u_num=8,
@@ -104,6 +105,7 @@ The `create_mesh()` method creates a tessellated mesh using your provided functi
 
 Here are the options:
 
+* `function`: the function to be used to generate the geometry. This is a function that takes two arguments (`u`, `v`) and returns a list of three items (`x`, `y`, `z`)
 * `u_range`: a list with two items indicating the minimum and maximum values for u (the first argument to the function passed);
 * `v_range`: a list with two items indicating the minimum and maximum values for v (the second argument to the function passed);
 * `u_num`: the number of tiles to be created in the u-direction;
