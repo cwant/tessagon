@@ -51,16 +51,30 @@ def general_cylinder(r, h, u, v):
 def cylinder(u, v):
   # u_cyclic = True, v_cyclic = False
   r = 5.0
-  h = 5.0
+  h = 3.5
   return general_cylinder(r, h, u, v)
 
 def other_cylinder(u, v):
   # u_cyclic = False, v_cyclic = True
   return cylinder(v, u)
 
+def general_paraboloid(scale1, scale2, displace, u, v):
+  return [scale1*u, scale1*v, displace + scale2 * (u**2 + v**2)]
+
 def paraboloid(u, v):
   # u_cyclic = False, v_cyclic = False
-  return [u, v, u**2 + v**2]
+  return general_paraboloid(4, 3, -3, u, v)
+
+def general_one_sheet_hyperboloid(scale1, scale2, u, v):
+  c = scale1 * sqrt(1 + u**2)
+  v1 = 2*pi*v
+  x = c * cos(v1)
+  y = c * sin(v1)
+  z = scale2 * u
+  return [x, y, z]
+
+def one_sheet_hyperboloid(u, v):
+  return general_one_sheet_hyperboloid(3, 2, u, v)
 
 def general_ellipsoid(r1, r2, r3, u, v):
   # u_cyclic = True, v_cyclic = False

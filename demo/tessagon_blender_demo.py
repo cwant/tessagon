@@ -93,18 +93,12 @@ def layer1():
   options = {
     'u_range': [0.0, 1.0],
     'v_range': [0.0, 1.0],
-    'u_num': 35,
-    'v_num': 5
+    'u_num': 45,
+    'v_num': 3,
+    'u_cyclic': True,
+    'v_cyclic': False,
   }
-  tessellate("HexTorus1", torus, HexTessagon, **options)
-
-  options = {
-    'u_range': [0.0, 1.0],
-    'v_range': [0.0, 1.0],
-    'u_num': 8,
-    'v_num': 20
-  }
-  tessellate("HexTorus2", other_torus, HexTessagon, **options)
+  tessellate("Hex1", cylinder, HexTessagon, **options)
 
   options = {
     'u_range': [0.0, 1.0],
@@ -123,15 +117,7 @@ def layer2():
     'u_num': 35,
     'v_num': 12
   }
-  tessellate("TriTorus1", torus, TriTessagon, **options)
-
-  options = {
-    'u_range': [0.0, 1.0],
-    'v_range': [0.0, 1.0],
-    'u_num': 6,
-    'v_num': 35
-  }
-  tessellate("TriTorus2", other_torus, TriTessagon, **options)
+  tessellate("Tri1", torus, TriTessagon, **options)
 
   options = {
     'u_range': [0.0, 1.0],
@@ -147,10 +133,11 @@ def layer3():
   options = {
     'u_range': [0.0, 1.0],
     'v_range': [0.0, 1.0],
-    'u_num': 30,
-    'v_num': 4
+    'u_num': 40,
+    'v_num': 6,
+    'v_twist': True
   }
-  tessellate("RhombusTorus1", torus, RhombusTessagon, **options)
+  tessellate("Rhombus1", klein, RhombusTessagon, **options)
 
   options = {
     'u_range': [0.0, 1.0],
@@ -166,10 +153,13 @@ def layer4():
   options = {
     'u_range': [0.0, 1.0],
     'v_range': [0.0, 1.0],
-    'u_num': 40,
-    'v_num': 8
+    'u_num': 4,
+    'v_num': 40,
+    'v_cyclic': True,
+    'u_cyclic': False,
+    'u_twist': True
   }
-  tessellate("OctoTorus1", torus, OctoTessagon, **options)
+  tessellate("Octo1", mobius, OctoTessagon, **options)
 
   options = {
     'u_range': [0.0, 1.0],
@@ -183,12 +173,14 @@ def layer4():
 
 def layer5():
   options = {
-    'u_range': [0.0, 1.0],
-    'v_range': [0.0, 1.0],
-    'u_num': 40,
-    'v_num': 6
+    'u_range': [-1.0, 1.0],
+    'v_range': [-1.0, 1.0],
+    'u_num': 15,
+    'v_num': 10,
+    'u_cyclic': False,
+    'v_cyclic': False
   }
-  tessellate("HexTriTorus1", torus, HexTriTessagon, **options)
+  tessellate("HexTri1", paraboloid, HexTriTessagon, **options)
 
   options = {
     'u_range': [0.0, 1.0],
@@ -280,12 +272,14 @@ def layer9():
 
 def layer10():
   options = {
-    'u_range': [0.0, 1.0],
+    'u_range': [-1.0, 1.0],
     'v_range': [0.0, 1.0],
-    'u_num': 25,
-    'v_num': 3,
+    'u_num': 4,
+    'v_num': 10,
+    'u_cyclic': False,
+    'v_cyclic': True
   }
-  tessellate("DodecaTorus1", torus, DodecaTessagon, **options)
+  tessellate("Dodeca1", one_sheet_hyperboloid, DodecaTessagon, **options)
 
   options = {
     'u_range': [0.0, 1.0],

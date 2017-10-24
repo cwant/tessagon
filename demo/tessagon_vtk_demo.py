@@ -58,8 +58,8 @@ def hex_tessagon(position):
   options = {
     'u_range': [0.0, 1.0],
     'v_range': [0.0, 1.0],
-    'u_num': 40,
-    'v_num': 5,
+    'u_num': 45,
+    'v_num': 3,
     'u_cyclic': True,
     'v_cyclic': False,
     'position': position
@@ -102,13 +102,15 @@ def octo_tessagon(position):
 
 def hex_tri_tessagon(position):
   options = {
-    'u_range': [0.0, 1.0],
-    'v_range': [0.0, 1.0],
-    'u_num': 40,
-    'v_num': 6,
+    'u_range': [-1.0, 1.0],
+    'v_range': [-1.0, 1.0],
+    'u_num': 15,
+    'v_num': 10,
+    'u_cyclic': False,
+    'v_cyclic': False,
     'position': position
   }
-  return tessellate(torus, HexTriTessagon, **options)
+  return tessellate(paraboloid, HexTriTessagon, **options)
 
 def hex_square_tri_tessagon(position):
   options = {
@@ -154,13 +156,15 @@ def brick_tessagon(position):
 
 def dodeca_tessagon(position):
   options = {
-    'u_range': [0.0, 1.0],
+    'u_range': [-1.0, 1.0],
     'v_range': [0.0, 1.0],
-    'u_num': 25,
-    'v_num': 3,
+    'u_num': 4,
+    'v_num': 10,
+    'u_cyclic': False,
+    'v_cyclic': True,
     'position': position
   }
-  return tessellate(torus, DodecaTessagon, **options)
+  return tessellate(one_sheet_hyperboloid, DodecaTessagon, **options)
 
 def square_tri_tessagon(position):
   options = {
