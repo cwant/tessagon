@@ -89,6 +89,14 @@ class AbstractTile(ValueBlend):
         return [neighbor_keys[1], neighbor_keys[0]]
     return neighbor_keys
 
+  def index_path(self, index_keys, neighbor_keys):
+    path = index_keys
+    if self.should_twist_u(neighbor_keys):
+      path = self.u_flip(path)
+    if self.should_twist_v(neighbor_keys):
+      path = self.v_flip(path)
+    return path
+    
   def get_neighbor_tile(self, neighbor_keys):
     tile = self
     for key in self.neighbor_path(neighbor_keys):
