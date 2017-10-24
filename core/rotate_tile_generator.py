@@ -87,7 +87,7 @@ class RotTile(AbstractTile):
 
     self.interior = generator.initialize_tiles(self.tessagon.tile_class)
     generator.initialize_neighbors(self.interior)
-    self.tiles += self.flatten_list(self.interior)
+    self.tiles += self._flatten_list(self.interior)
 
   def create_tiles(self):
     return self.tiles
@@ -117,7 +117,7 @@ class RotTile(AbstractTile):
 
         self.boundary['left'] = tiles
         tile.boundary['right'] = tiles
-        self.tiles += self.flatten_list(tiles)
+        self.tiles += self._flatten_list(tiles)
 
   def initialize_bottom_boundary(self, id_prefix):
     if not self.boundary['bottom']:
@@ -137,7 +137,7 @@ class RotTile(AbstractTile):
 
         self.boundary['bottom'] = tiles
         tile.boundary['top'] = tiles
-        self.tiles += self.flatten_list(tiles)
+        self.tiles += self._flatten_list(tiles)
 
   def initialize_right_boundary(self, id_prefix):
     if not self.boundary['right']:
@@ -221,5 +221,5 @@ class RotTile(AbstractTile):
         boundary_tile.neighbors['bottom'] = other_tile
         other_tile.neighbors['top'] = boundary_tile
 
-  def flatten_list(self, l):
+  def _flatten_list(self, l):
     return [item for sublist in l for item in sublist]

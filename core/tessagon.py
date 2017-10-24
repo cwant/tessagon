@@ -29,12 +29,12 @@ class Tessagon:
     self.vert_types = {}
 
   def create_mesh(self):
-    self.initialize_tiles()
+    self._initialize_tiles()
 
     self.mesh_adaptor.create_empty_mesh()
 
-    self.calculate_verts()
-    self.calculate_faces()
+    self._calculate_verts()
+    self._calculate_faces()
 
     self.mesh_adaptor.finish_mesh()
 
@@ -43,18 +43,21 @@ class Tessagon:
 
     return self.mesh_adaptor.get_mesh()
 
-  def initialize_tiles(self):
-    self.tiles = self.tile_generator.create_tiles()
-        
-  def calculate_verts(self):
-    for tile in self.tiles:
-      tile.calculate_verts()
-
-  def calculate_faces(self):
-    for tile in self.tiles:
-      tile.calculate_faces()
-
   def inspect(self):
     print("\n=== %s ===\n" % (self.__class__.__name__))
     for i in range(len(self.tiles)):
       self.tiles[i].inspect(tile_number=i)
+
+  ### Below are protected
+
+  def _initialize_tiles(self):
+    self.tiles = self.tile_generator.create_tiles()
+        
+  def _calculate_verts(self):
+    for tile in self.tiles:
+      tile.calculate_verts()
+
+  def _calculate_faces(self):
+    for tile in self.tiles:
+      tile.calculate_faces()
+
