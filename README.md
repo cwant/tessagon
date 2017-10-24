@@ -84,6 +84,12 @@ Additional tessagon classes can be added by deconstructing how a tessellation fi
 ### `DodecaTessagon`
 ![DodecaTessagon](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/dodeca_tessagon.png)
 
+### `SquareTriTessagon`
+![SquareTriTessagon](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/square_tri_tessagon.png)
+
+### `WeaveTessagon`
+![WeaveTessagon](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/weave_tessagon.png)
+
 ## Usage and Options
 
 Each tessagon class is initialized with number of keyword options, e.g.:
