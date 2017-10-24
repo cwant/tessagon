@@ -74,6 +74,7 @@ def general_one_sheet_hyperboloid(scale1, scale2, u, v):
   return [x, y, z]
 
 def one_sheet_hyperboloid(u, v):
+  # u_cyclic = False, v_cyclic = True
   return general_one_sheet_hyperboloid(3, 2, u, v)
 
 def general_ellipsoid(r1, r2, r3, u, v):
