@@ -73,10 +73,10 @@ class RotTile(AbstractTile):
     self.tiles = []
 
   def initialize_interior(self):
-    self.interior_corners = [ self.blend(self.c2, self.c1),
-                              self.blend(self.c4, self.c2),
-                              self.blend(self.c1, self.c3),
-                              self.blend(self.c3, self.c4) ]
+    self.interior_corners = [ self._blend(self.c2, self.c1),
+                              self._blend(self.c4, self.c2),
+                              self._blend(self.c1, self.c3),
+                              self._blend(self.c3, self.c4) ]
     if self.n < 2:
       return
     generator = TileGenerator(self.tessagon,
@@ -103,10 +103,10 @@ class RotTile(AbstractTile):
     if not self.boundary['left']:
       tile = self.get_neighbor_tile(['left'])
       if tile:
-        corners = [ self.blend(0, 0),
-                    self.blend(self.c2, self.c1),
-                    self.blend(self.c3 - 1.0, self.c4),
-                    self.blend(0, 1) ]
+        corners = [ self._blend(0, 0),
+                    self._blend(self.c2, self.c1),
+                    self._blend(self.c3 - 1.0, self.c4),
+                    self._blend(0, 1) ]
         generator = TileGenerator(self.tessagon,
                                   corners=corners,
                                   u_num=1, v_num=self.n,
@@ -123,10 +123,10 @@ class RotTile(AbstractTile):
     if not self.boundary['bottom']:
       tile = self.get_neighbor_tile(['bottom'])
       if tile:
-        corners = [ self.blend(self.c1, self.c3 - 1.0),
-                    self.blend(1, 0),
-                    self.blend(0, 0),
-                    self.blend(self.c4, self.c2) ]
+        corners = [ self._blend(self.c1, self.c3 - 1.0),
+                    self._blend(1, 0),
+                    self._blend(0, 0),
+                    self._blend(self.c4, self.c2) ]
         generator = TileGenerator(self.tessagon,
                                   corners=corners,
                                   u_num=self.n, v_num=1,

@@ -9,7 +9,7 @@ class TileGenerator(ValueBlend):
 
     # Corners is list of tuples [topleft, topright, bottomleft, bottomright]
     self.corners = None
-    self.init_corners(**kwargs)
+    self._init_corners(**kwargs)
 
     self.u_num = self.v_num = None
     self.u_cyclic = True
@@ -46,10 +46,10 @@ class TileGenerator(ValueBlend):
       for v in range(self.v_num):
         v_ratio0 = float(v) / self.v_num
         v_ratio1 = float(v + 1) / self.v_num
-        extra_args = { 'corners': [self.blend(u_ratio0, v_ratio0),
-                                   self.blend(u_ratio1, v_ratio0),
-                                   self.blend(u_ratio0, v_ratio1),
-                                   self.blend(u_ratio1, v_ratio1)] }
+        extra_args = { 'corners': [self._blend(u_ratio0, v_ratio0),
+                                   self._blend(u_ratio1, v_ratio0),
+                                   self._blend(u_ratio0, v_ratio1),
+                                   self._blend(u_ratio1, v_ratio1)] }
         if self.id_prefix:
           extra_args['id'] = "%s[%d][%d]" % (self.id_prefix, u, v)
         tiles[u][v] = tile_class(self.tessagon, **{**kwargs, **extra_args})

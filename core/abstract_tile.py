@@ -23,7 +23,7 @@ class AbstractTile(ValueBlend):
 
     # Corners is list of tuples [bottomleft, bottomright, topleft, topright]
     self.corners = None
-    self.init_corners(**kwargs)
+    self._init_corners(**kwargs)
 
     self.neighbors = { 'top': None,
                        'bottom': None,

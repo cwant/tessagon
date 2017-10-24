@@ -1,6 +1,6 @@
 class ValueBlend:
 
-  def init_corners(self, **kwargs):
+  def _init_corners(self, **kwargs):
     # Corners is list of tuples [bottomleft, bottomright, topleft, topright]
     if 'corners' in kwargs:
       self.corners = kwargs['corners']
@@ -17,17 +17,17 @@ class ValueBlend:
       raise ValueError("Must set either option "\
                        "'corners' or options 'u_range' and 'v_range'")
 
-  def blend_tuples(self, tuple1, tuple2, ratio):
+  def _blend_tuples(self, tuple1, tuple2, ratio):
     out = [None, None]
     for i in range(2):
       out[i] = (1 - ratio) * tuple1[i] + ratio * tuple2[i]
     return out
 
-  def blend(self, ratio_u, ratio_v):
-    uv0 = self.blend_tuples(self.corners[0],
+  def _blend(self, ratio_u, ratio_v):
+    uv0 = self._blend_tuples(self.corners[0],
                            self.corners[1],
                            ratio_u)
-    uv1 = self.blend_tuples(self.corners[2],
+    uv1 = self._blend_tuples(self.corners[2],
                            self.corners[3],
                            ratio_u)
-    return self.blend_tuples(uv0, uv1, ratio_v)
+    return self._blend_tuples(uv0, uv1, ratio_v)
