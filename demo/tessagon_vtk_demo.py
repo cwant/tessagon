@@ -38,8 +38,9 @@ def main():
   iren.Start()
 
 def tessellate(f, tessagon_class, **kwargs):
-  extra_args = {'adaptor_class' : VtkAdaptor}
-  tessagon = tessagon_class(f, **{**kwargs, **extra_args})
+  extra_args = {'function': f,
+                'adaptor_class' : VtkAdaptor}
+  tessagon = tessagon_class(**{**kwargs, **extra_args})
 
   poly_data = tessagon.create_mesh()
   mapper = vtk.vtkPolyDataMapper()

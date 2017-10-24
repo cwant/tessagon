@@ -6,8 +6,7 @@ reload(tessagon)
 from tessagon.adaptors.blender_adaptor import BlenderAdaptor
 from tessagon.types import *
 
-from tessagon.misc.shapes import torus, other_torus, cylinder, \
-  other_cylinder, mobius, other_mobius, plane, klein
+from tessagon.misc.shapes import *
 
 # Optional, for the wire_skin demos
 # https://github.com/cwant/wire_skin
@@ -77,8 +76,9 @@ def tessellate(out_name, f, tessagon_class, **kwargs):
   me = output_object.data
   output_materials = me.materials
 
-  extra_args = {'adaptor_class' : BlenderAdaptor}
-  tessagon = tessagon_class(f, **{**kwargs, **extra_args})
+  extra_args = {'function': f,
+                'adaptor_class' : BlenderAdaptor}
+  tessagon = tessagon_class(**{**kwargs, **extra_args})
 
   bm = tessagon.create_mesh()
 
@@ -320,10 +320,12 @@ def layer12():
   options = {
     'u_range': [0.0, 1.0],
     'v_range': [0.0, 1.0],
-    'u_num': 20,
-    'v_num': 4,
+    'u_num': 8,
+    'v_num': 6,
+    'v_cyclic': False,
+    'rot_factor': 1
   }
-  tessellate("WeaveTorus1", torus, WeaveTessagon, **options)
+  tessellate("WeaveSphere1", sphere, WeaveTessagon, **options)
 
   options = {
     'u_range': [0.0, 1.0],
