@@ -127,3 +127,15 @@ Here are the options:
   It hurt my brain developing this feature, so don't feel bad if it does't make any sense for you. Play around with it, and keep in mind that the number of tiles generated is somewhere between `u_num * v_num * (rot_factor - 1)**2` and `u_num * v_num * (rot_factor**2 + 1)` (depending on which tiles have neighbors, due to periodicity), so you typically want to set `u_num` and `v_num` to be a lot lower than you would in the non-rotated case.
 * `u_twist`: this is used with `v_cyclic` (note that says `v_cyclic` not `u_cyclic`). As the `v` values wrap around, the `u` values reconnect in the opposite direction: the low `u` values connect to the high `u` values, and vice versa. This allows you to make things like Möbius strips and Klein bottles.
 * `v_twist`: works with `u_cyclic`, analogous to how `u_twist` works.
+
+## Writing your own tessellation classes
+
+All tesselations are found in the `types` module, so check out the source code there for numerous examples. Each tessellation involve two classes: a tile class and a child of class `Tessagon`. The `Tessagon` subclass is easy (it just declares which tile class with be used), so writing the tile class will take most of your time. There are five methods that you will want to write:
+
+* `__init__`: typically you will want to call the constructor of the super-class. You can declare your tile class to be symmetric in either the u-direction or the v-direction, which will help you greatly if you have structured your vertices and faces well.
+
+* `init_verts`: here you define the structure of your verts in a nested hash. You can use any combination of keys you want as pathways to addressing your vertices. If you declared your class to be u-symmetric, then the words `left` and `right` will have significance in your pathways. Creating a vertex with the word `left` in it's pathway will automagically also create the symmetric `right` vertex, halfing the amount of work you need to do. For v-symmetric tiles, the words `top` and `bottom` have meaning, in an analogous way. If the tile is both u-symmetric and v-symmetric, then each vert created that has a combination of both `left`/`right` and `top`/`bottom` in it's pathway will actually create four symmetric vertices.
+
+* `init_faces`: here you define the structure of your faces in a nested hash. As with vertices, you can reduce your work by exploiting symmetry and using `left`, `right`, `top` and `bottom` when addressing your faces.
+
+* `calculate_verts`: here you define the locations of the vertices in the tiling, via the `add_vert` method. The method takes an array of keys to indicate which vertex is being defined, and a location expressed as a `u_ratio` and a `v_ratio`, both between 0 and 1. A `u_ratio` of 0 is `left` and a `u_ratio` of 1 is right. A `v_ratio` of 0 is `bottom` and a `v_ratio` of 1 is `top`. Using the boolean keywords `u_boundary`, `v_boundary` and `corner`, you can tell the system whether the vert of shared with neighboring tiles (this reduces the work that needs to be done, and can also keep the model topologically sound and water-tight).
