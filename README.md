@@ -116,8 +116,8 @@ Here are the options:
 * `v_range`: a list with two items indicating the minimum and maximum values for v (the second argument to the function passed);
 * `u_num`: the number of tiles to be created in the u-direction;
 * `v_num`: the number of tiles to be created in the v-direction;
-* `u_cyclic`: a boolean indicating whether the u-direction is cyclic (wraps around to the beginning again). You're function needs to be periodic in the u-direction for this to look nice;
-* `v_cyclic`: a boolean indicating whether the v-direction is cyclic;
+* `u_cyclic`: a boolean indicating whether the u-direction is cyclic (wraps around to the beginning again). You're function needs to be periodic in the u-direction for this to look nice. **Note: the default for this is `True`, so set it to `False` if you don't want things to be cyclic**
+* `v_cyclic`: a boolean indicating whether the v-direction is cyclic. **Default: `True`**
 * `rot_factor`: this is an integer greater than zero that allows you to rotate the tiles in the UV-domain is such a way that the tiling can still be cyclic.
   
   ![rot_factor](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/rot_factor.png)
@@ -125,3 +125,5 @@ Here are the options:
   The `rot_factor` specifies how many tiles you go across before you go up one unit (essentially the reciprocal of the slope of the grid lines. The image depicts a `rot_factor` of three, which generates 45 tiles (the purple interior and the blue boundary squares, each of which is blasted with the tessellation pattern when the function is applied). Here the meaning of `u_num` and `v_num` are interpreted differently: whereas in the non-rotated case, `u_num = 3` and `v_num = 2` would yeild 6 tiles, here we have 45 tiles. Niether U nor V are cyclic in the picture; had they both been cyclic, 60 tiles whould have been generated. The interior tiles form groups of `(rot_factor)**2` tiles (here each group is 2 x 2, for 24 total interior tiles), and each boundary shares `rot_factor x 1` tiles with it's neighbors (there are 7 such boundaries, so 21 boundary tiles).
   
   It hurt my brain developing this feature, so don't feel bad if it does't make any sense for you. Play around with it, and keep in mind that the number of tiles generated is somewhere between `u_num * v_num * (rot_factor - 1)**2` and `u_num * v_num * (rot_factor**2 + 1)` (depending on which tiles have neighbors, due to periodicity), so you typically want to set `u_num` and `v_num` to be a lot lower than you would in the non-rotated case.
+* `u_twist`: this is used with `v_cyclic` (note that says `v_cyclic` not `u_cyclic`). As the `v` values wrap around, the `u` values reconnect in the opposite direction: the low `u` values connect to the high `u` values, and vice versa. This allows you to make things like Möbius strips and Klein bottles.
+* `v_twist`: works with `u_cyclic`, analogous to how `u_twist` works.
