@@ -130,7 +130,9 @@ Here are the options:
 
 ## Writing your own tessellation classes
 
-All tesselations are found in the `types` module, so check out the source code there for numerous examples. Each tessellation involve two classes: a tile class and a child of class `Tessagon`. The `Tessagon` subclass is easy (it just declares which tile class with be used), so writing the tile class will take most of your time. There are five methods that you will want to write:
+All tesselations are found in the `types` module, so check out the source code there for numerous examples. The source code documentation in `hex_tessagon` is more verbose than the others, which hopefully will aid understanding.
+
+Each tessellation involve two classes: a tile class (a child of `Tile`) and a child of class `Tessagon`. The `Tessagon` subclass is easy (it just declares which tile class with be used), so writing the tile class will take most of your time. There are five methods that you will want to write:
 
 * `__init__`: typically you will want to call the constructor of the super-class. You can declare your tile class to be symmetric in either the u-direction or the v-direction, which will help you greatly if you have structured your vertices and faces well.
 
