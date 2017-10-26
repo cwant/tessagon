@@ -116,6 +116,9 @@ Here are the options:
 * `v_range`: a list with two items indicating the minimum and maximum values for v (the second argument to the function passed);
 * `u_num`: the number of tiles to be created in the u-direction;
 * `v_num`: the number of tiles to be created in the v-direction;
+
+![tiles](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/tiles.png)
+
 * `u_cyclic`: a boolean indicating whether the u-direction is cyclic (wraps around to the beginning again). You're function needs to be periodic in the u-direction for this to look nice. **Note: the default for this is `True`, so set it to `False` if you don't want things to be cyclic**
 * `v_cyclic`: a boolean indicating whether the v-direction is cyclic. **Default: `True`**
 * `rot_factor`: this is an integer greater than zero that allows you to rotate the tiles in the UV-domain is such a way that the tiling can still be cyclic.
