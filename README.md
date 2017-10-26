@@ -119,6 +119,10 @@ Here are the options:
 
 ![tiles](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/tiles.png)
 
+* `corners`: instead of using `u_range` and `v_range`, you can also specify your domain in the uv plain as a quadrilateral by specifying the corners of the region you would like to map. This is a list of four tuples in the following order: bottom-left, bottom-right, top-left, top-right.
+
+![corners](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/corners.png)
+
 * `u_cyclic`: a boolean indicating whether the u-direction is cyclic (wraps around to the beginning again). You're function needs to be periodic in the u-direction for this to look nice. **Note: the default for this is `True`, so set it to `False` if you don't want things to be cyclic**
 * `v_cyclic`: a boolean indicating whether the v-direction is cyclic. **Default: `True`**
 * `rot_factor`: this is an integer greater than zero that allows you to rotate the tiles in the UV-domain is such a way that the tiling can still be cyclic.
