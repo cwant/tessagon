@@ -43,7 +43,9 @@ class Tessagon:
     self.mesh_adaptor.finish_mesh()
 
     if self.post_process:
-      self.post_process()
+      # Run user defined post-processing code
+      # Need to pass self here (this could be designed better)
+      self.post_process(self)
 
     return self.mesh_adaptor.get_mesh()
 
