@@ -128,7 +128,7 @@ class DodecaTile(Tile):
                    [['top'], ['bottom', 'left', 'sq3']],
                    [['top'], ['bottom', 'left', 'sq4']],
                    [['top'], ['bottom', 'left', 'v_square']]],
-                  face_type='hexagon', corner=True)
+                  face_type='dodecagon', corner=True)
     # Middle Dodecagon
     self.add_face(['dodec', 'middle'],
                   [['top', 'left', 'u_square'],
@@ -143,7 +143,7 @@ class DodecaTile(Tile):
                    ['bottom', 'left', 'sq2'],
                    ['bottom', 'left', 'sq1'],
                    ['bottom', 'left', 'u_square']],
-                  face_type='hexagon')
+                  face_type='dodecagon')
     # Upper square
     self.add_face(['square', 'top', 'center'],
                   [['top', 'left', 'v_square'],
@@ -174,7 +174,7 @@ class DodecaTile(Tile):
                    ['top', 'right', 'v_square'],
                    ['top', 'right', 'sq4'],
                    ['top', 'right', 'sq2']],
-                  face_type='hex')
+                  face_type='hexagon')
 
     # Left Hex
     self.add_face(['hex', 'top', 'left'],
@@ -184,7 +184,7 @@ class DodecaTile(Tile):
                    [['left'], ['top', 'right', 'u_square']],
                    [['left'], ['top', 'right', 'sq1']],
                    [['left'], ['top', 'right', 'sq3']]],
-                  face_type='hex', u_boundary=True)
+                  face_type='hexagon', u_boundary=True)
 
 class DodecaTessagon(Tessagon):
   def init_tile_class(self):
