@@ -16,6 +16,10 @@ class TileGenerator(ValueBlend):
     self.v_cyclic = True
     self.u_twist = False
     self.v_twist = False
+    self.u_phase = 0.0
+    self.v_phase = 0.0
+    self.u_shear = 0.0
+    self.v_shear = 0.0
 
     if 'u_num' in kwargs:
       self.u_num = kwargs['u_num']
@@ -23,14 +27,24 @@ class TileGenerator(ValueBlend):
       self.v_num = kwargs['v_num']
     if not self.u_num or not self.v_num:
       raise ValueError("Make sure u_num and v_num intervals are set")
+
     if 'u_cyclic' in kwargs:
       self.u_cyclic = kwargs['u_cyclic']
-    if 'v_cyclic' in kwargs:
-      self.v_cyclic = kwargs['v_cyclic']
-    if 'u_twist' in kwargs:
-      self.u_twist = kwargs['u_twist']
+    if 'u_phase' in kwargs and kwargs['u_phase']:
+      self.u_phase = kwargs['u_phase']
+    if 'u_shear' in kwargs and kwargs['u_shear']:
+      self.u_shear = kwargs['u_shear']
     if 'v_twist' in kwargs:
       self.v_twist = kwargs['v_twist']
+
+    if 'v_cyclic' in kwargs:
+      self.v_cyclic = kwargs['v_cyclic']
+    if 'v_phase' in kwargs and kwargs['v_phase']:
+      self.v_phase = kwargs['v_phase']
+    if 'v_shear' in kwargs and kwargs['v_shear']:
+      self.v_shear = kwargs['v_shear']
+    if 'u_twist' in kwargs:
+      self.u_twist = kwargs['u_twist']
 
     # Note: id_prefix is not used for calculation, just debugging
     self.id_prefix = self.tessagon.__class__.__name__
@@ -43,13 +57,22 @@ class TileGenerator(ValueBlend):
     for u in range(self.u_num):
       u_ratio0 = float(u) / self.u_num
       u_ratio1 = float(u + 1) / self.u_num
+      v_shear0 = u * self.v_shear
+      v_shear1 = (u + 1) * self.v_shear
       for v in range(self.v_num):
         v_ratio0 = float(v) / self.v_num
         v_ratio1 = float(v + 1) / self.v_num
-        extra_args = { 'corners': [self._blend(u_ratio0, v_ratio0),
-                                   self._blend(u_ratio1, v_ratio0),
-                                   self._blend(u_ratio0, v_ratio1),
-                                   self._blend(u_ratio1, v_ratio1)] }
+        u_shear0 = v * self.u_shear
+        u_shear1 = (v + 1) * self.u_shear
+        corners = [self._blend(u_ratio0 + u_shear0 + self.u_phase,
+                               v_ratio0 + v_shear0 + self.v_phase),
+                   self._blend(u_ratio1 + u_shear0 + self.u_phase,
+                               v_ratio0 + v_shear1 + self.v_phase),
+                   self._blend(u_ratio0 + u_shear1 + self.u_phase,
+                               v_ratio1 + v_shear0 + self.v_phase),
+                   self._blend(u_ratio1 + u_shear1 + self.u_phase,
+                               v_ratio1 + v_shear1 + self.v_phase)]
+        extra_args = { 'corners': corners }
         if self.id_prefix:
           extra_args['id'] = "%s[%d][%d]" % (self.id_prefix, u, v)
         tiles[u][v] = tile_class(self.tessagon, **{**kwargs, **extra_args})
