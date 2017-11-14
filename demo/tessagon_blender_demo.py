@@ -61,6 +61,9 @@ def main():
   # WeaveTessagon
   layer12()
 
+  # FloretTessagon
+  layer13()
+
   # Non-cyclic Torus
   layer18()
 
@@ -330,6 +333,25 @@ def layer12():
     'v_cyclic': False
   }
   tessellate("WeavePlane1", plane, WeaveTessagon, **options)
+
+def layer13():
+  options = {
+    'u_range': [0.0, 1.0],
+    'v_range': [0.0, 1.0],
+    'u_num': 5,
+    'v_num': 2,
+  }
+  tessellate("Floret1", torus, FloretTessagon, **options)
+
+  options = {
+    'u_range': [0.0, 1.0],
+    'v_range': [0.0, 1.0],
+    'u_num': 1,
+    'v_num': 2,
+    'u_cyclic': False,
+    'v_cyclic': False
+  }
+  tessellate("FloretPlane1", plane, FloretTessagon, **options)
 
 def wire_to_skin(in_name, out_name, **kwargs):
   input_object = bpy.data.objects[in_name]
