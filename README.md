@@ -165,7 +165,7 @@ https://github.com/cwant/wire_skin
 
 ## 3D Printing on Shapeways
 
-I primarily use Tessagon to create objects for 3D printing (on [Shapeways](https://www.shapeways.com)). I tag my models with the keyword `tessagon`. If you also use Shapeways to print models made with Tessagon, feel free to also use this tag -- I'd be very interested to see what you make!
+I primarily use Tessagon to create objects for 3D printing (on [Shapeways](https://www.shapeways.com)). I tag my models with the keyword `tessagon`. If you also use Shapeways to print models made with Tessagon, feel free to use this tag -- I'd be very interested to see what you make!
 
 https://www.shapeways.com/marketplace?q=tessagon
 
