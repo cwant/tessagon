@@ -2,6 +2,13 @@ from math import sqrt
 from tessagon.core.tessagon import Tessagon
 from tessagon.core.tile import Tile
 
+# To get a sense of how Florets repeat over tiles, see:
+#   https://github.com/cwant/tessagon/blob/master/documentation/images/florets_repeat.png
+# To see how the Florets are arranged on a tile, see:
+#   https://github.com/cwant/tessagon/blob/master/documentation/images/florets_tiles.png
+# To see how Floret neighbors, verts and faces are arranged, see:
+#   https://github.com/cwant/tessagon/blob/master/documentation/images/florets_neighbors_verts_faces.png
+
 class Floret:
   def __init__(self, tile, i, middle_point):
     self.tile = tile
@@ -91,6 +98,7 @@ class Floret:
 class FloretTile(Tile):
   def __init__(self, tessagon, **kwargs):
     super().__init__(tessagon, **kwargs)
+    # See comment at the top of file for arrangement
     self.florets = [None] * 14
 
   def initialize_florets(self):
