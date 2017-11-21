@@ -11,3 +11,4 @@ from tessagon.types.dodeca_tessagon import DodecaTessagon
 from tessagon.types.square_tri_tessagon import SquareTriTessagon
 from tessagon.types.weave_tessagon import WeaveTessagon
 from tessagon.types.floret_tessagon import FloretTessagon
+from tessagon.types.hex_big_tri_tessagon import HexBigTriTessagon
