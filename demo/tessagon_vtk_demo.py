@@ -31,6 +31,7 @@ def main():
   ren.AddActor(weave_tessagon([30, 45, 0]))
   ren.AddActor(floret_tessagon([45, 0, 0]))
   ren.AddActor(hex_big_tri_tessagon([45, 15, 0]))
+  ren.AddActor(zig_zag_tessagon([45, 30, 0]))
 
   ren.SetBackground(0.3, 0.3, 0.3)
   renWin.SetSize(800, 600)
@@ -209,5 +210,16 @@ def hex_big_tri_tessagon(position):
     'position': position
   }
   return tessellate(torus, HexBigTriTessagon, **options)
+
+def zig_zag_tessagon(position):
+  options = {
+    'u_range': [0.0, 1.0],
+    'v_range': [0.0, 1.0],
+    'u_num': 10,
+    'v_num': 2,
+    'rot_factor': 2,
+    'position': position
+  }
+  return tessellate(torus, ZigZagTessagon, **options)
 
 main()
