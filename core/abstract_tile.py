@@ -21,6 +21,10 @@ class AbstractTile(ValueBlend):
     if 'id' in kwargs:
       self.id = kwargs['id']
 
+    # This is an identifier that is set by the generator, some kind of tuple
+    # Really this should be merged with the id thingy above
+    self.fingerprint = kwargs.get('fingerprint') or None
+
     # Corners is list of tuples [bottomleft, bottomright, topleft, topright]
     self.corners = None
     self._init_corners(**kwargs)
@@ -79,6 +83,8 @@ class AbstractTile(ValueBlend):
     print("             (%2.4f, %2.4f)  (%2.4f, %2.4f)" %
           tuple(self.corners[0] + self.corners[1]))
     print("  - twist:", self.twist)
+    if self.fingerprint:
+      print("  - fingerprint:", self.fingerprint)
     print('')
 
   #### Below are protected

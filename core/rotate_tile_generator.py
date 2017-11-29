@@ -63,6 +63,8 @@ class RotTile(AbstractTile):
 
     self.interior_corners = None
 
+    self.u_num = self.tessagon.tile_generator.u_num
+
     # We'll use these constants a lot
     n2_p1 = self.n**2 + 1.0
     self.c1 = 1.0 / n2_p1
@@ -79,15 +81,21 @@ class RotTile(AbstractTile):
                               self._blend(self.c3, self.c4) ]
     if self.n < 2:
       return
+    offset = self.basic_offset(self.fingerprint)
     generator = TileGenerator(self.tessagon,
                               corners=self.interior_corners,
                               u_num=self.n-1, v_num=self.n-1,
                               u_cyclic=False, v_cyclic=False,
-                              id_prefix=self.id + '.interior')
+                              id_prefix=self.id + '.interior',
+                              fingerprint_offset=offset)
 
     self.interior = generator.initialize_tiles(self.tessagon.tile_class)
     generator.initialize_neighbors(self.interior)
     self.tiles += self._flatten_list(self.interior)
+
+  def basic_offset(self, fingerprint):
+    return [fingerprint[0] * self.n + fingerprint[1] + 1,
+            self.u_num - fingerprint[0] + fingerprint[1] * self.n]
 
   def create_tiles(self):
     return self.tiles
@@ -107,11 +115,14 @@ class RotTile(AbstractTile):
                     self._blend(self.c2, self.c1),
                     self._blend(self.c3 - 1.0, self.c4),
                     self._blend(0, 1) ]
+        offset = self.basic_offset(self.fingerprint)
+        offset[0] -= 1
         generator = TileGenerator(self.tessagon,
                                   corners=corners,
                                   u_num=1, v_num=self.n,
                                   u_cyclic=False, v_cyclic=False,
-                                  id_prefix=id_prefix)
+                                  id_prefix=id_prefix,
+                                  fingerprint_offset=offset)
         tiles = generator.initialize_tiles(self.tessagon.tile_class)
         generator.initialize_neighbors(tiles)
 
@@ -127,11 +138,15 @@ class RotTile(AbstractTile):
                     self._blend(1, 0),
                     self._blend(0, 0),
                     self._blend(self.c4, self.c2) ]
+        offset = self.basic_offset(self.fingerprint)
+        offset[0] -= 1
+        offset[1] -= 1
         generator = TileGenerator(self.tessagon,
                                   corners=corners,
                                   u_num=self.n, v_num=1,
                                   u_cyclic=False, v_cyclic=False,
-                                  id_prefix=id_prefix)
+                                  id_prefix=id_prefix,
+                                  fingerprint_offset=offset)
         tiles = generator.initialize_tiles(self.tessagon.tile_class)
         generator.initialize_neighbors(tiles)
 

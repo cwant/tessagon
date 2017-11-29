@@ -50,6 +50,7 @@ class TileGenerator(ValueBlend):
     self.id_prefix = self.tessagon.__class__.__name__
     if 'id_prefix' in kwargs:
       self.id_prefix = kwargs['id_prefix']
+    self.fingerprint_offset = kwargs.get('fingerprint_offset') or None
 
   def initialize_tiles(self, tile_class, **kwargs):
     tiles = [[None for i in range(self.v_num)] for j in range(self.u_num)]
@@ -72,7 +73,12 @@ class TileGenerator(ValueBlend):
                                v_ratio1 + v_shear0 + self.v_phase),
                    self._blend(u_ratio1 + u_shear1 + self.u_phase,
                                v_ratio1 + v_shear1 + self.v_phase)]
-        extra_args = { 'corners': corners }
+        extra_args = { 'corners': corners,
+                       'fingerprint': [u, v] }
+        if self.fingerprint_offset:
+          extra_args['fingerprint'][0] += self.fingerprint_offset[0]
+          extra_args['fingerprint'][1] += self.fingerprint_offset[1]
+
         if self.id_prefix:
           extra_args['id'] = "%s[%d][%d]" % (self.id_prefix, u, v)
         tiles[u][v] = tile_class(self.tessagon, **{**kwargs, **extra_args})
