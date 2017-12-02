@@ -52,6 +52,8 @@ class TileGenerator(ValueBlend):
       self.id_prefix = kwargs['id_prefix']
     self.fingerprint_offset = kwargs.get('fingerprint_offset') or None
 
+    self.color_pattern = kwargs.get('color_pattern') or None
+
   def initialize_tiles(self, tile_class, **kwargs):
     tiles = [[None for i in range(self.v_num)] for j in range(self.u_num)]
 
@@ -81,6 +83,10 @@ class TileGenerator(ValueBlend):
 
         if self.id_prefix:
           extra_args['id'] = "%s[%d][%d]" % (self.id_prefix, u, v)
+
+        if self.color_pattern:
+          extra_args['color_pattern'] = self.color_pattern
+
         tiles[u][v] = tile_class(self.tessagon, **{**kwargs, **extra_args})
     return tiles
 

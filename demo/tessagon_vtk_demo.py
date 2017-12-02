@@ -17,21 +17,27 @@ def main():
   iren = vtk.vtkRenderWindowInteractor()
   iren.SetRenderWindow(renWin)
 
+  # Row 1
   ren.AddActor(hex_tessagon([0, 0, 0]))
-  ren.AddActor(tri_tessagon([0, 15, 0]))
-  ren.AddActor(rhombus_tessagon([0, 30, 0]))
-  ren.AddActor(octo_tessagon([0, 45, 0]))
-  ren.AddActor(hex_tri_tessagon([15, 0, 0]))
-  ren.AddActor(hex_square_tri_tessagon([15, 15, 0]))
-  ren.AddActor(square_tessagon([15, 30, 0]))
-  ren.AddActor(pythagorean_tessagon([15, 45, 0]))
-  ren.AddActor(brick_tessagon([30, 0, 0]))
-  ren.AddActor(dodeca_tessagon([30, 15, 0]))
-  ren.AddActor(square_tri_tessagon([30, 30, 0]))
-  ren.AddActor(weave_tessagon([30, 45, 0]))
-  ren.AddActor(floret_tessagon([45, 0, 0]))
-  ren.AddActor(hex_big_tri_tessagon([45, 15, 0]))
-  ren.AddActor(zig_zag_tessagon([45, 30, 0]))
+  ren.AddActor(tri_tessagon([15, 0, 0]))
+  ren.AddActor(tri_tessagon([15, -15, 0], color_pattern=1))
+  ren.AddActor(tri_tessagon([15, -30, 0], color_pattern=2))
+
+  ren.AddActor(rhombus_tessagon([30, 0, 0]))
+  ren.AddActor(octo_tessagon([45, 0, 0]))
+  ren.AddActor(hex_tri_tessagon([60, 0, 0]))
+  ren.AddActor(hex_square_tri_tessagon([75, 0, 0]))
+  ren.AddActor(square_tessagon([90, 0, 0]))
+  ren.AddActor(pythagorean_tessagon([105, 0, 0]))
+
+  # Row 1
+  ren.AddActor(brick_tessagon([0, -60, 0]))
+  ren.AddActor(dodeca_tessagon([15, -60, 0]))
+  ren.AddActor(square_tri_tessagon([30, -60, 0]))
+  ren.AddActor(weave_tessagon([45, -60, 0]))
+  ren.AddActor(floret_tessagon([60, -60, 0]))
+  ren.AddActor(hex_big_tri_tessagon([75, -60, 0]))
+  ren.AddActor(zig_zag_tessagon([90, -60, 0]))
 
   ren.SetBackground(0.3, 0.3, 0.3)
   renWin.SetSize(800, 600)
@@ -69,15 +75,15 @@ def hex_tessagon(position):
   }
   return tessellate(cylinder, HexTessagon, **options)
 
-def tri_tessagon(position):
+def tri_tessagon(position, **kwargs):
   options = {
     'u_range': [0.0, 1.0],
     'v_range': [0.0, 1.0],
-    'u_num': 35,
+    'u_num': 36,
     'v_num': 12,
     'position': position
   }
-  return tessellate(torus, TriTessagon, **options)
+  return tessellate(torus, TriTessagon, **{**kwargs, **options})
 
 def rhombus_tessagon(position):
   options = {

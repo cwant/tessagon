@@ -28,6 +28,8 @@ class Tessagon:
     else:
       raise ValueError('Must provide a mesh adaptor class')
 
+    self.color_pattern = kwargs.get('color_pattern') or None
+
     self.tiles = None
     self.face_types = {}
     self.vert_types = {}
@@ -39,6 +41,9 @@ class Tessagon:
 
     self._calculate_verts()
     self._calculate_faces()
+
+    if self.color_pattern:
+      self._calculate_colors()
 
     self.mesh_adaptor.finish_mesh()
 
@@ -66,4 +71,9 @@ class Tessagon:
   def _calculate_faces(self):
     for tile in self.tiles:
       tile.calculate_faces()
+
+  def _calculate_colors(self):
+    self.mesh_adaptor.initialize_colors()
+    for tile in self.tiles:
+      tile.calculate_colors()
 

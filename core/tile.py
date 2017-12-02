@@ -8,6 +8,7 @@ class Tile(AbstractTile):
 
     self.verts = self.init_verts()
     self.faces = self.init_faces()
+    self.color_pattern = kwargs.get('color_pattern') or None
 
   def add_vert(self, index_keys, ratio_u, ratio_v, **kwargs):
     # Use the mesh adaptor to create a vertex.
@@ -70,6 +71,11 @@ class Tile(AbstractTile):
     self._set_equivalent_neighbor_faces(index_keys, face, **kwargs)
 
     return face
+
+  def color_face(self, index_keys, color_index):
+    face = self._get_face(index_keys)
+    if not face: return
+    self.mesh_adaptor.color_face(face, color_index)
 
   def set_equivalent_face(self, neighbor_keys, index_keys, face, **kwargs):
     # On boundary, the face on a neighbor is equivalent to this face
@@ -215,3 +221,6 @@ class Tile(AbstractTile):
     u_flip_keys = self._u_flip(index_keys)
     uv_flip_keys = self._v_flip(u_flip_keys)
     self.set_equivalent_face([u_index, v_index], uv_flip_keys, face, **kwargs)
+
+  def calculate_colors(self):
+    pass

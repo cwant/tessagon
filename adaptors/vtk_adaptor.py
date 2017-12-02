@@ -7,6 +7,7 @@ class VtkAdaptor:
     self.points = None
     self.polys = None
     self.poly_data = None
+    self.scalars = None
 
   def create_empty_mesh(self):
     self.pcoords = vtk.vtkFloatArray()
@@ -14,6 +15,11 @@ class VtkAdaptor:
     self.points = vtk.vtkPoints()
     self.polys = vtk.vtkCellArray()
     self.poly_data = vtk.vtkPolyData()
+
+  def initialize_colors(self):
+    self.scalars = vtk.vtkFloatArray()
+    self.scalars.SetNumberOfComponents(1)
+    self.scalars.SetNumberOfTuples(self.face_count)
 
   def create_vert(self, coords):
     self.pcoords.InsertNextTuple3(*coords)
@@ -27,10 +33,16 @@ class VtkAdaptor:
     self.face_count += 1
     return index
 
+  def color_face(self, face, color_index):
+    self.scalars.SetTuple1(face, color_index)
+
   def finish_mesh(self):
     self.points.SetData(self.pcoords)
     self.poly_data.SetPoints(self.points)
     self.poly_data.SetPolys(self.polys)
+    if self.scalars:
+      self.poly_data.GetCellData().SetScalars(self.scalars)
 
   def get_mesh(self):
     return self.poly_data
+
