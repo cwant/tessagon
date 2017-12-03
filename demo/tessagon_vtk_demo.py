@@ -17,27 +17,30 @@ def main():
   iren = vtk.vtkRenderWindowInteractor()
   iren.SetRenderWindow(renWin)
 
+  offset = 15
   # Row 1
-  ren.AddActor(hex_tessagon([0, 0, 0]))
-  ren.AddActor(tri_tessagon([15, 0, 0]))
-  ren.AddActor(tri_tessagon([15, -15, 0], color_pattern=1))
-  ren.AddActor(tri_tessagon([15, -30, 0], color_pattern=2))
+  row1 = 0
+  ren.AddActor(hex_tessagon([0, row1, 0]))
+  ren.AddActor(tri_tessagon([offset, row1, 0]))
+  ren.AddActor(tri_tessagon([offset, row1 - offset, 0], color_pattern=1))
+  ren.AddActor(tri_tessagon([offset, row1 - 2*offset, 0], color_pattern=2))
+  ren.AddActor(tri_tessagon([offset, row1 - 3*offset, 0], color_pattern=3))
+  ren.AddActor(rhombus_tessagon([2*offset, row1, 0]))
+  ren.AddActor(octo_tessagon([3*offset, row1, 0]))
+  ren.AddActor(hex_tri_tessagon([4*offset, row1, 0]))
+  ren.AddActor(hex_square_tri_tessagon([5*offset, row1, 0]))
+  ren.AddActor(square_tessagon([6*offset, row1, 0]))
+  ren.AddActor(pythagorean_tessagon([7*offset, row1, 0]))
 
-  ren.AddActor(rhombus_tessagon([30, 0, 0]))
-  ren.AddActor(octo_tessagon([45, 0, 0]))
-  ren.AddActor(hex_tri_tessagon([60, 0, 0]))
-  ren.AddActor(hex_square_tri_tessagon([75, 0, 0]))
-  ren.AddActor(square_tessagon([90, 0, 0]))
-  ren.AddActor(pythagorean_tessagon([105, 0, 0]))
-
-  # Row 1
-  ren.AddActor(brick_tessagon([0, -60, 0]))
-  ren.AddActor(dodeca_tessagon([15, -60, 0]))
-  ren.AddActor(square_tri_tessagon([30, -60, 0]))
-  ren.AddActor(weave_tessagon([45, -60, 0]))
-  ren.AddActor(floret_tessagon([60, -60, 0]))
-  ren.AddActor(hex_big_tri_tessagon([75, -60, 0]))
-  ren.AddActor(zig_zag_tessagon([90, -60, 0]))
+  # Row 2
+  row2 = -4 * offset
+  ren.AddActor(brick_tessagon([0, row2, 0]))
+  ren.AddActor(dodeca_tessagon([offset, row2, 0]))
+  ren.AddActor(square_tri_tessagon([2*offset, row2, 0]))
+  ren.AddActor(weave_tessagon([3*offset, row2, 0]))
+  ren.AddActor(floret_tessagon([4*offset, row2, 0]))
+  ren.AddActor(hex_big_tri_tessagon([5*offset, row2, 0]))
+  ren.AddActor(zig_zag_tessagon([6*offset, row2, 0]))
 
   ren.SetBackground(0.3, 0.3, 0.3)
   renWin.SetSize(800, 600)
