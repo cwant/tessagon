@@ -118,13 +118,6 @@ class TriTile(Tile):
       self.color_paths([['left', 'middle'],
                         ['right', 'top']], 1, 0)
 
-  def color_paths(self, paths, color, color_other):
-    for path in [[x, y] for x in self.faces for y in self.faces[x] ]:
-      if path in paths:
-        self.color_face(path, color)
-      else:
-        self.color_face(path, color_other)
-
   def color_0_0(self):
     self.color_paths([], 0, 1)
 

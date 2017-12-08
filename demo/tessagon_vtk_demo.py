@@ -21,6 +21,8 @@ def main():
   # Row 1
   row1 = 0
   ren.AddActor(hex_tessagon([0, row1, 0]))
+  ren.AddActor(hex_tessagon([0, row1 - offset, 0], color_pattern=1))
+  ren.AddActor(hex_tessagon([0, row1 - 2*offset, 0], color_pattern=2))
   ren.AddActor(tri_tessagon([offset, row1, 0]))
   ren.AddActor(tri_tessagon([offset, row1 - offset, 0], color_pattern=1))
   ren.AddActor(tri_tessagon([offset, row1 - 2*offset, 0], color_pattern=2))
@@ -57,6 +59,15 @@ def tessellate(f, tessagon_class, **kwargs):
   poly_data = tessagon.create_mesh()
   mapper = vtk.vtkPolyDataMapper()
   mapper.SetInputData(poly_data)
+  lut = vtk.vtkLookupTable()
+  lut.SetHueRange(0.6, 0.6)
+  lut.SetSaturationRange(.5, .5)
+  lut.SetValueRange(0.2, 1.0)
+  lut.SetNumberOfColors(256)
+  lut.Build()
+  mapper.SetLookupTable(lut)
+  mapper.SetScalarRange(poly_data.GetScalarRange())
+
   actor = vtk.vtkActor()
   actor.SetMapper(mapper)
   actor.GetProperty().SetColor(tomato)
@@ -66,7 +77,11 @@ def tessellate(f, tessagon_class, **kwargs):
 
   return actor
 
-def hex_tessagon(position):
+def hex_tessagon(position, **kwargs):
+  def rotated_cylinder(u,v):
+    (x, y, z) = cylinder(u, v)
+    return [x, z, y]
+
   options = {
     'u_range': [0.0, 1.0],
     'v_range': [0.0, 1.0],
@@ -76,7 +91,7 @@ def hex_tessagon(position):
     'v_cyclic': False,
     'position': position
   }
-  return tessellate(cylinder, HexTessagon, **options)
+  return tessellate(rotated_cylinder, HexTessagon, **{**kwargs, **options})
 
 def tri_tessagon(position, **kwargs):
   options = {

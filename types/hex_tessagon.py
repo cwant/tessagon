@@ -88,6 +88,37 @@ class HexTile(Tile):
                   # neighboring tiles.
                   corner=True)
 
+  def calculate_colors(self):
+    if self.color_pattern == 1:
+      self.color_pattern1()
+    elif self.color_pattern == 2:
+      self.color_pattern2()
+
+  def color_pattern1(self):
+    if self.fingerprint[0] % 3 == 0:
+      self.color_paths([['top', 'left'],
+                        ['bottom', 'left']], 1, 0)
+    elif self.fingerprint[0] % 3 == 1:
+      self.color_paths([['middle']], 1, 0)
+    else:
+      self.color_paths([['top', 'right'],
+                        ['bottom', 'right']], 1, 0)
+
+  def color_pattern2(self):
+    if self.fingerprint[0] % 3 == 0:
+      self.color_paths_hash({1: [['top', 'left'],
+                                 ['bottom', 'left']],
+                             2: [['top', 'right'],
+                                 ['bottom', 'right']]}, 0)
+    elif self.fingerprint[0] % 3 == 1:
+      self.color_paths_hash({ 1: [['middle']],
+                              2: [['top', 'left'],
+                                  ['bottom', 'left']]}, 0)
+    else:
+      self.color_paths_hash({ 2: [['middle']],
+                              1: [['top', 'right'],
+                                  ['bottom', 'right']]}, 0)
+
 class HexTessagon(Tessagon):
   def init_tile_class(self):
     return HexTile

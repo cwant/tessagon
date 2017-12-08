@@ -9,6 +9,8 @@ class Tile(AbstractTile):
     self.verts = self.init_verts()
     self.faces = self.init_faces()
     self.color_pattern = kwargs.get('color_pattern') or None
+    if self.faces and self.color_pattern:
+      self.face_paths = self.all_face_paths()
 
   def add_vert(self, index_keys, ratio_u, ratio_v, **kwargs):
     # Use the mesh adaptor to create a vertex.
@@ -85,6 +87,37 @@ class Tile(AbstractTile):
     if not tile:
       return None
     tile._set_face(self._index_path(index_keys, neighbor_keys), face)
+
+  def all_face_paths(self, faces = None, base_path = None):
+    if not faces: faces = self.faces
+    if not base_path: base_path = []
+
+    paths = []
+    for index in faces:
+      new_base_path = base_path + [index]
+      if type(faces[index]) is dict:
+        paths += self.all_face_paths(faces[index], new_base_path)
+      else:
+        paths.append(new_base_path)
+    return paths
+
+  def color_paths(self, paths, color, color_other=None):
+    for path in self.face_paths:
+      if path in paths:
+        self.color_face(path, color)
+      elif color_other:
+        self.color_face(path, color_other)
+
+  def color_paths_hash(self, hash, color_other=None):
+    for path in self.face_paths:
+      for color in hash:
+        done = False
+        if path in hash[color]:
+          self.color_face(path, color)
+          done = True
+          break
+      if color_other and not done:
+        self.color_face(path, color_other)
 
   ### Below are protected
 
