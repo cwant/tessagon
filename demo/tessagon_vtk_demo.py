@@ -43,6 +43,11 @@ def main():
   ren.AddActor(floret_tessagon([4*offset, row2, 0]))
   ren.AddActor(hex_big_tri_tessagon([5*offset, row2, 0]))
   ren.AddActor(zig_zag_tessagon([6*offset, row2, 0]))
+  ren.AddActor(dissected_square_tessagon([7*offset, row2, 0]))
+  ren.AddActor(dissected_square_tessagon([7*offset, row2 - offset, 0],
+                                         color_pattern=1))
+  ren.AddActor(dissected_square_tessagon([7*offset, row2 - 2*offset, 0],
+                                         color_pattern=2))
 
   ren.SetBackground(0.3, 0.3, 0.3)
   renWin.SetSize(800, 600)
@@ -77,10 +82,11 @@ def tessellate(f, tessagon_class, **kwargs):
 
   return actor
 
+def rotated_cylinder(u,v):
+  (x, y, z) = cylinder(u, v)
+  return [x, z, y]
+
 def hex_tessagon(position, **kwargs):
-  def rotated_cylinder(u,v):
-    (x, y, z) = cylinder(u, v)
-    return [x, z, y]
 
   options = {
     'u_range': [0.0, 1.0],
@@ -246,4 +252,16 @@ def zig_zag_tessagon(position):
   }
   return tessellate(torus, ZigZagTessagon, **options)
 
+def dissected_square_tessagon(position, **kwargs):
+  options = {
+    'u_range': [0.0, 1.0],
+    'v_range': [0.0, 1.0],
+    'u_num': 32,
+    'v_num': 4,
+    'u_cyclic': True,
+    'v_cyclic': False,
+    'position': position
+  }
+  return tessellate(rotated_cylinder, DissectedSquareTessagon,
+                    **{**kwargs, **options})
 main()

@@ -8,6 +8,7 @@ class RotateTileGenerator(TileGenerator):
     super().__init__(tessagon, **kwargs)
 
     self.rot_factor = kwargs['rot_factor']
+    self.color_pattern = kwargs.get('color_pattern') or None
 
     # Rot tiles are not tiles, they are a collection of tiles.
     # They generate interior tiles ((rot_factor - 1)^2 of them) and
@@ -22,7 +23,8 @@ class RotateTileGenerator(TileGenerator):
 
   def create_tiles(self):
     self.rot_tiles = self.initialize_tiles(RotTile,
-                                           rot_factor=self.rot_factor)
+                                           rot_factor=self.rot_factor,
+                                           color_pattern=self.color_pattern)
     self.initialize_neighbors(self.rot_tiles)
     self.initialize_interiors()
     self.initialize_boundaries()
@@ -62,6 +64,7 @@ class RotTile(AbstractTile):
                       'bottom': None }
 
     self.interior_corners = None
+    self.color_pattern = kwargs.get('color_pattern') or None
 
     self.u_num = self.tessagon.tile_generator.u_num
 
@@ -87,6 +90,7 @@ class RotTile(AbstractTile):
                               u_num=self.n-1, v_num=self.n-1,
                               u_cyclic=False, v_cyclic=False,
                               id_prefix=self.id + '.interior',
+                              color_pattern=self.color_pattern,
                               fingerprint_offset=offset)
 
     self.interior = generator.initialize_tiles(self.tessagon.tile_class)
@@ -122,6 +126,7 @@ class RotTile(AbstractTile):
                                   u_num=1, v_num=self.n,
                                   u_cyclic=False, v_cyclic=False,
                                   id_prefix=id_prefix,
+                                  color_pattern=self.color_pattern,
                                   fingerprint_offset=offset)
         tiles = generator.initialize_tiles(self.tessagon.tile_class)
         generator.initialize_neighbors(tiles)
@@ -146,6 +151,7 @@ class RotTile(AbstractTile):
                                   u_num=self.n, v_num=1,
                                   u_cyclic=False, v_cyclic=False,
                                   id_prefix=id_prefix,
+                                  color_pattern=self.color_pattern,
                                   fingerprint_offset=offset)
         tiles = generator.initialize_tiles(self.tessagon.tile_class)
         generator.initialize_neighbors(tiles)
