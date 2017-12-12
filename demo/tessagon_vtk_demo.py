@@ -41,6 +41,10 @@ def main():
   ren.AddActor(square_tri_tessagon([2*offset, row2, 0]))
   ren.AddActor(weave_tessagon([3*offset, row2, 0]))
   ren.AddActor(floret_tessagon([4*offset, row2, 0]))
+  ren.AddActor(floret_tessagon([4*offset, row2 - offset, 0],
+                               color_pattern=1))
+  ren.AddActor(floret_tessagon([4*offset, row2 - 2*offset, 0],
+                               color_pattern=2))
   ren.AddActor(hex_big_tri_tessagon([5*offset, row2, 0]))
   ren.AddActor(zig_zag_tessagon([6*offset, row2, 0]))
   ren.AddActor(dissected_square_tessagon([7*offset, row2, 0]))
@@ -221,15 +225,15 @@ def weave_tessagon(position):
   }
   return tessellate(sphere, WeaveTessagon, **options)
 
-def floret_tessagon(position):
+def floret_tessagon(position, **kwargs):
   options = {
     'u_range': [0.0, 1.0],
     'v_range': [0.0, 1.0],
-    'u_num': 5,
-    'v_num': 2,
+    'u_num': 8,
+    'v_num': 3,
     'position': position
   }
-  return tessellate(torus, FloretTessagon, **options)
+  return tessellate(torus, FloretTessagon, **{**kwargs, **options})
 
 def hex_big_tri_tessagon(position):
   options = {

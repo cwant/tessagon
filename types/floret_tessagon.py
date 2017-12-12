@@ -80,6 +80,27 @@ class FloretTile(Stamp14Tile):
   def __init__(self, tessagon, **kwargs):
     super().__init__(tessagon, Floret, **kwargs)
 
+  def calculate_colors(self):
+    if self.color_pattern == 1:
+      self.color_pattern1()
+    elif self.color_pattern == 2:
+      self.color_pattern2()
+
+  def color_pattern1(self):
+    for i in range(14):
+      if (i - self.fingerprint[1]) % 3 == 0:
+        for face in self.stamps[i].faces:
+          self.mesh_adaptor.color_face(face, 1)
+      else:
+        for face in self.stamps[i].faces:
+          self.mesh_adaptor.color_face(face, 0)
+
+  def color_pattern2(self):
+    for i in range(14):
+      color = (i - self.fingerprint[1]) % 3
+      for face in self.stamps[i].faces:
+        self.mesh_adaptor.color_face(face, color)
+
 class FloretTessagon(Stamp14Tessagon):
   def __init__(self, **kwargs):
     super().__init__(**kwargs)
