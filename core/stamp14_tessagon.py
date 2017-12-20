@@ -29,6 +29,10 @@ class Stamp14:
     vert = self.verts[i] = self.offset_vert(offset_u, offset_v)
     return vert
 
+  def color_stamp(self, color):
+    for face in self.faces:
+      self.tile.mesh_adaptor.color_face(face, color)
+
 class Stamp14Tile(Tile):
   def __init__(self, tessagon, stamp_class, **kwargs):
     super().__init__(tessagon, **kwargs)

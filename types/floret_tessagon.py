@@ -85,21 +85,33 @@ class FloretTile(Stamp14Tile):
       self.color_pattern1()
     elif self.color_pattern == 2:
       self.color_pattern2()
+    elif self.color_pattern == 3:
+      self.color_pattern3()
 
   def color_pattern1(self):
     for i in range(14):
       if (i - self.fingerprint[1]) % 3 == 0:
-        for face in self.stamps[i].faces:
-          self.mesh_adaptor.color_face(face, 1)
+        self.stamps[i].color_stamp(1)
       else:
-        for face in self.stamps[i].faces:
-          self.mesh_adaptor.color_face(face, 0)
+        self.stamps[i].color_stamp(0)
 
   def color_pattern2(self):
     for i in range(14):
       color = (i - self.fingerprint[1]) % 3
-      for face in self.stamps[i].faces:
-        self.mesh_adaptor.color_face(face, color)
+      self.stamps[i].color_stamp(color)
+
+  def set_default_color(self, color):
+    for i in range(14):
+      self.stamps[i].color_stamp(color)
+
+  def color_pattern3(self):
+    for i in range(14):
+      if ((i // 5) + self.fingerprint[0] + self.fingerprint[1]) % 2 > 0:
+        continue
+      if (i + 2 * self.fingerprint[1]) % 6 > 0: continue
+      self.stamps[i].color_stamp(1)
+      for stamp in self.stamps[i].neighbors:
+        stamp.color_stamp(2)
 
 class FloretTessagon(Stamp14Tessagon):
   def __init__(self, **kwargs):
@@ -108,3 +120,11 @@ class FloretTessagon(Stamp14Tessagon):
 
   def init_tile_class(self):
     return FloretTile
+
+  def _calculate_colors(self):
+    self.mesh_adaptor.initialize_colors()
+    if self.color_pattern == 3:
+      for tile in self.tiles:
+        tile.set_default_color(0)
+    for tile in self.tiles:
+      tile.calculate_colors()
