@@ -90,6 +90,7 @@ class FloretTile(Stamp14Tile):
 
   def color_pattern1(self):
     for i in range(14):
+      if not self.stamps[i]: continue
       if (i - self.fingerprint[1]) % 3 == 0:
         self.stamps[i].color_stamp(1)
       else:
@@ -97,11 +98,13 @@ class FloretTile(Stamp14Tile):
 
   def color_pattern2(self):
     for i in range(14):
+      if not self.stamps[i]: continue
       color = (i - self.fingerprint[1]) % 3
       self.stamps[i].color_stamp(color)
 
   def set_default_color(self, color):
     for i in range(14):
+      if not self.stamps[i]: continue
       self.stamps[i].color_stamp(color)
 
   def color_pattern3(self):
