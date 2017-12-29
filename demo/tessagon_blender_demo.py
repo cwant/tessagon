@@ -1,12 +1,20 @@
+### Don't run me directly!
+### Load the file demo/tessagon_demo.blend into blender, it will run me
+
 import bpy
 from importlib import reload
 import tessagon
 reload(tessagon)
 
-from tessagon.adaptors.blender_adaptor import BlenderAdaptor
 from tessagon.types import *
-
 from tessagon.misc.shapes import *
+
+import tessagon_common_demo
+reload(tessagon_common_demo)
+from tessagon_common_demo import TessagonCommonDemo
+
+from tessagon.adaptors.blender_adaptor import BlenderAdaptor
+from tessagon_common_demo import TessagonCommonDemo
 
 # Optional, for the wire_skin demos
 # https://github.com/cwant/wire_skin
@@ -19,403 +27,148 @@ try:
 except:
   print('Could not load wire_skin, some demoes skipped')
 
-def main2():
-  layer12()
-
 def main():
-  # A bunch of layers have demos
+  BlenderDemo().main()
 
-  # Hexagon Torii
-  layer1()
-  
-  # Triangle Torii
-  layer2()
-  
-  # RhombusTessagon
-  layer3()
+class BlenderDemo(TessagonCommonDemo):
+  def main(self):
+    self.create_materials()
+    self.create_objects()
+    self.update_view()
 
-  # OctoTessagon
-  layer4()
+  def update_view(self):
+    for area in bpy.context.screen.areas:
+      if area.type == 'VIEW_3D':
+        for region in area.regions:
+          if region.type == 'WINDOW':
+            override = {'area': area, 'region': region}
+            bpy.ops.view3d.viewnumpad(override, type='TOP')
+            bpy.ops.view3d.view_all(override)
+            break
 
-  # HexTriTessagon
-  layer5()
+  def material_name(self, value, num_values):
+    return 'Color-{}-of-{}'.format(value + 1, num_values)
 
-  # HexSquareTriTessagon
-  layer6()
+  def diffuse_color(self, value, num_values):
+    shade = (num_values - 1 - value) / (num_values - 1)
+    return ([shade] * 3)
 
-  # SquareTessagon
-  layer7()
+  def create_materials(self):
+    # Create palletes based on how many different colors the object has
+    for num_values in [2, 3, 4]:
+      for value in range(num_values):
+        name = self.material_name(value, num_values)
+        if name in bpy.data.materials: continue
+        material = bpy.data.materials.new(name=name)
+        material.diffuse_color = self.diffuse_color(value, num_values)
 
-  # PythagoreanTessagon
-  layer8()
+  def create_objects(self):
+    super().create_objects()
 
-  # BrickTessagon
-  layer9()
+    if is_wire_skin_loaded:
+      # WireSkin demo
+      self.wire_skin_demo()
 
-  # DodecaTessagon
-  layer10()
+  def new_or_create_object(self, name):
+    if name in bpy.data.objects:
+      object = bpy.data.objects[name]
+    else:
+      me = bpy.data.meshes.new(name)
+      object = bpy.data.objects.new(name, me)
+      scn = bpy.context.scene
+      scn.objects.link(object)
+    return object
+    
+  def tessellate(self, f, tessagon_class, **kwargs):
+    out_name = kwargs.get('object_name')
+    if not out_name:
+      out_name = tessagon_class.__name__
+      color_pattern = kwargs.get('color_pattern') or None
+      if color_pattern != None: out_name += str(color_pattern)
 
-  # SquareTriTessagon
-  layer11()
+    output_object = self.new_or_create_object(out_name)
+    me = output_object.data
 
-  # WeaveTessagon
-  layer12()
+    me.materials.clear()
 
-  # FloretTessagon
-  layer13()
+    extra_args = {'function': f,
+                  'adaptor_class' : BlenderAdaptor}
+    tessagon = tessagon_class(**{**kwargs, **extra_args})
 
-  # Non-cyclic Torus
-  layer18()
+    bm = tessagon.create_mesh()
 
-  # Mobius Tessagon
-  layer19()
+    # To debug:
+    #tessagon.inspect()
 
-  if is_wire_skin_loaded:
-    # WireSkin demo, hexagons
-    layer20()
+    num_colors = len(set([face.material_index for face in bm.faces]))
+    bm.to_mesh(me)
+    output_object.data = me
+    output_object.show_wire = True
+    output_object.show_all_edges = True
 
-def tessellate(out_name, f, tessagon_class, **kwargs):
-  output_object = bpy.data.objects[out_name]
-  me = output_object.data
-  output_materials = me.materials
+    if num_colors > 1:
+      for value in range(num_colors):
+        name = self.material_name(value, num_colors)
+        material = bpy.data.materials[name]
+        me.materials.append(material)
 
-  extra_args = {'function': f,
-                'adaptor_class' : BlenderAdaptor}
-  tessagon = tessagon_class(**{**kwargs, **extra_args})
+    scale = kwargs.get('scale') or None
+    if scale != None:
+      output_object.scale = [scale]*3
+    location = kwargs.get('position') or None
+    if location != None:
+      output_object.location = location
+    layer = kwargs.get('layer') or None
+    if layer != None:
+      layers = [False] * 20
+      # Input layer is 1-based, but array is 0-based
+      layers[layer-1] = True
+      output_object.layers = layers
 
-  bm = tessagon.create_mesh()
+    me.update()
+    return output_object
 
-  # To debug:
-  #tessagon.inspect()
+  def wire_skin_demo(self):
+    position = [-30, 0, 0]
+    options = {
+      'u_range': [0.0, 1.0],
+      'v_range': [0.0, 1.0],
+      'u_num': 8,
+      'v_num': 20,
+      'object_name': 'HexTorusIn',
+      'position': position
+    }
+    ob = self.tessellate(other_torus, HexTessagon, **options)
+    name = self.material_name(1, 2)
+    material = bpy.data.materials[name]
+    ob.data.materials.append(material)
 
-  bm.to_mesh(me)
-  output_object.data = me
-  me.update()
-  
-def layer1():
-  options = {
-    'u_range': [0.0, 1.0],
-    'v_range': [0.0, 1.0],
-    'u_num': 45,
-    'v_num': 3,
-    'u_cyclic': True,
-    'v_cyclic': False,
-  }
-  tessellate("Hex1", cylinder, HexTessagon, **options)
+    options = {
+      'width': 0.1,
+      'height': 0.4,
+      'inside_radius': 0.1,
+      'outside_radius': 0.2,
+      'dist': 0.1,
+      'crease': 1.0,
+      'position': position
+    }
+    ob = self.wire_to_skin("HexTorusIn", "WireTorusOut", **options)
+    name = self.material_name(0, 2)
+    material = bpy.data.materials[name]
+    ob.data.materials.append(material)
 
-  options = {
-    'u_range': [0.0, 1.0],
-    'v_range': [0.0, 1.0],
-    'u_num': 3,
-    'v_num': 2,
-    'u_cyclic': False,
-    'v_cyclic': False
-  }
-  tessellate("HexPlane1", plane, HexTessagon, **options)
+  def wire_to_skin(self, in_name, out_name, **kwargs):
+    input_object = bpy.data.objects[in_name]
+    output_object = self.new_or_create_object(out_name)
 
-def layer2():
-  options = {
-    'u_range': [0.0, 1.0],
-    'v_range': [0.0, 1.0],
-    'u_num': 35,
-    'v_num': 12
-  }
-  tessellate("Tri1", torus, TriTessagon, **options)
+    wire_skin = WireSkin(input_object.data, **kwargs)
 
-  options = {
-    'u_range': [0.0, 1.0],
-    'v_range': [0.0, 1.0],
-    'u_num': 2,
-    'v_num': 4,
-    'u_cyclic': False,
-    'v_cyclic': False
-  }
-  tessellate("TriPlane1", plane, TriTessagon, **options)
+    me = wire_skin.create_mesh()
+    me.materials.clear()
 
-def layer3():
-  options = {
-    'u_range': [0.0, 1.0],
-    'v_range': [0.0, 1.0],
-    'u_num': 40,
-    'v_num': 6,
-    'v_twist': True
-  }
-  tessellate("Rhombus1", klein, RhombusTessagon, **options)
+    output_object.data = me
+    location = kwargs.get('position') or None
+    if location != None:
+      output_object.location = location
 
-  options = {
-    'u_range': [0.0, 1.0],
-    'v_range': [0.0, 1.0],
-    'u_num': 3,
-    'v_num': 2,
-    'u_cyclic': False,
-    'v_cyclic': False
-  }
-  tessellate("RhombusPlane1", plane, RhombusTessagon, **options)
-
-def layer4():
-  options = {
-    'u_range': [0.0, 1.0],
-    'v_range': [0.0, 1.0],
-    'u_num': 4,
-    'v_num': 40,
-    'v_cyclic': True,
-    'u_cyclic': False,
-    'u_twist': True
-  }
-  tessellate("Octo1", mobius, OctoTessagon, **options)
-
-  options = {
-    'u_range': [0.0, 1.0],
-    'v_range': [0.0, 1.0],
-    'u_num': 3,
-    'v_num': 3,
-    'u_cyclic': False,
-    'v_cyclic': False
-  }
-  tessellate("OctoPlane1", plane, OctoTessagon, **options)
-
-def layer5():
-  options = {
-    'u_range': [-1.0, 1.0],
-    'v_range': [-1.0, 1.0],
-    'u_num': 15,
-    'v_num': 10,
-    'u_cyclic': False,
-    'v_cyclic': False
-  }
-  tessellate("HexTri1", paraboloid, HexTriTessagon, **options)
-
-  options = {
-    'u_range': [0.0, 1.0],
-    'v_range': [0.0, 1.0],
-    'u_num': 3,
-    'v_num': 2,
-    'u_cyclic': False,
-    'v_cyclic': False
-  }
-  tessellate("HexTriPlane1", plane, HexTriTessagon, **options)
-
-def layer6():
-  options = {
-    'u_range': [0.0, 1.0],
-    'v_range': [0.0, 1.0],
-    'u_num': 45,
-    'v_num': 5
-  }
-  tessellate("HexSquareTriTorus1", torus, HexSquareTriTessagon, **options)
-
-  options = {
-    'u_range': [0.0, 1.0],
-    'v_range': [0.0, 1.0],
-    'u_num': 3,
-    'v_num': 2,
-    'u_cyclic': False,
-    'v_cyclic': False
-  }
-  tessellate("HexSquareTriPlane1", plane, HexSquareTriTessagon, **options)
-
-def layer7():
-  options = {
-    'u_range': [0.0, 1.0],
-    'v_range': [0.0, 1.0],
-    'u_num': 15,
-    'v_num': 4,
-    'rot_factor': 2
-  }
-  tessellate("SquareTorus1", torus, SquareTessagon, **options)
-
-  options = {
-    'u_range': [0.0, 1.0],
-    'v_range': [0.0, 1.0],
-    'u_num': 2,
-    'v_num': 2,
-    'u_cyclic': False,
-    'v_cyclic': False
-  }
-  tessellate("SquarePlane1", plane, SquareTessagon, **options)
-
-def layer8():
-  options = {
-    'u_range': [0.0, 1.0],
-    'v_range': [0.0, 1.0],
-    'u_num': 25,
-    'v_num': 6
-  }
-  tessellate("PythagoreanTorus1", torus, PythagoreanTessagon, **options)
-
-  options = {
-    'u_range': [0.0, 1.0],
-    'v_range': [0.0, 1.0],
-    'u_num': 2,
-    'v_num': 2,
-    'u_cyclic': False,
-    'v_cyclic': False
-  }
-  tessellate("PythagoreanPlane1", plane, PythagoreanTessagon, **options)
-
-def layer9():
-  options = {
-    'u_range': [0.0, 1.0],
-    'v_range': [0.0, 1.0],
-    'u_num': 15,
-    'v_num': 3,
-    'rot_factor': 3
-  }
-  tessellate("BrickTorus1", torus, BrickTessagon, **options)
-
-  options = {
-    'u_range': [0.0, 1.0],
-    'v_range': [0.0, 1.0],
-    'u_num': 4,
-    'v_num': 4,
-    'u_cyclic': False,
-    'v_cyclic': False
-  }
-  tessellate("BrickPlane1", plane, BrickTessagon, **options)
-
-def layer10():
-  options = {
-    'u_range': [-1.0, 1.0],
-    'v_range': [0.0, 1.0],
-    'u_num': 4,
-    'v_num': 10,
-    'u_cyclic': False,
-    'v_cyclic': True
-  }
-  tessellate("Dodeca1", one_sheet_hyperboloid, DodecaTessagon, **options)
-
-  options = {
-    'u_range': [0.0, 1.0],
-    'v_range': [0.0, 1.0],
-    'u_num': 3,
-    'v_num': 2,
-    'u_cyclic': False,
-    'v_cyclic': False
-  }
-  tessellate("DodecaPlane1", plane, DodecaTessagon, **options)
-
-def layer11():
-  options = {
-    'u_range': [0.0, 1.0],
-    'v_range': [0.0, 1.0],
-    'u_num': 20,
-    'v_num': 4,
-  }
-  tessellate("SquareTriTorus1", torus, SquareTriTessagon, **options)
-
-  options = {
-    'u_range': [0.0, 1.0],
-    'v_range': [0.0, 1.0],
-    'u_num': 2,
-    'v_num': 2,
-    'u_cyclic': False,
-    'v_cyclic': False
-  }
-  tessellate("SquareTriPlane1", plane, SquareTriTessagon, **options)
-
-def layer12():
-  options = {
-    'u_range': [0.0, 1.0],
-    'v_range': [0.0, 1.0],
-    'u_num': 8,
-    'v_num': 6,
-    'v_cyclic': False,
-    'rot_factor': 1
-  }
-  tessellate("WeaveSphere1", sphere, WeaveTessagon, **options)
-
-  options = {
-    'u_range': [0.0, 1.0],
-    'v_range': [0.0, 1.0],
-    'u_num': 2,
-    'v_num': 2,
-    'u_cyclic': False,
-    'v_cyclic': False
-  }
-  tessellate("WeavePlane1", plane, WeaveTessagon, **options)
-
-def layer13():
-  options = {
-    'u_range': [0.0, 1.0],
-    'v_range': [0.0, 1.0],
-    'u_num': 5,
-    'v_num': 2,
-  }
-  tessellate("Floret1", torus, FloretTessagon, **options)
-
-  options = {
-    'u_range': [0.0, 1.0],
-    'v_range': [0.0, 1.0],
-    'u_num': 1,
-    'v_num': 2,
-    'u_cyclic': False,
-    'v_cyclic': False
-  }
-  tessellate("FloretPlane1", plane, FloretTessagon, **options)
-
-def wire_to_skin(in_name, out_name, **kwargs):
-  input_object = bpy.data.objects[in_name]
-  output_object = bpy.data.objects[out_name]
-  output_materials = output_object.data.materials
-
-  wire_skin = \
-    WireSkin(input_object.data, **kwargs)
-
-  me = wire_skin.create_mesh()
-  for material in output_materials:
-    me.materials.append(material)
-  output_object.data = me
-
-def layer18():
-  options = {
-    'u_range': [0.0, 1.0],
-    'v_range': [0.0, 1.0],
-    'u_num': 10,
-    'v_num': 2,
-    'u_cyclic': True,
-    'v_cyclic': False,
-    'rot_factor': 2
-  }
-  tessellate("Cylinder1", cylinder, PythagoreanTessagon, **options)
-
-def layer19():
-  options = {
-    'u_range': [0.0, 1.0],
-    'v_range': [0.0, 1.0],
-    'u_num': 4,
-    'v_num': 40,
-    'v_cyclic': True,
-    'u_cyclic': False,
-    'u_twist': True
-  }
-  tessellate("Mobius1", mobius, BrickTessagon, **options)
-
-  options = {
-    'u_range': [0.0, 1.0],
-    'v_range': [0.0, 1.0],
-    'u_num': 40,
-    'v_num': 6,
-    #'u_cyclic': False,
-    #'v_cyclic': False,
-    'v_twist': True
-  }
-  tessellate("Klein1", klein, RhombusTessagon, **options)
-
-def layer20():
-  options = {
-    'u_range': [0.0, 1.0],
-    'v_range': [0.0, 1.0],
-    'u_num': 8,
-    'v_num': 20
-  }
-  tessellate("HexTorusIn", other_torus, HexTessagon, **options)
-
-  options = {
-    'width': 0.1,
-    'height': 0.4,
-    'inside_radius': 0.1,
-    'outside_radius': 0.2,
-    'dist': 0.1,
-    'crease': 1.0
-  }
-  wire_to_skin("HexTorusIn", "WireTorusOut", **options)
+    return output_object
