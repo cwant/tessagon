@@ -42,7 +42,7 @@ class BlenderDemo(TessagonCommonDemo):
         for region in area.regions:
           if region.type == 'WINDOW':
             override = {'area': area, 'region': region}
-            bpy.ops.view3d.viewnumpad(override, type='TOP')
+            bpy.ops.view3d.viewnumpad(override, type='FRONT')
             bpy.ops.view3d.view_all(override)
             break
 
@@ -50,8 +50,17 @@ class BlenderDemo(TessagonCommonDemo):
     return 'Color-{}-of-{}'.format(value + 1, num_values)
 
   def diffuse_color(self, value, num_values):
-    shade = (num_values - 1 - value) / (num_values - 1)
-    return ([shade] * 3)
+    # Curated colors
+    colors = { 2: [[1.0, 1.0, 1.0],
+                   [0.0, 0.0, 0.3]],
+               3: [[1.0, 1.0, 1.0],
+                   [0.1, 0.3, 0.5],
+                   [0.0, 0.0, 0.3]],
+               4: [[1.0, 1.0, 1.0],
+                   [0.3, 0.5, 0.7],
+                   [0.1, 0.3, 0.5],
+                   [0.0, 0.0, 0.3]] }
+    return colors[num_values][value]
 
   def create_materials(self):
     # Create palletes based on how many different colors the object has
