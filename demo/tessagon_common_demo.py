@@ -15,63 +15,59 @@ class TessagonCommonDemo:
     row = 0
     column = 0
     # Color patterns
-    self.hex_tessagon([column, row, 0])
-    self.hex_tessagon([column, row - offset, 0], color_pattern=1)
-    self.hex_tessagon([column, row - 2*offset, 0], color_pattern=2)
+    self.hex_tessagon([column, 0, row])
+    self.hex_tessagon([column, 0, row - offset], color_pattern=1)
+    self.hex_tessagon([column, 0, row - 2*offset], color_pattern=2)
     column += offset
-    self.tri_tessagon([column, row, 0])
-    self.tri_tessagon([column, row - offset, 0], color_pattern=1)
-    self.tri_tessagon([column, row - 2*offset, 0], color_pattern=2)
-    self.tri_tessagon([column, row - 3*offset, 0], color_pattern=3)
+    self.tri_tessagon([column, 0, row])
+    self.tri_tessagon([column, 0, row - offset], color_pattern=1)
+    self.tri_tessagon([column, 0, row - 2*offset], color_pattern=2)
+    self.tri_tessagon([column, 0, row - 3*offset], color_pattern=3)
     column += offset
-    self.dissected_square_tessagon([column, row, 0])
-    self.dissected_square_tessagon([column, row - offset, 0], color_pattern=1)
-    self.dissected_square_tessagon([column, row - 2*offset, 0],
+    self.dissected_square_tessagon([column, 0, row])
+    self.dissected_square_tessagon([column, 0, row - offset], color_pattern=1)
+    self.dissected_square_tessagon([column, 0, row - 2*offset],
                                    color_pattern=2)
     column += offset
-    self.floret_tessagon([column, row, 0])
-    self.floret_tessagon([column, row - offset, 0], color_pattern=1)
-    self.floret_tessagon([column, row - 2*offset, 0], color_pattern=2)
-    self.floret_tessagon([column, row - 3*offset, 0], color_pattern=3)
+    self.floret_tessagon([column, 0, row])
+    self.floret_tessagon([column, 0, row - offset], color_pattern=1)
+    self.floret_tessagon([column, 0, row - 2*offset], color_pattern=2)
+    self.floret_tessagon([column, 0, row - 3*offset], color_pattern=3)
 
     # Non-colored objects
     column += offset
     column += offset
     start_column = column
     # Row 1
-    self.rhombus_tessagon([column, row, 0])
+    self.rhombus_tessagon([column, 0, row])
     column += offset
-    self.octo_tessagon([column, row, 0])
+    self.octo_tessagon([column, 0, row])
     column += offset
-    self.hex_tri_tessagon([column, row, 0])
+    self.hex_tri_tessagon([column, 0, row])
     column += offset
-    self.hex_square_tri_tessagon([column, row, 0])
+    self.hex_square_tri_tessagon([column, 0, row])
 
     column = start_column
     row -= offset
     # Row 2
-    self.square_tessagon([column, row, 0])
+    self.square_tessagon([column, 0, row])
     column += offset
-    self.pythagorean_tessagon([column, row, 0])
+    self.pythagorean_tessagon([column, 0, row])
     column += offset
-    self.brick_tessagon([column, row, 0])
+    self.brick_tessagon([column, 0, row])
     column += offset
-    self.dodeca_tessagon([column, row, 0])
+    self.dodeca_tessagon([column, 0, row])
 
     column = start_column
     row -= offset
     # Row 3
-    self.square_tri_tessagon([column, row, 0])
+    self.square_tri_tessagon([column, 0, row])
     column += offset
-    self.weave_tessagon([column, row, 0])
+    self.weave_tessagon([column, 0, row])
     column += offset
-    self.hex_big_tri_tessagon([column, row, 0])
+    self.hex_big_tri_tessagon([column, 0, row])
     column += offset
-    self.zig_zag_tessagon([column, row, 0])
-
-  def rotated_cylinder(self, u,v):
-    (x, y, z) = cylinder(u, v)
-    return [x, z, y]
+    self.zig_zag_tessagon([column, 0, row])
 
   def hex_tessagon(self, position, **kwargs):
     options = {
@@ -83,7 +79,7 @@ class TessagonCommonDemo:
       'v_cyclic': False,
       'position': position
     }
-    return self.tessellate(self.rotated_cylinder, HexTessagon,
+    return self.tessellate(cylinder, HexTessagon,
                            **{**kwargs, **options})
 
   def tri_tessagon(self, position, **kwargs):
@@ -120,10 +116,6 @@ class TessagonCommonDemo:
     }
     return self.tessellate(mobius, OctoTessagon, **options)
 
-  def rotated_paraboloid(self, u,v):
-    (x, y, z) = paraboloid(u, v)
-    return [-x, -z, y]
-
   def hex_tri_tessagon(self, position):
     options = {
       'u_range': [-1.0, 1.0],
@@ -134,7 +126,7 @@ class TessagonCommonDemo:
       'v_cyclic': False,
       'position': position
     }
-    return self.tessellate(self.rotated_paraboloid, HexTriTessagon, **options)
+    return self.tessellate(paraboloid, HexTriTessagon, **options)
 
   def hex_square_tri_tessagon(self, position):
     options = {
@@ -178,10 +170,6 @@ class TessagonCommonDemo:
     }
     return self.tessellate(torus, BrickTessagon, **options)
 
-  def rotated_hyperboloid(self, u,v):
-    (x, y, z) = one_sheet_hyperboloid(u, v)
-    return [x, z, y]
-
   def dodeca_tessagon(self, position):
     options = {
       'u_range': [-1.0, 1.0],
@@ -192,7 +180,7 @@ class TessagonCommonDemo:
       'v_cyclic': True,
       'position': position
     }
-    return self.tessellate(self.rotated_hyperboloid, DodecaTessagon, **options)
+    return self.tessellate(one_sheet_hyperboloid, DodecaTessagon, **options)
 
   def square_tri_tessagon(self, position):
     options = {
@@ -204,10 +192,6 @@ class TessagonCommonDemo:
     }
     return self.tessellate(torus, SquareTriTessagon, **options)
 
-  def rotated_sphere(self, u,v):
-    (x, y, z) = sphere(u, v)
-    return [x, z, y]
-
   def weave_tessagon(self, position):
     options = {
       'u_range': [0.0, 1.0],
@@ -218,7 +202,7 @@ class TessagonCommonDemo:
       'rot_factor': 1,
       'position': position
     }
-    return self.tessellate(self.rotated_sphere, WeaveTessagon, **options)
+    return self.tessellate(sphere, WeaveTessagon, **options)
 
   def floret_torus(self, u, v):
     # u_cyclic = True, v_cyclic = True
@@ -268,5 +252,5 @@ class TessagonCommonDemo:
       'v_cyclic': False,
       'position': position
     }
-    return self.tessellate(self.rotated_cylinder, DissectedSquareTessagon,
+    return self.tessellate(cylinder, DissectedSquareTessagon,
                            **{**kwargs, **options})

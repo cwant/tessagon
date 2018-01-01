@@ -31,6 +31,8 @@ class VtkDemo(TessagonCommonDemo):
     self.ren.SetBackground(0.3, 0.3, 0.3)
     self.renWin.SetSize(800, 600)
     self.iren.Initialize()
+    camera = self.ren.GetActiveCamera()
+    camera.SetPosition(0, -200, 100);
     self.ren.ResetCamera()
     self.renWin.Render()
     self.iren.Start()
