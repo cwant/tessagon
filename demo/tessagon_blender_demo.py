@@ -63,14 +63,23 @@ class BlenderDemo(TessagonCommonDemo):
     return colors[num_values][value]
 
   def create_materials(self):
+    # Default material
+    if 'DefaultColor' not in bpy.data.materials:
+      self.create_material('DefaultColor', [1.0, 0.8, 0.5])
+
     # Create palletes based on how many different colors the object has
     for num_values in [2, 3, 4]:
       for value in range(num_values):
         name = self.material_name(value, num_values)
         if name in bpy.data.materials: continue
-        material = bpy.data.materials.new(name=name)
-        material.diffuse_color = self.diffuse_color(value, num_values)
+        self.create_material(name, self.diffuse_color(value, num_values))
 
+  def create_material(self, name, diffuse_color):
+    material = bpy.data.materials.new(name=name)
+    material.diffuse_color = diffuse_color
+    material.specular_intensity = 0.0
+    material.diffuse_intensity = 1.0
+    
   def create_objects(self):
     super().create_objects()
 
@@ -93,7 +102,7 @@ class BlenderDemo(TessagonCommonDemo):
     if not out_name:
       out_name = tessagon_class.__name__
       color_pattern = kwargs.get('color_pattern') or None
-      if color_pattern != None: out_name += str(color_pattern)
+      if color_pattern != None: out_name += "Color%d" % (color_pattern)
 
     output_object = self.new_or_create_object(out_name)
     me = output_object.data
@@ -120,6 +129,9 @@ class BlenderDemo(TessagonCommonDemo):
         name = self.material_name(value, num_colors)
         material = bpy.data.materials[name]
         me.materials.append(material)
+    else:
+      material = bpy.data.materials['DefaultColor']
+      me.materials.append(material)
 
     scale = kwargs.get('scale') or None
     if scale != None:
@@ -154,11 +166,12 @@ class BlenderDemo(TessagonCommonDemo):
 
     options = {
       'width': 0.1,
-      'height': 0.4,
+      'height': 0.2,
       'inside_radius': 0.1,
-      'outside_radius': 0.2,
+      'outside_radius': 0.1,
       'dist': 0.1,
       'crease': 1.0,
+      'displace': 0.15,
       'position': position
     }
     ob = self.wire_to_skin("HexTorusIn", "WireTorusOut", **options)
