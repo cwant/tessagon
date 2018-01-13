@@ -52,6 +52,8 @@ bmesh = tessagon.create_mesh()
 
 Additional tessagon classes can be added by deconstructing how a tessellation fits within a rectangular patch in the plane (check out the ASCII art in each source file in `tessagon.types`). The current `Tessagon` subclasses include:
 
+---
+
 ### `HexTessagon`
 ![HexTessagon](documentation/images/hex_tessagon.png)
 
@@ -62,6 +64,8 @@ Option `color_pattern=1` gives the following pattern:
 Option `color_pattern=2` gives the following pattern:
 
 ![HexTessagon color pattern 2](documentation/images/hex_tessagon_color2.png)
+
+---
 
 ### `TriTessagon`
 ![TriTessagon](documentation/images/tri_tessagon.png)
@@ -78,35 +82,57 @@ Option `color_pattern=3` gives the following pattern:
 
 ![TriTessagon color pattern 3](documentation/images/tri_tessagon_color3.png)
 
+---
+
 ### `RhombusTessagon`
 ![RhombusTessagon](documentation/images/rhombus_tessagon.png)
+
+---
 
 ### `OctoTessagon`
 ![OctoTessagon](documentation/images/octo_tessagon.png)
 
+---
+
 ### `HexTriTessagon` (Star of David)
 ![HexTriTessagon](documentation/images/hex_tri_tessagon.png)
+
+---
 
 ### `HexSquareTriTessagon`
 ![HexSquareTriTessagon](documentation/images/hex_square_tri_tessagon.png)
 
+---
+
 ### `SquareTessagon`
 ![SquareTessagon](documentation/images/square_tessagon.png)
+
+---
 
 ### `PythagoreanTessagon`
 ![PythagoreanTessagon](documentation/images/pythagorean_tessagon.png)
 
+---
+
 ### `BrickTessagon`
 ![BrickTessagon](documentation/images/brick_tessagon.png)
+
+---
 
 ### `DodecaTessagon`
 ![DodecaTessagon](documentation/images/dodeca_tessagon.png)
 
+---
+
 ### `SquareTriTessagon`
 ![SquareTriTessagon](documentation/images/square_tri_tessagon.png)
 
+---
+
 ### `WeaveTessagon`
 ![WeaveTessagon](documentation/images/weave_tessagon.png)
+
+---
 
 ### `FloretTessagon`
 ![FloretTessagon](documentation/images/floret_tessagon.png)
@@ -123,13 +149,19 @@ Option `color_pattern=3` gives the following pattern:
 
 ![FloretTessagon color pattern 3](documentation/images/floret_tessagon_color3.png)
 
+---
+
 ### `HexBigTriTessagon`
 ![HexBigTriTessagon](documentation/images/hex_big_tri_tessagon.png)
 
 (Naming things is hard.)
 
+---
+
 ### `ZigZagTessagon`
 ![ZigZagTessagon](documentation/images/zig_zag_tessagon.png)
+
+---
 
 ### `DissectedSquareTessagon`
 ![DissectedSquareTessagon](documentation/images/dissected_square_tessagon.png)
