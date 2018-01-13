@@ -55,8 +55,28 @@ Additional tessagon classes can be added by deconstructing how a tessellation fi
 ### `HexTessagon`
 ![HexTessagon](documentation/images/hex_tessagon.png)
 
+Option `color_pattern=1` gives the following pattern:
+
+![HexTessagon color pattern 1](documentation/images/hex_tessagon_color1.png)
+
+Option `color_pattern=2` gives the following pattern:
+
+![HexTessagon color pattern 2](documentation/images/hex_tessagon_color2.png)
+
 ### `TriTessagon`
 ![TriTessagon](documentation/images/tri_tessagon.png)
+
+Option `color_pattern=1` gives the following pattern:
+
+![TriTessagon color pattern 1](documentation/images/tri_tessagon_color1.png)
+
+Option `color_pattern=2` gives the following pattern:
+
+![TriTessagon color pattern 2](documentation/images/tri_tessagon_color2.png)
+
+Option `color_pattern=3` gives the following pattern:
+
+![TriTessagon color pattern 3](documentation/images/tri_tessagon_color3.png)
 
 ### `RhombusTessagon`
 ![RhombusTessagon](documentation/images/rhombus_tessagon.png)
@@ -91,6 +111,18 @@ Additional tessagon classes can be added by deconstructing how a tessellation fi
 ### `FloretTessagon`
 ![FloretTessagon](documentation/images/floret_tessagon.png)
 
+Option `color_pattern=1` gives the following pattern:
+
+![FloretTessagon color pattern 1](documentation/images/floret_tessagon_color1.png)
+
+Option `color_pattern=2` gives the following pattern:
+
+![FloretTessagon color pattern 2](documentation/images/floret_tessagon_color2.png)
+
+Option `color_pattern=3` gives the following pattern:
+
+![FloretTessagon color pattern 3](documentation/images/floret_tessagon_color3.png)
+
 ### `HexBigTriTessagon`
 ![HexBigTriTessagon](documentation/images/hex_big_tri_tessagon.png)
 
@@ -101,6 +133,14 @@ Additional tessagon classes can be added by deconstructing how a tessellation fi
 
 ### `DissectedSquareTessagon`
 ![DissectedSquareTessagon](documentation/images/dissected_square_tessagon.png)
+
+Option `color_pattern=1` gives the following pattern:
+
+![DissectedSquareTessagon color pattern 1](documentation/images/dissected_square_tessagon_color1.png)
+
+Option `color_pattern=2` gives the following pattern:
+
+![DissectedSquareTessagon color pattern 2](documentation/images/dissected_square_tessagon_color2.png)
 
 ## Usage and Options
 
