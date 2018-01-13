@@ -53,43 +53,43 @@ bmesh = tessagon.create_mesh()
 Additional tessagon classes can be added by deconstructing how a tessellation fits within a rectangular patch in the plane (check out the ASCII art in each source file in `tessagon.types`). The current `Tessagon` subclasses include:
 
 ### `HexTessagon`
-![HexTessagon](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/hex_tessagon.png)
+![HexTessagon](documentation/images/hex_tessagon.png)
 
 ### `TriTessagon`
-![TriTessagon](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/tri_tessagon.png)
+![TriTessagon](documentation/images/tri_tessagon.png)
 
 ### `RhombusTessagon`
-![RhombusTessagon](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/rhombus_tessagon.png)
+![RhombusTessagon](documentation/images/rhombus_tessagon.png)
 
 ### `OctoTessagon`
-![OctoTessagon](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/octo_tessagon.png)
+![OctoTessagon](documentation/images/octo_tessagon.png)
 
 ### `HexTriTessagon` (Star of David)
-![HexTriTessagon](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/hex_tri_tessagon.png)
+![HexTriTessagon](documentation/images/hex_tri_tessagon.png)
 
 ### `HexSquareTriTessagon`
-![HexSquareTriTessagon](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/hex_square_tri_tessagon.png)
+![HexSquareTriTessagon](documentation/images/hex_square_tri_tessagon.png)
 
 ### `SquareTessagon`
-![SquareTessagon](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/square_tessagon.png)
+![SquareTessagon](documentation/images/square_tessagon.png)
 
 ### `PythagoreanTessagon`
-![PythagoreanTessagon](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/pythagorean_tessagon.png)
+![PythagoreanTessagon](documentation/images/pythagorean_tessagon.png)
 
 ### `BrickTessagon`
-![BrickTessagon](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/brick_tessagon.png)
+![BrickTessagon](documentation/images/brick_tessagon.png)
 
 ### `DodecaTessagon`
-![DodecaTessagon](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/dodeca_tessagon.png)
+![DodecaTessagon](documentation/images/dodeca_tessagon.png)
 
 ### `SquareTriTessagon`
-![SquareTriTessagon](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/square_tri_tessagon.png)
+![SquareTriTessagon](documentation/images/square_tri_tessagon.png)
 
 ### `WeaveTessagon`
-![WeaveTessagon](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/weave_tessagon.png)
+![WeaveTessagon](documentation/images/weave_tessagon.png)
 
 ### `FloretTessagon`
-![FloretTessagon](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/floret_tessagon.png)
+![FloretTessagon](documentation/images/floret_tessagon.png)
 
 ## Usage and Options
 
@@ -118,17 +118,17 @@ Here are the options:
 * `u_num`: the number of tiles to be created in the u-direction;
 * `v_num`: the number of tiles to be created in the v-direction;
 
-![tiles](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/tiles.png)
+![tiles](documentation/images/tiles.png)
 
 * `corners`: instead of using `u_range` and `v_range`, you can also specify your domain in the uv plain as a quadrilateral by specifying the corners of the region you would like to map. This is a list of four tuples in the following order: bottom-left, bottom-right, top-left, top-right.
 
-![corners](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/corners.png)
+![corners](documentation/images/corners.png)
 
 * `u_cyclic`: a boolean indicating whether the u-direction is cyclic (wraps around to the beginning again). You're function needs to be periodic in the u-direction for this to look nice. **Note: the default for this is `True`, so set it to `False` if you don't want things to be cyclic**
 * `v_cyclic`: a boolean indicating whether the v-direction is cyclic. **Default: `True`**
 * `rot_factor`: this is an integer greater than zero that allows you to rotate the tiles in the UV-domain is such a way that the tiling can still be cyclic.
   
-  ![rot_factor](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/rot_factor.png)
+  ![rot_factor](documentation/images/rot_factor.png)
   
   The `rot_factor` specifies how many tiles you go across before you go up one unit (essentially the reciprocal of the slope of the grid lines. The image depicts a `rot_factor` of three, which generates 45 tiles (the purple interior and the blue boundary squares, each of which is blasted with the tessellation pattern when the function is applied). Here the meaning of `u_num` and `v_num` are interpreted differently: whereas in the non-rotated case, `u_num = 3` and `v_num = 2` would yeild 6 tiles, here we have 45 tiles. Niether U nor V are cyclic in the picture; had they both been cyclic, 60 tiles whould have been generated. The interior tiles form groups of `(rot_factor-1)**2` tiles (here each group is 2 x 2, for 24 total interior tiles), and each boundary shares `rot_factor x 1` tiles with it's neighbors (there are 7 such boundaries, so 21 boundary tiles).
   
@@ -161,7 +161,7 @@ Check out my other project `wire_skin` to add some interesting effects to the te
 
 https://github.com/cwant/wire_skin
 
-![wire_skin](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/wire_skin.png)
+![wire_skin](documentation/images/wire_skin.png)
 
 ## 3D Printing on Shapeways
 
