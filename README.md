@@ -91,6 +91,17 @@ Additional tessagon classes can be added by deconstructing how a tessellation fi
 ### `FloretTessagon`
 ![FloretTessagon](documentation/images/floret_tessagon.png)
 
+### `HexBigTriTessagon`
+![HexBigTriTessagon](documentation/images/hex_big_tri_tessagon.png)
+
+(Naming things is hard.)
+
+### `ZigZagTessagon`
+![ZigZagTessagon](documentation/images/zig_zag_tessagon.png)
+
+### `DissectedSquareTessagon`
+![DissectedSquareTessagon](documentation/images/dissected_square_tessagon.png)
+
 ## Usage and Options
 
 Each tessagon class is initialized with number of keyword options, e.g.:
