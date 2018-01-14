@@ -9,7 +9,7 @@ Now there is no excuse not to tessellate your favorite 2D manifolds with triangl
 
 Check out the repository and look in the `demo` directory.
 
-* **Blender**: you'll find a blender file and `tessagon_blender_demo.py` which creates the meshes in the demo. The demo has examples of each tessagon class, and an example that uses tessagon with one of my other projects, ![wire_skin](https://github.com/cwant/wire_skin).
+* **Blender**: you'll find a blender file and `tessagon_blender_demo.py` which creates the meshes in the demo. The demo has examples of each tessagon class, and an example that uses tessagon with one of my other projects, [wire_skin](https://github.com/cwant/wire_skin).
 * **VTK**: Take a look at `tessagon_vtk_demo.py` for a script that creates all of the current tessagon classes.
 
 ## How it works
