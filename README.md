@@ -218,6 +218,7 @@ Here are the options:
   It hurt my brain developing this feature, so don't feel bad if it does't make any sense for you. Play around with it, and keep in mind that the number of tiles generated is somewhere between `u_num * v_num * (rot_factor - 1)**2` and `u_num * v_num * (rot_factor**2 + 1)` (depending on which tiles have neighbors, due to periodicity), so you typically want to set `u_num` and `v_num` to be a lot lower than you would in the non-rotated case.
 * `u_twist`: this is used with `v_cyclic` (note that says `v_cyclic` not `u_cyclic`). As the `v` values wrap around, the `u` values reconnect in the opposite direction: the low `u` values connect to the high `u` values, and vice versa. This allows you to make things like Möbius strips and Klein bottles.
 * `v_twist`: works with `u_cyclic`, analogous to how `u_twist` works.
+* `color_pattern`: some Tessagon types support some curated patterns (applying more than one material/color to the output shape). These are identified by a number (e.g., `color_pattern=2`). The number has no meaning other than as an identifier. Checkout the description of the Tessagon types above to see what color patterns exist. The values of `u_num` and `v_num` may need to be tweaked to make a specific color pattern wrap correctly for cyclic tilings.
 
 ## Writing your own tessellation classes
 
