@@ -26,6 +26,89 @@ class SquareTile(Tile):
                              ['bottom', 'right'],
                              ['bottom', 'left']])
 
+  def calculate_colors(self):
+    if self.color_pattern == 1:
+      self.color_pattern1()
+    elif self.color_pattern == 2:
+      self.color_pattern2()
+    elif self.color_pattern == 3:
+      self.color_pattern3()
+    elif self.color_pattern == 4:
+      self.color_pattern4()
+    elif self.color_pattern == 5:
+      self.color_pattern5()
+    elif self.color_pattern == 6:
+      self.color_pattern6()
+    elif self.color_pattern == 7:
+      self.color_pattern7()
+    elif self.color_pattern == 8:
+      self.color_pattern8()
+
+  def color_pattern1(self):
+    if (self.fingerprint[0] + self.fingerprint[1]) % 2 == 0:
+      self.color_face(['middle'], 0)
+    else:
+      self.color_face(['middle'], 1)
+
+  def color_pattern2(self):
+    if (self.fingerprint[0] + self.fingerprint[1]) % 2 == 0:
+      self.color_face(['middle'], 0)
+    elif self.fingerprint[0] % 2 == 0:
+      self.color_face(['middle'], 1)
+    else:
+      self.color_face(['middle'], 2)
+
+  def color_pattern3(self):
+    if (self.fingerprint[0] * self.fingerprint[1]) % 2 == 0:
+      self.color_face(['middle'], 0)
+    else:
+      self.color_face(['middle'], 1)
+
+  def color_pattern4(self):
+    if self.fingerprint[1] % 2 == 0:
+      self.color_face(['middle'], 0)
+    else:
+      if ((self.fingerprint[1] // 2) + self.fingerprint[0]) % 2 == 0:
+        self.color_face(['middle'], 0)
+      else:
+        self.color_face(['middle'], 1)
+
+  def color_pattern5(self):
+    if self.fingerprint[1] % 2 == 0:
+      self.color_face(['middle'], 0)
+    else:
+      self.color_face(['middle'], 1)
+
+  def color_pattern6(self):
+    if self.fingerprint[1] % 2 == 0:
+      self.color_face(['middle'], 0)
+    else:
+      if self.fingerprint[0] % 2 == 0:
+        self.color_face(['middle'], 1)
+      else:
+        self.color_face(['middle'], 2)
+
+  def color_pattern7(self):
+    if self.fingerprint[1] % 2 == 0:
+      self.color_face(['middle'], 0)
+    else:
+      if ((self.fingerprint[1] // 2) + self.fingerprint[0]) % 2 == 0:
+        self.color_face(['middle'], 1)
+      else:
+        self.color_face(['middle'], 2)
+
+  def color_pattern8(self):
+    if self.fingerprint[1] % 2 == 0:
+      if self.fingerprint[0] % 2 == 0:
+        self.color_face(['middle'], 0)
+      else:
+        self.color_face(['middle'], 1)
+    else:
+      if self.fingerprint[0] % 2 == 0:
+        self.color_face(['middle'], 2)
+      else:
+        self.color_face(['middle'], 3)
+
 class SquareTessagon(Tessagon):
   def init_tile_class(self):
     return SquareTile
