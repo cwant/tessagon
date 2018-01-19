@@ -56,30 +56,48 @@ Additional tessagon classes can be added by deconstructing how a tessellation fi
 
 * [SquareTessagon](documentation/square_tessagon.md)  
   ![](documentation/images/square_tessagon_thumb.png)
-* [HexTessagon](documentation/hex_tessagon.md)
-* [TriTessagon](documentation/tri_tessagon.md)
+* [HexTessagon](documentation/hex_tessagon.md)  
+  ![](documentation/images/hex_tessagon_thumb.png)
+* [TriTessagon](documentation/tri_tessagon.md)  
+  ![](documentation/images/tri_tessagon_thumb.png)
 
 ### Archimedean tilings
 
-* [OctoTessagon](documentation/octo_tessagon.md)
-* [HexTriTessagon](documentation/hex_tri_tessagon.md)
-* [HexSquareTriTessagon](documentation/hex_square_tri_tessagon.md)
-* [DodecaTessagon](documentation/dodeca_tessagon.md)
-* [SquareTriTessagon](documentation/square_tri_tessagon.md)
+* [OctoTessagon](documentation/octo_tessagon.md)  
+  ![](documentation/images/octo_tessagon_thumb.png)
+* [HexTriTessagon](documentation/hex_tri_tessagon.md)  
+  ![](documentation/images/hex_tri_tessagon_thumb.png)
+* [HexSquareTriTessagon](documentation/hex_square_tri_tessagon.md)  
+  ![](documentation/images/hex_square_tri_tessagon_thumb.png)
+* [DodecaTessagon](documentation/dodeca_tessagon.md)  
+  ![](documentation/images/dodeca_tessagon_thumb.png)
+* [SquareTriTessagon](documentation/square_tri_tessagon.md)  
+  ![](documentation/images/square_tri_tessagon_thumb.png)
 
 ### Laves tilings
 
-* [RhombusTessagon](documentation/rhombus_tessagon.md)
-* [FloretTessagon](documentation/floret_tessagon.md)
+* [RhombusTessagon](documentation/rhombus_tessagon.md)  
+  ![](documentation/images/rhombus_tessagon_thumb.png)
+* [FloretTessagon](documentation/floret_tessagon.md)  
+  ![](documentation/images/floret_tessagon_thumb.png)
 
 ### Non-edge-to-edge tilings
 
-* [PythagoreanTessagon](documentation/pythagorean_tessagon.md)
-* [BrickTessagon](documentation/brick_tessagon.md)
-* [WeaveTessagon](documentation/weave_tessagon.md)
-* [HexBigTriTessagon](documentation/hex_big_tri_tessagon.md)
-* [ZigZagTessagon](documentation/zig_zag_tessagon.md)
-* [DissectedSquareTessagon](documentation/dissected_square_tessagon.md)
+* [PythagoreanTessagon](documentation/pythagorean_tessagon.md)  
+  ![](documentation/images/pythagorean_tessagon_thumb.png)
+* [BrickTessagon](documentation/brick_tessagon.md)  
+  ![](documentation/images/brick_tessagon_thumb.png)
+* [WeaveTessagon](documentation/weave_tessagon.md)  
+  ![](documentation/images/weave_tessagon_thumb.png)
+* [HexBigTriTessagon](documentation/hex_big_tri_tessagon.md)  
+  ![](documentation/images/hex_big_tri_tessagon_thumb.png)
+* [ZigZagTessagon](documentation/zig_zag_tessagon.md)  
+  ![](documentation/images/zig_zag_tessagon_thumb.png)
+
+### Misc
+
+* [DissectedSquareTessagon](documentation/dissected_square_tessagon.md)  
+  ![](documentation/images/dissected_square_tessagon_thumb.png)
 
 ## Usage and Options
 
