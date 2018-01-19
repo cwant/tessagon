@@ -14,8 +14,26 @@ from tessagon.misc.shapes import *
 from tessagon.adaptors.blender_adaptor import BlenderAdaptor
 
 def main():
+  classes = [HexTessagon,
+             SquareTessagon,
+             TriTessagon,
+             DissectedSquareTessagon,
+             FloretTessagon,
+             RhombusTessagon,
+             OctoTessagon,
+             HexTriTessagon,
+             HexSquareTriTessagon,
+             PythagoreanTessagon,
+             BrickTessagon,
+             DodecaTessagon,
+             ZigZagTessagon,
+             SquareTriTessagon,
+             WeaveTessagon,
+             HexBigTriTessagon]
   setup_render_scene()
-  render_tessagons()
+  render_tessagons(classes)
+  setup_thumbnail_scene()
+  render_thumbnails(classes)
 
 def setup_render_scene():
   scn = bpy.context.scene
@@ -73,28 +91,39 @@ def setup_render_scene():
 
   scn.world.horizon_color = [1, 1, 1]
 
+def setup_thumbnail_scene():
+  scn = bpy.context.scene
+  set_layer(scn)
+  scn.render.resolution_x = 100
+  scn.render.resolution_y = 75
+  camera = bpy.data.objects['Camera']
+  camera.location = [0, -17, 0]
+  camera.rotation_euler = [pi/2, 0, 0]
+  camera.data.lens = 120.0
+
 def set_layer(thing, layer = 1):
   thing.layers[layer] = True
   for i in range(20):
     if i != layer: thing.layers[i] = False
 
-def render_tessagons():
-  for cls in [HexTessagon, TriTessagon, DissectedSquareTessagon,
-              FloretTessagon, SquareTessagon, RhombusTessagon, OctoTessagon,
-              HexTriTessagon, HexSquareTriTessagon, PythagoreanTessagon,
-              BrickTessagon, DodecaTessagon, ZigZagTessagon,
-              SquareTriTessagon, WeaveTessagon, HexBigTriTessagon]:
+def render_tessagons(classes):
+  for cls in classes:
     render_class(cls)
 
   render_object(['HexTorusIn','WireTorusOut'],
                 filename='wire_skin.png', mark_edges=False)
 
-def render_class(cls):
+def render_thumbnails(classes):
+  for cls in classes:
+    render_class(cls, thumbnail = True)
+
+def render_class(cls, **kwargs):
   class_name = cls.__name__
-  render_object(class_name)
+  render_object(class_name, **kwargs)
+  if kwargs.get('thumbnail'): return
   for i in range(cls.num_color_patterns()):
     object_name = "%sColor%d" % (class_name, i+1)
-    render_object(object_name)
+    render_object(object_name, **kwargs)
 
 def render_object(name, **kwargs):
   if isinstance(name, list):
@@ -112,6 +141,8 @@ def render_object(name, **kwargs):
   # Writing PNG to /tmp or DOCUMENTATION_IMAGES_DIR
   dir = os.getenv('DOCUMENTATION_IMAGES_DIR') or '/tmp'
   filename = kwargs.get('filename') or get_filename(names[0])
+  if kwargs.get('thumbnail'):
+    filename += '_thumb'
   path = "%s/%s" % (dir, filename)
 
   print("Rendering and writing: %s" % path)
@@ -134,7 +165,7 @@ def prepare_object_for_render(object, **kwargs):
       edge.use_freestyle_mark = True
   mesh.update()
 
-def get_filename(name):
+def get_filename(name, **kwargs):
   # Convert class name to camelcase
   s1 = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
   return re.sub('([a-z0-9])([A-Z])', r'\1_\2', s1).lower()
