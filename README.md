@@ -55,6 +55,7 @@ Additional tessagon classes can be added by deconstructing how a tessellation fi
 ### Regular tilings
 
 * [SquareTessagon](documentation/square_tessagon.md)
+  
   ![](documentation/images/square_tessagon_thumb.png)
 * [HexTessagon](documentation/hex_tessagon.md)
 * [TriTessagon](documentation/tri_tessagon.md)
