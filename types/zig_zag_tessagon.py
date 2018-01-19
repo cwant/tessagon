@@ -142,5 +142,4 @@ class ZigZagTile(Tile):
     self.set_equivalent_face(['bottom'], 3, face)
 
 class ZigZagTessagon(Tessagon):
-  def init_tile_class(self):
-    return ZigZagTile
+  tile_class = ZigZagTile

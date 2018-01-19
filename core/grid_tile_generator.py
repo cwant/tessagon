@@ -7,7 +7,7 @@ class GridTileGenerator(TileGenerator):
     self.tiles = None
 
   def create_tiles(self):
-    self.tiles = self.initialize_tiles(self.tessagon.tile_class)
+    self.tiles = self.initialize_tiles(self.tessagon.__class__.tile_class)
     self.initialize_neighbors(self.tiles)
     # Flatten the tiles
     return [j for i in self.tiles for j in i]

@@ -82,5 +82,4 @@ class HexTriTile(Tile):
                   face_type='hexagon', corner=True)
 
 class HexTriTessagon(Tessagon):
-  def init_tile_class(self):
-    return HexTriTile
+  tile_class = HexTriTile

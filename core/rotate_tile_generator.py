@@ -93,7 +93,8 @@ class RotTile(AbstractTile):
                               color_pattern=self.color_pattern,
                               fingerprint_offset=offset)
 
-    self.interior = generator.initialize_tiles(self.tessagon.tile_class)
+    self.interior = \
+      generator.initialize_tiles(self.tessagon.__class__.tile_class)
     generator.initialize_neighbors(self.interior)
     self.tiles += self._flatten_list(self.interior)
 

@@ -2,6 +2,8 @@ from tessagon.core.tile import Tile
 from tessagon.core.tessagon import Tessagon
 
 class TriTile(Tile):
+  num_color_patterns = 3
+
   #  ^  0.|.1   This is the topology of the tile.
   #  |  |\|/|   (Not a Dead Kennedy's logo ...).
   #  |  |.2.|
@@ -42,14 +44,6 @@ class TriTile(Tile):
                   [['left', 'top'],
                    ['left', 'bottom'],
                    ['middle']])
-
-  def calculate_colors(self):
-    if self.color_pattern == 1:
-      self.color_pattern1()
-    elif self.color_pattern == 2:
-      self.color_pattern2()
-    elif self.color_pattern == 3:
-      self.color_pattern3()
 
   def color_pattern1(self):
     # two colors for triangles pointing in different directions
@@ -165,5 +159,4 @@ class TriTile(Tile):
 
 
 class TriTessagon(Tessagon):
-  def init_tile_class(self):
-    return TriTile
+  tile_class = TriTile

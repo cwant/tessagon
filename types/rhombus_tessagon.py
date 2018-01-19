@@ -63,5 +63,4 @@ class RhombusTile(Tile):
                   face_type='horizontal', corner=True)
 
 class RhombusTessagon(Tessagon):
-  def init_tile_class(self):
-    return RhombusTile
+  tile_class = RhombusTile

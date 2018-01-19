@@ -3,6 +3,8 @@ from tessagon.core.tile import Tile
 
 class DissectedSquareTile(Tile):
 
+  num_color_patterns = 2
+
   #    VERTS:     a = ['top', 'left']
   #    a---b---c  b = ['top', 'center']
   # ^  |\..|../|  c = ['top', 'right']
@@ -65,12 +67,6 @@ class DissectedSquareTile(Tile):
                    ['middle', 'center'],
                    ['top', 'center']])
 
-  def calculate_colors(self):
-    if self.color_pattern == 1:
-      self.color_pattern1()
-    elif self.color_pattern == 2:
-      self.color_pattern2()
-
   def color_pattern1(self):
     self.color_paths([['top', 'left', 'center'],
                       ['top', 'right', 'middle'],
@@ -105,5 +101,4 @@ class DissectedSquareTile(Tile):
                          color2, color1)
 
 class DissectedSquareTessagon(Tessagon):
-  def init_tile_class(self):
-    return DissectedSquareTile
+  tile_class = DissectedSquareTile

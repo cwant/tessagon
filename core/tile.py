@@ -1,6 +1,8 @@
 from tessagon.core.abstract_tile import AbstractTile
 
 class Tile(AbstractTile):
+  num_color_patterns = 0
+
   def __init__(self, tessagon, **kwargs):
     super().__init__(tessagon, **kwargs)
 
@@ -73,6 +75,16 @@ class Tile(AbstractTile):
     self._set_equivalent_neighbor_faces(index_keys, face, **kwargs)
 
     return face
+
+  def calculate_colors(self):
+    if self.color_pattern > self.__class__.num_color_patterns:
+      raise ValueError("color_pattern must be below %d" %
+                       (self.__class__.num_color_patterns))
+    method_name = "color_pattern%d" % (self.color_pattern)
+    method = getattr(self, method_name)
+    if not callable(method):
+      raise ValueError("%s is not a callable color pattern" % (method_name))
+    method()
 
   def color_face(self, index_keys, color_index):
     face = self._get_face(index_keys)
@@ -254,6 +266,3 @@ class Tile(AbstractTile):
     u_flip_keys = self._u_flip(index_keys)
     uv_flip_keys = self._v_flip(u_flip_keys)
     self.set_equivalent_face([u_index, v_index], uv_flip_keys, face, **kwargs)
-
-  def calculate_colors(self):
-    pass

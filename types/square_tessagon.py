@@ -2,6 +2,8 @@ from tessagon.core.tessagon import Tessagon
 from tessagon.core.tile import Tile
 
 class SquareTile(Tile):
+  num_color_patterns = 8
+
   def __init__(self, tessagon, **kwargs):
     super().__init__(tessagon, **kwargs)
     self.u_symmetric = True
@@ -25,24 +27,6 @@ class SquareTile(Tile):
                              ['top', 'right'],
                              ['bottom', 'right'],
                              ['bottom', 'left']])
-
-  def calculate_colors(self):
-    if self.color_pattern == 1:
-      self.color_pattern1()
-    elif self.color_pattern == 2:
-      self.color_pattern2()
-    elif self.color_pattern == 3:
-      self.color_pattern3()
-    elif self.color_pattern == 4:
-      self.color_pattern4()
-    elif self.color_pattern == 5:
-      self.color_pattern5()
-    elif self.color_pattern == 6:
-      self.color_pattern6()
-    elif self.color_pattern == 7:
-      self.color_pattern7()
-    elif self.color_pattern == 8:
-      self.color_pattern8()
 
   def color_pattern1(self):
     if (self.fingerprint[0] + self.fingerprint[1]) % 2 == 0:
@@ -110,5 +94,4 @@ class SquareTile(Tile):
         self.color_face(['middle'], 3)
 
 class SquareTessagon(Tessagon):
-  def init_tile_class(self):
-    return SquareTile
+  tile_class = SquareTile

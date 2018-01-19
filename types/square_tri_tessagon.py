@@ -116,5 +116,4 @@ class SquareTriTile(Tile):
                   face_type='triangle')
 
 class SquareTriTessagon(Tessagon):
-  def init_tile_class(self):
-    return SquareTriTile
+  tile_class = SquareTriTile

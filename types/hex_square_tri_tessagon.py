@@ -141,5 +141,4 @@ class HexSquareTriTile(Tile):
                   face_type='hexagon', corner=True)
 
 class HexSquareTriTessagon(Tessagon):
-  def init_tile_class(self):
-    return HexSquareTriTile
+  tile_class = HexSquareTriTile

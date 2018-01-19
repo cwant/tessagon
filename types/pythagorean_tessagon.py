@@ -163,5 +163,4 @@ class PythagoreanTile(Tile):
                        [5,1]])
 
 class PythagoreanTessagon(Tessagon):
-  def init_tile_class(self):
-    return PythagoreanTile
+  tile_class = PythagoreanTile
