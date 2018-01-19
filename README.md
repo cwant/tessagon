@@ -54,11 +54,11 @@ Additional tessagon classes can be added by deconstructing how a tessellation fi
 
 ### Regular tilings
 
-* [SquareTessagon](documentation/square_tessagon.md)  
+* [SquareTessagon](documentation/square_tessagon.md) (8 color patterns)  
   ![](documentation/images/square_tessagon_thumb.png)
-* [HexTessagon](documentation/hex_tessagon.md)  
+* [HexTessagon](documentation/hex_tessagon.md) (2 color patterns)  
   ![](documentation/images/hex_tessagon_thumb.png)
-* [TriTessagon](documentation/tri_tessagon.md)  
+* [TriTessagon](documentation/tri_tessagon.md) (3 color patterns)  
   ![](documentation/images/tri_tessagon_thumb.png)
 
 ### Archimedean tilings
@@ -78,7 +78,7 @@ Additional tessagon classes can be added by deconstructing how a tessellation fi
 
 * [RhombusTessagon](documentation/rhombus_tessagon.md)  
   ![](documentation/images/rhombus_tessagon_thumb.png)
-* [FloretTessagon](documentation/floret_tessagon.md)  
+* [FloretTessagon](documentation/floret_tessagon.md) (3 color patterns)  
   ![](documentation/images/floret_tessagon_thumb.png)
 
 ### Non-edge-to-edge tilings
@@ -96,7 +96,7 @@ Additional tessagon classes can be added by deconstructing how a tessellation fi
 
 ### Misc
 
-* [DissectedSquareTessagon](documentation/dissected_square_tessagon.md)  
+* [DissectedSquareTessagon](documentation/dissected_square_tessagon.md) (2 color patterns)  
   ![](documentation/images/dissected_square_tessagon_thumb.png)
 
 ## Usage and Options
