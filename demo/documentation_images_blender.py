@@ -97,20 +97,29 @@ def render_tessagons():
   render_object('FloretTessagonColor2')
   render_object('FloretTessagonColor3')
 
+  render_object('SquareTessagon')
+  render_object('SquareTessagonColor1')
+  render_object('SquareTessagonColor2')
+  render_object('SquareTessagonColor3')
+  render_object('SquareTessagonColor4')
+  render_object('SquareTessagonColor5')
+  render_object('SquareTessagonColor6')
+  render_object('SquareTessagonColor7')
+  render_object('SquareTessagonColor8')
+
   render_object('RhombusTessagon')
   render_object('OctoTessagon')
   render_object('HexTriTessagon')
   render_object('HexSquareTriTessagon')
 
-  render_object('SquareTessagon')
   render_object('PythagoreanTessagon')
   render_object('BrickTessagon')
   render_object('DodecaTessagon')
+  render_object('ZigZagTessagon')
 
   render_object('SquareTriTessagon')
   render_object('WeaveTessagon')
   render_object('HexBigTriTessagon')
-  render_object('ZigZagTessagon')
 
   render_object(['HexTorusIn','WireTorusOut'],
                 filename='wire_skin.png', mark_edges=False)

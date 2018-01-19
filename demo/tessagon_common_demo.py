@@ -34,6 +34,17 @@ class TessagonCommonDemo:
     self.floret_tessagon([column, 0, row - 2*offset], color_pattern=2)
     self.floret_tessagon([column, 0, row - 3*offset], color_pattern=3)
 
+    column += offset
+    self.square_tessagon([column, 0, row])
+    self.square_tessagon([column, 0, row - offset], color_pattern=1)
+    self.square_tessagon([column, 0, row - 2*offset], color_pattern=2)
+    self.square_tessagon([column, 0, row - 3*offset], color_pattern=3)
+    self.square_tessagon([column, 0, row - 4*offset], color_pattern=4)
+    self.square_tessagon([column, 0, row - 5*offset], color_pattern=5)
+    self.square_tessagon([column, 0, row - 6*offset], color_pattern=6)
+    self.square_tessagon([column, 0, row - 7*offset], color_pattern=7)
+    self.square_tessagon([column, 0, row - 8*offset], color_pattern=8)
+
     # Non-colored objects
     column += offset
     column += offset
@@ -50,13 +61,13 @@ class TessagonCommonDemo:
     column = start_column
     row -= offset
     # Row 2
-    self.square_tessagon([column, 0, row])
-    column += offset
     self.pythagorean_tessagon([column, 0, row])
     column += offset
     self.brick_tessagon([column, 0, row])
     column += offset
     self.dodeca_tessagon([column, 0, row])
+    column += offset
+    self.zig_zag_tessagon([column, 0, row])
 
     column = start_column
     row -= offset
@@ -66,8 +77,6 @@ class TessagonCommonDemo:
     self.weave_tessagon([column, 0, row])
     column += offset
     self.hex_big_tri_tessagon([column, 0, row])
-    column += offset
-    self.zig_zag_tessagon([column, 0, row])
 
   def hex_tessagon(self, position, **kwargs):
     options = {
@@ -91,6 +100,17 @@ class TessagonCommonDemo:
       'position': position
     }
     return self.tessellate(torus, TriTessagon, **{**kwargs, **options})
+
+  def square_tessagon(self, position, **kwargs):
+    options = {
+      'u_range': [0.0, 1.0],
+      'v_range': [0.0, 1.0],
+      'u_num': 24,
+      'v_num': 6,
+      'rot_factor': 2,
+      'position': position
+    }
+    return self.tessellate(torus, SquareTessagon, **{**kwargs, **options})
 
   def rhombus_klein(self, u, v):
     (x, y, z) = klein(u, v)
@@ -141,17 +161,6 @@ class TessagonCommonDemo:
       'position': position
     }
     return self.tessellate(torus, HexSquareTriTessagon, **options)
-
-  def square_tessagon(self, position):
-    options = {
-      'u_range': [0.0, 1.0],
-      'v_range': [0.0, 1.0],
-      'u_num': 15,
-      'v_num': 4,
-      'rot_factor': 2,
-      'position': position
-    }
-    return self.tessellate(torus, SquareTessagon, **options)
 
   def pythagorean_tessagon(self, position):
     options = {
