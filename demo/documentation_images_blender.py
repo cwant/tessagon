@@ -79,50 +79,22 @@ def set_layer(thing, layer = 1):
     if i != layer: thing.layers[i] = False
 
 def render_tessagons():
-  render_object('HexTessagon')
-  render_object('HexTessagonColor1')
-  render_object('HexTessagonColor2')
-
-  render_object('TriTessagon')
-  render_object('TriTessagonColor1')
-  render_object('TriTessagonColor2')
-  render_object('TriTessagonColor3')
-
-  render_object('DissectedSquareTessagon')
-  render_object('DissectedSquareTessagonColor1')
-  render_object('DissectedSquareTessagonColor2')
-
-  render_object('FloretTessagon')
-  render_object('FloretTessagonColor1')
-  render_object('FloretTessagonColor2')
-  render_object('FloretTessagonColor3')
-
-  render_object('SquareTessagon')
-  render_object('SquareTessagonColor1')
-  render_object('SquareTessagonColor2')
-  render_object('SquareTessagonColor3')
-  render_object('SquareTessagonColor4')
-  render_object('SquareTessagonColor5')
-  render_object('SquareTessagonColor6')
-  render_object('SquareTessagonColor7')
-  render_object('SquareTessagonColor8')
-
-  render_object('RhombusTessagon')
-  render_object('OctoTessagon')
-  render_object('HexTriTessagon')
-  render_object('HexSquareTriTessagon')
-
-  render_object('PythagoreanTessagon')
-  render_object('BrickTessagon')
-  render_object('DodecaTessagon')
-  render_object('ZigZagTessagon')
-
-  render_object('SquareTriTessagon')
-  render_object('WeaveTessagon')
-  render_object('HexBigTriTessagon')
+  for cls in [HexTessagon, TriTessagon, DissectedSquareTessagon,
+              FloretTessagon, SquareTessagon, RhombusTessagon, OctoTessagon,
+              HexTriTessagon, HexSquareTriTessagon, PythagoreanTessagon,
+              BrickTessagon, DodecaTessagon, ZigZagTessagon,
+              SquareTriTessagon, WeaveTessagon, HexBigTriTessagon]:
+    render_class(cls)
 
   render_object(['HexTorusIn','WireTorusOut'],
                 filename='wire_skin.png', mark_edges=False)
+
+def render_class(cls):
+  class_name = cls.__name__
+  render_object(class_name)
+  for i in range(cls.num_color_patterns()):
+    object_name = "%sColor%d" % (class_name, i+1)
+    render_object(object_name)
 
 def render_object(name, **kwargs):
   if isinstance(name, list):
