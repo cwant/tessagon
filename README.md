@@ -52,159 +52,52 @@ bmesh = tessagon.create_mesh()
 
 Additional tessagon classes can be added by deconstructing how a tessellation fits within a rectangular patch in the plane (check out the ASCII art in each source file in `tessagon.types`). The current `Tessagon` subclasses include:
 
----
-
-### `HexTessagon`
-![HexTessagon](documentation/images/hex_tessagon.png)
-
-Option `color_pattern=1` gives the following pattern:
-
-![HexTessagon color pattern 1](documentation/images/hex_tessagon_color1.png)
-
-Option `color_pattern=2` gives the following pattern:
-
-![HexTessagon color pattern 2](documentation/images/hex_tessagon_color2.png)
-
----
-
-### `TriTessagon`
-![TriTessagon](documentation/images/tri_tessagon.png)
-
-Option `color_pattern=1` gives the following pattern:
-
-![TriTessagon color pattern 1](documentation/images/tri_tessagon_color1.png)
-
-Option `color_pattern=2` gives the following pattern:
-
-![TriTessagon color pattern 2](documentation/images/tri_tessagon_color2.png)
-
-Option `color_pattern=3` gives the following pattern:
-
-![TriTessagon color pattern 3](documentation/images/tri_tessagon_color3.png)
-
----
-
-### `RhombusTessagon`
-![RhombusTessagon](documentation/images/rhombus_tessagon.png)
-
----
-
-### `OctoTessagon`
-![OctoTessagon](documentation/images/octo_tessagon.png)
-
----
-
-### `HexTriTessagon` (Star of David)
-![HexTriTessagon](documentation/images/hex_tri_tessagon.png)
-
----
-
-### `HexSquareTriTessagon`
-![HexSquareTriTessagon](documentation/images/hex_square_tri_tessagon.png)
-
----
-
-### `SquareTessagon`
-![SquareTessagon](documentation/images/square_tessagon.png)
-
-Option `color_pattern=1` gives the following pattern:
-
-![SquareTessagon color pattern 1](documentation/images/square_tessagon_color1.png)
-
-Option `color_pattern=2` gives the following pattern:
-
-![SquareTessagon color pattern 2](documentation/images/square_tessagon_color2.png)
-
-Option `color_pattern=3` gives the following pattern:
-
-![SquareTessagon color pattern 3](documentation/images/square_tessagon_color3.png)
-
-Option `color_pattern=4` gives the following pattern:
-
-![SquareTessagon color pattern 4](documentation/images/square_tessagon_color4.png)
-
-Option `color_pattern=5` gives the following pattern:
-
-![SquareTessagon color pattern 5](documentation/images/square_tessagon_color5.png)
-
-Option `color_pattern=6` gives the following pattern:
-
-![SquareTessagon color pattern 6](documentation/images/square_tessagon_color6.png)
-
-Option `color_pattern=7` gives the following pattern:
-
-![SquareTessagon color pattern 7](documentation/images/square_tessagon_color7.png)
-
-Option `color_pattern=8` gives the following pattern:
-
-![SquareTessagon color pattern 8](documentation/images/square_tessagon_color8.png)
-
----
-
-### `PythagoreanTessagon`
-![PythagoreanTessagon](documentation/images/pythagorean_tessagon.png)
-
----
-
-### `BrickTessagon`
-![BrickTessagon](documentation/images/brick_tessagon.png)
-
----
-
-### `DodecaTessagon`
-![DodecaTessagon](documentation/images/dodeca_tessagon.png)
-
----
-
-### `SquareTriTessagon`
-![SquareTriTessagon](documentation/images/square_tri_tessagon.png)
-
----
-
-### `WeaveTessagon`
-![WeaveTessagon](documentation/images/weave_tessagon.png)
-
----
-
-### `FloretTessagon`
-![FloretTessagon](documentation/images/floret_tessagon.png)
-
-Option `color_pattern=1` gives the following pattern:
-
-![FloretTessagon color pattern 1](documentation/images/floret_tessagon_color1.png)
-
-Option `color_pattern=2` gives the following pattern:
-
-![FloretTessagon color pattern 2](documentation/images/floret_tessagon_color2.png)
-
-Option `color_pattern=3` gives the following pattern:
-
-![FloretTessagon color pattern 3](documentation/images/floret_tessagon_color3.png)
-
----
-
-### `HexBigTriTessagon`
-![HexBigTriTessagon](documentation/images/hex_big_tri_tessagon.png)
-
-(Naming things is hard.)
-
----
-
-### `ZigZagTessagon`
-![ZigZagTessagon](documentation/images/zig_zag_tessagon.png)
-
----
-
-### `DissectedSquareTessagon`
-![DissectedSquareTessagon](documentation/images/dissected_square_tessagon.png)
-
-Option `color_pattern=1` gives the following pattern:
-
-![DissectedSquareTessagon color pattern 1](documentation/images/dissected_square_tessagon_color1.png)
-
-Option `color_pattern=2` gives the following pattern:
-
-![DissectedSquareTessagon color pattern 2](documentation/images/dissected_square_tessagon_color2.png)
+### Regular tilings
+
+* [SquareTessagon](documentation/square_tessagon.md) (8 color patterns)  
+  ![](documentation/images/square_tessagon_thumb.png)
+* [HexTessagon](documentation/hex_tessagon.md) (2 color patterns)  
+  ![](documentation/images/hex_tessagon_thumb.png)
+* [TriTessagon](documentation/tri_tessagon.md) (3 color patterns)  
+  ![](documentation/images/tri_tessagon_thumb.png)
+
+### Archimedean tilings
+
+* [OctoTessagon](documentation/octo_tessagon.md)  
+  ![](documentation/images/octo_tessagon_thumb.png)
+* [HexTriTessagon](documentation/hex_tri_tessagon.md)  
+  ![](documentation/images/hex_tri_tessagon_thumb.png)
+* [HexSquareTriTessagon](documentation/hex_square_tri_tessagon.md)  
+  ![](documentation/images/hex_square_tri_tessagon_thumb.png)
+* [DodecaTessagon](documentation/dodeca_tessagon.md)  
+  ![](documentation/images/dodeca_tessagon_thumb.png)
+* [SquareTriTessagon](documentation/square_tri_tessagon.md)  
+  ![](documentation/images/square_tri_tessagon_thumb.png)
+
+### Laves tilings
+
+* [RhombusTessagon](documentation/rhombus_tessagon.md)  
+  ![](documentation/images/rhombus_tessagon_thumb.png)
+* [FloretTessagon](documentation/floret_tessagon.md) (3 color patterns)  
+  ![](documentation/images/floret_tessagon_thumb.png)
+
+### Non-edge-to-edge tilings
+
+* [PythagoreanTessagon](documentation/pythagorean_tessagon.md)  
+  ![](documentation/images/pythagorean_tessagon_thumb.png)
+* [BrickTessagon](documentation/brick_tessagon.md)  
+  ![](documentation/images/brick_tessagon_thumb.png)
+* [WeaveTessagon](documentation/weave_tessagon.md)  
+  ![](documentation/images/weave_tessagon_thumb.png)
+* [HexBigTriTessagon](documentation/hex_big_tri_tessagon.md)  
+  ![](documentation/images/hex_big_tri_tessagon_thumb.png)
+* [ZigZagTessagon](documentation/zig_zag_tessagon.md)  
+  ![](documentation/images/zig_zag_tessagon_thumb.png)
+
+### Misc
+
+* [DissectedSquareTessagon](documentation/dissected_square_tessagon.md) (2 color patterns)  
+  ![](documentation/images/dissected_square_tessagon_thumb.png)
 
 ## Usage and Options
 

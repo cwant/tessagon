@@ -53,5 +53,4 @@ class BrickTile(Tile):
                           [['bottom'], ['right', 'middle']]], v_boundary=True)
 
 class BrickTessagon(Tessagon):
-  def init_tile_class(self):
-    return BrickTile
+  tile_class = BrickTile

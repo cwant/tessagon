@@ -2,6 +2,7 @@ from tessagon.core.tessagon import Tessagon
 from tessagon.core.tile import Tile
 
 class HexTile(Tile):
+  num_color_patterns = 2
 
   #    VERTS:
   #    ..|..
@@ -88,12 +89,6 @@ class HexTile(Tile):
                   # neighboring tiles.
                   corner=True)
 
-  def calculate_colors(self):
-    if self.color_pattern == 1:
-      self.color_pattern1()
-    elif self.color_pattern == 2:
-      self.color_pattern2()
-
   def color_pattern1(self):
     if self.fingerprint[0] % 3 == 0:
       self.color_paths([['top', 'left'],
@@ -120,5 +115,4 @@ class HexTile(Tile):
                                   ['bottom', 'right']]}, 0)
 
 class HexTessagon(Tessagon):
-  def init_tile_class(self):
-    return HexTile
+  tile_class = HexTile

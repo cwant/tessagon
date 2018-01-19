@@ -133,5 +133,4 @@ class WeaveTile(Tile):
                   face_type='oct', v_boundary=True)
 
 class WeaveTessagon(Tessagon):
-  def init_tile_class(self):
-    return WeaveTile
+  tile_class = WeaveTile

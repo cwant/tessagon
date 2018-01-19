@@ -2,13 +2,13 @@ from tessagon.core.grid_tile_generator import GridTileGenerator
 from tessagon.core.rotate_tile_generator import RotateTileGenerator
 
 class Tessagon:
+  tile_class = None
+
   def __init__(self, **kwargs):
     if 'function' in kwargs:
       self.f = kwargs['function']
     else:
       raise ValueError('Must specify a function')
-
-    self.tile_class = self.init_tile_class()
 
     if 'tile_generator' in kwargs:
       self.tile_generator = kwargs['tile_generator'](self, **kwargs)
@@ -58,6 +58,10 @@ class Tessagon:
     print("\n=== %s ===\n" % (self.__class__.__name__))
     for i in range(len(self.tiles)):
       self.tiles[i].inspect(tile_number=i)
+
+  @classmethod
+  def num_color_patterns(cls):
+    return cls.tile_class.num_color_patterns
 
   ### Below are protected
 

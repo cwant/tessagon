@@ -61,5 +61,4 @@ class OctoTile(Tile):
                          corner=True)
 
 class OctoTessagon(Tessagon):
-  def init_tile_class(self):
-    return OctoTile
+  tile_class = OctoTile

@@ -187,5 +187,4 @@ class DodecaTile(Tile):
                   face_type='hexagon', u_boundary=True)
 
 class DodecaTessagon(Tessagon):
-  def init_tile_class(self):
-    return DodecaTile
+  tile_class = DodecaTile

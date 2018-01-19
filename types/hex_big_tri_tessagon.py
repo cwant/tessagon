@@ -102,5 +102,4 @@ class HexBigTriTile(Stamp14Tile):
     super().__init__(tessagon, Thingy, **kwargs)
 
 class HexBigTriTessagon(Stamp14Tessagon):
-  def init_tile_class(self):
-    return HexBigTriTile
+  tile_class = HexBigTriTile

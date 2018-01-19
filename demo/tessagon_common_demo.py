@@ -16,34 +16,38 @@ class TessagonCommonDemo:
     column = 0
     # Color patterns
     self.hex_tessagon([column, 0, row])
-    self.hex_tessagon([column, 0, row - offset], color_pattern=1)
-    self.hex_tessagon([column, 0, row - 2*offset], color_pattern=2)
+    for i in range(HexTessagon.num_color_patterns()):
+      color_pattern = i+1
+      self.hex_tessagon([column, 0, row - color_pattern * offset],
+                        color_pattern=color_pattern)
     column += offset
-    self.tri_tessagon([column, 0, row])
-    self.tri_tessagon([column, 0, row - offset], color_pattern=1)
-    self.tri_tessagon([column, 0, row - 2*offset], color_pattern=2)
-    self.tri_tessagon([column, 0, row - 3*offset], color_pattern=3)
-    column += offset
-    self.dissected_square_tessagon([column, 0, row])
-    self.dissected_square_tessagon([column, 0, row - offset], color_pattern=1)
-    self.dissected_square_tessagon([column, 0, row - 2*offset],
-                                   color_pattern=2)
-    column += offset
-    self.floret_tessagon([column, 0, row])
-    self.floret_tessagon([column, 0, row - offset], color_pattern=1)
-    self.floret_tessagon([column, 0, row - 2*offset], color_pattern=2)
-    self.floret_tessagon([column, 0, row - 3*offset], color_pattern=3)
 
+    self.tri_tessagon([column, 0, row])
+    for i in range(TriTessagon.num_color_patterns()):
+      color_pattern = i+1
+      self.tri_tessagon([column, 0, row - color_pattern * offset],
+                        color_pattern=color_pattern)
     column += offset
+
+    self.dissected_square_tessagon([column, 0, row])
+    for i in range(DissectedSquareTessagon.num_color_patterns()):
+      color_pattern = i+1
+      self.dissected_square_tessagon([column, 0, row - color_pattern * offset],
+                                     color_pattern=color_pattern)
+    column += offset
+
+    self.floret_tessagon([column, 0, row])
+    for i in range(FloretTessagon.num_color_patterns()):
+      color_pattern = i+1
+      self.floret_tessagon([column, 0, row - color_pattern * offset],
+                           color_pattern=color_pattern)
+    column += offset
+
     self.square_tessagon([column, 0, row])
-    self.square_tessagon([column, 0, row - offset], color_pattern=1)
-    self.square_tessagon([column, 0, row - 2*offset], color_pattern=2)
-    self.square_tessagon([column, 0, row - 3*offset], color_pattern=3)
-    self.square_tessagon([column, 0, row - 4*offset], color_pattern=4)
-    self.square_tessagon([column, 0, row - 5*offset], color_pattern=5)
-    self.square_tessagon([column, 0, row - 6*offset], color_pattern=6)
-    self.square_tessagon([column, 0, row - 7*offset], color_pattern=7)
-    self.square_tessagon([column, 0, row - 8*offset], color_pattern=8)
+    for i in range(SquareTessagon.num_color_patterns()):
+      color_pattern = i+1
+      self.square_tessagon([column, 0, row - color_pattern * offset],
+                           color_pattern=color_pattern)
 
     # Non-colored objects
     column += offset
