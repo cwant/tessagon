@@ -29,7 +29,8 @@ def main():
              ZigZagTessagon,
              SquareTriTessagon,
              WeaveTessagon,
-             HexBigTriTessagon]
+             HexBigTriTessagon,
+             SquareTri2Tessagon]
   setup_render_scene()
   render_tessagons(classes)
   setup_thumbnail_scene()

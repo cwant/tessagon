@@ -81,6 +81,8 @@ class TessagonCommonDemo:
     self.weave_tessagon([column, 0, row])
     column += offset
     self.hex_big_tri_tessagon([column, 0, row])
+    column += offset
+    self.square_tri2_tessagon([column, 0, row])
 
   def hex_tessagon(self, position, **kwargs):
     options = {
@@ -271,3 +273,14 @@ class TessagonCommonDemo:
     }
     return self.tessellate(cylinder, DissectedSquareTessagon,
                            **{**kwargs, **options})
+
+  def square_tri2_tessagon(self, position):
+    options = {
+      'u_range': [0.0, 1.0],
+      'v_range': [0.0, 1.0],
+      'u_num': 10,
+      'v_num': 2,
+      'rot_factor': 2,
+      'position': position
+    }
+    return self.tessellate(torus, SquareTri2Tessagon, **options)

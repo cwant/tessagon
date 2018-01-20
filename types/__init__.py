@@ -14,3 +14,4 @@ from tessagon.types.floret_tessagon import FloretTessagon
 from tessagon.types.hex_big_tri_tessagon import HexBigTriTessagon
 from tessagon.types.zig_zag_tessagon import ZigZagTessagon
 from tessagon.types.dissected_square_tessagon import DissectedSquareTessagon
+from tessagon.types.square_tri2_tessagon import SquareTri2Tessagon

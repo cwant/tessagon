@@ -73,6 +73,8 @@ Additional tessagon classes can be added by deconstructing how a tessellation fi
   ![](documentation/images/dodeca_tessagon_thumb.png)
 * [SquareTriTessagon](documentation/square_tri_tessagon.md)  
   ![](documentation/images/square_tri_tessagon_thumb.png)
+* [SquareTri2Tessagon](documentation/square_tri2_tessagon.md)  
+  ![](documentation/images/square_tri2_tessagon_thumb.png)
 
 ### Laves tilings
 
