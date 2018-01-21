@@ -30,7 +30,8 @@ def main():
              SquareTriTessagon,
              WeaveTessagon,
              HexBigTriTessagon,
-             SquareTri2Tessagon]
+             SquareTri2Tessagon,
+             DodecaTriTessagon]
   setup_render_scene()
   render_tessagons(classes)
   setup_thumbnail_scene()

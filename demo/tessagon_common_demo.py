@@ -84,6 +84,11 @@ class TessagonCommonDemo:
     column += offset
     self.square_tri2_tessagon([column, 0, row])
 
+    column = start_column
+    row -= offset
+    # Row 3
+    self.dodeca_tri_tessagon([column, 0, row])
+
   def hex_tessagon(self, position, **kwargs):
     options = {
       'u_range': [0.0, 1.0],
@@ -284,3 +289,15 @@ class TessagonCommonDemo:
       'position': position
     }
     return self.tessellate(torus, SquareTri2Tessagon, **options)
+
+  def dodeca_tri_tessagon(self, position):
+    options = {
+      'u_range': [-1.0, 1.0],
+      'v_range': [0.0, 1.0],
+      'u_num': 3,
+      'v_num': 20,
+      'u_cyclic': False,
+      'v_cyclic': True,
+      'position': position
+    }
+    return self.tessellate(one_sheet_hyperboloid, DodecaTriTessagon, **options)
