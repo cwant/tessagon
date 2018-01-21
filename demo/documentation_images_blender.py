@@ -31,7 +31,8 @@ def main():
              WeaveTessagon,
              HexBigTriTessagon,
              SquareTri2Tessagon,
-             DodecaTriTessagon]
+             DodecaTriTessagon,
+             DissectedTriangleTessagon]
   setup_render_scene()
   render_tessagons(classes)
   setup_thumbnail_scene()

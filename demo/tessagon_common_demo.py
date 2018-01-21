@@ -88,6 +88,8 @@ class TessagonCommonDemo:
     row -= offset
     # Row 3
     self.dodeca_tri_tessagon([column, 0, row])
+    column += offset
+    self.dissected_triangle_tessagon([column, 0, row])
 
   def hex_tessagon(self, position, **kwargs):
     options = {
@@ -301,3 +303,27 @@ class TessagonCommonDemo:
       'position': position
     }
     return self.tessellate(one_sheet_hyperboloid, DodecaTriTessagon, **options)
+
+  def dissected_triangle2_tessagon(self, position):
+    options = {
+      'u_range': [0.0, 1.0],
+      'v_range': [0.0, 1.0],
+      'u_num': 10,
+      'v_num': 2,
+      'rot_factor': 2,
+      'position': position
+    }
+    return self.tessellate(torus, DissectedTriangleTessagon, **options)
+
+  def dissected_triangle_tessagon(self, position, **kwargs):
+    options = {
+      'u_range': [0.0, 1.0],
+      'v_range': [0.0, 1.0],
+      'u_num': 16,
+      'v_num': 3,
+      'u_cyclic': True,
+      'v_cyclic': False,
+      'position': position
+    }
+    return self.tessellate(cylinder, DissectedTriangleTessagon,
+                           **{**kwargs, **options})

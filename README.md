@@ -84,6 +84,10 @@ Additional tessagon classes can be added by deconstructing how a tessellation fi
   ![](documentation/images/rhombus_tessagon_thumb.png)
 * [FloretTessagon](documentation/floret_tessagon.md) (3 color patterns)  
   ![](documentation/images/floret_tessagon_thumb.png)
+* [DissectedSquareTessagon](documentation/dissected_square_tessagon.md) (2 color patterns)  
+  ![](documentation/images/dissected_square_tessagon_thumb.png)
+* [DissectedTriangeTessagon](documentation/dissected_triangle_tessagon.md)  
+  ![](documentation/images/dissected_triangle_tessagon_thumb.png)
 
 ### Non-edge-to-edge tilings
 
@@ -97,11 +101,6 @@ Additional tessagon classes can be added by deconstructing how a tessellation fi
   ![](documentation/images/hex_big_tri_tessagon_thumb.png)
 * [ZigZagTessagon](documentation/zig_zag_tessagon.md)  
   ![](documentation/images/zig_zag_tessagon_thumb.png)
-
-### Misc
-
-* [DissectedSquareTessagon](documentation/dissected_square_tessagon.md) (2 color patterns)  
-  ![](documentation/images/dissected_square_tessagon_thumb.png)
 
 ## Usage and Options
 

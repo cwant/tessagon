@@ -16,3 +16,4 @@ from tessagon.types.zig_zag_tessagon import ZigZagTessagon
 from tessagon.types.dissected_square_tessagon import DissectedSquareTessagon
 from tessagon.types.square_tri2_tessagon import SquareTri2Tessagon
 from tessagon.types.dodeca_tri_tessagon import DodecaTriTessagon
+from tessagon.types.dissected_triangle_tessagon import DissectedTriangleTessagon
