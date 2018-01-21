@@ -131,9 +131,11 @@ Here are the options:
 
 ![tiles](documentation/images/tiles.png)
 
-  As you work with the software, keep in mind the difference between a face and a tile. A tile is not a face! A tile is a four-sided region (often a rectangle) that holds one or more faces that form a repeated pattern. A tile often shares faces with neighboring tiles:  
-  ![tiles vs faces](documentation/images/tiles_vs_faces.png)
-  The source code files for each tessagon class usually contain some ASCII art that illustrates how the pattern of faces is arranged on a tile.
+As you work with the software, keep in mind the difference between a face and a tile. A tile is not a face! A tile is a four-sided region (often a rectangle) that holds one or more faces that form a repeated pattern. A tile often shares faces with neighboring tiles:
+
+![tiles vs faces](documentation/images/tiles_vs_faces.png)
+  
+The source code files for each tessagon class usually contain some ASCII art that illustrates how the pattern of faces is arranged on a tile.
 
 * `corners`: instead of using `u_range` and `v_range`, you can also specify your domain in the uv plain as a quadrilateral by specifying the corners of the region you would like to map. This is a list of four tuples in the following order: bottom-left, bottom-right, top-left, top-right.
 
