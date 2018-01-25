@@ -90,6 +90,10 @@ class TessagonCommonDemo:
     self.dodeca_tri_tessagon([column, 0, row])
     column += offset
     self.dissected_triangle_tessagon([column, 0, row])
+    column += offset
+    self.dissected_hex_quad_tessagon([column, 0, row])
+    #column += offset
+    #self.dissected_hex_tri_tessagon([column, 0, row])
 
   def hex_tessagon(self, position, **kwargs):
     options = {
@@ -230,7 +234,7 @@ class TessagonCommonDemo:
     }
     return self.tessellate(sphere, WeaveTessagon, **options)
 
-  def floret_torus(self, u, v):
+  def chubby_torus(self, u, v):
     # u_cyclic = True, v_cyclic = True
     r1 = 5.0
     r2 = 1.5
@@ -244,7 +248,7 @@ class TessagonCommonDemo:
       'v_num': 12,
       'position': position
     }
-    return self.tessellate(self.floret_torus, FloretTessagon,
+    return self.tessellate(self.chubby_torus, FloretTessagon,
                            **{**kwargs, **options})
 
   def hex_big_tri_tessagon(self, position):
@@ -326,4 +330,17 @@ class TessagonCommonDemo:
       'position': position
     }
     return self.tessellate(cylinder, DissectedTriangleTessagon,
+                           **{**kwargs, **options})
+
+  def dissected_hex_quad_tessagon(self, position, **kwargs):
+    options = {
+      'u_range': [0.0, 1.0],
+      'v_range': [0.0, 1.0],
+      'u_num': 10,
+      'v_num': 20,
+      'u_cyclic': True,
+      'v_cyclic': True,
+      'position': position
+    }
+    return self.tessellate(self.chubby_torus, DissectedHexQuadTessagon,
                            **{**kwargs, **options})
