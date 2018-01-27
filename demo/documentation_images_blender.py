@@ -33,7 +33,8 @@ def main():
              SquareTri2Tessagon,
              DodecaTriTessagon,
              DissectedTriangleTessagon,
-             DissectedHexQuadTessagon]
+             DissectedHexQuadTessagon,
+             DissectedHexTriTessagon]
 
   setup_render_scene()
   render_tessagons(classes)
