@@ -14,32 +14,39 @@ from tessagon.misc.shapes import *
 from tessagon.adaptors.blender_adaptor import BlenderAdaptor
 
 def main():
-  classes = [HexTessagon,
-             SquareTessagon,
-             TriTessagon,
-             DissectedSquareTessagon,
-             FloretTessagon,
-             RhombusTessagon,
-             OctoTessagon,
-             HexTriTessagon,
-             HexSquareTriTessagon,
-             PythagoreanTessagon,
-             BrickTessagon,
-             DodecaTessagon,
-             ZigZagTessagon,
-             SquareTriTessagon,
-             WeaveTessagon,
-             HexBigTriTessagon,
-             SquareTri2Tessagon,
-             DodecaTriTessagon,
-             DissectedTriangleTessagon,
-             DissectedHexQuadTessagon,
-             DissectedHexTriTessagon]
+  classes = {
+    'regular':  [SquareTessagon,
+                 HexTessagon,
+                 TriTessagon],
+
+    'archimedean': [OctoTessagon,
+                    HexTriTessagon,
+                    HexSquareTriTessagon,
+                    DodecaTessagon,
+                    SquareTriTessagon,
+                    SquareTri2Tessagon,
+                    DodecaTriTessagon],
+
+    'laves': [RhombusTessagon,
+              FloretTessagon,
+              DissectedSquareTessagon,
+              DissectedTriangleTessagon,
+              DissectedHexQuadTessagon,
+              DissectedHexTriTessagon],
+
+    'non_edge': [PythagoreanTessagon,
+                 BrickTessagon,
+                 WeaveTessagon,
+                 HexBigTriTessagon,
+                 ZigZagTessagon]
+  }
+  class_list = [ klass for key in classes for klass in classes[key]]
 
   setup_render_scene()
-  render_tessagons(classes)
+  render_tessagons(class_list)
   setup_thumbnail_scene()
-  render_thumbnails(classes)
+  render_thumbnails(class_list)
+  write_markdown(classes)
 
 def setup_render_scene():
   scn = bpy.context.scene
@@ -112,15 +119,15 @@ def set_layer(thing, layer = 1):
   for i in range(20):
     if i != layer: thing.layers[i] = False
 
-def render_tessagons(classes):
-  for cls in classes:
+def render_tessagons(class_list):
+  for cls in class_list:
     render_class(cls)
 
   render_object(['HexTorusIn','WireTorusOut'],
                 filename='wire_skin.png', mark_edges=False)
 
-def render_thumbnails(classes):
-  for cls in classes:
+def render_thumbnails(class_list):
+  for cls in class_list:
     render_class(cls, thumbnail = True)
 
 def render_class(cls, **kwargs):
@@ -182,3 +189,48 @@ def get_object(name):
     return None
   return bpy.data.objects[name]
 
+def write_markdown(classes):
+  dir = os.getenv('DOCUMENTATION_DIR') or '/tmp'
+
+  list_filename = "%s/README_tessagon_list.md" % (dir)
+  list_fp = open(list_filename, 'w')
+
+  key_to_name = {
+    'regular': 'Regular tilings',
+    'archimedean': 'Archimedean tilings',
+    'laves': 'Laves tilings',
+    'non_edge': 'Non-edge-to-edge tilings'
+  }
+  # darn, keys aren't ordered by insertion
+  for key in ['regular', 'archimedean', 'laves', 'non_edge']:
+    list_fp.write("### %s\n\n" % key_to_name[key])
+    for cls in classes[key]:
+      class_name = cls.__name__
+      file_base = get_filename(class_name)
+      num_patterns = cls.num_color_patterns()
+      markdown_file = "documentation/%s.md" % file_base
+      thumbnail_file = "documentation/images/%s_thumb.png" % file_base
+      img_file = "images/%s.png" % file_base
+
+      list_fp.write("* [%s](%s)" % (class_name, markdown_file))
+      if num_patterns > 0:
+        list_fp.write(" (%d color patterns)  \n" % num_patterns)
+      else:
+        list_fp.write("  \n")
+      list_fp.write("  [![%s](%s)](%s)\n" % (class_name, thumbnail_file,
+                                             markdown_file))
+
+      markdown_fp = open(markdown_file, 'w')
+      markdown_fp.write("# `%s`\n\n" % class_name)
+      markdown_fp.write("![%s](%s)\n" % (class_name, img_file))
+      if num_patterns > 0:
+        markdown_fp.write("\n## Color patterns\n")
+        for i in range(cls.num_color_patterns()):
+          markdown_fp.write("\n### `color_pattern=%d`\n\n" % (i+1))
+          color_img_file = "images/%s_color%d.png" % (file_base, i+1)
+          markdown_fp.write("![%s color pattern %d](%s)\n" %
+                            (class_name, i+1, color_img_file))
+      markdown_fp.close()
+
+    list_fp.write("\n")
+  list_fp.close()
