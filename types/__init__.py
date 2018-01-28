@@ -19,3 +19,4 @@ from tessagon.types.dodeca_tri_tessagon import DodecaTriTessagon
 from tessagon.types.dissected_triangle_tessagon import DissectedTriangleTessagon
 from tessagon.types.dissected_hex_quad_tessagon import DissectedHexQuadTessagon
 from tessagon.types.dissected_hex_tri_tessagon import DissectedHexTriTessagon
+from tessagon.types.penta_tessagon import PentaTessagon

@@ -95,6 +95,11 @@ class TessagonCommonDemo:
     column += offset
     self.dissected_hex_tri_tessagon([column, 0, row])
 
+    column = start_column
+    row -= offset
+    # Row 4
+    self.penta_tessagon([column, 0, row])
+
   def hex_tessagon(self, position, **kwargs):
     options = {
       'u_range': [0.0, 1.0],
@@ -357,3 +362,13 @@ class TessagonCommonDemo:
     }
     return self.tessellate(self.chubby_torus, DissectedHexTriTessagon,
                            **{**kwargs, **options})
+
+  def penta_tessagon(self, position):
+    options = {
+      'u_range': [0.0, 1.0],
+      'v_range': [0.0, 1.0],
+      'u_num': 20,
+      'v_num': 4,
+      'position': position
+    }
+    return self.tessellate(torus, PentaTessagon, **options)

@@ -32,7 +32,8 @@ def main():
               DissectedSquareTessagon,
               DissectedTriangleTessagon,
               DissectedHexQuadTessagon,
-              DissectedHexTriTessagon],
+              DissectedHexTriTessagon,
+              PentaTessagon],
 
     'non_edge': [PythagoreanTessagon,
                  BrickTessagon,
