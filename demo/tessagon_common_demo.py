@@ -99,6 +99,8 @@ class TessagonCommonDemo:
     row -= offset
     # Row 4
     self.penta_tessagon([column, 0, row])
+    column += offset
+    self.penta2_tessagon([column, 0, row])
 
   def hex_tessagon(self, position, **kwargs):
     options = {
@@ -372,3 +374,13 @@ class TessagonCommonDemo:
       'position': position
     }
     return self.tessellate(torus, PentaTessagon, **options)
+
+  def penta2_tessagon(self, position):
+    options = {
+      'u_range': [0.0, 1.0],
+      'v_range': [0.0, 1.0],
+      'u_num': 50,
+      'v_num': 4,
+      'position': position
+    }
+    return self.tessellate(torus, Penta2Tessagon, **options)

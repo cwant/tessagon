@@ -94,6 +94,8 @@ Additional tessagon classes can be added by deconstructing how a tessellation fi
   [![DissectedHexTriTessagon](documentation/images/dissected_hex_tri_tessagon_thumb.png)](documentation/dissected_hex_tri_tessagon.md)
 * [PentaTessagon](documentation/penta_tessagon.md)  
   [![PentaTessagon](documentation/images/penta_tessagon_thumb.png)](documentation/penta_tessagon.md)
+* [Penta2Tessagon](documentation/penta2_tessagon.md)  
+  [![Penta2Tessagon](documentation/images/penta2_tessagon_thumb.png)](documentation/penta2_tessagon.md)
 
 ### Non-edge-to-edge tilings
 
