@@ -296,12 +296,12 @@ class TessagonCommonDemo:
     options = {
       'u_range': [0.0, 1.0],
       'v_range': [0.0, 1.0],
-      'u_num': 10,
-      'v_num': 2,
-      'rot_factor': 2,
+      'u_num': 35,
+      'v_num': 3,
+      'v_cyclic': False,
       'position': position
     }
-    return self.tessellate(torus, SquareTri2Tessagon, **options)
+    return self.tessellate(cylinder, SquareTri2Tessagon, **options)
 
   def dodeca_tri_tessagon(self, position):
     options = {
