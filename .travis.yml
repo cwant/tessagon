@@ -6,3 +6,4 @@ matrix:
   include:
     - python: 3.6
     - python: 3.5
+install:
