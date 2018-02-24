@@ -67,13 +67,13 @@ class TileGenerator(ValueBlend):
         v_ratio1 = float(v + 1) / self.v_num
         u_shear0 = v * self.u_shear
         u_shear1 = (v + 1) * self.u_shear
-        corners = [self._blend(u_ratio0 + u_shear0 + self.u_phase,
+        corners = [self.blend(u_ratio0 + u_shear0 + self.u_phase,
                                v_ratio0 + v_shear0 + self.v_phase),
-                   self._blend(u_ratio1 + u_shear0 + self.u_phase,
+                   self.blend(u_ratio1 + u_shear0 + self.u_phase,
                                v_ratio0 + v_shear1 + self.v_phase),
-                   self._blend(u_ratio0 + u_shear1 + self.u_phase,
+                   self.blend(u_ratio0 + u_shear1 + self.u_phase,
                                v_ratio1 + v_shear0 + self.v_phase),
-                   self._blend(u_ratio1 + u_shear1 + self.u_phase,
+                   self.blend(u_ratio1 + u_shear1 + self.u_phase,
                                v_ratio1 + v_shear1 + self.v_phase)]
         extra_args = { 'corners': corners,
                        'fingerprint': [u, v] }

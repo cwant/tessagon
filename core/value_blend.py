@@ -23,7 +23,7 @@ class ValueBlend:
       out[i] = (1 - ratio) * tuple1[i] + ratio * tuple2[i]
     return out
 
-  def _blend(self, ratio_u, ratio_v):
+  def blend(self, ratio_u, ratio_v):
     uv0 = self._blend_tuples(self.corners[0],
                            self.corners[1],
                            ratio_u)

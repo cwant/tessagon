@@ -19,7 +19,7 @@ class Tile(AbstractTile):
     # In reality, multiple vertices may get defined if symmetry is declared
     vert = self._get_vert(index_keys)
     if not vert:
-      coords = self.f(*self._blend(ratio_u, ratio_v))
+      coords = self.f(*self.blend(ratio_u, ratio_v))
       vert = self.mesh_adaptor.create_vert(coords)
 
       self._set_vert(index_keys, vert)

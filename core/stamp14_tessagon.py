@@ -18,7 +18,7 @@ class Stamp14:
   def offset_point(self, offset_u, offset_v):
     uv = [self.reference_point[0] + offset_u,
           self.reference_point[1] + offset_v] 
-    return self.tile.f(*self.tile._blend(*uv))
+    return self.tile.f(*self.tile.blend(*uv))
 
   def offset_vert(self, offset_u, offset_v):
     point = self.offset_point(offset_u, offset_v)

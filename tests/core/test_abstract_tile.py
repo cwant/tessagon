@@ -2,6 +2,8 @@ import pytest
 from core_tests_base import CoreTestsBase
 from tessagon.core.abstract_tile import AbstractTile
 
+# Testing ValueBlend too ...
+
 class TestAbstractTile(CoreTestsBase):
   def test_u_range_v_range_params(self):
     tessagon = FakeTessagon()
@@ -48,6 +50,30 @@ class TestAbstractTile(CoreTestsBase):
     assert tile.get_neighbor_tile(['top']) == tiles[0]
     assert tile.get_neighbor_tile(['bottom']) == tiles[1]
     assert tile.get_neighbor_tile(['left', 'top']) == tiles[4]
+
+  def test_blend_when_initialized_with_ranges(self):
+    tessagon = FakeTessagon()
+    tile = AbstractTile(tessagon, u_range=[0.5, 1.0], v_range=[2.5, 4.5])
+
+    assert tile.blend(0, 0) == [0.5, 2.5]
+    assert tile.blend(1, 0) == [1.0, 2.5]
+    assert tile.blend(0, 1) == [0.5, 4.5]
+    assert tile.blend(1, 1) == [1.0, 4.5]
+    assert tile.blend(0.5, 0.25) == [0.75, 3.0]
+    assert tile.blend(0.75, 0.5) == [0.875, 3.5]
+
+  def test_blend_when_initialized_with_corners(self):
+    tessagon = FakeTessagon()
+    tile = AbstractTile(tessagon, corners=[[0.5, 2.5],
+                                           [1.5, 4.5],
+                                           [1.5, 4.5],
+                                           [2.5, 6.5]])
+
+    assert tile.blend(0, 0) == [0.5, 2.5]
+    assert tile.blend(1, 0) == [1.5, 4.5]
+    assert tile.blend(0, 1) == [1.5, 4.5]
+    assert tile.blend(1, 1) == [2.5, 6.5]
+    assert tile.blend(0.5, 0.5) == [1.5, 4.5]
 
 class FakeTessagon:
   def f(self, u, v):
