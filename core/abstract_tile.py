@@ -14,7 +14,7 @@ class AbstractTile(ValueBlend):
         if 'u_symmetric' in kwargs:
             self.u_symmetric = kwargs['u_symmetric']
         if 'v_symmetric' in kwargs:
-            self.u_symmetric = kwargs['u_symmetric']
+            self.v_symmetric = kwargs['v_symmetric']
 
         self.id = None
         # This is not necessary to any of the calculations, just

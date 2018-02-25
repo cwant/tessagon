@@ -10,9 +10,18 @@ class CoreTestsBase:
 
 
 class FakeTessagon:
+    def __init__(self):
+        self.mesh_adaptor = FakeAdaptor()
+
     def f(self, u, v):
         return [u, u*v, v]
 
 
 class FakeAdaptor:
-    pass
+    def __init__(self):
+        self.verts = []
+        self.faces = []
+
+    def create_vert(self, coords):
+        self.verts.append(coords)
+        return coords
