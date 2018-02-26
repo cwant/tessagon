@@ -1,5 +1,4 @@
-from core_tests_base import CoreTestsBase, FakeTessagon
-from tessagon.core.tile import Tile
+from core_tests_base import CoreTestsBase, FakeTessagon, FakeTileSubClass
 
 
 class TestTile(CoreTestsBase):
@@ -8,7 +7,8 @@ class TestTile(CoreTestsBase):
 
     def test_add_vert(self):
         tessagon = FakeTessagon()
-        tile = TileSubClass(tessagon, u_range=[0.5, 1.0], v_range=[2.5, 3.0])
+        tile = FakeTileSubClass(tessagon, u_range=[0.5, 1.0],
+                                v_range=[2.5, 3.0])
         tile.add_vert(['top', 'left'], 0.25, 0.75)
         assert tile.blend(0.25, 0.75) == [0.625, 2.875]
 
@@ -20,8 +20,9 @@ class TestTile(CoreTestsBase):
 
     def test_add_vert_u_symmetric(self):
         tessagon = FakeTessagon()
-        tile = TileSubClass(tessagon, u_range=[0.5, 1.0], v_range=[2.5, 3.0],
-                            u_symmetric=True)
+        tile = FakeTileSubClass(tessagon, u_range=[0.5, 1.0],
+                                v_range=[2.5, 3.0],
+                                u_symmetric=True)
         tile.add_vert(['top', 'left'], 0.25, 0.75)
         # [0.75, 0.75] is reflection of [0.25, 0.75] in U direction
         assert tile.blend(0.75, 0.75) == [0.875, 2.875]
@@ -34,8 +35,9 @@ class TestTile(CoreTestsBase):
 
     def test_add_vert_v_symmetric(self):
         tessagon = FakeTessagon()
-        tile = TileSubClass(tessagon, u_range=[0.5, 1.0], v_range=[2.5, 3.0],
-                            v_symmetric=True)
+        tile = FakeTileSubClass(tessagon, u_range=[0.5, 1.0],
+                                v_range=[2.5, 3.0],
+                                v_symmetric=True)
         tile.add_vert(['top', 'left'], 0.25, 0.75)
         # [0.25, 0.25] is reflection of [0.25, 0.75] in V direction
         assert tile.blend(0.25, 0.25) == [0.625, 2.625]
@@ -48,8 +50,9 @@ class TestTile(CoreTestsBase):
 
     def test_add_vert_u_v_symmetric(self):
         tessagon = FakeTessagon()
-        tile = TileSubClass(tessagon, u_range=[0.5, 1.0], v_range=[2.5, 3.0],
-                            u_symmetric=True, v_symmetric=True)
+        tile = FakeTileSubClass(tessagon, u_range=[0.5, 1.0],
+                                v_range=[2.5, 3.0],
+                                u_symmetric=True, v_symmetric=True)
         tile.add_vert(['top', 'left'], 0.25, 0.75)
         # [0.75, 0.25] is reflection of [0.25, 0.75] in U and V directions
         assert tile.blend(0.75, 0.25) == [0.875, 2.625]
@@ -59,17 +62,3 @@ class TestTile(CoreTestsBase):
         assert tile.verts['top']['right'] == tile.f(0.875, 2.875)
         assert tile.verts['bottom']['left'] == tile.f(0.625, 2.625)
         assert tile.verts['bottom']['right'] == tile.f(0.875, 2.625)
-
-
-class TileSubClass(Tile):
-    def init_verts(self):
-        return {'top': {'left': None,
-                        'right': None},
-                'bottom': {'left': None,
-                           'right': None}}
-
-    def init_faces(self):
-        return {'top': {'left': None,
-                        'right': None},
-                'bottom': {'left': None,
-                           'right': None}}
