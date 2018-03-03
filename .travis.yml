@@ -7,6 +7,8 @@ matrix:
     - python: 3.6
     - python: 3.5
 install:
-  - echo 'hello world'
+  - pip install flake8
 script:
   - pytest
+  # More dirs to be added later
+  - flake8 core
