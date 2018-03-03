@@ -6,8 +6,8 @@ from importlib import reload
 import tessagon
 reload(tessagon)
 
-from tessagon.types import *
-from tessagon.misc.shapes import *
+from tessagon.types.hex_tessagon import HexTessagon
+from tessagon.misc.shapes import other_torus
 
 import tessagon_common_demo
 reload(tessagon_common_demo)
