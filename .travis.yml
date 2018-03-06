@@ -1,0 +1,14 @@
+os: linux
+sudo: false
+language: python
+
+matrix:
+  include:
+    - python: 3.6
+    - python: 3.5
+install:
+  - pip install flake8
+script:
+  - pytest
+  # More dirs to be added later
+  - flake8 --verbose

@@ -104,3 +104,4 @@ ENV/
 
 wire_skin.py
 tmp/
+.pytest_cache/
