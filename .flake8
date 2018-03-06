@@ -1,0 +1,2 @@
+[flake8]
+exclude = wire_skin.py
