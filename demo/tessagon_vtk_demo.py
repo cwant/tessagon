@@ -4,7 +4,7 @@ import vtk
 from vtk.util.colors import tomato
 
 this_dir = os.path.dirname(os.path.realpath(__file__))
-sys.path.append(this_dir + '/../..')
+sys.path.append(this_dir + '/..')
 
 from tessagon.adaptors.vtk_adaptor import VtkAdaptor  # noqa: E402
 from tessagon_common_demo import TessagonCommonDemo  # noqa: E402
