@@ -1,5 +1,6 @@
-# tessagon
-Now there is no excuse not to tessellate your favorite 2D manifolds with triangles or hexagons or whatever.
+# tessagon -- tessellation / tiling with python
+
+Tessellate your favorite 3D surfaces (technically, 2D manifolds) with triangles, hexagons, or a number of other curated tiling types!
 
 ![Animation of tessellated torii](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/tessagon_demo.gif)
 
