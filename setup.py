@@ -10,7 +10,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='tessagon',
-    version='0.3',
+    version='0.4',
     description='Tessellate your favorite 2D manifolds with triangles, ' +
     'hexagons, and other interesting patterns.',
     long_description=long_description,
