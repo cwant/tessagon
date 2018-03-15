@@ -1,4 +1,4 @@
-# tessagon -- tessellation / tiling with python
+# tessagon: tessellation / tiling with python
 
 Tessellate your favorite 3D surfaces (technically, 2D manifolds) with triangles, hexagons, or a number of other curated tiling types!
 
