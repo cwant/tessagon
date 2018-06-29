@@ -10,5 +10,4 @@ install:
   - pip install flake8
 script:
   - pytest
-  # More dirs to be added later
   - flake8 --verbose
