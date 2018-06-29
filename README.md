@@ -208,3 +208,4 @@ I primarily use Tessagon to create objects for 3D printing (on [Shapeways](https
 
 https://www.shapeways.com/marketplace?q=tessagon
 
+![3D printed DodecaHexTriTessagon](https://cwant.github.io/python-os-presentation/assets/3d-print.png)
