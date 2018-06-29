@@ -2,9 +2,7 @@
 
 Tessellate your favorite 3D surfaces (technically, 2D manifolds) with triangles, hexagons, or a number of other curated tiling types!
 
-Checkout my presentation on the creation of Tessagon as an open source Python project here:
-
-[https://cwant.github.io/python-os-presentation](https://cwant.github.io/python-os-presentation/#/)
+**Check out my presentation on the creation of Tessagon as an open source Python project here: [https://cwant.github.io/python-os-presentation](https://cwant.github.io/python-os-presentation/#/)**
 
 ![Animation of tessellated torii](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/tessagon_demo.gif)
 
