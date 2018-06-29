@@ -6,8 +6,6 @@ Tessellate your favorite 3D surfaces (technically, 2D manifolds) with triangles,
 
 ![Animation of tessellated torii](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/tessagon_demo.gif)
 
-(Individual images from the above gif are below.)
-
 ## TL;DR
 
 Check out the repository and look in the `demo` directory.
