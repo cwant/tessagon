@@ -31,7 +31,8 @@ Three things are needed to use tessagon to tessellate the surface of a 2D-manifo
   * adaptor `BlenderAdaptor` from the module `tessagon.adaptors.blender_adaptor`. The output from the adaptor's `get_mesh` method is of type `BMesh`.
   * adaptor `VtkAdaptor` from the module `tessagon.adaptors.vtk_adaptor`. The output from the adaptor's `get_mesh` method is of type `VtkPolydata`.
   * adaptor `ListAdaptor` from the module `tessagon.adaptors.list_adaptor`. The output from the adaptor's `get_mesh` method is a dict with keys `vert_list`, `face_list` and `color_list`, which point to lists of vertices, faces (as indices into the vertex list), and color indices for each face.
- (Note that the `get_mesh` methods mentioned above are usually called indirectly through the `Tessagon` method `create_mesh`.)
+
+  (Note that the `get_mesh` methods mentioned above are usually called indirectly through the `Tessagon` method `create_mesh`.)
  
 The reader should check out the demos, but here is some very basic usage using blender:
 
