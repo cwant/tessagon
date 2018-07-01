@@ -55,7 +55,7 @@ class Tile(AbstractTile):
     def add_face(self, index_keys, vert_index_keys_list, **kwargs):
         # Use the mesh adaptor to create a face.
         # In reality, multiple faces may get defined if symmetry is declared
-        if self._get_face(index_keys):
+        if self._get_face(index_keys) is not None:
             return None
 
         verts = self._get_verts_from_list(vert_index_keys_list)
