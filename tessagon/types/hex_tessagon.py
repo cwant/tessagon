@@ -1,10 +1,15 @@
 from tessagon.core.tessagon import Tessagon
 from tessagon.core.tile import Tile
+from tessagon.core.tessagon_metadata import TessagonMetadata
+
+metadata = TessagonMetadata(name='Regular Hexagons',
+                            num_color_patterns=2,
+                            classification='regular',
+                            shapes=['hexagons'],
+                            sides=[6])
 
 
 class HexTile(Tile):
-    num_color_patterns = 2
-
     #    VERTS:
     #    ..|..
     #    ..a..  a = ['top', 'center']
@@ -118,3 +123,4 @@ class HexTile(Tile):
 
 class HexTessagon(Tessagon):
     tile_class = HexTile
+    metadata = metadata

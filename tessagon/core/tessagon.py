@@ -4,6 +4,7 @@ from tessagon.core.rotate_tile_generator import RotateTileGenerator
 
 class Tessagon:
     tile_class = None
+    metadata = None
 
     def __init__(self, **kwargs):
         if 'function' in kwargs:
@@ -62,7 +63,9 @@ class Tessagon:
 
     @classmethod
     def num_color_patterns(cls):
-        return cls.tile_class.num_color_patterns
+        if cls.metadata is None:
+            return 0
+        return cls.metadata.num_color_patterns()
 
     # Below are protected
 

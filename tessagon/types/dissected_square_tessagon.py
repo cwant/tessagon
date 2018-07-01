@@ -1,10 +1,15 @@
 from tessagon.core.tessagon import Tessagon
 from tessagon.core.tile import Tile
+from tessagon.core.tessagon_metadata import TessagonMetadata
+
+metadata = TessagonMetadata(name='Dissected Square',
+                            num_color_patterns=2,
+                            classification='laves',
+                            shapes=['triangles'],
+                            sides=[3])
 
 
 class DissectedSquareTile(Tile):
-
-    num_color_patterns = 2
 
     #    VERTS:     a = ['top', 'left']
     #    a---b---c  b = ['top', 'center']
@@ -103,3 +108,4 @@ class DissectedSquareTile(Tile):
 
 class DissectedSquareTessagon(Tessagon):
     tile_class = DissectedSquareTile
+    metadata = metadata

@@ -1,9 +1,15 @@
-from tessagon.core.tile import Tile
 from tessagon.core.tessagon import Tessagon
+from tessagon.core.tile import Tile
+from tessagon.core.tessagon_metadata import TessagonMetadata
+
+metadata = TessagonMetadata(name='Regular Triangles',
+                            num_color_patterns=3,
+                            classification='regular',
+                            shapes=['triangles'],
+                            sides=[3])
 
 
 class TriTile(Tile):
-    num_color_patterns = 3
 
     #  ^  0.|.1   This is the topology of the tile.
     #  |  |\|/|   (Not a Dead Kennedy's logo ...).
@@ -140,3 +146,4 @@ class TriTile(Tile):
 
 class TriTessagon(Tessagon):
     tile_class = TriTile
+    metadata = metadata

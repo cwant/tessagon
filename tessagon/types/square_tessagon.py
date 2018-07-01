@@ -1,9 +1,15 @@
 from tessagon.core.tessagon import Tessagon
 from tessagon.core.tile import Tile
+from tessagon.core.tessagon_metadata import TessagonMetadata
+
+metadata = TessagonMetadata(name='Regular Squares',
+                            num_color_patterns=8,
+                            classification='regular',
+                            shapes=['squares'],
+                            sides=[4])
 
 
 class SquareTile(Tile):
-    num_color_patterns = 8
 
     def __init__(self, tessagon, **kwargs):
         super().__init__(tessagon, **kwargs)
@@ -94,3 +100,4 @@ class SquareTile(Tile):
 
 class SquareTessagon(Tessagon):
     tile_class = SquareTile
+    metadata = metadata

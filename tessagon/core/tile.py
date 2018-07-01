@@ -2,7 +2,6 @@ from tessagon.core.abstract_tile import AbstractTile
 
 
 class Tile(AbstractTile):
-    num_color_patterns = 0
 
     def __init__(self, tessagon, **kwargs):
         super().__init__(tessagon, **kwargs)
@@ -81,10 +80,13 @@ class Tile(AbstractTile):
 
         return face
 
+    def num_color_patterns(self):
+        return self.tessagon.num_color_patterns()
+
     def calculate_colors(self):
-        if self.color_pattern > self.__class__.num_color_patterns:
+        if self.color_pattern > self.num_color_patterns():
             raise ValueError("color_pattern must be below %d" %
-                             (self.__class__.num_color_patterns))
+                             (self.num_color_patterns()))
         method_name = "color_pattern%d" % (self.color_pattern)
         method = getattr(self, method_name)
         if not callable(method):

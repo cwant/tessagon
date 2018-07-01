@@ -1,5 +1,12 @@
 from tessagon.core.stamp14_tessagon \
     import Stamp14, Stamp14Tile, Stamp14Tessagon
+from tessagon.core.tessagon_metadata import TessagonMetadata
+
+metadata = TessagonMetadata(name='Florets',
+                            num_color_patterns=3,
+                            classification='laves',
+                            shapes=['pentagons'],
+                            sides=[5])
 
 # To get a sense of how Florets repeat over tiles, see:
 #   https://github.com/cwant/tessagon/blob/master/documentation/images/florets_repeat.png
@@ -81,7 +88,6 @@ class Floret(Stamp14):
 
 
 class FloretTile(Stamp14Tile):
-    num_color_patterns = 3
 
     def __init__(self, tessagon, **kwargs):
         super().__init__(tessagon, Floret, **kwargs)
@@ -121,6 +127,7 @@ class FloretTile(Stamp14Tile):
 
 class FloretTessagon(Stamp14Tessagon):
     tile_class = FloretTile
+    metadata = metadata
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
