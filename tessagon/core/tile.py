@@ -19,7 +19,7 @@ class Tile(AbstractTile):
         # Use the mesh adaptor to create a vertex.
         # In reality, multiple vertices may get defined if symmetry is declared
         vert = self._get_vert(index_keys)
-        if not vert:
+        if vert is None:
             coords = self.f(*self.blend(ratio_u, ratio_v))
             vert = self.mesh_adaptor.create_vert(coords)
 
@@ -43,10 +43,11 @@ class Tile(AbstractTile):
         # On boundary, the vert on a neighbor is equivalent to this vert
         # This is usually only called indirectly via add_vert, but check out
         # PythagoreanTile for an example of direct usage
-        if not vert:
+        if vert is None:
             return None
+
         tile = self.get_neighbor_tile(neighbor_keys)
-        if not tile:
+        if tile is None:
             return None
 
         tile._set_vert(self._index_path(index_keys, neighbor_keys), vert)
@@ -58,7 +59,7 @@ class Tile(AbstractTile):
             return None
 
         verts = self._get_verts_from_list(vert_index_keys_list)
-        if not verts:
+        if verts is None:
             return None
 
         face = self.mesh_adaptor.create_face(verts)
@@ -93,7 +94,7 @@ class Tile(AbstractTile):
 
     def color_face(self, index_keys, color_index):
         face = self._get_face(index_keys)
-        if not face:
+        if face is None:
             return
         self.mesh_adaptor.color_face(face, color_index)
 
@@ -102,14 +103,14 @@ class Tile(AbstractTile):
         # This is usually only called indirectly via add_face, but check out
         # PythagoreanTile for an example of direct usage
         tile = self.get_neighbor_tile(neighbor_keys)
-        if not tile:
+        if tile is None:
             return None
         tile._set_face(self._index_path(index_keys, neighbor_keys), face)
 
     def all_face_paths(self, faces=None, base_path=None):
-        if not faces:
+        if faces is None:
             faces = self.faces
-        if not base_path:
+        if base_path is None:
             base_path = []
 
         paths = []
@@ -156,7 +157,7 @@ class Tile(AbstractTile):
     def _get_neighbor_vert(self, neighbor_keys, index_keys):
         # See comment about neighbors in AbstractTile
         tile = self.get_neighbor_tile(neighbor_keys)
-        if not tile:
+        if tile is None:
             return None
         return tile._get_vert(self._index_path(index_keys, neighbor_keys))
 
@@ -219,7 +220,8 @@ class Tile(AbstractTile):
                                                vert_index_keys[1])
             else:
                 vert = self._get_vert(vert_index_keys)
-            if not vert:
+
+            if vert is None:
                 return None
             verts.append(vert)
 
