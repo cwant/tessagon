@@ -24,7 +24,7 @@ or::
 
 setup(
     name='tessagon',
-    version='0.4.2',
+    version='0.5',
     description='Tessellate your favorite 2D manifolds with triangles, ' +
     'hexagons, and other interesting patterns.',
     long_description=long_description,
