@@ -67,6 +67,14 @@ class TessagonDiscovery:
         other_classes = list(set(ALL) - set(self.classes))
         return TessagonDiscovery(classes=other_classes)
 
+    def __add__(self, other):
+        new_classes = list(set(self.classes) | set(other.classes))
+        return TessagonDiscovery(classes=new_classes)
+
+    def __sub__(self, other):
+        new_classes = list(set(self.classes) - set(other.classes))
+        return TessagonDiscovery(classes=new_classes)
+
     def with_color_patterns(self):
         results = []
         for klass in self.classes:
