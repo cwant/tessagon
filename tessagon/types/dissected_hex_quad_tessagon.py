@@ -1,5 +1,11 @@
 from tessagon.core.tile import Tile
 from tessagon.core.tessagon import Tessagon
+from tessagon.core.tessagon_metadata import TessagonMetadata
+
+metadata = TessagonMetadata(name='Hexagons Dissected with Quads',
+                            classification='laves',
+                            shapes=['quads'],
+                            sides=[4])
 
 
 class DissectedHexQuadTile(Tile):
@@ -127,3 +133,4 @@ class DissectedHexQuadTile(Tile):
 
 class DissectedHexQuadTessagon(Tessagon):
     tile_class = DissectedHexQuadTile
+    metadata = metadata

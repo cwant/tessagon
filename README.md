@@ -193,6 +193,21 @@ There are five methods that you will want to write:
 
 * `calculate_faces`: here you define the faces for the tiling using the previously defined vertices, via the `add_face` method. The method takes an array of face to indicate which face is being defined, and an array of vertex keys that indicate which vertices are in the face. These vertices are either on the current tile, or some of them can being on neighboring tiles (in which case the keys for the neighboring tile are also included). The symmetry of the tile may cause other reflected faces to be defined. Using the boolean keywords `u_boundary`, `v_boundary` and `corner`, you can tell the system whether the face is shared with neighboring tiles.
 
+## Metadata and Discovery
+
+Each `Tessagon` subclass has some metadata attached to it (class `TessagonMetadata`) that describes the properties of the tiling. This metadata will be expanded as needs require, but currently consists of information about how many color patterns the tiling has, what type (`regular`, `archimedean`, `laves`, `non_edge`), and what sorts of shapes are produced by instances of the class.
+
+A nascent helper class `tessagon.core.tessagon_discovery.TessagonDiscovery` exists that can help you search for tilings with certain properties (for example, this could be used to create a menu for an external application that categorizes the tilings). The methods in the class are intended to support chaining of operations (e.g., they results returned are also of type `TessagonDiscovery`, that can then be reified using the `to_list` method). Some examples:
+
+```python
+find_all = TessagonDiscovery()
+find_all.to_list() # a list of all of the tessagons
+regular = find_all.with_classification('regular')
+regular.to_list() # The three regular tilings (HexTessagon, SquareTessagon, TriTessagon)
+regular.inverse().to_list() # All tilings except for the regular ones
+```
+Checkout the [test suite](tests/core/test_tessagon_discovery.py) for more example usage.
+
 ## wire_skin
 
 Check out my other project `wire_skin` to add some interesting effects to the tessellated manifolds you create:

@@ -1,5 +1,11 @@
 from tessagon.core.tile import Tile
 from tessagon.core.tessagon import Tessagon
+from tessagon.core.tessagon_metadata import TessagonMetadata
+
+metadata = TessagonMetadata(name='Dissected Triangle',
+                            classification='laves',
+                            shapes=['triangles'],
+                            sides=[3])
 
 
 class DissectedTriangleTile(Tile):
@@ -100,3 +106,4 @@ class DissectedTriangleTile(Tile):
 
 class DissectedTriangleTessagon(Tessagon):
     tile_class = DissectedTriangleTile
+    metadata = metadata

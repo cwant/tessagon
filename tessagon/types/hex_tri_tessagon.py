@@ -1,5 +1,11 @@
 from tessagon.core.tile import Tile
 from tessagon.core.tessagon import Tessagon
+from tessagon.core.tessagon_metadata import TessagonMetadata
+
+metadata = TessagonMetadata(name='Hexagons and Triangles',
+                            classification='archimedean',
+                            shapes=['hexagons', 'triangles'],
+                            sides=[6, 3])
 
 
 class HexTriTile(Tile):
@@ -84,3 +90,4 @@ class HexTriTile(Tile):
 
 class HexTriTessagon(Tessagon):
     tile_class = HexTriTile
+    metadata = metadata

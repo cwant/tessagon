@@ -1,5 +1,11 @@
-from tessagon.core.tessagon import Tessagon
 from tessagon.core.tile import Tile
+from tessagon.core.tessagon import Tessagon
+from tessagon.core.tessagon_metadata import TessagonMetadata
+
+metadata = TessagonMetadata(name='Bricks',
+                            classification='non_edge',
+                            shapes=['rectangles'],
+                            sides=[4])
 
 
 class BrickTile(Tile):
@@ -58,3 +64,4 @@ class BrickTile(Tile):
 
 class BrickTessagon(Tessagon):
     tile_class = BrickTile
+    metadata = metadata

@@ -1,5 +1,11 @@
-from tessagon.core.tessagon import Tessagon
 from tessagon.core.tile import Tile
+from tessagon.core.tessagon import Tessagon
+from tessagon.core.tessagon_metadata import TessagonMetadata
+
+metadata = TessagonMetadata(name='Zig-Zag',
+                            classification='non_edge',
+                            shapes=['rectangles'],
+                            sides=[4])
 
 
 class ZigZagTile(Tile):
@@ -151,3 +157,4 @@ class ZigZagTile(Tile):
 
 class ZigZagTessagon(Tessagon):
     tile_class = ZigZagTile
+    metadata = metadata

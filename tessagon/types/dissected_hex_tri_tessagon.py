@@ -1,5 +1,11 @@
-from tessagon.core.tessagon import Tessagon
 from tessagon.types.dissected_hex_quad_tessagon import DissectedHexQuadTile
+from tessagon.core.tessagon import Tessagon
+from tessagon.core.tessagon_metadata import TessagonMetadata
+
+metadata = TessagonMetadata(name='Hexagons Dissected with Triangles',
+                            classification='laves',
+                            shapes=['triangles'],
+                            sides=[3])
 
 
 # Uses the same configuration of vertices as DissectedHexQuadTile
@@ -104,3 +110,4 @@ class DissectedHexTriTile(DissectedHexQuadTile):
 
 class DissectedHexTriTessagon(Tessagon):
     tile_class = DissectedHexTriTile
+    metadata = metadata

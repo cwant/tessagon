@@ -1,6 +1,14 @@
 from math import sqrt
 from tessagon.core.tile import Tile
 from tessagon.core.tessagon import Tessagon
+from tessagon.core.tessagon_metadata import TessagonMetadata
+
+# TODO: gulp, 'octagon' does not begin with 'octo'
+
+metadata = TessagonMetadata(name='Octagons and Squares',
+                            classification='archimedean',
+                            shapes=['octagons', 'squares'],
+                            sides=[8, 4])
 
 
 class OctoTile(Tile):
@@ -67,3 +75,4 @@ class OctoTile(Tile):
 
 class OctoTessagon(Tessagon):
     tile_class = OctoTile
+    metadata = metadata
