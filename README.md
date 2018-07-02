@@ -195,7 +195,7 @@ There are five methods that you will want to write:
 
 ## Metadata and Discovery
 
-Each `Tessagon` subclass has some metadata attached to it (class `TessagonMetadata`) that describes the properties of the tiling. This metadata will be expanded as needs require, but currently consists of information about how many color patterns the tiling has, what type (`regular`, `archimedean`, `laves`, `non_edge`), and what sorts of shapes the object has.
+Each `Tessagon` subclass has some metadata attached to it (class `TessagonMetadata`) that describes the properties of the tiling. This metadata will be expanded as needs require, but currently consists of information about how many color patterns the tiling has, what type (`regular`, `archimedean`, `laves`, `non_edge`), and what sorts of shapes are produced by instances of the class.
 
 A nascent helper class `tessagon.core.tessagon_discovery.TessagonDiscovery` exists that can help you search for tilings with certain properties (for example, this could be used to create a menu for an external application that categorizes the tilings). The methods in the class are intended to support chaining of operations (e.g., they results returned are also of type `TessagonDiscovery`, that can then be reified using the `to_list` method). Some examples:
 
