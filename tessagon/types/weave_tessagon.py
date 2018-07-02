@@ -1,5 +1,11 @@
 from tessagon.core.tile import Tile
 from tessagon.core.tessagon import Tessagon
+from tessagon.core.tessagon_metadata import TessagonMetadata
+
+metadata = TessagonMetadata(name='Weave',
+                            classification='non_edge',
+                            shapes=['quads', 'rectangles'],
+                            sides=[4])
 
 
 class WeaveTile(Tile):
@@ -131,3 +137,4 @@ class WeaveTile(Tile):
 
 class WeaveTessagon(Tessagon):
     tile_class = WeaveTile
+    metadata = metadata

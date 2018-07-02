@@ -1,4 +1,10 @@
 class TessagonMetadata:
+    CLASSIFICATION_MAP = {
+        'regular': 'Regular tiling',
+        'archimedean': 'Archimedean tiling',
+        'laves': 'Laves tiling',
+        'non_edge': 'Non-edge-to-edge tiling'
+    }
 
     def __init__(self, **kwargs):
         self._name = kwargs.get('name')
@@ -28,3 +34,6 @@ class TessagonMetadata:
 
     def has_classification(self, classification):
         return self._classification == classification
+
+    def human_readable_classification(self):
+        return self.__class__.CLASSIFICATION_MAP[self._classification]

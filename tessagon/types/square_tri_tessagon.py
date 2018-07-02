@@ -1,6 +1,12 @@
 from math import sqrt
 from tessagon.core.tile import Tile
 from tessagon.core.tessagon import Tessagon
+from tessagon.core.tessagon_metadata import TessagonMetadata
+
+metadata = TessagonMetadata(name='Squares and Triangles',
+                            classification='archimedean',
+                            shapes=['squares', 'triangles'],
+                            sides=[4, 3])
 
 
 class SquareTriTile(Tile):
@@ -117,3 +123,4 @@ class SquareTriTile(Tile):
 
 class SquareTriTessagon(Tessagon):
     tile_class = SquareTriTile
+    metadata = metadata

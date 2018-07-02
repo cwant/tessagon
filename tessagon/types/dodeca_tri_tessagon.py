@@ -1,6 +1,12 @@
 from math import sqrt
 from tessagon.core.tile import Tile
 from tessagon.core.tessagon import Tessagon
+from tessagon.core.tessagon_metadata import TessagonMetadata
+
+metadata = TessagonMetadata(name='Dodecagons and Triangles',
+                            classification='archimedean',
+                            shapes=['dodecagons', 'triangles'],
+                            sides=[12, 3])
 
 
 class DodecaTriTile(Tile):
@@ -129,3 +135,4 @@ class DodecaTriTile(Tile):
 
 class DodecaTriTessagon(Tessagon):
     tile_class = DodecaTriTile
+    metadata = metadata

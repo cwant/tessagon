@@ -1,5 +1,11 @@
-from tessagon.core.tessagon import Tessagon
 from tessagon.core.tile import Tile
+from tessagon.core.tessagon import Tessagon
+from tessagon.core.tessagon_metadata import TessagonMetadata
+
+metadata = TessagonMetadata(name='Pythagorean',
+                            classification='non_edge',
+                            shapes=['squares'],
+                            sides=[4])
 
 
 class PythagoreanTile(Tile):
@@ -170,3 +176,4 @@ class PythagoreanTile(Tile):
 
 class PythagoreanTessagon(Tessagon):
     tile_class = PythagoreanTile
+    metadata = metadata

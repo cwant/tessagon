@@ -1,5 +1,11 @@
 from tessagon.core.tile import Tile
 from tessagon.core.tessagon import Tessagon
+from tessagon.core.tessagon_metadata import TessagonMetadata
+
+metadata = TessagonMetadata(name='Rhombuses',
+                            classification='laves',
+                            shapes=['rhombuses'],
+                            sides=[4])
 
 
 class RhombusTile(Tile):
@@ -66,3 +72,4 @@ class RhombusTile(Tile):
 
 class RhombusTessagon(Tessagon):
     tile_class = RhombusTile
+    metadata = metadata

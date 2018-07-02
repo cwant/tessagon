@@ -1,5 +1,11 @@
 from tessagon.core.stamp14_tessagon \
     import Stamp14, Stamp14Tile, Stamp14Tessagon
+from tessagon.core.tessagon_metadata import TessagonMetadata
+
+metadata = TessagonMetadata(name='Hexagons and Big Triangles',
+                            classification='non_edge',
+                            shapes=['hexagons', 'triangles'],
+                            sides=[6, 3])
 
 # To get a sense of how Thingies repeat over tiles, see:
 #   https://github.com/cwant/tessagon/blob/master/documentation/images/thingies_repeat.png
@@ -100,3 +106,4 @@ class HexBigTriTile(Stamp14Tile):
 
 class HexBigTriTessagon(Stamp14Tessagon):
     tile_class = HexBigTriTile
+    metadata = metadata

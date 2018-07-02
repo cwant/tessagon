@@ -1,6 +1,12 @@
 from math import sqrt
 from tessagon.core.tile import Tile
 from tessagon.core.tessagon import Tessagon
+from tessagon.core.tessagon_metadata import TessagonMetadata
+
+metadata = TessagonMetadata(name='Other Pentagons',
+                            classification='laves',
+                            shapes=['pentagons'],
+                            sides=[5])
 
 
 class Penta2Tile(Tile):
@@ -77,3 +83,4 @@ class Penta2Tile(Tile):
 
 class Penta2Tessagon(Tessagon):
     tile_class = Penta2Tile
+    metadata = metadata
