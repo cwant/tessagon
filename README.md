@@ -4,6 +4,9 @@ Tessellate your favorite 3D surfaces (technically, 2D manifolds) with triangles,
 
 **Check out my presentation on the creation of Tessagon as an open source Python project here: [https://cwant.github.io/python-os-presentation](https://cwant.github.io/python-os-presentation/#/)**
 
+**You can find a Blender pull request to add support for Tessagon in the "XYZ function" addon here:
+[https://developer.blender.org/D3519](https://developer.blender.org/D3519)**
+
 ![Animation of tessellated torii](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/tessagon_demo.gif)
 
 ## TL;DR
