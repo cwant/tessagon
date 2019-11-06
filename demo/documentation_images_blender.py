@@ -2,6 +2,7 @@
 # Load the file demo/tessagon_demo.blend into blender, it will run me
 # Run the demo first to create the objects, and I will render them
 
+# TODO: make this work with Blender >= 2.8
 import math
 import re
 import os

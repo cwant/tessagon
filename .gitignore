@@ -102,6 +102,7 @@ ENV/
 
 *.blend[0-9]
 
+wire_skin
 wire_skin.py
 tmp/
 .pytest_cache/

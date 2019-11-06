@@ -92,3 +92,11 @@ class TessagonDiscovery:
             if klass.metadata.has_classification(classification):
                 results.append(klass)
         return TessagonDiscovery(classes=results)
+
+    @classmethod
+    def get_class(cls, class_name):
+        if class_name in globals():
+            klass = globals()[class_name]
+            if klass in ALL:
+                return klass
+        raise ValueError(class_name + ' is not recognized by Tessagon')
