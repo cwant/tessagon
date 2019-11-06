@@ -2,6 +2,8 @@
 
 Tessellate your favorite 3D surfaces (technically, 2D manifolds) with triangles, hexagons, or a number of other curated tiling types!
 
+**Now works with Blender 2.8 (and still works with earlier versions).**
+
 **Check out my presentation on the creation of Tessagon as an open source Python project here: [https://cwant.github.io/python-os-presentation](https://cwant.github.io/python-os-presentation/#/)**
 
 **You can find a Blender pull request to add support for Tessagon in the "XYZ function" addon here:
@@ -200,7 +202,7 @@ There are five methods that you will want to write:
 
 Each `Tessagon` subclass has some metadata attached to it (class `TessagonMetadata`) that describes the properties of the tiling. This metadata will be expanded as needs require, but currently consists of information about how many color patterns the tiling has, what type (`regular`, `archimedean`, `laves`, `non_edge`), and what sorts of shapes are produced by instances of the class.
 
-A nascent helper class `tessagon.core.tessagon_discovery.TessagonDiscovery` exists that can help you search for tilings with certain properties (for example, this could be used to create a menu for an external application that categorizes the tilings). The methods in the class are intended to support chaining of operations (e.g., they results returned are also of type `TessagonDiscovery`, that can then be reified using the `to_list` method). Some examples:
+A nascent helper class `tessagon.TessagonDiscovery` exists that can help you search for tilings with certain properties (for example, this could be used to create a menu for an external application that categorizes the tilings). The methods in the class are intended to support chaining of operations (e.g., they results returned are also of type `TessagonDiscovery`, that can then be reified using the `to_list` method). Some examples:
 
 ```python
 find_all = TessagonDiscovery()
@@ -210,6 +212,13 @@ regular.to_list() # The three regular tilings (HexTessagon, SquareTessagon, TriT
 regular.inverse().to_list() # All tilings except for the regular ones
 ```
 Checkout the [test suite](tests/core/test_tessagon_discovery.py) for more example usage.
+
+The `TessagonDiscovery` class also has a class method `get_class` for fetching tessagon classes without having to deal with importing that looks like this:
+
+```python
+tessagon_cls = TessagonDiscovery.get_class('TriTessagon')
+tessagon = tessagon_cls(function=my_func, ...)
+```
 
 ## wire_skin
 

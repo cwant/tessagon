@@ -23,9 +23,25 @@ def main():
 
 class BlenderDemo(TessagonCommonDemo):
     def main(self):
+        blender_version = float(bpy.app.version_string.split()[0])
+        if (blender_version < 2.8):
+            self.create_material = self.create_material_27
+            self.link_object_scene = self.link_object_scene_27
+            self.view_front = self.view_front_27
+        else:
+            self.create_material = self.create_material_28
+            self.link_object_scene = self.link_object_scene_28
+            self.view_front = self.view_front_28
+
         self.create_materials()
         self.create_objects()
         self.update_view()
+
+    def view_front_27(self, override):
+        bpy.ops.view3d.viewnumpad(override, type='FRONT')
+
+    def view_front_28(self, override):
+        bpy.ops.view3d.view_axis(override, type='FRONT')
 
     def update_view(self):
         for area in bpy.context.screen.areas:
@@ -33,7 +49,7 @@ class BlenderDemo(TessagonCommonDemo):
                 for region in area.regions:
                     if region.type == 'WINDOW':
                         override = {'area': area, 'region': region}
-                        bpy.ops.view3d.viewnumpad(override, type='FRONT')
+                        self.view_front(override)
                         bpy.ops.view3d.view_all(override)
                         break
 
@@ -67,11 +83,17 @@ class BlenderDemo(TessagonCommonDemo):
                 self.create_material(name, self.diffuse_color(value,
                                                               num_values))
 
-    def create_material(self, name, diffuse_color):
+    def create_material_27(self, name, diffuse_color):
         material = bpy.data.materials.new(name=name)
         material.diffuse_color = diffuse_color
         material.specular_intensity = 0.0
         material.diffuse_intensity = 1.0
+
+    def create_material_28(self, name, diffuse_color):
+        material = bpy.data.materials.new(name=name)
+        material.diffuse_color = diffuse_color + [1.0]
+        material.specular_intensity = 0.0
+        # material.diffuse_intensity = 1.0
 
     def create_objects(self):
         super().create_objects()
@@ -80,6 +102,12 @@ class BlenderDemo(TessagonCommonDemo):
             # WireSkin demo
             self.wire_skin_demo()
 
+    def link_object_scene_27(self, object, scn):
+        scn.objects.link(object)
+
+    def link_object_scene_28(self, object, scn):
+        scn.collection.objects.link(object)
+
     def new_or_create_object(self, name):
         if name in bpy.data.objects:
             object = bpy.data.objects[name]
@@ -87,7 +115,7 @@ class BlenderDemo(TessagonCommonDemo):
             me = bpy.data.meshes.new(name)
             object = bpy.data.objects.new(name, me)
             scn = bpy.context.scene
-            scn.objects.link(object)
+            self.link_object_scene(object, scn)
         return object
 
     def tessellate(self, f, tessagon_class, **kwargs):
