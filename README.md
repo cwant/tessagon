@@ -2,14 +2,18 @@
 
 Tessellate your favorite 3D surfaces (technically, 2D manifolds) with triangles, hexagons, or a number of other curated tiling types!
 
-**Now works with Blender 2.8 (and still works with earlier versions).**
+![Animation of tessellated torii](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/tessagon_demo.gif)
+
+## News
+
+**Now works with Blender 2.8 (and still works with earlier versions). Todo: check if it works with Blender 3.x.**
 
 **Check out my presentation on the creation of Tessagon as an open source Python project here: [https://cwant.github.io/python-os-presentation](https://cwant.github.io/python-os-presentation/#/)**
 
-**You can find a Blender pull request to add support for Tessagon in the "XYZ function" addon here:
-[https://developer.blender.org/D3519](https://developer.blender.org/D3519)**
+**A demo of using Tessagon with Inkscape can be found [here](https://gist.github.com/cwant/697f0c6ce07d9e14e710f5b80ca5eece).**
 
-![Animation of tessellated torii](https://raw.githubusercontent.com/cwant/tessagon/master/documentation/images/tessagon_demo.gif)
+**~You can find a Blender pull request to add support for Tessagon in the "XYZ function" addon here:
+[https://developer.blender.org/D3519](https://developer.blender.org/D3519)~** (This didn't really go anywhere, and was for Blender 2.x)
 
 ## TL;DR
 
