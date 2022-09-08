@@ -3,6 +3,7 @@ from tessagon.core.tessagon import Tessagon
 from tessagon.core.tessagon_metadata import TessagonMetadata
 
 metadata = TessagonMetadata(name='Pythagorean',
+                            num_color_patterns=1,
                             classification='non_edge',
                             shapes=['squares'],
                             sides=[4])
@@ -173,6 +174,15 @@ class PythagoreanTile(Tile):
                            [6, 1],
                            [5, 1]])
 
+    def color_pattern1(self):
+        # Color the big ones
+        self.color_face([1], 1)
+        self.color_face([3], 1)
+        self.color_face([5], 1)
+        self.color_face([6], 1)
+        self.color_face([8], 1)
+        self.color_face([10], 1)
+        self.color_face([11], 1)
 
 class PythagoreanTessagon(Tessagon):
     tile_class = PythagoreanTile

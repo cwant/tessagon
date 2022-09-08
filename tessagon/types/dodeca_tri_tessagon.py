@@ -4,6 +4,7 @@ from tessagon.core.tessagon import Tessagon
 from tessagon.core.tessagon_metadata import TessagonMetadata
 
 metadata = TessagonMetadata(name='Dodecagons and Triangles',
+                            num_color_patterns=1,
                             classification='archimedean',
                             shapes=['dodecagons', 'triangles'],
                             sides=[12, 3])
@@ -132,6 +133,9 @@ class DodecaTriTile(Tile):
                        [['bottom'], ['left', 'top', 'diag']]],
                       face_type='triangle', v_boundary=True)
 
+    def color_pattern1(self):
+        self.color_paths([['dodec', 'left', 'bottom'],
+                          ['dodec', 'center']], 1, 0)
 
 class DodecaTriTessagon(Tessagon):
     tile_class = DodecaTriTile

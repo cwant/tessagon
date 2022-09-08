@@ -3,6 +3,7 @@ from tessagon.core.stamp14_tessagon \
 from tessagon.core.tessagon_metadata import TessagonMetadata
 
 metadata = TessagonMetadata(name='Hexagons and Big Triangles',
+                            num_color_patterns=2,
                             classification='non_edge',
                             shapes=['hexagons', 'triangles'],
                             sides=[6, 3])
@@ -98,11 +99,22 @@ class Thingy(Stamp14):
         verts = [self.verts[i] for i in [10, 11, 12, 6, 0, 5]]
         self.faces[2] = self.tile.mesh_adaptor.create_face(verts)
 
-
 class HexBigTriTile(Stamp14Tile):
     def __init__(self, tessagon, **kwargs):
         super().__init__(tessagon, Thingy, **kwargs)
 
+    def color_pattern1(self):
+        for i in range(14):
+            if not self.stamps[i]:
+                continue
+            self.stamps[i].color_face_index(0, 1)
+
+    def color_pattern2(self):
+        for i in range(14):
+            if not self.stamps[i]:
+                continue
+            self.stamps[i].color_face_index(0, 1)
+            self.stamps[i].color_face_index(1, 2)
 
 class HexBigTriTessagon(Stamp14Tessagon):
     tile_class = HexBigTriTile

@@ -3,6 +3,7 @@ from tessagon.core.tessagon import Tessagon
 from tessagon.core.tessagon_metadata import TessagonMetadata
 
 metadata = TessagonMetadata(name='Hexagons and Triangles',
+                            num_color_patterns=1,
                             classification='archimedean',
                             shapes=['hexagons', 'triangles'],
                             sides=[6, 3])
@@ -87,6 +88,10 @@ class HexTriTile(Tile):
                        [['top'], ['left', 'bottom']]],
                       face_type='hexagon', corner=True)
 
+    def color_pattern1(self):
+        # Color the hexagons
+        self.color_face(['center', 'middle'], 1)
+        self.color_face(['left', 'top', 'hexagon'], 1)
 
 class HexTriTessagon(Tessagon):
     tile_class = HexTriTile

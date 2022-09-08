@@ -6,6 +6,7 @@ from tessagon.core.tessagon_metadata import TessagonMetadata
 # TODO: gulp, 'octagon' does not begin with 'octo'
 
 metadata = TessagonMetadata(name='Octagons and Squares',
+                            num_color_patterns=1,
                             classification='archimedean',
                             shapes=['octagons', 'squares'],
                             sides=[8, 4])
@@ -72,6 +73,8 @@ class OctoTile(Tile):
                        [['top'], ['left', 'bottom', 'u_boundary']]],
                       corner=True)
 
+    def color_pattern1(self):
+        self.color_face(['middle'], 1)
 
 class OctoTessagon(Tessagon):
     tile_class = OctoTile

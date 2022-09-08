@@ -3,6 +3,7 @@ from tessagon.core.tessagon import Tessagon
 from tessagon.core.tessagon_metadata import TessagonMetadata
 
 metadata = TessagonMetadata(name='Weave',
+                            num_color_patterns=1,
                             classification='non_edge',
                             shapes=['quads', 'rectangles'],
                             sides=[4])
@@ -134,6 +135,12 @@ class WeaveTile(Tile):
                        [['top'], ['bottom', 'left', 'u_inner', 'v_outer']]],
                       face_type='oct', v_boundary=True)
 
+    def color_pattern1(self):
+        self.color_face(['oct', 'top', 'center'], 1)
+        self.color_face(['oct', 'middle', 'left'], 1)
+
+        self.color_face(['oct', 'top', 'left'], 2)
+        self.color_face(['oct', 'middle', 'center'], 2)
 
 class WeaveTessagon(Tessagon):
     tile_class = WeaveTile

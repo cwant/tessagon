@@ -3,6 +3,7 @@ from tessagon.core.tessagon import Tessagon
 from tessagon.core.tessagon_metadata import TessagonMetadata
 
 metadata = TessagonMetadata(name='Dissected Triangle',
+                            num_color_patterns=1,
                             classification='laves',
                             shapes=['triangles'],
                             sides=[3])
@@ -102,6 +103,23 @@ class DissectedTriangleTile(Tile):
                       [['center'],
                        ['left', 'middle'],
                        ['left', 'top', 'corner']])
+
+    def color_pattern1(self):
+        if self.fingerprint[1] % 3 == 0:
+            self.color_paths([['left', 'middle'],
+                              ['right', 'middle']], 1, 0)
+        elif self.fingerprint[1] % 3 == 2:
+            self.color_paths([['left', 'top', 'interior2'],
+                              ['right', 'top', 'interior2'],
+                              ['left', 'top', 'interior1'],
+                              ['right', 'top', 'interior1']], 1, 0)
+            self.color_paths([['left', 'bottom', 'center'],
+                              ['right', 'bottom', 'center']], 1, 0)
+        else:
+            self.color_paths([['left', 'bottom', 'interior2'],
+                              ['right', 'bottom', 'interior2'],
+                              ['left', 'bottom', 'interior1'],
+                              ['right', 'bottom', 'interior1']], 1, 0)
 
 
 class DissectedTriangleTessagon(Tessagon):

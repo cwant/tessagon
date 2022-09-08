@@ -3,6 +3,7 @@ from tessagon.core.tessagon import Tessagon
 from tessagon.core.tessagon_metadata import TessagonMetadata
 
 metadata = TessagonMetadata(name='Bricks',
+                            num_color_patterns=1,
                             classification='non_edge',
                             shapes=['rectangles'],
                             sides=[4])
@@ -61,7 +62,11 @@ class BrickTile(Tile):
                        [['bottom'], ['right', 'middle']]],
                       v_boundary=True)
 
-
+    def color_pattern1(self):
+        self.color_paths([
+            ['left'],
+            ['right']
+        ], 1, 0)
 class BrickTessagon(Tessagon):
     tile_class = BrickTile
     metadata = metadata

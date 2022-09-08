@@ -6,6 +6,7 @@ from tessagon.core.tessagon_metadata import TessagonMetadata
 # Will my brain survive this one?
 
 metadata = TessagonMetadata(name='Dodecagons, Hexagons, and Squares',
+                            num_color_patterns=1,
                             classification='archimedean',
                             shapes=['dodecagons', 'hexagons', 'squares'],
                             sides=[12, 6, 4])
@@ -189,6 +190,16 @@ class DodecaTile(Tile):
                        [['left'], ['top', 'right', 'sq1']],
                        [['left'], ['top', 'right', 'sq3']]],
                       face_type='hexagon', u_boundary=True)
+
+    def color_pattern1(self):
+        self.color_face(['dodec', 'middle'], 1)
+        self.color_face(['dodec', 'top', 'left'], 1)
+
+        self.color_face(['hex', 'top', 'left'], 2)
+        self.color_face(['hex', 'top', 'center'], 2)
+        self.color_face(['hex', 'bottom', 'left'], 2)
+        self.color_face(['hex', 'bottom', 'center'], 2)
+        
 
 
 class DodecaTessagon(Tessagon):

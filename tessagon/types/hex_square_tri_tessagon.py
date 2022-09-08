@@ -4,6 +4,7 @@ from tessagon.core.tessagon import Tessagon
 from tessagon.core.tessagon_metadata import TessagonMetadata
 
 metadata = TessagonMetadata(name='Hexagons, Squares, and Triangles',
+                            num_color_patterns=1,
                             classification='archimedean',
                             shapes=['hexagons', 'squares', 'triangles'],
                             sides=[6, 4, 3])
@@ -146,6 +147,19 @@ class HexSquareTriTile(Tile):
                        [['top'], ['bottom', 'left', 'u_boundary']],
                        [['top'], ['bottom', 'left', 'v_square']]],
                       face_type='hexagon', corner=True)
+
+    def color_pattern1(self):
+        self.color_face(['hex', 'middle'], 1)
+        self.color_face(['hex', 'top', 'left'], 1)
+
+        # TODO: I'm not sure why I have to explicitely color
+        # 'right' and 'bottom' faces (I thought symmetry would do this?)
+        self.color_face(['square', 'top', 'center'], 2)
+        self.color_face(['square', 'top', 'left'], 2)
+        self.color_face(['square', 'top', 'right'], 2)
+        self.color_face(['square', 'middle', 'left'], 2)
+        self.color_face(['square', 'bottom', 'left'], 2)
+        self.color_face(['square', 'bottom', 'right'], 2)
 
 
 class HexSquareTriTessagon(Tessagon):

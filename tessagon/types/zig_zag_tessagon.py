@@ -3,6 +3,7 @@ from tessagon.core.tessagon import Tessagon
 from tessagon.core.tessagon_metadata import TessagonMetadata
 
 metadata = TessagonMetadata(name='Zig-Zag',
+                            num_color_patterns=1,
                             classification='non_edge',
                             shapes=['rectangles'],
                             sides=[4])
@@ -154,6 +155,11 @@ class ZigZagTile(Tile):
                                   [['bottom'], [5, 4]]])
         self.set_equivalent_face(['bottom'], 3, face)
 
+    def color_pattern1(self):
+        self.color_face(1, 1)
+        self.color_face(2, 1)
+        self.color_face(7, 1)
+        self.color_face(8, 1)
 
 class ZigZagTessagon(Tessagon):
     tile_class = ZigZagTile

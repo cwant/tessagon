@@ -3,6 +3,7 @@ from tessagon.core.tessagon import Tessagon
 from tessagon.core.tessagon_metadata import TessagonMetadata
 
 metadata = TessagonMetadata(name='Hexagons Dissected with Quads',
+                            num_color_patterns=2,
                             classification='laves',
                             shapes=['quads'],
                             sides=[4])
@@ -130,6 +131,32 @@ class DissectedHexQuadTile(Tile):
                        ['center', 'top', 'interior'],
                        ['right', 'top', 'interior']])
 
+    def color_pattern1(self):
+        self.color_paths([['left', 'top', 'middle'],
+                          ['center', 'top'],
+                          ['right', 'top', 'middle'],
+                          ['left', 'bottom', 'middle'],
+                          ['center', 'bottom'],
+                          ['right', 'bottom', 'middle']], 1, 0)
+
+    def color_pattern2(self):
+        if self.fingerprint[0] % 3 == 0:
+            self.color_paths([['left', 'top', 'middle'],
+                              ['center', 'top'],
+                              ['right', 'top', 'middle'],
+                              ['left', 'bottom', 'middle'],
+                              ['center', 'bottom'],
+                              ['right', 'bottom', 'middle']], 1, 0)
+        elif self.fingerprint[0] % 3 == 1:
+            self.color_paths([
+                ['right', 'top', 'v_boundary'],
+                ['right', 'bottom', 'v_boundary']], 1, 0)
+        elif self.fingerprint[0] % 3 == 2:
+            self.color_paths([
+                ['left', 'top', 'v_boundary'],
+                ['left', 'top', 'u_boundary'],
+                ['left', 'bottom', 'v_boundary'],
+                ['left', 'bottom', 'u_boundary']], 1, 0)
 
 class DissectedHexQuadTessagon(Tessagon):
     tile_class = DissectedHexQuadTile

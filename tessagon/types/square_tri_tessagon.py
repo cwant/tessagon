@@ -4,6 +4,7 @@ from tessagon.core.tessagon import Tessagon
 from tessagon.core.tessagon_metadata import TessagonMetadata
 
 metadata = TessagonMetadata(name='Squares and Triangles',
+                            num_color_patterns=2,
                             classification='archimedean',
                             shapes=['squares', 'triangles'],
                             sides=[4, 3])
@@ -120,6 +121,22 @@ class SquareTriTile(Tile):
                        ['top', 'left', 'u_boundary']],
                       face_type='triangle')
 
+    def color_pattern1(self):
+        self.color_face(['square', 'top', 'left'], 1)
+        self.color_face(['square', 'top', 'right'], 1)
+        self.color_face(['square', 'bottom', 'left'], 1)
+        self.color_face(['square', 'bottom', 'right'], 1)
+
+    def color_pattern2(self):
+        self.color_face(['square', 'top', 'left'], 1)
+        self.color_face(['square', 'top', 'right'], 1)
+        self.color_face(['square', 'bottom', 'left'], 1)
+        self.color_face(['square', 'bottom', 'right'], 1)
+
+        self.color_face(['tri', 'middle', 'left'], 2)
+        self.color_face(['tri', 'middle', 'right'], 2)
+        self.color_face(['tri', 'top', 'left', 'v_boundary'], 2)
+        self.color_face(['tri', 'top', 'right', 'v_boundary'], 2)
 
 class SquareTriTessagon(Tessagon):
     tile_class = SquareTriTile

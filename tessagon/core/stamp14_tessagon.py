@@ -33,9 +33,15 @@ class Stamp14:
         vert = self.verts[i] = self.offset_vert(offset_u, offset_v)
         return vert
 
-    def color_stamp(self, color):
+    def color_face_index(self, index, color_index):
+        if index >= len(self.faces):
+            return none
+        face = self.faces[index]
+        self.tile.mesh_adaptor.color_face(face, color_index)
+
+    def color_stamp(self, color_index):
         for face in self.faces:
-            self.tile.mesh_adaptor.color_face(face, color)
+            self.tile.mesh_adaptor.color_face(face, color_index)
 
 
 class Stamp14Tile(Tile):

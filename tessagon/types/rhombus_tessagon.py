@@ -3,6 +3,7 @@ from tessagon.core.tessagon import Tessagon
 from tessagon.core.tessagon_metadata import TessagonMetadata
 
 metadata = TessagonMetadata(name='Rhombuses',
+                            num_color_patterns=2,
                             classification='laves',
                             shapes=['rhombuses'],
                             sides=[4])
@@ -69,6 +70,19 @@ class RhombusTile(Tile):
                        [['top'], ['left', 'bottom']]],
                       face_type='horizontal', corner=True)
 
+    def color_pattern1(self):
+        self.color_face(['middle'], 1)
+        self.color_face(['left', 'top', 'exterior'], 1)
+
+        self.color_face(['left', 'top', 'interior'], 2)
+        self.color_face(['right', 'bottom', 'interior'], 2)
+
+    def color_pattern2(self):
+        self.color_face(['left', 'top', 'interior'], 1)
+        self.color_face(['right', 'top', 'interior'], 1)
+
+        self.color_face(['left', 'bottom', 'interior'], 2)
+        self.color_face(['right', 'bottom', 'interior'], 2)
 
 class RhombusTessagon(Tessagon):
     tile_class = RhombusTile

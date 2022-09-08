@@ -4,6 +4,7 @@ from tessagon.core.tessagon import Tessagon
 from tessagon.core.tessagon_metadata import TessagonMetadata
 
 metadata = TessagonMetadata(name='Other Squares and Triangles',
+                            num_color_patterns=1,
                             classification='archimedean',
                             shapes=['squares', 'triangles'],
                             sides=[4, 3])
@@ -86,6 +87,9 @@ class SquareTri2Tile(Tile):
                        ['left', 'top', 'u_boundary']],
                       face_type='square')
 
+    def color_pattern1(self):
+        self.color_paths([['left', 'bottom', 'corner'],
+                          ['center', 'middle']], 1, 0)
 
 class SquareTri2Tessagon(Tessagon):
     tile_class = SquareTri2Tile

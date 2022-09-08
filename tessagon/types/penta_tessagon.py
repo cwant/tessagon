@@ -4,6 +4,7 @@ from tessagon.core.tessagon import Tessagon
 from tessagon.core.tessagon_metadata import TessagonMetadata
 
 metadata = TessagonMetadata(name='Pentagons',
+                            num_color_patterns=1,
                             classification='laves',
                             shapes=['pentagons'],
                             sides=[5])
@@ -120,6 +121,13 @@ class PentaTile(Tile):
                        ['right', 'bottom', 'v_boundary'],
                        ['left', 'bottom', 'v_boundary']])
 
+    def color_pattern1(self):
+        self.color_paths([
+            ['right', 'middle'],
+            ['center', 'bottom'],
+            ['right', 'bottom', 'v_boundary'],
+            ['right', 'bottom', 'u_boundary'],
+        ], 1, 0)
 
 class PentaTessagon(Tessagon):
     tile_class = PentaTile

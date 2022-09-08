@@ -3,6 +3,7 @@ from tessagon.core.tessagon import Tessagon
 from tessagon.core.tessagon_metadata import TessagonMetadata
 
 metadata = TessagonMetadata(name='Hexagons Dissected with Triangles',
+                            num_color_patterns=1,
                             classification='laves',
                             shapes=['triangles'],
                             sides=[3])
@@ -107,6 +108,24 @@ class DissectedHexTriTile(DissectedHexQuadTile):
                        ['left', 'top', 'interior'],
                        ['center', 'top', 'interior']])
 
+    def color_pattern1(self):
+        self.color_paths([
+            ['left', 'top', 'v_boundary'],
+            ['left', 'top', 'u_boundary'],
+            ['left', 'top', 'middle'],
+            ['left', 'top', 'center'],
+
+            ['right', 'top', 'interior1'],
+            ['right', 'top', 'interior2'],
+            
+            ['right', 'bottom', 'v_boundary'],
+            ['right', 'bottom', 'u_boundary'],
+            ['right', 'bottom', 'middle'],
+            ['right', 'bottom', 'center'],
+
+            ['left', 'bottom', 'interior1'],
+            ['left', 'bottom', 'interior2'],
+        ], 1, 0)
 
 class DissectedHexTriTessagon(Tessagon):
     tile_class = DissectedHexTriTile
