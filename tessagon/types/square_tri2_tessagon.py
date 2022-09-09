@@ -91,6 +91,7 @@ class SquareTri2Tile(Tile):
         self.color_paths([['left', 'bottom', 'corner'],
                           ['center', 'middle']], 1, 0)
 
+
 class SquareTri2Tessagon(Tessagon):
     tile_class = SquareTri2Tile
     metadata = metadata

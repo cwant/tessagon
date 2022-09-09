@@ -35,7 +35,7 @@ class Stamp14:
 
     def color_face_index(self, index, color_index):
         if index >= len(self.faces):
-            return none
+            return None
         face = self.faces[index]
         self.tile.mesh_adaptor.color_face(face, color_index)
 

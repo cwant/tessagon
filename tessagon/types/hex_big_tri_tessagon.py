@@ -99,6 +99,7 @@ class Thingy(Stamp14):
         verts = [self.verts[i] for i in [10, 11, 12, 6, 0, 5]]
         self.faces[2] = self.tile.mesh_adaptor.create_face(verts)
 
+
 class HexBigTriTile(Stamp14Tile):
     def __init__(self, tessagon, **kwargs):
         super().__init__(tessagon, Thingy, **kwargs)
@@ -115,6 +116,7 @@ class HexBigTriTile(Stamp14Tile):
                 continue
             self.stamps[i].color_face_index(0, 1)
             self.stamps[i].color_face_index(1, 2)
+
 
 class HexBigTriTessagon(Stamp14Tessagon):
     tile_class = HexBigTriTile

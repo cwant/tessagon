@@ -93,6 +93,7 @@ class HexTriTile(Tile):
         self.color_face(['center', 'middle'], 1)
         self.color_face(['left', 'top', 'hexagon'], 1)
 
+
 class HexTriTessagon(Tessagon):
     tile_class = HexTriTile
     metadata = metadata

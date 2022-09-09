@@ -88,6 +88,7 @@ class Penta2Tile(Tile):
             ['right', 'bottom']
         ], 1, 0)
 
+
 class Penta2Tessagon(Tessagon):
     tile_class = Penta2Tile
     metadata = metadata

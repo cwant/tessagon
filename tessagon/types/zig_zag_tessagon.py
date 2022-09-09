@@ -161,6 +161,7 @@ class ZigZagTile(Tile):
         self.color_face(7, 1)
         self.color_face(8, 1)
 
+
 class ZigZagTessagon(Tessagon):
     tile_class = ZigZagTile
     metadata = metadata

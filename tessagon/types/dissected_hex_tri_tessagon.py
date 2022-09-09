@@ -117,7 +117,7 @@ class DissectedHexTriTile(DissectedHexQuadTile):
 
             ['right', 'top', 'interior1'],
             ['right', 'top', 'interior2'],
-            
+
             ['right', 'bottom', 'v_boundary'],
             ['right', 'bottom', 'u_boundary'],
             ['right', 'bottom', 'middle'],
@@ -126,6 +126,7 @@ class DissectedHexTriTile(DissectedHexQuadTile):
             ['left', 'bottom', 'interior1'],
             ['left', 'bottom', 'interior2'],
         ], 1, 0)
+
 
 class DissectedHexTriTessagon(Tessagon):
     tile_class = DissectedHexTriTile

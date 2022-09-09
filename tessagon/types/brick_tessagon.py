@@ -67,6 +67,8 @@ class BrickTile(Tile):
             ['left'],
             ['right']
         ], 1, 0)
+
+
 class BrickTessagon(Tessagon):
     tile_class = BrickTile
     metadata = metadata

@@ -138,6 +138,7 @@ class SquareTriTile(Tile):
         self.color_face(['tri', 'top', 'left', 'v_boundary'], 2)
         self.color_face(['tri', 'top', 'right', 'v_boundary'], 2)
 
+
 class SquareTriTessagon(Tessagon):
     tile_class = SquareTriTile
     metadata = metadata

@@ -76,6 +76,7 @@ class OctoTile(Tile):
     def color_pattern1(self):
         self.color_face(['middle'], 1)
 
+
 class OctoTessagon(Tessagon):
     tile_class = OctoTile
     metadata = metadata

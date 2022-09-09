@@ -199,7 +199,6 @@ class DodecaTile(Tile):
         self.color_face(['hex', 'top', 'center'], 2)
         self.color_face(['hex', 'bottom', 'left'], 2)
         self.color_face(['hex', 'bottom', 'center'], 2)
-        
 
 
 class DodecaTessagon(Tessagon):

@@ -84,6 +84,7 @@ class RhombusTile(Tile):
         self.color_face(['left', 'bottom', 'interior'], 2)
         self.color_face(['right', 'bottom', 'interior'], 2)
 
+
 class RhombusTessagon(Tessagon):
     tile_class = RhombusTile
     metadata = metadata

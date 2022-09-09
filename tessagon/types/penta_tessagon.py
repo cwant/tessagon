@@ -129,6 +129,7 @@ class PentaTile(Tile):
             ['right', 'bottom', 'u_boundary'],
         ], 1, 0)
 
+
 class PentaTessagon(Tessagon):
     tile_class = PentaTile
     metadata = metadata

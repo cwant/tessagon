@@ -184,6 +184,7 @@ class PythagoreanTile(Tile):
         self.color_face([10], 1)
         self.color_face([11], 1)
 
+
 class PythagoreanTessagon(Tessagon):
     tile_class = PythagoreanTile
     metadata = metadata

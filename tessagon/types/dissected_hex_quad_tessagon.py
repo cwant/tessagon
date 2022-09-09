@@ -158,6 +158,7 @@ class DissectedHexQuadTile(Tile):
                 ['left', 'bottom', 'v_boundary'],
                 ['left', 'bottom', 'u_boundary']], 1, 0)
 
+
 class DissectedHexQuadTessagon(Tessagon):
     tile_class = DissectedHexQuadTile
     metadata = metadata

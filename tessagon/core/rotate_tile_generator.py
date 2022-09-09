@@ -245,5 +245,5 @@ class RotTile(AbstractTile):
                 boundary_tile.neighbors['bottom'] = other_tile
                 other_tile.neighbors['top'] = boundary_tile
 
-    def _flatten_list(self, l):
-        return [item for sublist in l for item in sublist]
+    def _flatten_list(self, lst):
+        return [item for sublist in lst for item in sublist]

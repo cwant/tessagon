@@ -142,6 +142,7 @@ class WeaveTile(Tile):
         self.color_face(['oct', 'top', 'left'], 2)
         self.color_face(['oct', 'middle', 'center'], 2)
 
+
 class WeaveTessagon(Tessagon):
     tile_class = WeaveTile
     metadata = metadata

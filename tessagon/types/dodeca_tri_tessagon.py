@@ -137,6 +137,7 @@ class DodecaTriTile(Tile):
         self.color_paths([['dodec', 'left', 'bottom'],
                           ['dodec', 'center']], 1, 0)
 
+
 class DodecaTriTessagon(Tessagon):
     tile_class = DodecaTriTile
     metadata = metadata
