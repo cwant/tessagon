@@ -24,7 +24,7 @@ or::
 
 setup(
     name='tessagon',
-    version='0.6',
+    version='0.7',
     description='Tessellate your favorite 2D manifolds with triangles, ' +
     'hexagons, and other interesting patterns.',
     long_description=long_description,
@@ -43,5 +43,5 @@ setup(
                  'Topic :: Scientific/Engineering :: Visualization'],
     keywords='tesselation tiling modeling blender vtk',
     packages=find_packages(exclude=['tests', 'demo', 'wire_skin.py']),
-    python_requires='~=3.5'
+    python_requires='>=3.5'
 )
