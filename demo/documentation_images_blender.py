@@ -7,63 +7,41 @@ import math
 import re
 import os
 import bpy
-from tessagon.types.hex_tessagon import HexTessagon
-from tessagon.types.tri_tessagon import TriTessagon
-from tessagon.types.octo_tessagon import OctoTessagon
-from tessagon.types.rhombus_tessagon import RhombusTessagon
-from tessagon.types.hex_tri_tessagon import HexTriTessagon
-from tessagon.types.hex_square_tri_tessagon import HexSquareTriTessagon
-from tessagon.types.square_tessagon import SquareTessagon
-from tessagon.types.pythagorean_tessagon import PythagoreanTessagon
-from tessagon.types.brick_tessagon import BrickTessagon
-from tessagon.types.dodeca_tessagon import DodecaTessagon
-from tessagon.types.square_tri_tessagon import SquareTriTessagon
-from tessagon.types.weave_tessagon import WeaveTessagon
-from tessagon.types.floret_tessagon import FloretTessagon
-from tessagon.types.hex_big_tri_tessagon import HexBigTriTessagon
-from tessagon.types.zig_zag_tessagon import ZigZagTessagon
-from tessagon.types.dissected_square_tessagon import DissectedSquareTessagon
-from tessagon.types.square_tri2_tessagon import SquareTri2Tessagon
-from tessagon.types.dodeca_tri_tessagon import DodecaTriTessagon
-from tessagon.types.dissected_triangle_tessagon \
-    import DissectedTriangleTessagon
-from tessagon.types.dissected_hex_quad_tessagon \
-    import DissectedHexQuadTessagon
-from tessagon.types.dissected_hex_tri_tessagon \
-    import DissectedHexTriTessagon
-from tessagon.types.penta_tessagon import PentaTessagon
-from tessagon.types.penta2_tessagon import Penta2Tessagon
 
+from tessagon import TessagonDiscovery
 
 def main():
-    classes = {
-        'regular':  [SquareTessagon,
-                     HexTessagon,
-                     TriTessagon],
+    class_names = {
+        'regular':  ['SquareTessagon',
+                     'HexTessagon',
+                     'TriTessagon'],
 
-        'archimedean': [OctoTessagon,
-                        HexTriTessagon,
-                        HexSquareTriTessagon,
-                        DodecaTessagon,
-                        SquareTriTessagon,
-                        SquareTri2Tessagon,
-                        DodecaTriTessagon],
+        'archimedean': ['OctoTessagon',
+                        'HexTriTessagon',
+                        'HexSquareTriTessagon',
+                        'DodecaTessagon',
+                        'SquareTriTessagon',
+                        'SquareTri2Tessagon',
+                        'DodecaTriTessagon',
+                        'BigHexTriTessagon'],
 
-        'laves': [RhombusTessagon,
-                  FloretTessagon,
-                  DissectedSquareTessagon,
-                  DissectedTriangleTessagon,
-                  DissectedHexQuadTessagon,
-                  DissectedHexTriTessagon,
-                  PentaTessagon,
-                  Penta2Tessagon],
+        'laves': ['RhombusTessagon',
+                  'FloretTessagon',
+                  'DissectedSquareTessagon',
+                  'DissectedTriangleTessagon',
+                  'DissectedHexQuadTessagon',
+                  'DissectedHexTriTessagon',
+                  'PentaTessagon',
+                  'Penta2Tessagon'],
 
-        'non_edge': [PythagoreanTessagon,
-                     BrickTessagon,
-                     WeaveTessagon,
-                     HexBigTriTessagon,
-                     ZigZagTessagon]
+        'non_edge': ['PythagoreanTessagon',
+                     'BrickTessagon',
+                     'WeaveTessagon',
+                     'HexBigTriTessagon',
+                     'ZigZagTessagon']
     }
+    classes = { tiling_type: list(map(TessagonDiscovery.get_class, names)) \
+                for (tiling_type, names) in class_names.items() }
     class_list = [klass for key in classes for klass in classes[key]]
 
     setup_render_scene()

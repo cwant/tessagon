@@ -98,6 +98,8 @@ Additional tessagon classes can be added by deconstructing how a tessellation fi
   [![SquareTri2Tessagon](documentation/images/square_tri2_tessagon_thumb.png)](documentation/square_tri2_tessagon.md)
 * [DodecaTriTessagon](documentation/dodeca_tri_tessagon.md) (1 color patterns)  
   [![DodecaTriTessagon](documentation/images/dodeca_tri_tessagon_thumb.png)](documentation/dodeca_tri_tessagon.md)
+* [BigHexTriTessagon](documentation/big_hex_tri_tessagon.md) (1 color patterns)  
+  [![BigHexTriTessagon](documentation/images/big_hex_tri_tessagon_thumb.png)](documentation/big_hex_tri_tessagon.md)
 
 ### Laves tilings
 

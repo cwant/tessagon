@@ -193,6 +193,18 @@ class TessagonCommonDemo:
         return self.tessellate(one_sheet_hyperboloid, DodecaTessagon,
                                **{**kwargs, **options})
 
+    def big_hex_tri_tessagon(self, position, **kwargs):
+        options = {
+            'u_range': [0.0, 1.0],
+            'v_range': [0.0, 1.0],
+            'u_num': 28,
+            'v_num': 4,
+            'position': position
+        }
+        HexBigTriTessagon = self.method_to_class()
+        return self.tessellate(torus, HexBigTriTessagon,
+                               **{**kwargs, **options})
+
     def square_tri_tessagon(self, position, **kwargs):
         options = {
             'u_range': [0.0, 1.0],

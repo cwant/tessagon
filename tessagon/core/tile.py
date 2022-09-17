@@ -217,7 +217,8 @@ class Tile(AbstractTile):
     def _get_verts_from_list(self, vert_index_keys_list):
         verts = []
         for vert_index_keys in vert_index_keys_list:
-            if isinstance(vert_index_keys[0], list):
+            if isinstance(vert_index_keys, list) \
+               and isinstance(vert_index_keys[0], list):
                 vert = self._get_neighbor_vert(vert_index_keys[0],
                                                vert_index_keys[1])
             else:

@@ -24,6 +24,7 @@ from tessagon.types.dissected_hex_tri_tessagon \
     import DissectedHexTriTessagon
 from tessagon.types.penta_tessagon import PentaTessagon
 from tessagon.types.penta2_tessagon import Penta2Tessagon
+from tessagon.types.big_hex_tri_tessagon import BigHexTriTessagon
 
 ALL = [SquareTessagon,
        HexTessagon,
@@ -36,6 +37,7 @@ ALL = [SquareTessagon,
        SquareTriTessagon,
        SquareTri2Tessagon,
        DodecaTriTessagon,
+       BigHexTriTessagon,
 
        RhombusTessagon,
        FloretTessagon,
