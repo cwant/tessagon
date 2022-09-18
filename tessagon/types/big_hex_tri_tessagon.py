@@ -36,7 +36,6 @@ class BigHexTriTile(Tile):
                 13: None,
                 14: None}
 
-
     def init_faces(self):
         return {
             # Hex
@@ -45,7 +44,7 @@ class BigHexTriTile(Tile):
             'c': None,
 
             # Triangles
-            0: None, 
+            0: None,
             1: None,
             2: None,
             3: None,
@@ -82,7 +81,7 @@ class BigHexTriTile(Tile):
         y3 = y2 / sqrt(21)
 
         return (x3, y3)
-       
+
     def calculate_verts(self):
         vert = self.add_vert([0], 0, 1)
         self.set_equivalent_vert(['left'], 1, vert)
@@ -161,8 +160,8 @@ class BigHexTriTile(Tile):
         self.set_equivalent_face(['left'], 8, face)
 
         self.add_face(10, [7,
-                          8,
-                          5])
+                           8,
+                           5])
         self.add_face(11, [6,
                            9,
                            7])
@@ -286,6 +285,7 @@ class BigHexTriTile(Tile):
         self.color_face('a', 2)
         self.color_face('b', 2)
         self.color_face('c', 2)
+
 
 class BigHexTriTessagon(Tessagon):
     tile_class = BigHexTriTile
