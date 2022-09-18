@@ -43,19 +43,28 @@ class TessagonCommonDemo:
         row = 0
         column = 0
 
+        # Output meshes for potential inspection (e.g. test suite)
+        meshes = {}
+
         for cls in classes:
+            key = cls.__name__
+            meshes[key] = {'color_patterns': {}}
+
             method = self.class_to_method(cls)
 
             # Non-color pattern object
-            method([column, 0, row])
-
+            meshes[key]['regular'] = method([column, 0, row])
+            print(key)
             for i in range(cls.num_color_patterns()):
                 color_pattern = i + 1
 
                 # Color pattern object
-                method([column, 0, row - color_pattern * offset],
-                                  color_pattern=color_pattern)
+                meshes[key]['color_patterns'][color_pattern] \
+                    = method([column, 0, row - color_pattern * offset],
+                             color_pattern=color_pattern)
             column += offset
+
+        return meshes
 
     def hex_tessagon(self, position, **kwargs):
         options = {
@@ -201,8 +210,8 @@ class TessagonCommonDemo:
             'v_num': 4,
             'position': position
         }
-        HexBigTriTessagon = self.method_to_class()
-        return self.tessellate(torus, HexBigTriTessagon,
+        BigHexTriTessagon = self.method_to_class()
+        return self.tessellate(torus, BigHexTriTessagon,
                                **{**kwargs, **options})
 
     def square_tri_tessagon(self, position, **kwargs):
