@@ -15,15 +15,15 @@ class TestTileGenerator(CoreTestsBase):
         assert len(tiles[1]) == 3
 
         tile_generator.initialize_neighbors(tiles)
-        assert(tiles[0][0].get_neighbor_tile(['left']) is None)
-        assert(tiles[0][0].get_neighbor_tile(['bottom']) is None)
-        assert(tiles[0][0].get_neighbor_tile(['right']) is tiles[1][0])
-        assert(tiles[0][0].get_neighbor_tile(['top']) is tiles[0][1])
+        assert tiles[0][0].get_neighbor_tile(['left']) is None
+        assert tiles[0][0].get_neighbor_tile(['bottom']) is None
+        assert tiles[0][0].get_neighbor_tile(['right']) is tiles[1][0]
+        assert tiles[0][0].get_neighbor_tile(['top']) is tiles[0][1]
 
-        assert(tiles[1][2].get_neighbor_tile(['left']) is tiles[0][2])
-        assert(tiles[1][2].get_neighbor_tile(['bottom']) is tiles[1][1])
-        assert(tiles[1][2].get_neighbor_tile(['right']) is None)
-        assert(tiles[1][2].get_neighbor_tile(['top']) is None)
+        assert tiles[1][2].get_neighbor_tile(['left']) is tiles[0][2]
+        assert tiles[1][2].get_neighbor_tile(['bottom']) is tiles[1][1]
+        assert tiles[1][2].get_neighbor_tile(['right']) is None
+        assert tiles[1][2].get_neighbor_tile(['top']) is None
 
     def test_u_cyclic(self):
         tessagon = FakeTessagon()
@@ -37,15 +37,15 @@ class TestTileGenerator(CoreTestsBase):
         assert len(tiles[1]) == 3
 
         tile_generator.initialize_neighbors(tiles)
-        assert(tiles[0][0].get_neighbor_tile(['left']) is tiles[1][0])
-        assert(tiles[0][0].get_neighbor_tile(['bottom']) is None)
-        assert(tiles[0][0].get_neighbor_tile(['right']) is tiles[1][0])
-        assert(tiles[0][0].get_neighbor_tile(['top']) is tiles[0][1])
+        assert tiles[0][0].get_neighbor_tile(['left']) is tiles[1][0]
+        assert tiles[0][0].get_neighbor_tile(['bottom']) is None
+        assert tiles[0][0].get_neighbor_tile(['right']) is tiles[1][0]
+        assert tiles[0][0].get_neighbor_tile(['top']) is tiles[0][1]
 
-        assert(tiles[1][2].get_neighbor_tile(['left']) is tiles[0][2])
-        assert(tiles[1][2].get_neighbor_tile(['bottom']) is tiles[1][1])
-        assert(tiles[1][2].get_neighbor_tile(['right']) is tiles[0][2])
-        assert(tiles[1][2].get_neighbor_tile(['top']) is None)
+        assert tiles[1][2].get_neighbor_tile(['left']) is tiles[0][2]
+        assert tiles[1][2].get_neighbor_tile(['bottom']) is tiles[1][1]
+        assert tiles[1][2].get_neighbor_tile(['right']) is tiles[0][2]
+        assert tiles[1][2].get_neighbor_tile(['top']) is None
 
     def test_v_cyclic(self):
         tessagon = FakeTessagon()
@@ -59,15 +59,15 @@ class TestTileGenerator(CoreTestsBase):
         assert len(tiles[1]) == 3
 
         tile_generator.initialize_neighbors(tiles)
-        assert(tiles[0][0].get_neighbor_tile(['left']) is None)
-        assert(tiles[0][0].get_neighbor_tile(['bottom']) is tiles[0][2])
-        assert(tiles[0][0].get_neighbor_tile(['right']) is tiles[1][0])
-        assert(tiles[0][0].get_neighbor_tile(['top']) is tiles[0][1])
+        assert tiles[0][0].get_neighbor_tile(['left']) is None
+        assert tiles[0][0].get_neighbor_tile(['bottom']) is tiles[0][2]
+        assert tiles[0][0].get_neighbor_tile(['right']) is tiles[1][0]
+        assert tiles[0][0].get_neighbor_tile(['top']) is tiles[0][1]
 
-        assert(tiles[1][2].get_neighbor_tile(['left']) is tiles[0][2])
-        assert(tiles[1][2].get_neighbor_tile(['bottom']) is tiles[1][1])
-        assert(tiles[1][2].get_neighbor_tile(['right']) is None)
-        assert(tiles[1][2].get_neighbor_tile(['top']) is tiles[1][0])
+        assert tiles[1][2].get_neighbor_tile(['left']) is tiles[0][2]
+        assert tiles[1][2].get_neighbor_tile(['bottom']) is tiles[1][1]
+        assert tiles[1][2].get_neighbor_tile(['right']) is None
+        assert tiles[1][2].get_neighbor_tile(['top']) is tiles[1][0]
 
     def test_u_v_cyclic(self):
         tessagon = FakeTessagon()
@@ -81,12 +81,12 @@ class TestTileGenerator(CoreTestsBase):
         assert len(tiles[1]) == 3
 
         tile_generator.initialize_neighbors(tiles)
-        assert(tiles[0][0].get_neighbor_tile(['left']) is tiles[1][0])
-        assert(tiles[0][0].get_neighbor_tile(['bottom']) is tiles[0][2])
-        assert(tiles[0][0].get_neighbor_tile(['right']) is tiles[1][0])
-        assert(tiles[0][0].get_neighbor_tile(['top']) is tiles[0][1])
+        assert tiles[0][0].get_neighbor_tile(['left']) is tiles[1][0]
+        assert tiles[0][0].get_neighbor_tile(['bottom']) is tiles[0][2]
+        assert tiles[0][0].get_neighbor_tile(['right']) is tiles[1][0]
+        assert tiles[0][0].get_neighbor_tile(['top']) is tiles[0][1]
 
-        assert(tiles[1][2].get_neighbor_tile(['left']) is tiles[0][2])
-        assert(tiles[1][2].get_neighbor_tile(['bottom']) is tiles[1][1])
-        assert(tiles[1][2].get_neighbor_tile(['right']) is tiles[0][2])
-        assert(tiles[1][2].get_neighbor_tile(['top']) is tiles[1][0])
+        assert tiles[1][2].get_neighbor_tile(['left']) is tiles[0][2]
+        assert tiles[1][2].get_neighbor_tile(['bottom']) is tiles[1][1]
+        assert tiles[1][2].get_neighbor_tile(['right']) is tiles[0][2]
+        assert tiles[1][2].get_neighbor_tile(['top']) is tiles[1][0]
