@@ -27,3 +27,15 @@ class TestDemo:
         list_demo = ListDemo()
         meshes = list_demo.main()
         assert len(meshes) == 24
+
+        # Torus with rot_factor ...
+        assert len(meshes['SquareTessagon']['regular']['vert_list']) == 720
+        assert len(meshes['SquareTessagon']['regular']['face_list']) == 720
+
+        # Klein bottle ...
+        assert len(meshes['RhombusTessagon']['regular']['vert_list']) == 1440
+        assert len(meshes['RhombusTessagon']['regular']['face_list']) == 1440
+
+        # Mobius strip ...
+        assert len(meshes['OctoTessagon']['regular']['vert_list']) == 720
+        assert len(meshes['OctoTessagon']['regular']['face_list']) == 280
