@@ -2,6 +2,7 @@ from math import sqrt
 from tessagon.core.tile import Tile
 from tessagon.core.tessagon import Tessagon
 from tessagon.core.tessagon_metadata import TessagonMetadata
+from tessagon.core.tile_utils import left_tile
 
 metadata = TessagonMetadata(name='Other Pentagons',
                             num_color_patterns=1,
@@ -78,8 +79,9 @@ class Penta2Tile(Tile):
                       [['center', 'middle'],
                        ['center', 'bottom'],
                        ['left', 'bottom', 'u_boundary'],
-                       [['left'], ['center', 'bottom']],
-                       [['left'], ['center', 'middle']]], u_boundary=True)
+                       left_tile(['center', 'bottom']),
+                       left_tile(['center', 'middle'])],
+                      u_boundary=True)
 
     def color_pattern1(self):
         self.color_paths([

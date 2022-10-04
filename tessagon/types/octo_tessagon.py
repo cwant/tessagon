@@ -2,6 +2,7 @@ from math import sqrt
 from tessagon.core.tile import Tile
 from tessagon.core.tessagon import Tessagon
 from tessagon.core.tessagon_metadata import TessagonMetadata
+from tessagon.core.tile_utils import left_tile, top_tile
 
 # TODO: gulp, 'octagon' does not begin with 'octo'
 
@@ -69,8 +70,8 @@ class OctoTile(Tile):
                       [['left', 'top', 'v_boundary'],
                        ['left', 'top', 'u_boundary'],
                        # Verts on neighbor tiles
-                       [['left'], ['right', 'top', 'v_boundary']],
-                       [['top'], ['left', 'bottom', 'u_boundary']]],
+                       left_tile(['right', 'top', 'v_boundary']),
+                       top_tile(['left', 'bottom', 'u_boundary'])],
                       corner=True)
 
     def color_pattern1(self):

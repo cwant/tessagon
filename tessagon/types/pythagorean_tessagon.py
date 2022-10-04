@@ -1,6 +1,9 @@
 from tessagon.core.tile import Tile
 from tessagon.core.tessagon import Tessagon
 from tessagon.core.tessagon_metadata import TessagonMetadata
+from tessagon.core.tile_utils import top_tile, bottom_tile, \
+    left_tile, right_tile, left_bottom_tile, left_top_tile, \
+    right_bottom_tile, right_top_tile
 
 metadata = TessagonMetadata(name='Pythagorean',
                             num_color_patterns=1,
@@ -58,24 +61,24 @@ class PythagoreanTile(Tile):
 
                 vert = self.add_vert([col, row], c[col], c[row])
                 if col == 1:
-                    self.set_equivalent_vert(['left'], [6, row], vert)
+                    self.set_equivalent_vert(*left_tile([6, row]), vert)
                     if row == 6:
-                        self.set_equivalent_vert(['left', 'top'], [6, 1], vert)
+                        self.set_equivalent_vert(*left_top_tile([6, 1]), vert)
                     elif row == 1:
-                        self.set_equivalent_vert(['left', 'bottom'], [6, 6],
+                        self.set_equivalent_vert(*left_bottom_tile([6, 6]),
                                                  vert)
                 elif col == 6:
-                    self.set_equivalent_vert(['right'], [1, row], vert)
+                    self.set_equivalent_vert(*right_tile([1, row]), vert)
                     if row == 6:
-                        self.set_equivalent_vert(['right', 'top'], [1, 1],
+                        self.set_equivalent_vert(*right_top_tile([1, 1]),
                                                  vert)
                     elif row == 1:
-                        self.set_equivalent_vert(['right', 'bottom'], [1, 6],
+                        self.set_equivalent_vert(*right_bottom_tile([1, 6]),
                                                  vert)
                 if row == 6:
-                    self.set_equivalent_vert(['top'], [col, 1], vert)
+                    self.set_equivalent_vert(*top_tile([col, 1]), vert)
                 elif row == 1:
-                    self.set_equivalent_vert(['bottom'], [col, 6], vert)
+                    self.set_equivalent_vert(*bottom_tile([col, 6]), vert)
 
     def init_faces(self):
         return {1: None, 2: None, 3: None, 4: None, 5: None, 6: None,
@@ -87,10 +90,10 @@ class PythagoreanTile(Tile):
                                  [2, 5],
                                  [3, 5],
                                  [3, 6],
-                                 [['top'], [3, 2]],
-                                 [['top'], [2, 2]],
-                                 [['top'], [1, 2]]])
-        self.set_equivalent_face(['top'], 11, face)
+                                 top_tile([3, 2]),
+                                 top_tile([2, 2]),
+                                 top_tile([1, 2])])
+        self.set_equivalent_face(*top_tile(11), face)
 
         self.add_face(2, [[3, 6],
                           [4, 6],
@@ -125,10 +128,10 @@ class PythagoreanTile(Tile):
                                  [2, 3],
                                  [2, 2],
                                  [1, 2],
-                                 [['left'], [5, 2]],
-                                 [['left'], [5, 3]],
-                                 [['left'], [5, 4]]])
-        self.set_equivalent_face(['left'], 8, face)
+                                 left_tile([5, 2]),
+                                 left_tile([5, 3]),
+                                 left_tile([5, 4])])
+        self.set_equivalent_face(*left_tile(8), face)
 
         self.add_face(7, [[4, 4],
                           [5, 4],
@@ -140,10 +143,10 @@ class PythagoreanTile(Tile):
                                  [5, 3],
                                  [5, 2],
                                  [6, 2],
-                                 [['right'], [2, 2]],
-                                 [['right'], [2, 3]],
-                                 [['right'], [2, 4]]])
-        self.set_equivalent_face(['right'], 6, face)
+                                 right_tile([2, 2]),
+                                 right_tile([2, 3]),
+                                 right_tile([2, 4])])
+        self.set_equivalent_face(*right_tile(6), face)
 
         self.add_face(9, [[2, 3],
                           [3, 3],
@@ -164,10 +167,10 @@ class PythagoreanTile(Tile):
                                   [2, 2],
                                   [3, 2],
                                   [3, 1],
-                                  [['bottom'], [3, 5]],
-                                  [['bottom'], [2, 5]],
-                                  [['bottom'], [1, 5]]])
-        self.set_equivalent_face(['bottom'], 1, face)
+                                  bottom_tile([3, 5]),
+                                  bottom_tile([2, 5]),
+                                  bottom_tile([1, 5])])
+        self.set_equivalent_face(*bottom_tile(1), face)
 
         self.add_face(12, [[5, 2],
                            [6, 2],

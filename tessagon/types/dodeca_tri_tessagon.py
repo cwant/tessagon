@@ -2,6 +2,7 @@ from math import sqrt
 from tessagon.core.tile import Tile
 from tessagon.core.tessagon import Tessagon
 from tessagon.core.tessagon_metadata import TessagonMetadata
+from tessagon.core.tile_utils import bottom_tile, left_tile, bottom_left_tile
 
 metadata = TessagonMetadata(name='Dodecagons and Triangles',
                             num_color_patterns=1,
@@ -92,15 +93,15 @@ class DodecaTriTile(Tile):
                       [['left', 'middle'],
                        ['left', 'bottom', 'tri'],
                        ['left', 'bottom', 'diag'],
-                       [['bottom'], ['left', 'top', 'diag']],
-                       [['bottom'], ['left', 'top', 'tri']],
-                       [['bottom'], ['left', 'middle']],
-                       [['bottom', 'left'], ['right', 'middle']],
-                       [['bottom', 'left'], ['right', 'top', 'tri']],
-                       [['bottom', 'left'], ['right', 'top', 'diag']],
-                       [['left'], ['right', 'bottom', 'diag']],
-                       [['left'], ['right', 'bottom', 'tri']],
-                       [['left'], ['right', 'middle']]],
+                       bottom_tile(['left', 'top', 'diag']),
+                       bottom_tile(['left', 'top', 'tri']),
+                       bottom_tile(['left', 'middle']),
+                       bottom_left_tile(['right', 'middle']),
+                       bottom_left_tile(['right', 'top', 'tri']),
+                       bottom_left_tile(['right', 'top', 'diag']),
+                       left_tile(['right', 'bottom', 'diag']),
+                       left_tile(['right', 'bottom', 'tri']),
+                       left_tile(['right', 'middle'])],
                       face_type='dodecagon', corner=True)
 
         # Middle Dodecagon
@@ -130,7 +131,7 @@ class DodecaTriTile(Tile):
         self.add_face(['tri', 'left', 'bottom'],
                       [['left', 'bottom', 'diag'],
                        ['left', 'bottom', 'v_boundary'],
-                       [['bottom'], ['left', 'top', 'diag']]],
+                       bottom_tile(['left', 'top', 'diag'])],
                       face_type='triangle', v_boundary=True)
 
     def color_pattern1(self):

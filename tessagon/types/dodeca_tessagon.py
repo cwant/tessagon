@@ -2,6 +2,7 @@ from math import sqrt
 from tessagon.core.tile import Tile
 from tessagon.core.tessagon import Tessagon
 from tessagon.core.tessagon_metadata import TessagonMetadata
+from tessagon.core.tile_utils import top_tile, left_tile, left_top_tile
 
 # Will my brain survive this one?
 
@@ -126,15 +127,15 @@ class DodecaTile(Tile):
                       [['top', 'left', 'v_square'],
                        ['top', 'left', 'sq4'],
                        ['top', 'left', 'sq3'],
-                       [['left'], ['top', 'right', 'sq3']],
-                       [['left'], ['top', 'right', 'sq4']],
-                       [['left'], ['top', 'right', 'v_square']],
-                       [['left', 'top'], ['bottom', 'right', 'v_square']],
-                       [['left', 'top'], ['bottom', 'right', 'sq4']],
-                       [['left', 'top'], ['bottom', 'right', 'sq3']],
-                       [['top'], ['bottom', 'left', 'sq3']],
-                       [['top'], ['bottom', 'left', 'sq4']],
-                       [['top'], ['bottom', 'left', 'v_square']]],
+                       left_tile(['top', 'right', 'sq3']),
+                       left_tile(['top', 'right', 'sq4']),
+                       left_tile(['top', 'right', 'v_square']),
+                       left_top_tile(['bottom', 'right', 'v_square']),
+                       left_top_tile(['bottom', 'right', 'sq4']),
+                       left_top_tile(['bottom', 'right', 'sq3']),
+                       top_tile(['bottom', 'left', 'sq3']),
+                       top_tile(['bottom', 'left', 'sq4']),
+                       top_tile(['bottom', 'left', 'v_square'])],
                       face_type='dodecagon', corner=True)
         # Middle Dodecagon
         self.add_face(['dodec', 'middle'],
@@ -155,15 +156,15 @@ class DodecaTile(Tile):
         self.add_face(['square', 'top', 'center'],
                       [['top', 'left', 'v_square'],
                        ['top', 'right', 'v_square'],
-                       [['top'], ['bottom', 'right', 'v_square']],
-                       [['top'], ['bottom', 'left', 'v_square']]],
+                       top_tile(['bottom', 'right', 'v_square']),
+                       top_tile(['bottom', 'left', 'v_square'])],
                       face_type='square', v_boundary=True)
         # Left square
         self.add_face(['square', 'middle', 'left'],
                       [['top', 'left', 'u_square'],
                        ['bottom', 'left', 'u_square'],
-                       [['left'], ['bottom', 'right', 'u_square']],
-                       [['left'], ['top', 'right', 'u_square']]],
+                       left_tile(['bottom', 'right', 'u_square']),
+                       left_tile(['top', 'right', 'u_square'])],
                       face_type='square', u_boundary=True)
         # Interior square
         self.add_face(['square', 'top', 'left'],
@@ -186,9 +187,9 @@ class DodecaTile(Tile):
                       [['top', 'left', 'sq3'],
                        ['top', 'left', 'sq1'],
                        ['top', 'left', 'u_square'],
-                       [['left'], ['top', 'right', 'u_square']],
-                       [['left'], ['top', 'right', 'sq1']],
-                       [['left'], ['top', 'right', 'sq3']]],
+                       left_tile(['top', 'right', 'u_square']),
+                       left_tile(['top', 'right', 'sq1']),
+                       left_tile(['top', 'right', 'sq3'])],
                       face_type='hexagon', u_boundary=True)
 
     def color_pattern1(self):

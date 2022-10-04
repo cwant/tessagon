@@ -2,6 +2,7 @@ from math import sqrt
 from tessagon.core.tile import Tile
 from tessagon.core.tessagon import Tessagon
 from tessagon.core.tessagon_metadata import TessagonMetadata
+from tessagon.core.tile_utils import left_tile, top_tile, left_top_tile
 
 metadata = TessagonMetadata(name='Hexagons, Squares, and Triangles',
                             num_color_patterns=1,
@@ -109,15 +110,15 @@ class HexSquareTriTile(Tile):
         self.add_face(['square', 'top', 'center'],
                       [['top', 'left', 'v_square'],
                        ['top', 'right', 'v_square'],
-                       [['top'], ['bottom', 'right', 'v_square']],
-                       [['top'], ['bottom', 'left', 'v_square']]],
+                       top_tile(['bottom', 'right', 'v_square']),
+                       top_tile(['bottom', 'left', 'v_square'])],
                       face_type='square', v_boundary=True)
         # Left square
         self.add_face(['square', 'middle', 'left'],
                       [['top', 'left', 'u_square'],
                        ['bottom', 'left', 'u_square'],
-                       [['left'], ['bottom', 'right', 'u_square']],
-                       [['left'], ['top', 'right', 'u_square']]],
+                       left_tile(['bottom', 'right', 'u_square']),
+                       left_tile(['top', 'right', 'u_square'])],
                       face_type='square', u_boundary=True)
         # Interior square
         self.add_face(['square', 'top', 'left'],
@@ -136,16 +137,16 @@ class HexSquareTriTile(Tile):
         self.add_face(['tri', 'top', 'left'],
                       [['top', 'left', 'u_square'],
                        ['top', 'left', 'u_boundary'],
-                       [['left'], ['top', 'right', 'u_square']]],
+                       left_tile(['top', 'right', 'u_square'])],
                       face_type='triangle', u_boundary=True)
         # Corner hexagon
         self.add_face(['hex', 'top', 'left'],
                       [['top', 'left', 'v_square'],
                        ['top', 'left', 'u_boundary'],
-                       [['left'], ['top', 'right', 'v_square']],
-                       [['left', 'top'], ['bottom', 'right', 'v_square']],
-                       [['top'], ['bottom', 'left', 'u_boundary']],
-                       [['top'], ['bottom', 'left', 'v_square']]],
+                       left_tile(['top', 'right', 'v_square']),
+                       left_top_tile(['bottom', 'right', 'v_square']),
+                       top_tile(['bottom', 'left', 'u_boundary']),
+                       top_tile(['bottom', 'left', 'v_square'])],
                       face_type='hexagon', corner=True)
 
     def color_pattern1(self):

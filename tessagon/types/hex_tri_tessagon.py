@@ -1,7 +1,7 @@
 from tessagon.core.tile import Tile
 from tessagon.core.tessagon import Tessagon
 from tessagon.core.tessagon_metadata import TessagonMetadata
-
+from tessagon.core.tile_utils import left_tile, left_top_tile, top_tile
 metadata = TessagonMetadata(name='Hexagons and Triangles',
                             num_color_patterns=1,
                             classification='archimedean',
@@ -74,7 +74,7 @@ class HexTriTile(Tile):
                       [['left', 'top'],
                        ['left', 'middle'],
                        # Verts on neighbor tiles
-                       [['left'], ['right', 'top']]],
+                       left_tile(['right', 'top'])],
                       face_type='triangle', u_boundary=True)
 
         # Exterior top-left hexagon
@@ -82,10 +82,10 @@ class HexTriTile(Tile):
                       [['top'],
                        ['left', 'top'],
                        # Verts on neighbor tiles
-                       [['left'], ['right', 'top']],
-                       [['left'], 'top'],
-                       [['left', 'top'], ['right', 'bottom']],
-                       [['top'], ['left', 'bottom']]],
+                       left_tile(['right', 'top']),
+                       left_tile('top'),
+                       left_top_tile(['right', 'bottom']),
+                       top_tile(['left', 'bottom'])],
                       face_type='hexagon', corner=True)
 
     def color_pattern1(self):
