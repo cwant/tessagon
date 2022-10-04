@@ -2,6 +2,7 @@ from math import sqrt
 from tessagon.core.tile import Tile
 from tessagon.core.tessagon import Tessagon
 from tessagon.core.tessagon_metadata import TessagonMetadata
+from tessagon.core.tile_utils import left_tile, bottom_tile
 
 metadata = TessagonMetadata(name='Pentagons',
                             num_color_patterns=1,
@@ -95,16 +96,16 @@ class PentaTile(Tile):
                       [['left', 'bottom', 'u_boundary'],
                        ['left', 'bottom', 'interior'],
                        ['left', 'middle'],
-                       [['left'], ['right', 'middle']],
-                       [['left'], ['right', 'bottom', 'interior']]],
+                       left_tile(['right', 'middle']),
+                       left_tile(['right', 'bottom', 'interior'])],
                       u_boundary=True)
 
         self.add_face(['left', 'bottom', 'v_boundary'],
                       [['left', 'bottom', 'u_boundary'],
                        ['left', 'bottom', 'interior'],
                        ['left', 'bottom', 'v_boundary'],
-                       [['bottom'], ['left', 'top', 'interior']],
-                       [['bottom'], ['left', 'top', 'u_boundary']]],
+                       bottom_tile(['left', 'top', 'interior']),
+                       bottom_tile(['left', 'top', 'u_boundary'])],
                       v_boundary=True)
 
         self.add_face(['left', 'middle'],

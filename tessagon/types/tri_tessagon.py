@@ -1,6 +1,7 @@
 from tessagon.core.tessagon import Tessagon
 from tessagon.core.tile import Tile
 from tessagon.core.tessagon_metadata import TessagonMetadata
+from tessagon.core.tile_utils import top_tile
 
 metadata = TessagonMetadata(name='Regular Triangles',
                             num_color_patterns=3,
@@ -45,7 +46,7 @@ class TriTile(Tile):
                       [['left', 'top'],
                        ['middle'],
                        # Vert on neighboring tile
-                       [['top'], ['middle']]], v_boundary=True)
+                       top_tile(['middle'])], v_boundary=True)
         # Two interior faces, via symmetry
         self.add_face(['left', 'middle'],
                       [['left', 'top'],

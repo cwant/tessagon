@@ -1,6 +1,10 @@
 from tessagon.core.tessagon import Tessagon
 from tessagon.core.tile import Tile
 from tessagon.core.tessagon_metadata import TessagonMetadata
+from tessagon.core.tile_utils import right_tile, left_tile, \
+    top_tile, bottom_tile, left_top_tile, right_top_tile, \
+    left_bottom_tile, right_bottom_tile
+
 from math import atan2, sqrt, sin, cos
 
 metadata = TessagonMetadata(name='Big Hexagons and Triangles',
@@ -84,14 +88,14 @@ class BigHexTriTile(Tile):
 
     def calculate_verts(self):
         vert = self.add_vert([0], 0, 1)
-        self.set_equivalent_vert(['left'], 1, vert)
-        self.set_equivalent_vert(['top'], 13, vert)
-        self.set_equivalent_vert(['left', 'top'], 14, vert)
+        self.set_equivalent_vert(*left_tile(1), vert)
+        self.set_equivalent_vert(*top_tile(13), vert)
+        self.set_equivalent_vert(*left_top_tile(14), vert)
 
         vert = self.add_vert([1], 1, 1)
-        self.set_equivalent_vert(['right'], 0, vert)
-        self.set_equivalent_vert(['top'], 14, vert)
-        self.set_equivalent_vert(['right', 'top'], 13, vert)
+        self.set_equivalent_vert(*right_tile(0), vert)
+        self.set_equivalent_vert(*top_tile(14), vert)
+        self.set_equivalent_vert(*right_top_tile(13), vert)
 
         self.add_vert([2], *self.transform(1, 4.5))
         self.add_vert([3], *self.transform(0, 4))
@@ -106,35 +110,35 @@ class BigHexTriTile(Tile):
         self.add_vert([12], *self.transform(1, 0.5))
 
         vert = self.add_vert([13], 0, 0)
-        self.set_equivalent_vert(['left'], 14, vert)
-        self.set_equivalent_vert(['bottom'], 0, vert)
-        self.set_equivalent_vert(['left', 'bottom'], 1, vert)
+        self.set_equivalent_vert(*left_tile(14), vert)
+        self.set_equivalent_vert(*bottom_tile(0), vert)
+        self.set_equivalent_vert(*left_bottom_tile(1), vert)
 
         vert = self.add_vert([14], 1, 0)
-        self.set_equivalent_vert(['right'], 13, vert)
-        self.set_equivalent_vert(['bottom'], 1, vert)
-        self.set_equivalent_vert(['right', 'bottom'], 0, vert)
+        self.set_equivalent_vert(*right_tile(13), vert)
+        self.set_equivalent_vert(*bottom_tile(1), vert)
+        self.set_equivalent_vert(*right_bottom_tile(0), vert)
 
     def calculate_faces(self):
         face = self.add_face(0, [3,
                                  0,
-                                 [['top'], 12]])
-        self.set_equivalent_face(['top'], 23, face)
+                                 top_tile(12)])
+        self.set_equivalent_face(*top_tile(23), face)
 
         face = self.add_face(1, [2,
                                  3,
-                                 [['top'], 12]])
-        self.set_equivalent_face(['top'], 24, face)
+                                 top_tile(12)])
+        self.set_equivalent_face(*top_tile(24), face)
 
         face = self.add_face(2, [2,
-                                 [['top'], 12],
-                                 [['top'], 11]])
-        self.set_equivalent_face(['top'], 21, face)
+                                 top_tile(12),
+                                 top_tile(11)])
+        self.set_equivalent_face(*top_tile(21), face)
 
         face = self.add_face(3, [1,
                                  2,
-                                 [['top'], 11]])
-        self.set_equivalent_face(['top'], 22, face)
+                                 top_tile(11)])
+        self.set_equivalent_face(*top_tile(22), face)
 
         self.add_face(4, [3,
                           2,
@@ -150,14 +154,14 @@ class BigHexTriTile(Tile):
                           7])
 
         face = self.add_face(8, [6,
-                                 [['right'], 5],
-                                 [['right'], 8]])
-        self.set_equivalent_face(['right'], 9, face)
+                                 right_tile(5),
+                                 right_tile(8)])
+        self.set_equivalent_face(*right_tile(9), face)
 
         face = self.add_face(9, [5,
                                  8,
-                                 [['left'], 6]])
-        self.set_equivalent_face(['left'], 8, face)
+                                 left_tile(6)])
+        self.set_equivalent_face(*left_tile(8), face)
 
         self.add_face(10, [7,
                            8,
@@ -168,43 +172,43 @@ class BigHexTriTile(Tile):
 
         face = self.add_face(12, [9,
                                   6,
-                                  [['right'], 8]])
-        self.set_equivalent_face(['right'], 13, face)
+                                  right_tile(8)])
+        self.set_equivalent_face(*right_tile(13), face)
 
         face = self.add_face(13, [8,
-                                  [['left'], 9],
-                                  [['left'], 6]])
-        self.set_equivalent_face(['left'], 12, face)
+                                  left_tile(9),
+                                  left_tile(6)])
+        self.set_equivalent_face(*left_tile(12), face)
 
         face = self.add_face(14, [9,
-                                  [['right'], 8],
-                                  [['right'], 10]])
-        self.set_equivalent_face(['right'], 15, face)
+                                  right_tile(8),
+                                  right_tile(10)])
+        self.set_equivalent_face(*right_tile(15), face)
 
         face = self.add_face(15, [8,
                                   10,
-                                  [['left'], 9]])
-        self.set_equivalent_face(['left'], 14, face)
+                                  left_tile(9)])
+        self.set_equivalent_face(*left_tile(14), face)
 
         face = self.add_face(16, [11,
                                   9,
-                                  [['right'], 10]])
-        self.set_equivalent_face(['right'], 17, face)
+                                  right_tile(10)])
+        self.set_equivalent_face(*right_tile(17), face)
 
         face = self.add_face(17, [10,
-                                  [['left'], 9],
-                                  [['left'], 11]])
-        self.set_equivalent_face(['left'], 16, face)
+                                  left_tile(9),
+                                  left_tile(11)])
+        self.set_equivalent_face(*left_tile(16), face)
 
         face = self.add_face(18, [14,
                                   11,
-                                  [['right'], 10]])
-        self.set_equivalent_face(['right'], 19, face)
+                                  right_tile(10)])
+        self.set_equivalent_face(*right_tile(19), face)
 
         face = self.add_face(19, [10,
                                   13,
-                                  [['left'], 11]])
-        self.set_equivalent_face(['left'], 18, face)
+                                  left_tile(11)])
+        self.set_equivalent_face(*left_tile(18), face)
 
         self.add_face(20, [10,
                            12,
@@ -212,39 +216,39 @@ class BigHexTriTile(Tile):
 
         face = self.add_face(21, [12,
                                   11,
-                                  [['bottom'], 2]])
-        self.set_equivalent_face(['bottom'], 2, face)
+                                  bottom_tile(2)])
+        self.set_equivalent_face(*bottom_tile(2), face)
 
         face = self.add_face(22, [11,
                                   14,
-                                  [['bottom'], 2]])
-        self.set_equivalent_face(['bottom'], 3, face)
+                                  bottom_tile(2)])
+        self.set_equivalent_face(*bottom_tile(3), face)
 
         face = self.add_face(23, [13,
                                   12,
-                                  [['bottom'], 3]])
-        self.set_equivalent_face(['bottom'], 0, face)
+                                  bottom_tile(3)])
+        self.set_equivalent_face(*bottom_tile(0), face)
 
         face = self.add_face(24, [12,
-                                  [['bottom'], 2],
-                                  [['bottom'], 3]])
-        self.set_equivalent_face(['bottom'], 1, face)
+                                  bottom_tile(2),
+                                  bottom_tile(3)])
+        self.set_equivalent_face(*bottom_tile(1), face)
 
         face = self.add_face('a', [0,
                                    3,
                                    5,
-                                   [['left'], 6],
-                                   [['left'], 4],
-                                   [['left'], 2]])
-        self.set_equivalent_face(['left'], 'b', face)
+                                   left_tile(6),
+                                   left_tile(4),
+                                   left_tile(2)])
+        self.set_equivalent_face(*left_tile('b'), face)
 
         face = self.add_face('b', [6,
                                    4,
                                    2,
                                    1,
-                                   [['right'], 3],
-                                   [['right'], 5]])
-        self.set_equivalent_face(['right'], 'a', face)
+                                   right_tile(3),
+                                   right_tile(5)])
+        self.set_equivalent_face(*right_tile('a'), face)
 
         self.add_face('c', [7,
                             9,

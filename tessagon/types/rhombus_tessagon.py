@@ -1,6 +1,7 @@
 from tessagon.core.tile import Tile
 from tessagon.core.tessagon import Tessagon
 from tessagon.core.tessagon_metadata import TessagonMetadata
+from tessagon.core.tile_utils import left_tile, top_tile
 
 metadata = TessagonMetadata(name='Rhombuses',
                             num_color_patterns=2,
@@ -66,8 +67,8 @@ class RhombusTile(Tile):
                       [['center', 'top', 'boundary'],
                        ['left', 'top'],
                        # Verts on neighbor tile
-                       [['left'], ['center', 'top', 'boundary']],
-                       [['top'], ['left', 'bottom']]],
+                       left_tile(['center', 'top', 'boundary']),
+                       top_tile(['left', 'bottom'])],
                       face_type='horizontal', corner=True)
 
     def color_pattern1(self):

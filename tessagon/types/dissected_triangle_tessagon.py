@@ -1,6 +1,7 @@
 from tessagon.core.tile import Tile
 from tessagon.core.tessagon import Tessagon
 from tessagon.core.tessagon_metadata import TessagonMetadata
+from tessagon.core.tile_utils import top_tile
 
 metadata = TessagonMetadata(name='Dissected Triangle',
                             num_color_patterns=1,
@@ -92,7 +93,7 @@ class DissectedTriangleTile(Tile):
         self.add_face(['left', 'top', 'center'],
                       [['center'],
                        ['left', 'top', 'v_boundary'],
-                       [['top'], ['center']]], v_boundary=True)
+                       top_tile(['center'])], v_boundary=True)
 
         self.add_face(['left', 'top', 'interior1'],
                       [['center'],

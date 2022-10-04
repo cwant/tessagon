@@ -1,6 +1,7 @@
 from tessagon.core.tile import Tile
 from tessagon.core.tessagon import Tessagon
 from tessagon.core.tessagon_metadata import TessagonMetadata
+from tessagon.core.tile_utils import left_tile, top_tile, left_top_tile
 
 metadata = TessagonMetadata(name='Weave',
                             num_color_patterns=1,
@@ -101,14 +102,14 @@ class WeaveTile(Tile):
         self.add_face(['oct', 'top', 'left'],
                       [['top', 'left', 'u_inner', 'v_outer'],
                        ['top', 'left', 'u_outer', 'v_outer'],
-                       [['left'], ['top', 'right', 'u_outer', 'v_outer']],
-                       [['left'], ['top', 'right', 'u_inner', 'v_outer']],
-                       [['left', 'top'],
-                        ['bottom', 'right', 'u_inner', 'v_outer']],
-                       [['left', 'top'],
-                        ['bottom', 'right', 'u_outer', 'v_outer']],
-                       [['top'], ['bottom', 'left', 'u_outer', 'v_outer']],
-                       [['top'], ['bottom', 'left', 'u_inner', 'v_outer']]],
+                       left_tile(['top', 'right', 'u_outer', 'v_outer']),
+                       left_tile(['top', 'right', 'u_inner', 'v_outer']),
+                       left_top_tile(['bottom', 'right',
+                                      'u_inner', 'v_outer']),
+                       left_top_tile(['bottom', 'right',
+                                      'u_outer', 'v_outer']),
+                       top_tile(['bottom', 'left', 'u_outer', 'v_outer']),
+                       top_tile(['bottom', 'left', 'u_inner', 'v_outer'])],
                       face_type='oct', corner=True)
 
         # 2 side strips
@@ -117,10 +118,10 @@ class WeaveTile(Tile):
                        ['top', 'left', 'u_outer', 'v_inner'],
                        ['bottom', 'left', 'u_outer', 'v_inner'],
                        ['bottom', 'left', 'u_outer', 'v_outer'],
-                       [['left'], ['bottom', 'right', 'u_outer', 'v_outer']],
-                       [['left'], ['bottom', 'right', 'u_outer', 'v_inner']],
-                       [['left'], ['top', 'right', 'u_outer', 'v_inner']],
-                       [['left'], ['top', 'right', 'u_outer', 'v_outer']]],
+                       left_tile(['bottom', 'right', 'u_outer', 'v_outer']),
+                       left_tile(['bottom', 'right', 'u_outer', 'v_inner']),
+                       left_tile(['top', 'right', 'u_outer', 'v_inner']),
+                       left_tile(['top', 'right', 'u_outer', 'v_outer'])],
                       face_type='oct', u_boundary=True)
 
         # 2 top/bottom strips
@@ -129,10 +130,10 @@ class WeaveTile(Tile):
                        ['top', 'left', 'u_inner', 'v_inner'],
                        ['top', 'right', 'u_inner', 'v_inner'],
                        ['top', 'right', 'u_inner', 'v_outer'],
-                       [['top'], ['bottom', 'right', 'u_inner', 'v_outer']],
-                       [['top'], ['bottom', 'right', 'u_inner', 'v_inner']],
-                       [['top'], ['bottom', 'left', 'u_inner', 'v_inner']],
-                       [['top'], ['bottom', 'left', 'u_inner', 'v_outer']]],
+                       top_tile(['bottom', 'right', 'u_inner', 'v_outer']),
+                       top_tile(['bottom', 'right', 'u_inner', 'v_inner']),
+                       top_tile(['bottom', 'left', 'u_inner', 'v_inner']),
+                       top_tile(['bottom', 'left', 'u_inner', 'v_outer'])],
                       face_type='oct', v_boundary=True)
 
     def color_pattern1(self):

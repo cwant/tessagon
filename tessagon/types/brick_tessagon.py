@@ -1,6 +1,7 @@
 from tessagon.core.tile import Tile
 from tessagon.core.tessagon import Tessagon
 from tessagon.core.tessagon_metadata import TessagonMetadata
+from tessagon.core.tile_utils import left_tile, bottom_tile
 
 metadata = TessagonMetadata(name='Bricks',
                             num_color_patterns=1,
@@ -46,9 +47,9 @@ class BrickTile(Tile):
                        ['left', 'middle'],
                        ['left', 'bottom'],
                        # Verts on neighbor tiles:
-                       [['left'], ['right', 'bottom']],
-                       [['left'], ['right', 'middle']],
-                       [['left'], ['right', 'top']]],
+                       left_tile(['right', 'bottom']),
+                       left_tile(['right', 'middle']),
+                       left_tile(['right', 'top'])],
                       u_boundary=True)
 
         # Add bottom, symmetry gives the top face
@@ -58,8 +59,8 @@ class BrickTile(Tile):
                        ['left', 'middle'],
                        ['left', 'bottom'],
                        # Verts on neighbor tiles:
-                       [['bottom'], ['left', 'middle']],
-                       [['bottom'], ['right', 'middle']]],
+                       bottom_tile(['left', 'middle']),
+                       bottom_tile(['right', 'middle'])],
                       v_boundary=True)
 
     def color_pattern1(self):

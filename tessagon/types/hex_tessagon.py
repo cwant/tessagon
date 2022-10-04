@@ -1,6 +1,7 @@
 from tessagon.core.tessagon import Tessagon
 from tessagon.core.tile import Tile
 from tessagon.core.tessagon_metadata import TessagonMetadata
+from tessagon.core.tile_utils import top_tile, top_left_tile, left_tile
 
 metadata = TessagonMetadata(name='Regular Hexagons',
                             num_color_patterns=2,
@@ -86,10 +87,10 @@ class HexTile(Tile):
                        # The other four verts are on neighboring tiles.
                        # E.g., the next one is the ['bottom', 'center']
                        # vert on the top neighbor tile.
-                       [['top'], ['bottom', 'center']],
-                       [['top'], ['bottom', 'left']],
-                       [['top', 'left'], ['bottom', 'center']],
-                       [['left'], ['top', 'center']]],
+                       top_tile(['bottom', 'center']),
+                       top_tile(['bottom', 'left']),
+                       top_left_tile(['bottom', 'center']),
+                       left_tile(['top', 'center'])],
                       # Defining the face as a 'corner' also associates the
                       # created face as one that is shared with
                       # neighboring tiles.

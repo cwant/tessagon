@@ -1,6 +1,9 @@
 from tessagon.core.tile import Tile
 from tessagon.core.tessagon import Tessagon
 from tessagon.core.tessagon_metadata import TessagonMetadata
+from tessagon.core.tile_utils import left_tile, right_tile, \
+    top_tile, bottom_tile, left_top_tile, left_bottom_tile, \
+    right_bottom_tile, right_top_tile
 
 metadata = TessagonMetadata(name='Zig-Zag',
                             num_color_patterns=1,
@@ -60,25 +63,25 @@ class ZigZagTile(Tile):
                                 continue
                 vert = self.add_vert([col, row], c[col], c[row])
                 if col == 1:
-                    self.set_equivalent_vert(['left'], [5, row], vert)
+                    self.set_equivalent_vert(*left_tile([5, row]), vert)
                     if row == 5:
-                        self.set_equivalent_vert(['left', 'top'], [5, 1],
+                        self.set_equivalent_vert(*left_top_tile([5, 1]),
                                                  vert)
                     elif row == 1:
-                        self.set_equivalent_vert(['left', 'bottom'], [5, 5],
+                        self.set_equivalent_vert(*left_bottom_tile([5, 5]),
                                                  vert)
                 elif col == 5:
-                    self.set_equivalent_vert(['right'], [1, row], vert)
+                    self.set_equivalent_vert(*right_tile([1, row]), vert)
                     if row == 5:
-                        self.set_equivalent_vert(['right', 'top'], [1, 1],
+                        self.set_equivalent_vert(*right_top_tile([1, 1]),
                                                  vert)
                     elif row == 1:
-                        self.set_equivalent_vert(['right', 'bottom'], [1, 5],
+                        self.set_equivalent_vert(*right_bottom_tile([1, 5]),
                                                  vert)
                 if row == 5:
-                    self.set_equivalent_vert(['top'], [col, 1], vert)
+                    self.set_equivalent_vert(*top_tile([col, 1]), vert)
                 elif row == 1:
-                    self.set_equivalent_vert(['bottom'], [col, 5], vert)
+                    self.set_equivalent_vert(*bottom_tile([col, 5]), vert)
 
     def calculate_faces(self):
         self.add_face(1, [[1, 5],
@@ -99,17 +102,17 @@ class ZigZagTile(Tile):
                                  [4, 4],
                                  [5, 4],
                                  [5, 5],
-                                 [['top'], [5, 2]],
-                                 [['top'], [4, 2]]])
-        self.set_equivalent_face(['top'], 10, face)
+                                 top_tile([5, 2]),
+                                 top_tile([4, 2])])
+        self.set_equivalent_face(*top_tile(10), face)
 
         face = self.add_face(4, [[1, 3],
                                  [2, 3],
                                  [2, 4],
                                  [1, 4],
-                                 [['left'], [4, 4]],
-                                 [['left'], [4, 3]]])
-        self.set_equivalent_face(['left'], 6, face)
+                                 left_tile([4, 4]),
+                                 left_tile([4, 3])])
+        self.set_equivalent_face(*left_tile(6), face)
 
         self.add_face(5, [[3, 2],
                           [3, 3],
@@ -122,9 +125,9 @@ class ZigZagTile(Tile):
                                  [4, 4],
                                  [4, 3],
                                  [5, 3],
-                                 [['right'], [2, 3]],
-                                 [['right'], [2, 4]]])
-        self.set_equivalent_face(['right'], 4, face)
+                                 right_tile([2, 3]),
+                                 right_tile([2, 4])])
+        self.set_equivalent_face(*right_tile(4), face)
 
         self.add_face(7, [[2, 1],
                           [2, 2],
@@ -151,9 +154,9 @@ class ZigZagTile(Tile):
                                   [5, 2],
                                   [4, 2],
                                   [4, 1],
-                                  [['bottom'], [4, 4]],
-                                  [['bottom'], [5, 4]]])
-        self.set_equivalent_face(['bottom'], 3, face)
+                                  bottom_tile([4, 4]),
+                                  bottom_tile([5, 4])])
+        self.set_equivalent_face(*bottom_tile(3), face)
 
     def color_pattern1(self):
         self.color_face(1, 1)

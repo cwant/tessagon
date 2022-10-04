@@ -1,6 +1,7 @@
 from tessagon.core.tile import Tile
 from tessagon.core.tessagon import Tessagon
 from tessagon.core.tessagon_metadata import TessagonMetadata
+from tessagon.core.tile_utils import left_tile
 
 metadata = TessagonMetadata(name='Hexagons Dissected with Quads',
                             num_color_patterns=2,
@@ -116,7 +117,7 @@ class DissectedHexQuadTile(Tile):
                       [['left', 'top', 'corner'],
                        ['left', 'top', 'interior'],
                        ['left', 'top', 'u_boundary'],
-                       [['left'], ['right', 'top', 'interior']]],
+                       left_tile(['right', 'top', 'interior'])],
                       u_boundary=True)
 
         self.add_face(['left', 'top', 'middle'],
