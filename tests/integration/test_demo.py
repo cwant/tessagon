@@ -21,10 +21,16 @@ class ListDemo(TessagonCommonDemo):
         return self.create_objects()
 
 
+# Create the demo meshes for testing
+list_demo = ListDemo()
+meshes = list_demo.main()
+
+
 class TestDemo:
 
-    def __init(self):
-        self.meshes = None
+    @property
+    def meshes(self):
+        return meshes
 
     def vert_list_length(self, tessagon):
         return len(self.meshes[tessagon]['regular']['vert_list'])
@@ -32,73 +38,286 @@ class TestDemo:
     def face_list_length(self, tessagon):
         return len(self.meshes[tessagon]['regular']['face_list'])
 
+    def color_pattern_count(self, tessagon):
+        return len(self.meshes[tessagon]['color_patterns'])
+
+    def color_count(self, tessagon, pattern, color):
+        colors = self.meshes[tessagon]['color_patterns'][pattern]['color_list']
+        return len([c for c in colors if c == color])
+
     def test_demo_works(self):
-        list_demo = ListDemo()
-        self.meshes = list_demo.main()
         assert len(self.meshes) == 24
 
-        assert self.vert_list_length('BigHexTriTessagon') == 1344
-        assert self.face_list_length('BigHexTriTessagon') == 2016
+    def test_big_hex_tri_tessagon(self):
+        tessagon = 'BigHexTriTessagon'
+        assert self.vert_list_length(tessagon) == 1344
+        assert self.face_list_length(tessagon) == 2016
 
-        assert self.vert_list_length('BrickTessagon') == 1800
-        assert self.face_list_length('BrickTessagon') == 900
+        assert self.color_pattern_count(tessagon) == 1
 
-        assert self.vert_list_length('DissectedHexQuadTessagon') == 3456
-        assert self.face_list_length('DissectedHexQuadTessagon') == 3456
+        assert self.color_count(tessagon, 1, 0) == 896
+        assert self.color_count(tessagon, 1, 1) == 896
+        assert self.color_count(tessagon, 1, 2) == 224
 
-        assert self.vert_list_length('DissectedHexTriTessagon') == 2400
-        assert self.face_list_length('DissectedHexTriTessagon') == 4800
+    def test_brick_tessagon(self):
+        tessagon = 'BrickTessagon'
+        assert self.vert_list_length(tessagon) == 1800
+        assert self.face_list_length(tessagon) == 900
 
-        assert self.vert_list_length('DissectedTriangleTessagon') == 336
-        assert self.face_list_length('DissectedTriangleTessagon') == 544
+        assert self.color_pattern_count(tessagon) == 1
 
-        assert self.vert_list_length('DodecaTessagon') == 960
-        assert self.face_list_length('DodecaTessagon') == 440
+        assert self.color_count(tessagon, 1, 0) == 450
+        assert self.color_count(tessagon, 1, 1) == 450
 
-        assert self.vert_list_length('DodecaTriTessagon') == 720
-        assert self.face_list_length('DodecaTriTessagon') == 340
+    def test_hex_quad_tessagon(self):
+        tessagon = 'DissectedHexQuadTessagon'
+        assert self.vert_list_length(tessagon) == 3456
+        assert self.face_list_length(tessagon) == 3456
 
-        assert self.vert_list_length('FloretTessagon') == 3024
-        assert self.face_list_length('FloretTessagon') == 2016
+        assert self.color_pattern_count(tessagon) == 2
 
-        assert self.vert_list_length('HexBigTriTessagon') == 840
-        assert self.face_list_length('HexBigTriTessagon') == 420
+        assert self.color_count(tessagon, 1, 0) == 1728
+        assert self.color_count(tessagon, 1, 1) == 1728
 
-        assert self.vert_list_length('HexSquareTriTessagon') == 2700
-        assert self.face_list_length('HexSquareTriTessagon') == 2700
+        assert self.color_count(tessagon, 2, 0) == 2304
+        assert self.color_count(tessagon, 2, 1) == 1152
 
-        assert self.vert_list_length('HexTessagon') == 540
-        assert self.face_list_length('HexTessagon') == 225
+    def test_dissected_hex_tri_tessagon(self):
+        tessagon = 'DissectedHexTriTessagon'
+        assert self.vert_list_length(tessagon) == 2400
+        assert self.face_list_length(tessagon) == 4800
 
-        assert self.vert_list_length('HexTriTessagon') == 925
-        assert self.face_list_length('HexTriTessagon') == 856
+        assert self.color_pattern_count(tessagon) == 1
 
+        assert self.color_count(tessagon, 1, 0) == 2400
+        assert self.color_count(tessagon, 1, 1) == 2400
+
+    def test_dissected_triangle_tessagon(self):
+        tessagon = 'DissectedTriangleTessagon'
+
+        assert self.vert_list_length(tessagon) == 336
+        assert self.face_list_length(tessagon) == 544
+
+        assert self.color_pattern_count(tessagon) == 1
+
+        assert self.color_count(tessagon, 1, 0) == 352
+        assert self.color_count(tessagon, 1, 1) == 192
+
+    def test_dodeca_tessagon(self):
+        tessagon = 'DodecaTessagon'
+        assert self.vert_list_length(tessagon) == 960
+        assert self.face_list_length(tessagon) == 440
+
+        assert self.color_pattern_count(tessagon) == 1
+
+        assert self.color_count(tessagon, 1, 0) == 230
+        assert self.color_count(tessagon, 1, 1) == 70
+        assert self.color_count(tessagon, 1, 2) == 140
+
+    def test_dodeca_tri_tessagon(self):
+        tessagon = 'DodecaTriTessagon'
+        assert self.vert_list_length(tessagon) == 720
+        assert self.face_list_length(tessagon) == 340
+
+        assert self.color_pattern_count(tessagon) == 1
+
+        assert self.color_count(tessagon, 1, 0) == 240
+        assert self.color_count(tessagon, 1, 1) == 100
+
+    def test_floret_tessagon(self):
+        tessagon = 'FloretTessagon'
+        assert self.vert_list_length(tessagon) == 3024
+        assert self.face_list_length(tessagon) == 2016
+
+        assert self.color_pattern_count(tessagon) == 3
+
+        assert self.color_count(tessagon, 1, 0) == 1344
+        assert self.color_count(tessagon, 1, 1) == 672
+
+        assert self.color_count(tessagon, 2, 0) == 672
+        assert self.color_count(tessagon, 2, 1) == 672
+        assert self.color_count(tessagon, 2, 2) == 672
+
+        assert self.color_count(tessagon, 3, 0) == 840
+        assert self.color_count(tessagon, 3, 1) == 168
+        assert self.color_count(tessagon, 3, 2) == 1008
+
+    def test_hex_big_tri_tessagon(self):
+        tessagon = 'HexBigTriTessagon'
+        assert self.vert_list_length(tessagon) == 840
+        assert self.face_list_length(tessagon) == 420
+
+        assert self.color_pattern_count(tessagon) == 2
+
+        assert self.color_count(tessagon, 1, 0) == 280
+        assert self.color_count(tessagon, 1, 1) == 140
+
+        assert self.color_count(tessagon, 2, 0) == 140
+        assert self.color_count(tessagon, 2, 1) == 140
+        assert self.color_count(tessagon, 2, 2) == 140
+
+    def test_hex_square_tri_tessagon(self):
+        tessagon = 'HexSquareTriTessagon'
+        assert self.vert_list_length(tessagon) == 2700
+        assert self.face_list_length(tessagon) == 2700
+
+        assert self.color_pattern_count(tessagon) == 1
+
+        assert self.color_count(tessagon, 1, 0) == 900
+        assert self.color_count(tessagon, 1, 1) == 450
+        assert self.color_count(tessagon, 1, 2) == 1350
+
+    def test_hex_tessagon(self):
+        tessagon = 'HexTessagon'
+        assert self.vert_list_length(tessagon) == 540
+        assert self.face_list_length(tessagon) == 225
+
+        assert self.color_pattern_count(tessagon) == 2
+
+        assert self.color_count(tessagon, 1, 0) == 150
+        assert self.color_count(tessagon, 1, 1) == 75
+
+        assert self.color_count(tessagon, 2, 0) == 75
+        assert self.color_count(tessagon, 2, 1) == 75
+        assert self.color_count(tessagon, 2, 2) == 75
+
+    def test_hex_tri_tessagon(self):
+        tessagon = 'HexTriTessagon'
+        assert self.vert_list_length(tessagon) == 925
+        assert self.face_list_length(tessagon) == 856
+
+        assert self.color_pattern_count(tessagon) == 1
+
+        assert self.color_count(tessagon, 1, 0) == 580
+        assert self.color_count(tessagon, 1, 1) == 276
+
+    def test_octo_tessagon(self):
         # Mobius strip ...
-        assert self.vert_list_length('OctoTessagon') == 720
-        assert self.face_list_length('OctoTessagon') == 280
+        tessagon = 'OctoTessagon'
+        assert self.vert_list_length(tessagon) == 720
+        assert self.face_list_length(tessagon) == 280
 
-        assert self.vert_list_length('Penta2Tessagon') == 1200
-        assert self.face_list_length('Penta2Tessagon') == 800
+        assert self.color_pattern_count(tessagon) == 1
 
-        assert self.vert_list_length('PentaTessagon') == 960
-        assert self.face_list_length('PentaTessagon') == 640
+        assert self.color_count(tessagon, 1, 0) == 120
+        assert self.color_count(tessagon, 1, 1) == 160
 
-        assert self.vert_list_length('PythagoreanTessagon') == 3000
-        assert self.face_list_length('PythagoreanTessagon') == 1500
+    def test_penta2_tessagon(self):
+        tessagon = 'Penta2Tessagon'
+        assert self.vert_list_length(tessagon) == 1200
+        assert self.face_list_length(tessagon) == 800
 
+        assert self.color_pattern_count(tessagon) == 1
+
+        assert self.color_count(tessagon, 1, 0) == 400
+        assert self.color_count(tessagon, 1, 1) == 400
+
+    def test_penta_tessagon(self):
+        tessagon = 'PentaTessagon'
+        assert self.vert_list_length(tessagon) == 960
+        assert self.face_list_length(tessagon) == 640
+
+        assert self.color_pattern_count(tessagon) == 1
+
+        assert self.color_count(tessagon, 1, 0) == 320
+        assert self.color_count(tessagon, 1, 1) == 320
+
+    def test_pythagorean_tessagon(self):
+        tessagon = 'PythagoreanTessagon'
+        assert self.vert_list_length(tessagon) == 3000
+        assert self.face_list_length(tessagon) == 1500
+
+        assert self.color_pattern_count(tessagon) == 1
+
+        assert self.color_count(tessagon, 1, 0) == 750
+        assert self.color_count(tessagon, 1, 1) == 750
+
+    def test_rhombus_tessagon(self):
         # Klein bottle ...
-        assert self.vert_list_length('RhombusTessagon') == 1440
-        assert self.face_list_length('RhombusTessagon') == 1440
+        tessagon = 'RhombusTessagon'
+        assert self.vert_list_length(tessagon) == 1440
+        assert self.face_list_length(tessagon) == 1440
 
+        assert self.color_pattern_count(tessagon) == 2
+
+        assert self.color_count(tessagon, 1, 0) == 480
+        assert self.color_count(tessagon, 1, 1) == 480
+        assert self.color_count(tessagon, 1, 2) == 480
+
+        assert self.color_count(tessagon, 2, 0) == 480
+        assert self.color_count(tessagon, 2, 1) == 480
+        assert self.color_count(tessagon, 2, 2) == 480
+
+    def test_square_tessagon(self):
         # Torus with rot_factor ...
-        assert self.vert_list_length('SquareTessagon') == 720
-        assert self.face_list_length('SquareTessagon') == 720
+        tessagon = 'SquareTessagon'
+        assert self.vert_list_length(tessagon) == 720
+        assert self.face_list_length(tessagon) == 720
 
-        assert self.vert_list_length('TriTessagon') == 864
-        assert self.face_list_length('TriTessagon') == 1728
+        assert self.color_pattern_count(tessagon) == 8
 
-        assert self.vert_list_length('WeaveTessagon') == 1408
-        assert self.face_list_length('WeaveTessagon') == 672
+        assert self.color_count(tessagon, 1, 0) == 360
+        assert self.color_count(tessagon, 1, 1) == 360
 
-        assert self.vert_list_length('ZigZagTessagon') == 1600
-        assert self.face_list_length('ZigZagTessagon') == 800
+        assert self.color_count(tessagon, 2, 0) == 360
+        assert self.color_count(tessagon, 2, 1) == 180
+        assert self.color_count(tessagon, 2, 2) == 180
+
+        assert self.color_count(tessagon, 3, 0) == 540
+        assert self.color_count(tessagon, 3, 1) == 180
+
+        assert self.color_count(tessagon, 4, 0) == 540
+        assert self.color_count(tessagon, 4, 1) == 180
+
+        assert self.color_count(tessagon, 5, 0) == 360
+        assert self.color_count(tessagon, 5, 1) == 360
+
+        assert self.color_count(tessagon, 6, 0) == 360
+        assert self.color_count(tessagon, 6, 1) == 180
+        assert self.color_count(tessagon, 6, 2) == 180
+
+        assert self.color_count(tessagon, 7, 0) == 360
+        assert self.color_count(tessagon, 7, 1) == 180
+        assert self.color_count(tessagon, 7, 2) == 180
+
+        assert self.color_count(tessagon, 8, 0) == 180
+        assert self.color_count(tessagon, 8, 1) == 180
+        assert self.color_count(tessagon, 8, 2) == 180
+        assert self.color_count(tessagon, 8, 3) == 180
+
+    def test_tri_tessagon(self):
+        tessagon = 'TriTessagon'
+        assert self.vert_list_length(tessagon) == 864
+        assert self.face_list_length(tessagon) == 1728
+
+        assert self.color_pattern_count(tessagon) == 3
+
+        assert self.color_count(tessagon, 1, 0) == 864
+        assert self.color_count(tessagon, 1, 1) == 864
+
+        assert self.color_count(tessagon, 2, 0) == 864
+        assert self.color_count(tessagon, 2, 1) == 864
+
+        assert self.color_count(tessagon, 3, 0) == 1152
+        assert self.color_count(tessagon, 3, 1) == 576
+
+    def test_weave_tessagon(self):
+        tessagon = 'WeaveTessagon'
+        assert self.vert_list_length(tessagon) == 1408
+        assert self.face_list_length(tessagon) == 672
+
+        assert self.color_pattern_count(tessagon) == 1
+
+        assert self.color_count(tessagon, 1, 0) == 352
+        assert self.color_count(tessagon, 1, 1) == 160
+        assert self.color_count(tessagon, 1, 2) == 160
+
+    def test_zig_zag_tessagon(self):
+        tessagon = 'ZigZagTessagon'
+        assert self.vert_list_length(tessagon) == 1600
+        assert self.face_list_length(tessagon) == 800
+
+        assert self.color_pattern_count(tessagon) == 1
+
+        assert self.color_count(tessagon, 1, 0) == 400
+        assert self.color_count(tessagon, 1, 1) == 400
