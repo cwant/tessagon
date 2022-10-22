@@ -35,7 +35,8 @@ class TessagonCommonDemo:
         classes = find_all.with_classification('regular').to_list() \
             + find_all.with_classification('archimedean').to_list() \
             + find_all.with_classification('laves').to_list() \
-            + find_all.with_classification('non_edge').to_list()
+            + find_all.with_classification('non_edge').to_list() \
+            + find_all.with_classification('non_convex').to_list()
         
         # A long row of each tiling pattern, with color patterns underneath
         offset = 15
@@ -401,4 +402,16 @@ class TessagonCommonDemo:
         }
         Penta2Tessagon = self.method_to_class()
         return self.tessellate(torus, Penta2Tessagon,
+                               **{**kwargs, **options})
+
+    def stanley_park_tessagon(self, position, **kwargs):
+        options = {
+            'u_range': [0.0, 1.0],
+            'v_range': [0.0, 1.0],
+            'u_num': 25,
+            'v_num': 10,
+            'position': position
+        }
+        StanleyParkTessagon = self.method_to_class()
+        return self.tessellate(torus, StanleyParkTessagon,
                                **{**kwargs, **options})

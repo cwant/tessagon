@@ -38,7 +38,9 @@ def main():
                      'BrickTessagon',
                      'WeaveTessagon',
                      'HexBigTriTessagon',
-                     'ZigZagTessagon']
+                     'ZigZagTessagon'],
+
+        'non_convex': ['StanleyParkTessagon']
     }
     classes = { tiling_type: list(map(TessagonDiscovery.get_class, names)) \
                 for (tiling_type, names) in class_names.items() }
@@ -219,10 +221,11 @@ def write_markdown(classes):
         'regular': 'Regular tilings',
         'archimedean': 'Archimedean tilings',
         'laves': 'Laves tilings',
-        'non_edge': 'Non-edge-to-edge tilings'
+        'non_edge': 'Non-edge-to-edge tilings',
+        'non_convex': 'Non-convex tilings'
     }
     # darn, keys aren't ordered by insertion
-    for key in ['regular', 'archimedean', 'laves', 'non_edge']:
+    for key in ['regular', 'archimedean', 'laves', 'non_edge', 'non_convex']:
         list_fp.write("### %s\n\n" % key_to_name[key])
         for cls in classes[key]:
             class_name = cls.__name__

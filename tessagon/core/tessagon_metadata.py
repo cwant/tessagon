@@ -3,7 +3,8 @@ class TessagonMetadata:
         'regular': 'Regular tiling',
         'archimedean': 'Archimedean tiling',
         'laves': 'Laves tiling',
-        'non_edge': 'Non-edge-to-edge tiling'
+        'non_edge': 'Non-edge-to-edge tiling',
+        'non_convex': 'Non-convex tiling'
     }
 
     def __init__(self, **kwargs):
