@@ -133,6 +133,11 @@ Additional tessagon classes can be added by deconstructing how a tessellation fi
 * [ZigZagTessagon](documentation/zig_zag_tessagon.md) (1 color patterns)  
   [![ZigZagTessagon](documentation/images/zig_zag_tessagon_thumb.png)](documentation/zig_zag_tessagon.md)
 
+### Non-convex tilings
+
+* [StanleyParkTessagon](documentation/stanley_park_tessagon.md) (2 color patterns)  
+  [![StanleyParkTessagon](documentation/images/stanley_park_tessagon_thumb.png)](documentation/stanley_park_tessagon.md)
+
 ## Usage and Options
 
 Each tessagon class is initialized with number of keyword options, e.g.:

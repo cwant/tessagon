@@ -25,6 +25,7 @@ from tessagon.types.dissected_hex_tri_tessagon \
 from tessagon.types.penta_tessagon import PentaTessagon
 from tessagon.types.penta2_tessagon import Penta2Tessagon
 from tessagon.types.big_hex_tri_tessagon import BigHexTriTessagon
+from tessagon.types.stanley_park_tessagon import StanleyParkTessagon
 
 ALL = [SquareTessagon,
        HexTessagon,
@@ -52,7 +53,9 @@ ALL = [SquareTessagon,
        BrickTessagon,
        WeaveTessagon,
        HexBigTriTessagon,
-       ZigZagTessagon]
+       ZigZagTessagon,
+
+       StanleyParkTessagon]
 
 
 class TessagonDiscovery:
