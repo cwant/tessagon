@@ -26,6 +26,7 @@ from tessagon.types.penta_tessagon import PentaTessagon
 from tessagon.types.penta2_tessagon import Penta2Tessagon
 from tessagon.types.big_hex_tri_tessagon import BigHexTriTessagon
 from tessagon.types.stanley_park_tessagon import StanleyParkTessagon
+from tessagon.types.valemount_tessagon import ValemountTessagon
 
 ALL = [SquareTessagon,
        HexTessagon,
@@ -54,6 +55,7 @@ ALL = [SquareTessagon,
        WeaveTessagon,
        HexBigTriTessagon,
        ZigZagTessagon,
+       ValemountTessagon,
 
        StanleyParkTessagon]
 
