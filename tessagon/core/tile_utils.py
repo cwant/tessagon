@@ -34,5 +34,13 @@ def bottom_left_tile(index_keys):
     return [['bottom', 'left'], index_keys]
 
 
+def bottom_right_tile(index_keys):
+    return [['bottom', 'right'], index_keys]
+
+
 def top_left_tile(index_keys):
     return [['top', 'left'], index_keys]
+
+
+def top_right_tile(index_keys):
+    return [['top', 'right'], index_keys]

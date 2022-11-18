@@ -38,7 +38,8 @@ def main():
                      'BrickTessagon',
                      'WeaveTessagon',
                      'HexBigTriTessagon',
-                     'ZigZagTessagon'],
+                     'ZigZagTessagon',
+                     'ValemountTessagon'],
 
         'non_convex': ['StanleyParkTessagon']
     }

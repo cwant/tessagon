@@ -415,3 +415,16 @@ class TessagonCommonDemo:
         StanleyParkTessagon = self.method_to_class()
         return self.tessellate(torus, StanleyParkTessagon,
                                **{**kwargs, **options})
+
+    def valemount_tessagon(self, position, **kwargs):
+        options = {
+            'u_range': [0.0, 1.0],
+            'v_range': [0.0, 1.0],
+            'u_num': 16,
+            'v_num': 4,
+            'rot_factor': 2,
+            'position': position
+        }
+        ValemountTessagon = self.method_to_class()
+        return self.tessellate(torus, ValemountTessagon,
+                               **{**kwargs, **options})
