@@ -139,6 +139,8 @@ Additional tessagon classes can be added by deconstructing how a tessellation fi
 
 * [StanleyParkTessagon](documentation/stanley_park_tessagon.md) (2 color patterns)  
   [![StanleyParkTessagon](documentation/images/stanley_park_tessagon_thumb.png)](documentation/stanley_park_tessagon.md)
+* [IslamicHexStarsTessagon](documentation/islamic_hex_stars_tessagon.md) (1 color patterns)  
+  [![IslamicHexStarsTessagon](documentation/images/islamic_hex_stars_tessagon_thumb.png)](documentation/islamic_hex_stars_tessagon.md)
 
 ## Usage and Options
 

@@ -428,3 +428,16 @@ class TessagonCommonDemo:
         ValemountTessagon = self.method_to_class()
         return self.tessellate(torus, ValemountTessagon,
                                **{**kwargs, **options})
+
+    def islamic_hex_stars_tessagon(self, position, **kwargs):
+        options = {
+            'u_range': [0.0, 1.0],
+            'v_range': [0.0, 1.0],
+            'u_num': 4,
+            'v_num': 1,
+            'rot_factor': 5,
+            'position': position
+        }
+        IslamicHexStarsTessagon = self.method_to_class()
+        return self.tessellate(torus, IslamicHexStarsTessagon,
+                               **{**kwargs, **options})
