@@ -42,7 +42,8 @@ def main():
                      'ValemountTessagon'],
 
         'non_convex': ['StanleyParkTessagon',
-                       'IslamicHexStarsTessagon']
+                       'IslamicHexStarsTessagon',
+                       'IslamicStarsCrossesTessagon']
     }
     classes = { tiling_type: list(map(TessagonDiscovery.get_class, names)) \
                 for (tiling_type, names) in class_names.items() }

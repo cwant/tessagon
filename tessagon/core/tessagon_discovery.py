@@ -28,6 +28,8 @@ from tessagon.types.big_hex_tri_tessagon import BigHexTriTessagon
 from tessagon.types.stanley_park_tessagon import StanleyParkTessagon
 from tessagon.types.valemount_tessagon import ValemountTessagon
 from tessagon.types.islamic_hex_stars_tessagon import IslamicHexStarsTessagon
+from tessagon.types.islamic_stars_crosses_tessagon \
+    import IslamicStarsCrossesTessagon
 
 ALL = [SquareTessagon,
        HexTessagon,
@@ -59,7 +61,8 @@ ALL = [SquareTessagon,
        ValemountTessagon,
 
        StanleyParkTessagon,
-       IslamicHexStarsTessagon]
+       IslamicHexStarsTessagon,
+       IslamicStarsCrossesTessagon]
 
 
 class TessagonDiscovery:

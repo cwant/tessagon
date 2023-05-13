@@ -441,3 +441,18 @@ class TessagonCommonDemo:
         IslamicHexStarsTessagon = self.method_to_class()
         return self.tessellate(torus, IslamicHexStarsTessagon,
                                **{**kwargs, **options})
+
+    def islamic_stars_crosses_tessagon(self, position, **kwargs):
+        options = {
+            'u_range': [-1.0, 1.0],
+            'v_range': [0.0, 1.0],
+            'u_num': 3,
+            'v_num': 15,
+            'rot_factor': 2,
+            'u_cyclic': False,
+            'v_cyclic': True,
+            'position': position
+        }
+        IslamicStarsCrossesTessagon = self.method_to_class()
+        return self.tessellate(one_sheet_hyperboloid, IslamicStarsCrossesTessagon,
+                               **{**kwargs, **options})
