@@ -456,3 +456,16 @@ class TessagonCommonDemo:
         IslamicStarsCrossesTessagon = self.method_to_class()
         return self.tessellate(one_sheet_hyperboloid, IslamicStarsCrossesTessagon,
                                **{**kwargs, **options})
+
+    def cloverdale_tessagon(self, position, **kwargs):
+        options = {
+            'u_range': [0.0, 1.0],
+            'v_range': [0.0, 1.0],
+            'u_num': 14,
+            'v_num': 14,
+            'v_cyclic': False,
+            'position': position
+        }
+        CloverdaleTessagon = self.method_to_class()
+        return self.tessellate(sphere, CloverdaleTessagon,
+                               **{**kwargs, **options})

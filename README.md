@@ -134,6 +134,8 @@ Additional tessagon classes can be added by deconstructing how a tessellation fi
   [![ZigZagTessagon](documentation/images/zig_zag_tessagon_thumb.png)](documentation/zig_zag_tessagon.md)
 * [ValemountTessagon](documentation/valemount_tessagon.md) (1 color patterns)  
   [![ValemountTessagon](documentation/images/valemount_tessagon_thumb.png)](documentation/valemount_tessagon.md)
+* [CloverdaleTessagon](documentation/cloverdale_tessagon.md) (1 color patterns)  
+  [![CloverdaleTessagon](documentation/images/cloverdale_tessagon_thumb.png)](documentation/cloverdale_tessagon.md)
 
 ### Non-convex tilings
 

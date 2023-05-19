@@ -39,7 +39,8 @@ def main():
                      'WeaveTessagon',
                      'HexBigTriTessagon',
                      'ZigZagTessagon',
-                     'ValemountTessagon'],
+                     'ValemountTessagon',
+                     'CloverdaleTessagon'],
 
         'non_convex': ['StanleyParkTessagon',
                        'IslamicHexStarsTessagon',
