@@ -8,7 +8,8 @@ metadata = TessagonMetadata(name='Other Pentagons',
                             num_color_patterns=1,
                             classification='laves',
                             shapes=['pentagons'],
-                            sides=[5])
+                            sides=[5],
+                            uv_ratio=1.0/(2.0+sqrt(3.0)))
 
 
 class Penta2Tile(Tile):

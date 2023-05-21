@@ -6,7 +6,8 @@ metadata = TessagonMetadata(name='Regular Squares',
                             num_color_patterns=8,
                             classification='regular',
                             shapes=['squares'],
-                            sides=[4])
+                            sides=[4],
+                            uv_ratio=1.0)
 
 
 class SquareTile(Tile):

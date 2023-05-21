@@ -8,7 +8,8 @@ metadata = TessagonMetadata(name='Islamic Stars and Crosses',
                             num_color_patterns=1,
                             classification='non_convex',
                             shapes=['stars', 'crosses'],
-                            sides=[16])
+                            sides=[16],
+                            uv_ratio=1.0)
 
 
 class IslamicStarsCrossesTile(Tile):

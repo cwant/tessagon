@@ -8,7 +8,8 @@ metadata = TessagonMetadata(name='Hexagons, Squares, and Triangles',
                             num_color_patterns=1,
                             classification='archimedean',
                             shapes=['hexagons', 'squares', 'triangles'],
-                            sides=[6, 4, 3])
+                            sides=[6, 4, 3],
+                            uv_ratio=1.0/sqrt(3.0))
 
 
 class HexSquareTriTile(Tile):

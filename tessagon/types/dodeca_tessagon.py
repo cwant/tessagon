@@ -10,7 +10,8 @@ metadata = TessagonMetadata(name='Dodecagons, Hexagons, and Squares',
                             num_color_patterns=1,
                             classification='archimedean',
                             shapes=['dodecagons', 'hexagons', 'squares'],
-                            sides=[12, 6, 4])
+                            sides=[12, 6, 4],
+                            uv_ratio=1.0/sqrt(3.0))
 
 
 class DodecaTile(Tile):

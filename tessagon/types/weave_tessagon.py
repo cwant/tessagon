@@ -7,7 +7,8 @@ metadata = TessagonMetadata(name='Weave',
                             num_color_patterns=1,
                             classification='non_edge',
                             shapes=['quads', 'rectangles'],
-                            sides=[4])
+                            sides=[4],
+                            uv_ratio=1.0)
 
 
 class WeaveTile(Tile):

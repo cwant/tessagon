@@ -9,7 +9,8 @@ metadata = TessagonMetadata(name='Pythagorean',
                             num_color_patterns=1,
                             classification='non_edge',
                             shapes=['squares'],
-                            sides=[4])
+                            sides=[4],
+                            uv_ratio=1.0)
 
 
 class PythagoreanTile(Tile):

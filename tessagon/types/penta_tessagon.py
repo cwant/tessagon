@@ -8,7 +8,8 @@ metadata = TessagonMetadata(name='Pentagons',
                             num_color_patterns=1,
                             classification='laves',
                             shapes=['pentagons'],
-                            sides=[5])
+                            sides=[5],
+                            uv_ratio=1.0)
 
 
 class PentaTile(Tile):

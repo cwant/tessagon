@@ -197,6 +197,7 @@ The source code files for each tessagon class usually contain some ASCII art tha
 * `u_twist`: this is used with `v_cyclic` (note that says `v_cyclic` not `u_cyclic`). As the `v` values wrap around, the `u` values reconnect in the opposite direction: the low `u` values connect to the high `u` values, and vice versa. This allows you to make things like Möbius strips and Klein bottles.
 * `v_twist`: works with `u_cyclic`, analogous to how `u_twist` works.
 * `color_pattern`: some Tessagon types support some curated patterns (applying more than one material/color to the output shape). These are identified by a number (e.g., `color_pattern=2`). The number has no meaning other than as an identifier. Checkout the description of the Tessagon types above to see what color patterns exist. The values of `u_num` and `v_num` may need to be tweaked to make a specific color pattern wrap correctly for cyclic tilings.
+* `simple_2d` (default: `False`), `multiplier_2d`, `translate_2d`: these parameters (when `simple_2d` is `True`) help with creating tilings in the XY-plane (2D). The "natural" undistorted aspect ratio of the tiling is preserved. `multiplier_2d` (a number) allows you to scale such tilings, and `translate_2d` (a tuple) places a corner of the tiling (either top-left or bottom-left, depending on how you handle the up direction). With `simple_2d`, no function should be supplied to the Tessagon class.
 
 ## Writing your own tessellation classes
 

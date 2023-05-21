@@ -1,3 +1,4 @@
+from math import sqrt
 from tessagon.core.tessagon import Tessagon
 from tessagon.core.tile import Tile
 from tessagon.core.tessagon_metadata import TessagonMetadata
@@ -7,7 +8,8 @@ from tessagon.core.tile_utils import top_tile, bottom_tile, \
 metadata = TessagonMetadata(name='Stanley Park',
                             num_color_patterns=2,
                             classification='non_convex',
-                            sides=[12])
+                            sides=[12],
+                            uv_ratio=sqrt(3.0))
 
 # Non-convex pattern. Might work better for 2D than 3D
 # Also, the ASCII art below is a bit hard to visualize,

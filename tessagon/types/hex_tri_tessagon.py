@@ -1,3 +1,4 @@
+from math import sqrt
 from tessagon.core.tile import Tile
 from tessagon.core.tessagon import Tessagon
 from tessagon.core.tessagon_metadata import TessagonMetadata
@@ -6,7 +7,8 @@ metadata = TessagonMetadata(name='Hexagons and Triangles',
                             num_color_patterns=1,
                             classification='archimedean',
                             shapes=['hexagons', 'triangles'],
-                            sides=[6, 3])
+                            sides=[6, 3],
+                            uv_ratio=1.0/sqrt(3.0))
 
 
 class HexTriTile(Tile):

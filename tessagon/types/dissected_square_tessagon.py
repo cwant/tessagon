@@ -6,7 +6,8 @@ metadata = TessagonMetadata(name='Dissected Square',
                             num_color_patterns=2,
                             classification='laves',
                             shapes=['triangles'],
-                            sides=[3])
+                            sides=[3],
+                            uv_ratio=1.0)
 
 
 class DissectedSquareTile(Tile):

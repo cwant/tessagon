@@ -9,7 +9,8 @@ metadata = TessagonMetadata(name='Zig-Zag',
                             num_color_patterns=1,
                             classification='non_edge',
                             shapes=['rectangles'],
-                            sides=[4])
+                            sides=[4],
+                            uv_ratio=1.0)
 
 
 class ZigZagTile(Tile):

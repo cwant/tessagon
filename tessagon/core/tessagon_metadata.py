@@ -15,6 +15,7 @@ class TessagonMetadata:
         self._classification = kwargs.get('classification', 'misc')
         self._shapes = kwargs.get('shapes', [])
         self._sides = kwargs.get('sides', [])
+        self._uv_ratio = kwargs.get('uv_ratio', None)
 
     def name(self):
         return self._name
@@ -38,3 +39,13 @@ class TessagonMetadata:
 
     def human_readable_classification(self):
         return self.__class__.CLASSIFICATION_MAP[self._classification]
+
+    @property
+    def uv_ratio(self):
+        # Aspect ratio U/V for best looking proportions
+        # Roughly, assuming a uniform input function,
+        # we would want to select the u, v inputs so that:
+        #   (u_range[1] - u_range[0]) / u_num
+        #          = uv_ratio * (v_range[1] - v_range[0]) / v_num
+        # Or scale the input function so get similar proportions.
+        return self._uv_ratio

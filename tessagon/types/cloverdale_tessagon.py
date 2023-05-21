@@ -8,7 +8,8 @@ metadata = TessagonMetadata(name='Cloverdale',
                             num_color_patterns=1,
                             classification='non_edge',
                             shapes=['squares', 'pentagons'],
-                            sides=[4, 5])
+                            sides=[4, 5],
+                            uv_ratio=1.0)
 
 
 class CloverdaleTile(Tile):

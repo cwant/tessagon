@@ -1,3 +1,4 @@
+from math import sqrt
 from tessagon.core.tile import Tile
 from tessagon.core.tessagon import Tessagon
 from tessagon.core.tessagon_metadata import TessagonMetadata
@@ -7,7 +8,8 @@ metadata = TessagonMetadata(name='Islamic Hexagons and Stars',
                             num_color_patterns=1,
                             classification='non_convex',
                             shapes=['hexagons', 'stars'],
-                            sides=[6, 12])
+                            sides=[6, 12],
+                            uv_ratio=sqrt(3.0))
 
 
 class IslamicHexStarsTile(Tile):

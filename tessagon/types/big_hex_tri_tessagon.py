@@ -1,3 +1,4 @@
+from math import atan2, sqrt, sin, cos
 from tessagon.core.tessagon import Tessagon
 from tessagon.core.tile import Tile
 from tessagon.core.tessagon_metadata import TessagonMetadata
@@ -5,13 +6,12 @@ from tessagon.core.tile_utils import right_tile, left_tile, \
     top_tile, bottom_tile, left_top_tile, right_top_tile, \
     left_bottom_tile, right_bottom_tile
 
-from math import atan2, sqrt, sin, cos
-
 metadata = TessagonMetadata(name='Big Hexagons and Triangles',
                             num_color_patterns=1,
                             classification='archimedean',
                             shapes=['hexagons', 'triangles'],
-                            sides=[6, 3])
+                            sides=[6, 3],
+                            uv_ratio=1.0/sqrt(3))
 
 
 class BigHexTriTile(Tile):

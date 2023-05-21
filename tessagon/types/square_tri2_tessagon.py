@@ -7,7 +7,8 @@ metadata = TessagonMetadata(name='Other Squares and Triangles',
                             num_color_patterns=1,
                             classification='archimedean',
                             shapes=['squares', 'triangles'],
-                            sides=[4, 3])
+                            sides=[4, 3],
+                            uv_ratio=1.0/(2.0+sqrt(3.0)))
 
 
 class SquareTri2Tile(Tile):

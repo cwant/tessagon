@@ -1,3 +1,4 @@
+from math import sqrt
 from tessagon.types.dissected_hex_quad_tessagon import DissectedHexQuadTile
 from tessagon.core.tessagon import Tessagon
 from tessagon.core.tessagon_metadata import TessagonMetadata
@@ -6,7 +7,8 @@ metadata = TessagonMetadata(name='Hexagons Dissected with Triangles',
                             num_color_patterns=1,
                             classification='laves',
                             shapes=['triangles'],
-                            sides=[3])
+                            sides=[3],
+                            uv_ratio=1.0/sqrt(3.0))
 
 
 # Uses the same configuration of vertices as DissectedHexQuadTile

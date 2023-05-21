@@ -8,7 +8,8 @@ metadata = TessagonMetadata(name='Dodecagons and Triangles',
                             num_color_patterns=1,
                             classification='archimedean',
                             shapes=['dodecagons', 'triangles'],
-                            sides=[12, 3])
+                            sides=[12, 3],
+                            uv_ratio=sqrt(3.0))
 
 
 class DodecaTriTile(Tile):

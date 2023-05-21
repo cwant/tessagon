@@ -1,3 +1,4 @@
+from math import sqrt
 from tessagon.core.stamp14_tessagon \
     import Stamp14, Stamp14Tile, Stamp14Tessagon
 from tessagon.core.tessagon_metadata import TessagonMetadata
@@ -6,14 +7,8 @@ metadata = TessagonMetadata(name='Hexagons and Big Triangles',
                             num_color_patterns=2,
                             classification='non_edge',
                             shapes=['hexagons', 'triangles'],
-                            sides=[6, 3])
-
-# To get a sense of how Thingies repeat over tiles, see:
-#   https://github.com/cwant/tessagon/blob/master/documentation/images/thingies_repeat.png
-# To see how the Thingies are arranged on a tile, see:
-#   https://github.com/cwant/tessagon/blob/master/documentation/images/thingies_tiles.png
-# To see how Thingy neighbors, verts and faces are arranged, see:
-#   https://github.com/cwant/tessagon/blob/master/documentation/images/thingies_neighbors_verts_faces.png
+                            sides=[6, 3],
+                            uv_ratio=sqrt(3.0))
 
 
 class Thingy(Stamp14):

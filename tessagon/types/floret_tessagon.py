@@ -1,3 +1,4 @@
+from math import sqrt
 from tessagon.core.stamp14_tessagon \
     import Stamp14, Stamp14Tile, Stamp14Tessagon
 from tessagon.core.tessagon_metadata import TessagonMetadata
@@ -6,7 +7,8 @@ metadata = TessagonMetadata(name='Florets',
                             num_color_patterns=3,
                             classification='laves',
                             shapes=['pentagons'],
-                            sides=[5])
+                            sides=[5],
+                            uv_ratio=sqrt(3))
 
 # To get a sense of how Florets repeat over tiles, see:
 #   https://github.com/cwant/tessagon/blob/master/documentation/images/florets_repeat.png
