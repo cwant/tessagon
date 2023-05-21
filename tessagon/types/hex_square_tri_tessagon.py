@@ -86,7 +86,7 @@ class HexSquareTriTile(Tile):
         v0 = 1.0 - 0.5*v_unit
         v1 = 1.0 - v_unit
         v2 = 0.5 + v_unit
-        v3 = 1.0 - 2.0*v_unit
+        v3 = 0.5 + 0.5*v_unit
 
         # Define top left square, other verts defined through symmetry
         self.add_vert(['top', 'left', 'v_square'], u2, v0)
