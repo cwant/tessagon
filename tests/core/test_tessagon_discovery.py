@@ -1,3 +1,5 @@
+import os
+import glob
 from core_tests_base import CoreTestsBase
 from tessagon.core.tessagon_discovery import TessagonDiscovery
 from tessagon.types.hex_tessagon import HexTessagon
@@ -6,6 +8,16 @@ from tessagon.types.square_tessagon import SquareTessagon
 
 
 class TestTessagonDiscovery(CoreTestsBase):
+    def test_find_all(self):
+        # We want to be able to find everything in the types folder
+        find_all = TessagonDiscovery()
+        wildcard = os.path.realpath(os.path.dirname(__file__) +
+                                    '/../../tessagon/types/*_tessagon.py')
+        all_type_py = glob.glob(wildcard)
+        count_all_classes = len(find_all.to_list())
+        assert count_all_classes > 20
+        assert count_all_classes == len(all_type_py)
+
     def test_find_regular(self):
         find_all = TessagonDiscovery()
         regular = find_all.with_classification('regular')
