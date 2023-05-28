@@ -374,7 +374,7 @@ class DocumentationImages:
             markdown_fp.write("\n## Extra parameters\n")
             for parameter in cls.metadata.extra_parameters:
                 parameter_info = cls.metadata.extra_parameters[parameter]
-                extra_info = [parameter_info['type'],
+                extra_info = ["type: `{}`".format(parameter_info['type']),
                               "default: `{}`".format(parameter_info['default'])]
                 if parameter_info.get('min') != None:
                     extra_info.append("minimum: `{}`".\
@@ -389,8 +389,8 @@ class DocumentationImages:
                     image = self.extra_parameter_filename(cls, parameter, value_name)
                     value = self.extra_parameter_value(cls, parameter, value_name)
                     alt = "{} {}={}".format(class_name, parameter, value)
-                    markdown_fp.write("* `{}={}`\n".format(parameter, value))
-                    markdown_fp.write("  ![{}]({})\n".format(alt, image))
+                    markdown_fp.write("#### `{}={}`\n".format(parameter, value))
+                    markdown_fp.write("![{}]({})\n".format(alt, image))
 
 
 def main():
