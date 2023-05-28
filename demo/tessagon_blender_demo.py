@@ -119,21 +119,25 @@ class BlenderDemo(TessagonCommonDemo):
         return object
 
     def tessellate(self, f, tessagon_class, **kwargs):
+        extra_args = {'function': f,
+                      'adaptor_class': BlenderAdaptor}
+        tessagon = tessagon_class(**{**kwargs, **extra_args})
+
         out_name = kwargs.get('object_name')
         if not out_name:
             out_name = tessagon_class.__name__
-            color_pattern = kwargs.get('color_pattern') or None
+            color_pattern = tessagon.color_pattern or None
             if color_pattern is not None:
                 out_name += "Color%d" % (color_pattern)
-
+            for parameter in sorted(tessagon.extra_parameters):
+                # TODO: will this break?
+                value = round(tessagon.extra_parameters[parameter], 2)
+                out_name += "-{}={}".format(parameter, value)
+        print(out_name)
         output_object = self.new_or_create_object(out_name)
         me = output_object.data
 
         me.materials.clear()
-
-        extra_args = {'function': f,
-                      'adaptor_class': BlenderAdaptor}
-        tessagon = tessagon_class(**{**kwargs, **extra_args})
 
         bm = tessagon.create_mesh()
 

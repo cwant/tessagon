@@ -16,13 +16,17 @@ class TessagonMetadata:
         self._shapes = kwargs.get('shapes', [])
         self._sides = kwargs.get('sides', [])
         self._uv_ratio = kwargs.get('uv_ratio', None)
+        self._extra_parameters = kwargs.get('extra_parameters', {})
 
+    @property
     def name(self):
         return self._name
 
+    @property
     def num_color_patterns(self):
         return self._num_color_patterns
 
+    @property
     def has_color_patterns(self):
         return self._num_color_patterns > 0
 
@@ -31,12 +35,14 @@ class TessagonMetadata:
             return True
         return False
 
+    @property
     def classification(self):
         return self._classification
 
     def has_classification(self, classification):
         return self._classification == classification
 
+    @property
     def human_readable_classification(self):
         return self.__class__.CLASSIFICATION_MAP[self._classification]
 
@@ -49,3 +55,7 @@ class TessagonMetadata:
         #          = uv_ratio * (v_range[1] - v_range[0]) / v_num
         # Or scale the input function so get similar proportions.
         return self._uv_ratio
+
+    @property
+    def extra_parameters(self):
+        return self._extra_parameters

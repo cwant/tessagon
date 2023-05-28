@@ -59,6 +59,6 @@ class TestTessagonDiscovery(CoreTestsBase):
         color = TessagonDiscovery().with_color_patterns()
         non_color = color.inverse()
         for tessagon in color.to_list():
-            assert tessagon.metadata.num_color_patterns() > 0
+            assert tessagon.metadata.num_color_patterns > 0
         for tessagon in non_color.to_list():
-            assert tessagon.metadata.num_color_patterns() == 0
+            assert tessagon.metadata.num_color_patterns == 0

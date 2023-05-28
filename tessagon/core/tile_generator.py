@@ -89,6 +89,11 @@ class TileGenerator(ValueBlend):
                 if self.color_pattern:
                     extra_args['color_pattern'] = self.color_pattern
 
+                extra_parameters = self.tessagon.extra_parameters
+                if extra_parameters:
+                    for parameter in extra_parameters:
+                        extra_args[parameter] = extra_parameters[parameter]
+
                 tiles[u][v] = tile_class(self.tessagon,
                                          **{**kwargs, **extra_args})
         return tiles

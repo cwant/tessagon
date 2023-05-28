@@ -14,6 +14,7 @@ class CoreTestsBase:
 class FakeTessagon:
     def __init__(self):
         self.mesh_adaptor = FakeAdaptor()
+        self.extra_parameters = {}
 
     def f(self, u, v):
         return [u, u*v, v]

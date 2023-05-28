@@ -84,21 +84,21 @@ Additional tessagon classes can be added by deconstructing how a tessellation fi
 
 ### Archimedean tilings
 
-* [OctoTessagon](documentation/octo_tessagon.md) (1 color patterns)  
+* [OctoTessagon](documentation/octo_tessagon.md) (1 color pattern)  
   [![OctoTessagon](documentation/images/octo_tessagon_thumb.png)](documentation/octo_tessagon.md)
-* [HexTriTessagon](documentation/hex_tri_tessagon.md) (1 color patterns)  
+* [HexTriTessagon](documentation/hex_tri_tessagon.md) (1 color pattern)  
   [![HexTriTessagon](documentation/images/hex_tri_tessagon_thumb.png)](documentation/hex_tri_tessagon.md)
-* [HexSquareTriTessagon](documentation/hex_square_tri_tessagon.md) (1 color patterns)  
+* [HexSquareTriTessagon](documentation/hex_square_tri_tessagon.md) (1 color pattern)  
   [![HexSquareTriTessagon](documentation/images/hex_square_tri_tessagon_thumb.png)](documentation/hex_square_tri_tessagon.md)
-* [DodecaTessagon](documentation/dodeca_tessagon.md) (1 color patterns)  
+* [DodecaTessagon](documentation/dodeca_tessagon.md) (1 color pattern)  
   [![DodecaTessagon](documentation/images/dodeca_tessagon_thumb.png)](documentation/dodeca_tessagon.md)
 * [SquareTriTessagon](documentation/square_tri_tessagon.md) (2 color patterns)  
   [![SquareTriTessagon](documentation/images/square_tri_tessagon_thumb.png)](documentation/square_tri_tessagon.md)
-* [SquareTri2Tessagon](documentation/square_tri2_tessagon.md) (1 color patterns)  
+* [SquareTri2Tessagon](documentation/square_tri2_tessagon.md) (1 color pattern)  
   [![SquareTri2Tessagon](documentation/images/square_tri2_tessagon_thumb.png)](documentation/square_tri2_tessagon.md)
-* [DodecaTriTessagon](documentation/dodeca_tri_tessagon.md) (1 color patterns)  
+* [DodecaTriTessagon](documentation/dodeca_tri_tessagon.md) (1 color pattern)  
   [![DodecaTriTessagon](documentation/images/dodeca_tri_tessagon_thumb.png)](documentation/dodeca_tri_tessagon.md)
-* [BigHexTriTessagon](documentation/big_hex_tri_tessagon.md) (1 color patterns)  
+* [BigHexTriTessagon](documentation/big_hex_tri_tessagon.md) (1 color pattern)  
   [![BigHexTriTessagon](documentation/images/big_hex_tri_tessagon_thumb.png)](documentation/big_hex_tri_tessagon.md)
 
 ### Laves tilings
@@ -109,41 +109,41 @@ Additional tessagon classes can be added by deconstructing how a tessellation fi
   [![FloretTessagon](documentation/images/floret_tessagon_thumb.png)](documentation/floret_tessagon.md)
 * [DissectedSquareTessagon](documentation/dissected_square_tessagon.md) (2 color patterns)  
   [![DissectedSquareTessagon](documentation/images/dissected_square_tessagon_thumb.png)](documentation/dissected_square_tessagon.md)
-* [DissectedTriangleTessagon](documentation/dissected_triangle_tessagon.md) (1 color patterns)  
+* [DissectedTriangleTessagon](documentation/dissected_triangle_tessagon.md) (1 color pattern)  
   [![DissectedTriangleTessagon](documentation/images/dissected_triangle_tessagon_thumb.png)](documentation/dissected_triangle_tessagon.md)
 * [DissectedHexQuadTessagon](documentation/dissected_hex_quad_tessagon.md) (2 color patterns)  
   [![DissectedHexQuadTessagon](documentation/images/dissected_hex_quad_tessagon_thumb.png)](documentation/dissected_hex_quad_tessagon.md)
-* [DissectedHexTriTessagon](documentation/dissected_hex_tri_tessagon.md) (1 color patterns)  
+* [DissectedHexTriTessagon](documentation/dissected_hex_tri_tessagon.md) (1 color pattern)  
   [![DissectedHexTriTessagon](documentation/images/dissected_hex_tri_tessagon_thumb.png)](documentation/dissected_hex_tri_tessagon.md)
-* [PentaTessagon](documentation/penta_tessagon.md) (1 color patterns)  
+* [PentaTessagon](documentation/penta_tessagon.md) (1 color pattern)  
   [![PentaTessagon](documentation/images/penta_tessagon_thumb.png)](documentation/penta_tessagon.md)
-* [Penta2Tessagon](documentation/penta2_tessagon.md) (1 color patterns)  
+* [Penta2Tessagon](documentation/penta2_tessagon.md) (1 color pattern)  
   [![Penta2Tessagon](documentation/images/penta2_tessagon_thumb.png)](documentation/penta2_tessagon.md)
 
 ### Non-edge-to-edge tilings
 
-* [PythagoreanTessagon](documentation/pythagorean_tessagon.md) (1 color patterns)  
+* [PythagoreanTessagon](documentation/pythagorean_tessagon.md) (1 color pattern)  
   [![PythagoreanTessagon](documentation/images/pythagorean_tessagon_thumb.png)](documentation/pythagorean_tessagon.md)
-* [BrickTessagon](documentation/brick_tessagon.md) (1 color patterns)  
+* [BrickTessagon](documentation/brick_tessagon.md) (1 color pattern)  
   [![BrickTessagon](documentation/images/brick_tessagon_thumb.png)](documentation/brick_tessagon.md)
-* [WeaveTessagon](documentation/weave_tessagon.md) (1 color patterns)  
+* [WeaveTessagon](documentation/weave_tessagon.md) (1 color pattern, 1 extra parameter)  
   [![WeaveTessagon](documentation/images/weave_tessagon_thumb.png)](documentation/weave_tessagon.md)
 * [HexBigTriTessagon](documentation/hex_big_tri_tessagon.md) (2 color patterns)  
   [![HexBigTriTessagon](documentation/images/hex_big_tri_tessagon_thumb.png)](documentation/hex_big_tri_tessagon.md)
-* [ZigZagTessagon](documentation/zig_zag_tessagon.md) (1 color patterns)  
+* [ZigZagTessagon](documentation/zig_zag_tessagon.md) (1 color pattern)  
   [![ZigZagTessagon](documentation/images/zig_zag_tessagon_thumb.png)](documentation/zig_zag_tessagon.md)
-* [ValemountTessagon](documentation/valemount_tessagon.md) (1 color patterns)  
+* [ValemountTessagon](documentation/valemount_tessagon.md) (1 color pattern)  
   [![ValemountTessagon](documentation/images/valemount_tessagon_thumb.png)](documentation/valemount_tessagon.md)
-* [CloverdaleTessagon](documentation/cloverdale_tessagon.md) (1 color patterns)  
+* [CloverdaleTessagon](documentation/cloverdale_tessagon.md) (1 color pattern)  
   [![CloverdaleTessagon](documentation/images/cloverdale_tessagon_thumb.png)](documentation/cloverdale_tessagon.md)
 
 ### Non-convex tilings
 
 * [StanleyParkTessagon](documentation/stanley_park_tessagon.md) (2 color patterns)  
   [![StanleyParkTessagon](documentation/images/stanley_park_tessagon_thumb.png)](documentation/stanley_park_tessagon.md)
-* [IslamicHexStarsTessagon](documentation/islamic_hex_stars_tessagon.md) (1 color patterns)  
+* [IslamicHexStarsTessagon](documentation/islamic_hex_stars_tessagon.md) (1 color pattern)  
   [![IslamicHexStarsTessagon](documentation/images/islamic_hex_stars_tessagon_thumb.png)](documentation/islamic_hex_stars_tessagon.md)
-* [IslamicStarsCrossesTessagon](documentation/islamic_stars_crosses_tessagon.md) (1 color patterns)  
+* [IslamicStarsCrossesTessagon](documentation/islamic_stars_crosses_tessagon.md) (1 color pattern)  
   [![IslamicStarsCrossesTessagon](documentation/images/islamic_stars_crosses_tessagon_thumb.png)](documentation/islamic_stars_crosses_tessagon.md)
 
 ## Usage and Options
@@ -165,7 +165,10 @@ poly_data = tessagon.create_mesh()
 ```
 The `create_mesh()` method creates a tessellated mesh using your provided function and the tile type corresponding to the tessagon class used. The chosen adaptor dictates the 3D data type the mesh will be (for the `BlenderAdaptor` the output is `BMesh`, for the `VTKAdaptor` the output is `vtkPolyData`).
 
-Here are the options:
+Each Tessagon class may supply options that are specific to that class
+(they will be listed on the documentation page for each class).
+
+Here are the options that are common to all Tessagon classes:
 
 * `function`: the function to be used to generate the geometry. This is a function that takes two arguments `u, v` and returns a list of three items `[x, y, z]`
 * `u_range`: a list with two items indicating the minimum and maximum values for u (the first argument to the function passed);

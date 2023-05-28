@@ -8,7 +8,16 @@ metadata = TessagonMetadata(name='Weave',
                             classification='non_edge',
                             shapes=['quads', 'rectangles'],
                             sides=[4],
-                            uv_ratio=1.0)
+                            uv_ratio=1.0,
+                            extra_parameters={
+                                'square_ratio': {
+                                    'type': 'float',
+                                    'min': 0.0,
+                                    'max': 1.0,
+                                    'default': 0.5,
+                                    'description': 'Control the size of the squares'
+                                }
+                            })
 
 
 class WeaveTile(Tile):
@@ -30,6 +39,7 @@ class WeaveTile(Tile):
         super().__init__(tessagon, **kwargs)
         self.u_symmetric = True
         self.v_symmetric = True
+        self.square_ratio = kwargs.get('square_ratio', 0.5)
 
     def init_verts(self):
         # u_square means on the square that is on the U-boundary
@@ -66,11 +76,12 @@ class WeaveTile(Tile):
                                    'right': None}}}
 
     def calculate_verts(self):
-        u0 = 1.0/8.0
-        u1 = 3.0/8.0
+        half_square_size = 0.25 * self.square_ratio
+        u0 = 0.25 - half_square_size
+        u1 = 0.25 + half_square_size
 
-        v0 = 5.0/8.0
-        v1 = 7.0/8.0
+        v0 = 0.75 - half_square_size
+        v1 = 0.75 + half_square_size
 
         # Define top left square, other verts defined through symmetry
         self.add_vert(['top', 'left', 'u_inner', 'v_inner'], u1, v0)

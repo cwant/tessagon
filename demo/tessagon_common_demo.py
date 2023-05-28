@@ -41,7 +41,6 @@ class TessagonCommonDemo:
         # A long row of each tiling pattern, with color patterns underneath
         offset = 15
 
-        row = 0
         column = 0
 
         # Output meshes for potential inspection (e.g. test suite)
@@ -49,20 +48,38 @@ class TessagonCommonDemo:
 
         for cls in classes:
             key = cls.__name__
-            meshes[key] = {'color_patterns': {}}
+            meshes[key] = {'color_patterns': {},
+                           'extra_parameters': {}}
 
             method = self.class_to_method(cls)
 
+            row = 0
+
             # Non-color pattern object
             meshes[key]['regular'] = method([column, 0, row])
-            print(key)
+
             for i in range(cls.num_color_patterns()):
                 color_pattern = i + 1
+                row -= offset
 
                 # Color pattern object
-                meshes[key]['color_patterns'][color_pattern] \
-                    = method([column, 0, row - color_pattern * offset],
-                             color_pattern=color_pattern)
+                meshes[key]['color_patterns'][color_pattern] = \
+                    method([column, 0, row], color_pattern=color_pattern)
+
+            for parameter in cls.metadata.extra_parameters:
+                parameter_info = cls.metadata.extra_parameters[parameter]
+                meshes[key]['extra_parameters'][parameter] = {}
+                if parameter_info['type'] == 'float':
+                    values = dict(
+                        low=(parameter_info['default'] + parameter_info['min']) / 2.0,
+                        high=(parameter_info['default'] + parameter_info['max']) / 2.0)
+                    for value_name in values:
+                        value = values[value_name]
+                        row -= offset
+                        kwargs = {parameter: value}
+                        meshes[key]['extra_parameters'][parameter][value_name] = \
+                            method([column, 0, row], **kwargs)
+
             column += offset
 
         return meshes

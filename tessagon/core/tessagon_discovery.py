@@ -94,7 +94,7 @@ class TessagonDiscovery:
         for klass in self.classes:
             if klass.metadata is None:
                 continue
-            if klass.metadata.has_color_patterns():
+            if klass.metadata.has_color_patterns:
                 results.append(klass)
         return TessagonDiscovery(classes=results)
 
