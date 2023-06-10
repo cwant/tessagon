@@ -1,15 +1,16 @@
-from core_tests_base import CoreTestsBase, FakeTessagon, FakeTileSubClass
-from tessagon.core.tile_generator import TileGenerator
+from core_tests_base import CoreTestsBase, FakeTessagon
+from tessagon.core.grid_tile_generator import GridTileGenerator
 
 
-class TestTileGenerator(CoreTestsBase):
+class TestGridTileGenerator(CoreTestsBase):
     def test_non_cyclic(self):
         tessagon = FakeTessagon()
-        tile_generator = TileGenerator(tessagon,
-                                       u_range=[0.5, 1.0], v_range=[2.5, 4.0],
-                                       u_num=2, v_num=3,
-                                       u_cyclic=False, v_cyclic=False)
-        tiles = tile_generator.initialize_tiles(FakeTileSubClass)
+        tile_generator = GridTileGenerator(tessagon,
+                                           u_range=[0.5, 1.0],
+                                           v_range=[2.5, 4.0],
+                                           u_num=2, v_num=3,
+                                           u_cyclic=False, v_cyclic=False)
+        tiles = tile_generator.initialize_tiles()
         assert len(tiles) == 2
         assert len(tiles[0]) == 3
         assert len(tiles[1]) == 3
@@ -27,11 +28,12 @@ class TestTileGenerator(CoreTestsBase):
 
     def test_u_cyclic(self):
         tessagon = FakeTessagon()
-        tile_generator = TileGenerator(tessagon,
-                                       u_range=[0.5, 1.0], v_range=[2.5, 4.0],
-                                       u_num=2, v_num=3,
-                                       u_cyclic=True, v_cyclic=False)
-        tiles = tile_generator.initialize_tiles(FakeTileSubClass)
+        tile_generator = GridTileGenerator(tessagon,
+                                           u_range=[0.5, 1.0],
+                                           v_range=[2.5, 4.0],
+                                           u_num=2, v_num=3,
+                                           u_cyclic=True, v_cyclic=False)
+        tiles = tile_generator.initialize_tiles()
         assert len(tiles) == 2
         assert len(tiles[0]) == 3
         assert len(tiles[1]) == 3
@@ -49,11 +51,12 @@ class TestTileGenerator(CoreTestsBase):
 
     def test_v_cyclic(self):
         tessagon = FakeTessagon()
-        tile_generator = TileGenerator(tessagon,
-                                       u_range=[0.5, 1.0], v_range=[2.5, 4.0],
-                                       u_num=2, v_num=3,
-                                       u_cyclic=False, v_cyclic=True)
-        tiles = tile_generator.initialize_tiles(FakeTileSubClass)
+        tile_generator = GridTileGenerator(tessagon,
+                                           u_range=[0.5, 1.0],
+                                           v_range=[2.5, 4.0],
+                                           u_num=2, v_num=3,
+                                           u_cyclic=False, v_cyclic=True)
+        tiles = tile_generator.initialize_tiles()
         assert len(tiles) == 2
         assert len(tiles[0]) == 3
         assert len(tiles[1]) == 3
@@ -71,11 +74,12 @@ class TestTileGenerator(CoreTestsBase):
 
     def test_u_v_cyclic(self):
         tessagon = FakeTessagon()
-        tile_generator = TileGenerator(tessagon,
-                                       u_range=[0.5, 1.0], v_range=[2.5, 4.0],
-                                       u_num=2, v_num=3,
-                                       u_cyclic=True, v_cyclic=True)
-        tiles = tile_generator.initialize_tiles(FakeTileSubClass)
+        tile_generator = GridTileGenerator(tessagon,
+                                           u_range=[0.5, 1.0],
+                                           v_range=[2.5, 4.0],
+                                           u_num=2, v_num=3,
+                                           u_cyclic=True, v_cyclic=True)
+        tiles = tile_generator.initialize_tiles()
         assert len(tiles) == 2
         assert len(tiles[0]) == 3
         assert len(tiles[1]) == 3

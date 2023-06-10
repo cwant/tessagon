@@ -11,15 +11,6 @@ class CoreTestsBase:
     pass
 
 
-class FakeTessagon:
-    def __init__(self):
-        self.mesh_adaptor = FakeAdaptor()
-        self.extra_parameters = {}
-
-    def f(self, u, v):
-        return [u, u*v, v]
-
-
 class FakeAdaptor:
     def __init__(self):
         self.verts = []
@@ -42,3 +33,14 @@ class FakeTileSubClass(Tile):
                         'right': None},
                 'bottom': {'left': None,
                            'right': None}}
+
+
+class FakeTessagon:
+    tile_class = FakeTileSubClass
+
+    def __init__(self):
+        self.mesh_adaptor = FakeAdaptor()
+        self.extra_parameters = {}
+
+    def f(self, u, v):
+        return [u, u*v, v]

@@ -1,5 +1,5 @@
 from tessagon.core.grid_tile_generator import GridTileGenerator
-from tessagon.core.rotate_tile_generator import RotateTileGenerator
+from tessagon.core.parallelogram_tile_generator import ParallelogramTileGenerator
 
 
 class Tessagon:
@@ -10,7 +10,15 @@ class Tessagon:
         if 'tile_generator' in kwargs:
             self.tile_generator = kwargs['tile_generator'](self, **kwargs)
         elif 'rot_factor' in kwargs:
-            self.tile_generator = RotateTileGenerator(self, **kwargs)
+            rot_factor = kwargs['rot_factor']
+            extra_args = {'parallelogram_vectors':
+                          [[rot_factor, -1], [1, rot_factor]]}
+
+            self.tile_generator = \
+                ParallelogramTileGenerator(self,
+                                           **{**kwargs, **extra_args})
+        elif 'parallelogram_vectors' in kwargs:
+            self.tile_generator = ParallelogramTileGenerator(self, **kwargs)
         else:
             self.tile_generator = GridTileGenerator(self, **kwargs)
 

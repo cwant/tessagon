@@ -68,6 +68,22 @@ class AbstractTile(ValueBlend):
             tile = tile.neighbors[key]
         return tile
 
+    @property
+    def left(self):
+        return self.get_neighbor_tile(["left"])
+
+    @property
+    def right(self):
+        return self.get_neighbor_tile(["right"])
+
+    @property
+    def top(self):
+        return self.get_neighbor_tile(["top"])
+
+    @property
+    def bottom(self):
+        return self.get_neighbor_tile(["bottom"])
+
     def inspect(self, **kwargs):
         # For debugging topology
         if not self.id:
