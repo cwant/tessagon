@@ -1,5 +1,6 @@
 from tessagon.core.grid_tile_generator import GridTileGenerator
-from tessagon.core.parallelogram_tile_generator import ParallelogramTileGenerator
+from tessagon.core.parallelogram_tile_generator \
+    import ParallelogramTileGenerator
 
 
 class Tessagon:
@@ -135,11 +136,12 @@ class Tessagon:
     def _process_extra_parameters(self, **kwargs):
         self.extra_parameters = {}
         parameters_info = self.metadata.extra_parameters
-        if not parameters_info: return
+        if not parameters_info:
+            return
 
         for parameter in parameters_info:
             parameter_info = parameters_info[parameter]
-            if not parameter in kwargs:
+            if parameter not in kwargs:
                 continue
             value = kwargs.get(parameter)
             if parameter_info['type'] == 'float':
@@ -150,10 +152,10 @@ class Tessagon:
     def _process_float_extra_parameter(self, parameter, value, parameter_info):
         max_value = parameter_info.get('max')
         min_value = parameter_info.get('min')
-        if max_value != None and value > max_value:
+        if max_value is not None and value > max_value:
             raise ValueError('Parameter {} ({}) exceeds maximum ({})'
                              .format(parameter, value, max_value))
-        if min_value != None and value < min_value:
+        if min_value is not None and value < min_value:
             raise ValueError('Parameter {} ({}) below minimum ({})'
                              .format(parameter, value, min_value))
         self.extra_parameters[parameter] = value

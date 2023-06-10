@@ -1,9 +1,9 @@
 from tessagon.core.tile_generator import TileGenerator
-from tessagon.core.abstract_tile import AbstractTile
 
 
 class ParallelogramTileGenerator(TileGenerator):
-    # This generates tiles that are rotated and combined with a sheer transformation
+    # This generates tiles that are rotated and combined
+    # with a sheer transformation
     # (Turning a collection of tiles into a parallelogram.)
     # This is done so that the tile patterns can still be cyclic.
 
@@ -35,14 +35,17 @@ class ParallelogramTileGenerator(TileGenerator):
         self.tiles = {}
 
     def validate_parallelogram(self):
+        error = None
         if self.p[0][0] <= 0:
-            raise ValueError("First parallelogram vector can't have negative u")
+            error = "First parallelogram vector can't have negative u"
         elif self.p[1][1] <= 0:
-            raise ValueError("Second parallelogram vector can't have negative v")
+            error = "Second parallelogram vector can't have negative v"
         if self.determinant == 0:
-            raise ValueError("Parallelogram vector are colinear")
+            error = "Parallelogram vector are colinear"
         elif self.determinant < 0:
-            raise ValueError("First parallelogram vector is to the left of second")
+            error = "First parallelogram vector is to the left of second"
+        if error:
+            raise ValueError(error)
 
     def initialize_tiles(self):
         tiles = {}
@@ -51,7 +54,7 @@ class ParallelogramTileGenerator(TileGenerator):
             for v in fingerprint_range[1]:
                 fingerprint = self.normalize_fingerprint(u, v)
                 fingerprint_str = str(fingerprint)
-                if not fingerprint_str in tiles: 
+                if fingerprint_str not in tiles:
                     if self.valid_fingerprint(*fingerprint):
                         tiles[fingerprint_str] = self.make_tile(*fingerprint)
         return tiles
@@ -127,7 +130,7 @@ class ParallelogramTileGenerator(TileGenerator):
         fingerprint = self.normalize_fingerprint(u + 1, v + 1)
         if not self.point_in_parallelogram(*fingerprint):
             return False
-        
+
         return True
 
     def parallelogram_coord(self, u, v):
@@ -146,13 +149,13 @@ class ParallelogramTileGenerator(TileGenerator):
             if 0.0 <= parallelogram_uv[1] <= self.v_num:
                 return True
         return False
-            
+
     def normalize_fingerprint(self, u, v):
         # Return a canonical fingerprint for tile with this fingerprint
         # Tiles that are essentually the same (due to cyclic/wrapping)
         # will have the same fingerprint.
         # The goal is to not create such tiles more than once
-        while(True):
+        while (True):
             u_old = u
             v_old = v
             parallelogram_uv = self.parallelogram_coord(u, v)

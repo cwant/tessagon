@@ -15,7 +15,8 @@ metadata = TessagonMetadata(name='Weave',
                                     'min': 0.0,
                                     'max': 1.0,
                                     'default': 0.5,
-                                    'description': 'Control the size of the squares'
+                                    'description':
+                                    'Control the size of the squares'
                                 }
                             })
 
