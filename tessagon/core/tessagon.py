@@ -10,6 +10,7 @@ class Tessagon:
         if 'tile_generator' in kwargs:
             self.tile_generator = kwargs['tile_generator'](self, **kwargs)
         elif 'rot_factor' in kwargs:
+            # Deprecated?
             rot_factor = kwargs['rot_factor']
             extra_args = {'parallelogram_vectors':
                           [[rot_factor, -1], [1, rot_factor]]}
