@@ -1,118 +1,167 @@
-from math import sqrt
-from tessagon.core.stamp14_tessagon \
-    import Stamp14, Stamp14Tile, Stamp14Tessagon
+from math import sqrt, atan2, sin, cos, pi
+from tessagon.core.tessagon import Tessagon
+from tessagon.core.tile import Tile
 from tessagon.core.tessagon_metadata import TessagonMetadata
+from tessagon.core.tile_utils import \
+    left_tile, top_tile, top_left_tile, \
+    right_tile, top_right_tile
 
 metadata = TessagonMetadata(name='Hexagons and Big Triangles',
                             num_color_patterns=2,
                             classification='non_edge',
                             shapes=['hexagons', 'triangles'],
                             sides=[6, 3],
-                            uv_ratio=sqrt(3.0))
+                            uv_ratio=1.0/sqrt(3.0))
 
+class HexBigTriTile(Tile):
+    def __init__(self, tessagon, **kwargs):
+        super().__init__(tessagon, **kwargs)
+        self.rot_symmetric = 180
 
-class Thingy(Stamp14):
+        # Future use to control hexagon size?
+        self.hexagon_ratio = 0.5
+
+        # in u units
+        self.hex_radius = 2 * self.hexagon_ratio / sqrt(7)
+
+        # multiplier to get v units ...
+        self.uv_ratio = self.tessagon.metadata.uv_ratio
+
+        # Tilt...
+        self.theta_offset = -atan2(1, 3 * sqrt(3)) + pi/6
+        self.hex_theta = [(self.theta_offset + number * pi / 3.0) \
+                          for number in range(6)]
+
+    def hex_vert_coord(self, center, number):
+        # number in range(6)
+        return [center[0] + \
+                self.hex_radius * cos(self.hex_theta[number]),
+                center[1] + \
+                self.hex_radius * sin(self.hex_theta[number]) * self.uv_ratio]
+
     def init_verts(self):
-        return [None]*13
+        verts = {'rotate0': {},
+                 'rotate180': {}}
+
+        for i in ['rotate0', 'rotate180']:
+            for j in range(6):
+                verts[i][j] = None
+        return verts
 
     def init_faces(self):
-        return [None]*3
+        faces = {'rotate0': {},
+                 'rotate180': {},
+                 'middle': None}
+
+        for i in ['rotate0', 'rotate180']:
+            for j in range(6):
+                faces[i][j] = None
+        return faces
 
     def calculate_verts(self):
-        unit_u = 1.0 / 14.0
-        unit_v = 1.0 / 14.0
+        self.add_vert(['rotate0', 0], *self.hex_vert_coord([0, 1], 5))
 
-        # Hexagon (face 0)
-        d_u = unit_u
-        d_v = unit_v
-        self.add_offset_vert(0, d_u, d_v)
-        self.add_offset_vert(2, -d_u, d_v)
-        self.add_offset_vert(3, -d_u, -d_v)
-        self.add_offset_vert(5, d_u, -d_v)
-        d_v = 2 * unit_v
-        self.add_offset_vert(1, 0, d_v)
-        self.add_offset_vert(4, 0, -d_v)
+        self.add_vert(['rotate0', 1], *self.hex_vert_coord([1, 1], 3))
+        self.add_vert(['rotate0', 2], *self.hex_vert_coord([1, 1], 4))
 
-        # Rest of upper triangle (face 1)
-        d_u = 2 * unit_u
-        self.add_offset_vert(6, d_u, 0)
-        self.add_offset_vert(7, d_u, 2 * unit_v)
-        self.add_offset_vert(8, d_u, 4 * unit_v)
-        self.add_offset_vert(9, unit_u, 3 * unit_v)
-
-        # Rest of lower triangle (face 2)
-        self.add_offset_vert(10, unit_u, -3 * unit_v)
-        self.add_offset_vert(11, 2 * unit_u, -2 * unit_v)
-        self.add_offset_vert(12, 3 * unit_u, -1 * unit_v)
-
-        # Uggh, this is brutal, be thankful you didn't have to figure this out
-        neighbor = self.neighbors[0]
-        if neighbor:
-            self.set_equivalent_vert(neighbor, 12, 4)
-            self.set_equivalent_vert(neighbor, 6, 3)
-            self.set_equivalent_vert(neighbor, 7, 2)
-
-        neighbor = self.neighbors[1]
-        if neighbor:
-            self.set_equivalent_vert(neighbor, 7, 10)
-            self.set_equivalent_vert(neighbor, 8, 5)
-            self.set_equivalent_vert(neighbor, 9, 4)
-
-        neighbor = self.neighbors[2]
-        if neighbor:
-            self.set_equivalent_vert(neighbor, 9, 12)
-            self.set_equivalent_vert(neighbor, 1, 11)
-            self.set_equivalent_vert(neighbor, 2, 10)
-
-        neighbor = self.neighbors[3]
-        if neighbor:
-            self.set_equivalent_vert(neighbor, 2, 7)
-            self.set_equivalent_vert(neighbor, 3, 6)
-            self.set_equivalent_vert(neighbor, 4, 12)
-
-        neighbor = self.neighbors[4]
-        if neighbor:
-            self.set_equivalent_vert(neighbor, 4, 9)
-            self.set_equivalent_vert(neighbor, 5, 8)
-            self.set_equivalent_vert(neighbor, 10, 7)
-
-        neighbor = self.neighbors[5]
-        if neighbor:
-            self.set_equivalent_vert(neighbor, 10, 2)
-            self.set_equivalent_vert(neighbor, 11, 1)
-            self.set_equivalent_vert(neighbor, 12, 9)
-
-    def set_equivalent_vert(self, neighbor, src, dest):
-        if not self.verts[src]:
-            return
-        neighbor.verts[dest] = self.verts[src]
+        self.add_vert(['rotate0', 3], *self.hex_vert_coord([0.5, 0.5], 0))
+        self.add_vert(['rotate0', 4], *self.hex_vert_coord([0.5, 0.5], 1))
+        self.add_vert(['rotate0', 5], *self.hex_vert_coord([0.5, 0.5], 2))
 
     def calculate_faces(self):
-        self.faces[0] = self.tile.mesh_adaptor.create_face(self.verts[0:6])
-        verts = [self.verts[i] for i in [6, 7, 8, 9, 1, 0]]
-        self.faces[1] = self.tile.mesh_adaptor.create_face(verts)
-        verts = [self.verts[i] for i in [10, 11, 12, 6, 0, 5]]
-        self.faces[2] = self.tile.mesh_adaptor.create_face(verts)
+        # Hexagon
+        self.add_face(['middle'],
+                      [['rotate0', 3],
+                       ['rotate0', 4],
+                       ['rotate0', 5],
+                       ['rotate180', 3],
+                       ['rotate180', 4],
+                       ['rotate180', 5]])
 
+        # Top left Hexagon
+        face = self.add_face(['rotate0', 0],
+                             [['rotate0', 0],
+                              top_tile(['rotate180', 1]),
+                              top_tile(['rotate180', 2]),
+                              top_left_tile(['rotate180', 0]),
+                              left_tile(['rotate0', 1]),
+                              left_tile(['rotate0', 2])],
+                             equivalent=[left_tile(['rotate0', 3]),
+                                         top_left_tile(['rotate180', 0]),
+                                         top_tile(['rotate180', 3])])
 
-class HexBigTriTile(Stamp14Tile):
-    def __init__(self, tessagon, **kwargs):
-        super().__init__(tessagon, Thingy, **kwargs)
+        # Top right Hexagon
+        face = self.add_face(['rotate0', 3],
+                             [['rotate0', 2],
+                              ['rotate0', 1],
+                              top_tile(['rotate180', 0]),
+                              top_right_tile(['rotate180', 2]),
+                              top_right_tile(['rotate180', 1]),
+                              right_tile(['rotate0', 0])],
+                             equivalent=[top_tile(['rotate180', 0]),
+                                         top_right_tile(['rotate180', 3]),
+                                         right_tile(['rotate0', 0])])
 
+        # Top left Triangle (mostly interior)
+        face = self.add_face(['rotate0', 1],
+                             [['rotate0', 0],
+                              ['rotate0', 5],
+                              ['rotate0', 4],
+                              ['rotate0', 2],
+                              ['rotate0', 1],
+                              top_tile(['rotate180', 1])],
+                             equivalent=[top_tile(['rotate180', 2])])
+        
+        # Top right Triangle (mostly exterior)
+        face = self.add_face(['rotate0', 2],
+                             [['rotate0', 1],
+                              top_tile(['rotate180', 0]),
+                              top_tile(['rotate180', 5]),
+                              top_tile(['rotate180', 4]),
+                              top_tile(['rotate180', 2]),
+                              top_tile(['rotate180', 1])],
+                             equivalent=[top_tile(['rotate180', 1])])
+
+        # Left Triangle
+        face = self.add_face(['rotate0', 4],
+                             [['rotate180', 3],
+                              ['rotate0', 5],
+                              ['rotate0', 0],
+                              left_tile(['rotate0', 2]),
+                              left_tile(['rotate0', 4]),
+                              left_tile(['rotate0', 3])],
+                             equivalent=[left_tile(['rotate0', 5])])
+
+        # Right Triangle
+        face = self.add_face(['rotate0', 5],
+                             [['rotate0', 2],
+                              ['rotate0', 4],
+                              ['rotate0', 3],
+                              right_tile(['rotate180', 3]),
+                              right_tile(['rotate0', 5]),
+                              right_tile(['rotate0', 0])],
+                             equivalent=[right_tile(['rotate0', 4])])
+        
     def color_pattern1(self):
-        for i in range(14):
-            if not self.stamps[i]:
-                continue
-            self.stamps[i].color_face_index(0, 1)
+        self.color_face(['middle'], 1)
+        self.color_face(['rotate0', 0], 1)
+        self.color_face(['rotate0', 3], 1)
+        self.color_face(['rotate180', 0], 1)
+        self.color_face(['rotate180', 3], 1)
 
     def color_pattern2(self):
-        for i in range(14):
-            if not self.stamps[i]:
-                continue
-            self.stamps[i].color_face_index(0, 1)
-            self.stamps[i].color_face_index(1, 2)
+        self.color_face(['rotate0', 1], 1)
+        self.color_face(['rotate180', 4], 1)
+        self.color_face(['rotate180', 5], 1)
+        self.color_face(['rotate180', 2], 1)
+
+        self.color_face(['middle'], 2)
+        self.color_face(['rotate0', 0], 2)
+        self.color_face(['rotate0', 3], 2)
+        self.color_face(['rotate180', 0], 2)
+        self.color_face(['rotate180', 3], 2)
 
 
-class HexBigTriTessagon(Stamp14Tessagon):
+class HexBigTriTessagon(Tessagon):
     tile_class = HexBigTriTile
     metadata = metadata

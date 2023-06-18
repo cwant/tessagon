@@ -281,8 +281,11 @@ class TessagonCommonDemo:
         options = {
             'u_range': [0.0, 1.0],
             'v_range': [0.0, 1.0],
-            'u_num': 5,
-            'v_num': 2,
+            'u_num': 1,
+            'v_num': 1,
+            #'parallelogram_vectors': [[9,-1], [1, 3]],
+            'parallelogram_vectors': [[10,-3], [1, 10]],
+            #'parallelogram_vectors': [[1,-1], [3, 1]],
             'position': position
         }
         HexBigTriTessagon = self.method_to_class()
