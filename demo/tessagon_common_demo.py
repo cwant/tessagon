@@ -277,19 +277,20 @@ class TessagonCommonDemo:
         return self.tessellate(self.chubby_torus, FloretTessagon,
                                **{**kwargs, **options})
 
+    def flip_axes_torus(self, u, v):
+        return torus(v, -u)
+
     def hex_big_tri_tessagon(self, position, **kwargs):
         options = {
             'u_range': [0.0, 1.0],
             'v_range': [0.0, 1.0],
-            'u_num': 1,
-            'v_num': 1,
-            #'parallelogram_vectors': [[9,-1], [1, 3]],
-            'parallelogram_vectors': [[10,-3], [1, 10]],
-            #'parallelogram_vectors': [[1,-1], [3, 1]],
+            'u_num': 2,
+            'v_num': 5,
+            'parallelogram_vectors': [[5, 1], [-3, 5]],
             'position': position
         }
         HexBigTriTessagon = self.method_to_class()
-        return self.tessellate(torus, HexBigTriTessagon,
+        return self.tessellate(self.flip_axes_torus, HexBigTriTessagon,
                                **{**kwargs, **options})
 
     def zig_zag_tessagon(self, position, **kwargs):
