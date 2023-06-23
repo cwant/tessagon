@@ -58,13 +58,27 @@ class Tile(AbstractTile):
     def add_face(self, index_keys, vert_index_keys_list, **kwargs):
         # Use the mesh adaptor to create a face.
         # In reality, multiple faces may get defined if symmetry is declared
-        if self._get_face(index_keys) is not None:
-            return None
+        face = self._get_face(index_keys)
 
-        verts = self._get_verts_from_list(vert_index_keys_list)
-        if verts is None:
-            return None
+        if face is None:
+            verts = self._get_verts_from_list(vert_index_keys_list)
+            if verts is not None:
+                face = \
+                    self._make_face(index_keys, verts, **kwargs)
 
+        if face is not None:
+            equivalent_faces = kwargs.get('equivalent', [])
+            for equivalent_face in equivalent_faces:
+                self.set_equivalent_face(*equivalent_face, face)
+
+        # We add additional faces by flipping 'left', 'right' etc
+        # if the tile has some kind of symmetry defined
+        self._create_symmetric_faces(index_keys, vert_index_keys_list,
+                                     **kwargs)
+
+        return face
+
+    def _make_face(self, index_keys, verts, **kwargs):
         face = self.mesh_adaptor.create_face(verts)
         self._set_face(index_keys, face)
 
@@ -73,11 +87,6 @@ class Tile(AbstractTile):
             if not kwargs['face_type'] in self.tessagon.face_types:
                 self.tessagon.face_types[kwargs['face_type']] = []
             self.tessagon.face_types[kwargs['face_type']].append(face)
-
-        # We add additional faces by flipping 'left', 'right' etc
-        # if the tile has some kind of symmetry defined
-        self._create_symmetric_faces(index_keys, vert_index_keys_list,
-                                     **kwargs)
 
         # On the boundary, make sure equivalent faces are set on neighbor tiles
         self._set_equivalent_neighbor_faces(index_keys, face, **kwargs)
