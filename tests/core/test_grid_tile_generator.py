@@ -15,7 +15,7 @@ class TestGridTileGenerator(CoreTestsBase):
         assert len(tiles[0]) == 3
         assert len(tiles[1]) == 3
 
-        tile_generator.initialize_neighbors(tiles)
+        tile_generator.initialize_neighbors()
         assert tiles[0][0].get_neighbor_tile(['left']) is None
         assert tiles[0][0].get_neighbor_tile(['bottom']) is None
         assert tiles[0][0].get_neighbor_tile(['right']) is tiles[1][0]
@@ -38,7 +38,7 @@ class TestGridTileGenerator(CoreTestsBase):
         assert len(tiles[0]) == 3
         assert len(tiles[1]) == 3
 
-        tile_generator.initialize_neighbors(tiles)
+        tile_generator.initialize_neighbors()
         assert tiles[0][0].get_neighbor_tile(['left']) is tiles[1][0]
         assert tiles[0][0].get_neighbor_tile(['bottom']) is None
         assert tiles[0][0].get_neighbor_tile(['right']) is tiles[1][0]
@@ -61,7 +61,7 @@ class TestGridTileGenerator(CoreTestsBase):
         assert len(tiles[0]) == 3
         assert len(tiles[1]) == 3
 
-        tile_generator.initialize_neighbors(tiles)
+        tile_generator.initialize_neighbors()
         assert tiles[0][0].get_neighbor_tile(['left']) is None
         assert tiles[0][0].get_neighbor_tile(['bottom']) is tiles[0][2]
         assert tiles[0][0].get_neighbor_tile(['right']) is tiles[1][0]
@@ -84,7 +84,7 @@ class TestGridTileGenerator(CoreTestsBase):
         assert len(tiles[0]) == 3
         assert len(tiles[1]) == 3
 
-        tile_generator.initialize_neighbors(tiles)
+        tile_generator.initialize_neighbors()
         assert tiles[0][0].get_neighbor_tile(['left']) is tiles[1][0]
         assert tiles[0][0].get_neighbor_tile(['bottom']) is tiles[0][2]
         assert tiles[0][0].get_neighbor_tile(['right']) is tiles[1][0]

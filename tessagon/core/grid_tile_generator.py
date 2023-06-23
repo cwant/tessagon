@@ -31,9 +31,11 @@ class GridTileGenerator(TileGenerator):
 
                 tiles[u][v] = self.create_tile(u, v, corners, **kwargs)
 
+        self.tiles = tiles
         return tiles
 
-    def initialize_neighbors(self, tiles, **kwargs):
+    def initialize_neighbors(self, **kwargs):
+        tiles = self.tiles
         for u in range(self.u_num):
             u_prev = (u - 1) % self.u_num
             u_next = (u + 1) % self.u_num
@@ -77,8 +79,5 @@ class GridTileGenerator(TileGenerator):
                 tile.set_neighbors(left=left, right=right, top=top,
                                    bottom=bottom)
 
-    def create_tiles(self):
-        self.tiles = self.initialize_tiles()
-        self.initialize_neighbors(self.tiles)
-        # Flatten the tiles
+    def get_tiles(self):
         return [j for i in self.tiles for j in i]

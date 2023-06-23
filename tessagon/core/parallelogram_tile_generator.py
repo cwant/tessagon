@@ -57,10 +57,11 @@ class ParallelogramTileGenerator(TileGenerator):
                 if fingerprint_str not in tiles:
                     if self.valid_fingerprint(*fingerprint):
                         tiles[fingerprint_str] = self.make_tile(*fingerprint)
+        self.tiles = tiles
         return tiles
 
     def initialize_neighbors(self):
-        for tile in self.tiles.values():
+        for tile in self.get_tiles():
             u = tile.fingerprint[0]
             v = tile.fingerprint[1]
 
@@ -83,10 +84,7 @@ class ParallelogramTileGenerator(TileGenerator):
             tile.set_neighbors(left=left, right=right, top=top,
                                bottom=bottom)
 
-    def create_tiles(self):
-        self.tiles = self.initialize_tiles()
-        self.initialize_neighbors()
-
+    def get_tiles(self):
         return self.tiles.values()
 
     def make_tile(self, *fingerprint):

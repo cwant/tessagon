@@ -14,6 +14,10 @@ class Tile(AbstractTile):
         if self.faces and self.color_pattern:
             self.face_paths = self.all_face_paths()
 
+    def validate(self):
+        # Subclass decides if this should be done
+        pass
+
     def add_vert(self, index_keys, ratio_u, ratio_v, **kwargs):
         # Use the mesh adaptor to create a vertex.
         # In reality, multiple vertices may get defined if symmetry is declared
