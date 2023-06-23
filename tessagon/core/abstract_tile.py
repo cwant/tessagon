@@ -7,14 +7,14 @@ class AbstractTile(ValueBlend):
         self.f = tessagon.f
 
         # Verts/faces indexed with 'left', 'right', 'center'
-        self.u_symmetric = False
+        self.u_symmetric = kwargs.get('u_symmetric', False)
         # Verts/faces indexed with 'bottom', 'middle', 'top'
-        self.v_symmetric = False
+        self.v_symmetric = kwargs.get('v_symmetric', False)
 
-        if 'u_symmetric' in kwargs:
-            self.u_symmetric = kwargs['u_symmetric']
-        if 'v_symmetric' in kwargs:
-            self.v_symmetric = kwargs['v_symmetric']
+        # Verts/faces with 'rotate' and a number.
+        # Only rot_symmetric = 180 supported
+        # TODO: implement rot_symmetric = 90 as needed
+        self.rot_symmetric = kwargs.get('rot_symmetry', None)
 
         self.id = None
         # This is not necessary to any of the calculations, just
@@ -117,7 +117,10 @@ class AbstractTile(ValueBlend):
             return nested_list[index_keys]
         value = nested_list
         for index in index_keys:
-            value = value[index]
+            try:
+                value = value[index]
+            except:
+                raise ValueError("index: " + str(index) + ' value:'  + str(value))
         return value
 
     def _set_nested_list_value(self, nested_list, index_keys, value):
@@ -156,16 +159,21 @@ class AbstractTile(ValueBlend):
             path = self._v_flip(path)
         return path
 
+    def _permute_value(self, index_keys, vals):
+        # abstract function to permute values in a list
+        # e.g., 'left' and 'right' in u_flip below
+        if isinstance(index_keys, list):
+            return [self._permute_value(u, vals) for u in index_keys]
+        for i in range(len(vals)):
+            if index_keys == vals[i]:
+                return vals[(i+1) % len(vals)]
+
+        return index_keys
+
     def _swap_value(self, index_keys, val1, val2):
         # abstract function to swap two values in a list
         # e.g., 'left' and 'right' in u_flip below
-        if isinstance(index_keys, list):
-            return [self._swap_value(u, val1, val2) for u in index_keys]
-        if index_keys == val1:
-            return val2
-        if index_keys == val2:
-            return val1
-        return index_keys
+        return self._permute_value(index_keys, [val1, val2])
 
     def _u_flip(self, index_keys):
         # swap each left with right (and vice versa) in list
@@ -178,6 +186,20 @@ class AbstractTile(ValueBlend):
         if not self.v_symmetric:
             return index_keys
         return self._swap_value(index_keys, 'bottom', 'top')
+
+    def _rotate_index(self, index_keys):
+        # rotate
+        if not self.rot_symmetric:
+            return index_keys
+        elif self.rot_symmetric == 180:
+            keys = self._permute_value(index_keys, ['rotate0', 'rotate180'])
+            keys = self._permute_value(keys, ['left', 'right'])
+            keys = self._permute_value(keys, ['top', 'bottom'])
+            return keys
+        elif self.rot_symmetric == 90:
+            return self._permute_value(index_keys,
+                                       ['rotate0', 'rotate90'
+                                        'rotate180', 'rotate270'])
 
     def _v_index(self, index_keys):
         # find either 'top' or 'bottom' in the list
