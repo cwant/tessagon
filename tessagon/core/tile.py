@@ -180,12 +180,12 @@ class Tile(AbstractTile):
         # The 'symmetry' keyword is just to ensure we don't recurse forever
         if 'symmetry' not in kwargs:
             extra_args = {'symmetry': True}
-            if self.rot_symmetric==180:
+            if self.rot_symmetric == 180:
                 rot_keys = self._rotate_index(index_keys)
                 self.add_vert(rot_keys, 1.0 - ratio_u, 1 - ratio_v,
                               **{**kwargs, **extra_args})
 
-            elif self.rot_symmetric==90:
+            elif self.rot_symmetric == 90:
                 rot_keys = self._rotate_index(index_keys)
                 self.add_vert(rot_keys, 1.0 - ratio_v, ratio_u,
                               **{**kwargs, **extra_args})
@@ -274,7 +274,7 @@ class Tile(AbstractTile):
                     equivalent_faces = kwargs['equivalent']
                     kwargs = kwargs.copy()
                     kwargs['equivalent'] = \
-                        [self._rotate_index(equivalent_face) \
+                        [self._rotate_index(equivalent_face)
                          for equivalent_face in equivalent_faces]
 
                 self.add_face(rot_keys, rot_vert_index_keys_list,

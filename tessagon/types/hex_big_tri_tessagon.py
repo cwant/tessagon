@@ -4,8 +4,7 @@ from tessagon.core.alternating_tile import AlternatingTile
 from tessagon.core.tessagon_metadata import TessagonMetadata
 from tessagon.core.tile_utils import \
     left_tile, top_tile, top_left_tile, \
-    right_tile, top_right_tile, bottom_tile, \
-    bottom_left_tile, bottom_right_tile
+    right_tile, bottom_tile
 
 metadata = TessagonMetadata(name='Hexagons and Big Triangles',
                             num_color_patterns=2,
@@ -13,6 +12,7 @@ metadata = TessagonMetadata(name='Hexagons and Big Triangles',
                             shapes=['hexagons', 'triangles'],
                             sides=[6, 3],
                             uv_ratio=1.0/sqrt(3.0))
+
 
 class HexBigTriTile(AlternatingTile):
     def __init__(self, tessagon, **kwargs):
@@ -28,14 +28,14 @@ class HexBigTriTile(AlternatingTile):
 
         # Tilt
         self.theta_offset = -atan2(1, 3 * sqrt(3)) + pi/6
-        self.hex_theta = [(self.theta_offset + number * pi / 3.0) \
+        self.hex_theta = [(self.theta_offset + number * pi / 3.0)
                           for number in range(6)]
 
     def hex_vert_coord(self, center, number):
         # number in range(6)
-        return [center[0] + \
+        return [center[0] +
                 self.hex_radius * cos(self.hex_theta[number]),
-                center[1] + \
+                center[1] +
                 self.hex_radius * sin(self.hex_theta[number]) * self.uv_ratio]
 
     def init_verts(self):
@@ -93,26 +93,26 @@ class HexBigTriTile(AlternatingTile):
                                   top_tile('I')])
 
         # Left Triangle
-        face = self.add_face('B',
-                             [1,
-                              0,
-                              left_tile(3),
-                              left_tile(4),
-                              left_tile(5),
-                              bottom_tile(2)],
-                             equivalent=[bottom_tile('E'),
-                                         left_tile('H')])
+        self.add_face('B',
+                      [1,
+                       0,
+                       left_tile(3),
+                       left_tile(4),
+                       left_tile(5),
+                       bottom_tile(2)],
+                      equivalent=[bottom_tile('E'),
+                                  left_tile('H')])
 
         # Right Triangle
-        face = self.add_face('C',
-                             [0,
-                              1,
-                              right_tile(4),
-                              right_tile(3),
-                              right_tile(2),
-                              top_tile(5)],
-                             equivalent=[right_tile('G'),
-                                         top_tile('J')])
+        self.add_face('C',
+                      [0,
+                       1,
+                       right_tile(4),
+                       right_tile(3),
+                       right_tile(2),
+                       top_tile(5)],
+                      equivalent=[right_tile('G'),
+                                  top_tile('J')])
 
     def color_pattern1(self):
         if self.tile_type == 0:
@@ -122,6 +122,7 @@ class HexBigTriTile(AlternatingTile):
         if self.tile_type == 0:
             self.color_face('A', 1)
             self.color_face('B', 2)
+
 
 class HexBigTriTessagon(Tessagon):
     tile_class = HexBigTriTile

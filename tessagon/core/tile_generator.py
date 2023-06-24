@@ -59,7 +59,6 @@ class TileGenerator(ValueBlend):
         return tile_class(self.tessagon,
                           **{**kwargs, **extra_args})
 
-
     def create_tiles(self):
         self.initialize_tiles()
         self.initialize_neighbors()

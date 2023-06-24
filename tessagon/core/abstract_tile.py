@@ -117,10 +117,8 @@ class AbstractTile(ValueBlend):
             return nested_list[index_keys]
         value = nested_list
         for index in index_keys:
-            try:
-                value = value[index]
-            except:
-                raise ValueError("index: " + str(index) + ' value:'  + str(value))
+            value = value[index]
+
         return value
 
     def _set_nested_list_value(self, nested_list, index_keys, value):
