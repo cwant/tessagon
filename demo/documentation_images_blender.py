@@ -287,26 +287,26 @@ class DocumentationImages:
         return "%s/README_tessagon_list.md" % (dir)
 
     def markdown_filename(self, cls):
-        return "documentation/{}.md".\
+        return "documentation/types/{}.md".\
             format(self.class_to_snakecase(cls))
 
     def thumbnail_filename(self, cls):
         class_name = cls.__name__
         page_parts = self.page_parts[class_name]
-        return "documentation/images/{}".format(page_parts['thumbnail'])
+        return "documentation/images/types/{}".format(page_parts['thumbnail'])
 
     def color_pattern_filename(self, cls, pattern_number):
         class_name = cls.__name__
         page_parts = self.page_parts[class_name]
         return \
-            "images/{}".format(page_parts['color_patterns'][pattern_number])
+            "../images/types/{}".format(page_parts['color_patterns'][pattern_number])
 
     def extra_parameter_filename(self, cls, parameter, value_name):
         class_name = cls.__name__
         page_parts = self.page_parts[class_name]
         parameter_part = page_parts['extra_parameters'][parameter][value_name]
         return \
-            "images/{}".format(parameter_part['filename'])
+            "../images/types/{}".format(parameter_part['filename'])
 
     def extra_parameter_value(self, cls, parameter, value_name):
         class_name = cls.__name__
@@ -345,7 +345,7 @@ class DocumentationImages:
         page_parts = self.page_parts[class_name]
         markdown_file = self.markdown_filename(cls)
 
-        img_file = "images/{}".format(page_parts['image'])
+        img_file = "../images/types/{}".format(page_parts['image'])
 
         markdown_fp = open(markdown_file, 'w')
         markdown_fp.write("# `%s`\n\n" % class_name)
