@@ -224,8 +224,8 @@ class TessagonCommonDemo:
         options = {
             'u_range': [0.0, 1.0],
             'v_range': [0.0, 1.0],
-            'u_num': 28,
-            'v_num': 4,
+            'u_num': 56,
+            'v_num': 8,
             'position': position
         }
         BigHexTriTessagon = self.method_to_class()

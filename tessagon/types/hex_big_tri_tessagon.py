@@ -18,6 +18,9 @@ class HexBigTriTile(AlternatingTile):
     def __init__(self, tessagon, **kwargs):
         super().__init__(tessagon, **kwargs)
 
+        self.u_symmetric = False
+        self.v_symmetric = False
+
         # Future use to control hexagon size?
         self.hexagon_ratio = 0.5
 
