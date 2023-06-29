@@ -268,8 +268,8 @@ class TessagonCommonDemo:
         options = {
             'u_range': [0.0, 1.0],
             'v_range': [0.0, 1.0],
-            'u_num': 1,
-            'v_num': 6,
+            'u_num': 2,
+            'v_num': 12,
             'parallelogram_vectors': [[9,-1], [1, 3]],
             'position': position
         }
