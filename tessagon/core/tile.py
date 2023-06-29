@@ -32,6 +32,11 @@ class Tile(AbstractTile):
                     self.tessagon.vert_types[kwargs['vert_type']] = []
                 self.tessagon.vert_types[kwargs['vert_type']].append(vert)
 
+        if vert is not None:
+            equivalent_verts = kwargs.get('equivalent', [])
+            for equivalent_vert in equivalent_verts:
+                self.set_equivalent_vert(*equivalent_vert, vert)
+
         # We add additional vertices by flipping 'left', 'right' etc
         # if the tile has some kind of symmetry defined
         self._create_symmetric_verts(index_keys, ratio_u, ratio_v, **kwargs)
