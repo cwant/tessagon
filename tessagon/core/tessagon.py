@@ -33,7 +33,14 @@ class Tessagon:
 
         if 'adaptor_class' in kwargs:
             adaptor_class = kwargs['adaptor_class']
-            self.mesh_adaptor = adaptor_class(**kwargs)
+
+            # Get options that are specific to this adaptor
+            adaptor_options = {}
+            for option in adaptor_class.ADAPTOR_OPTIONS:
+                if option in kwargs:
+                    adaptor_options[option] = kwargs[option]
+
+            self.mesh_adaptor = adaptor_class(**adaptor_options)
         else:
             raise ValueError('Must provide a mesh adaptor class')
 

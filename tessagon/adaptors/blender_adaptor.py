@@ -1,7 +1,8 @@
+from tessagon.adaptors.base_adaptor import BaseAdaptor
 import bmesh
 
 
-class BlenderAdaptor:
+class BlenderAdaptor(BaseAdaptor):
     def __init__(self, **kwargs):
         self.bm = None
 

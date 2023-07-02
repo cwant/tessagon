@@ -1,7 +1,8 @@
+from tessagon.adaptors.base_adaptor import BaseAdaptor
 import vtk
 
 
-class VtkAdaptor:
+class VtkAdaptor(BaseAdaptor):
     def __init__(self, **kwargs):
         self.point_count = 0
         self.face_count = 0

@@ -1,4 +1,7 @@
-class ListAdaptor:
+from tessagon.adaptors.base_adaptor import BaseAdaptor
+
+
+class ListAdaptor(BaseAdaptor):
 
     def __init__(self, **kwargs):
         self.vert_list = None
