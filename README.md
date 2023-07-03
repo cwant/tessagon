@@ -6,14 +6,14 @@ Tessellate your favorite 3D surfaces (technically, 2D manifolds) with triangles,
 
 ## News
 
-**Now works with Blender 2.8 (and still works with earlier versions). Todo: check if it works with Blender 3.x.**
+**A nascent Inkscape extension to create tiling patterns: <https://github.com/cwant/inkscape-tiling-extension>**
 
-**Check out my presentation on the creation of Tessagon as an open source Python project here: [https://cwant.github.io/python-os-presentation](https://cwant.github.io/python-os-presentation/#/)**
+**You can find a Blender (3.6) pull request to add support for Tessagon in the "XYZ function" addon here:
+<https://projects.blender.org/blender/blender-addons/pulls/104726>**
 
-**A demo of using Tessagon with Inkscape can be found [here](https://gist.github.com/cwant/697f0c6ce07d9e14e710f5b80ca5eece).**
+**Check out my presentation on the creation of Tessagon as an open source Python project here: <https://cwant.github.io/python-os-presentation>**
 
-**~You can find a Blender pull request to add support for Tessagon in the "XYZ function" addon here:
-[https://developer.blender.org/D3519](https://developer.blender.org/D3519)~** (This didn't really go anywhere, and was for Blender 2.x)
+**A demo of using Tessagon with Inkscape Simple Scripting can be found [here](https://gist.github.com/cwant/697f0c6ce07d9e14e710f5b80ca5eece).**
 
 ## TL;DR
 
@@ -36,9 +36,10 @@ Three things are needed to use tessagon to tessellate the surface of a 2D-manifo
 
 * Tessagon provides a bunch of classes (subclasses of a class called `Tessagon`) that will tessellate a portion of UV-space with mesh patterns. Parameters provide the details of the bounds in UV-space, the resolution of the tiling, whether the tiling is cyclic, whether a cyclic domain "twists" (think a topological identification space, like a Mobius strip or a Klein bottle), whether it is rotated, etc. These classes are in the `tessagon.types` module.
 * The programmer must provide a formula that describes the shape of surface of the 3-dimensional object to create. This function maps two-dimensional space (also known as UV-space) into 3-dimensional space. The tiling happens in the input two dimensional space, and the function maps the tiling onto the surface of the 3-dimensional shape. There are some demo functions in `tessagon.misc.shapes`, such as torii (a.k.a. donuts), spheres, cylinders, etc.
-* Finally, an adaptor is chosen to create a mesh in a supported 3D software package. Currently only Blender and VTK are supported, but there is also a generic `ListAdaptor` that does not depend on any external package, and can aid in the creation of importers (and is useful for testing/debugging):
+* Finally, an adaptor is chosen to create a mesh in a supported 3D software package. Currently Blender and VTK are supported applications. There is an adaptor that writes an SVG group to a string, with various options (root SVG node, style options). There is also a generic `ListAdaptor` that does not depend on any external package, and can aid in the creation of importers (and is useful for testing/debugging):
   * adaptor `BlenderAdaptor` from the module `tessagon.adaptors.blender_adaptor`. The output from the adaptor's `get_mesh` method is of type `BMesh`.
   * adaptor `VtkAdaptor` from the module `tessagon.adaptors.vtk_adaptor`. The output from the adaptor's `get_mesh` method is of type `VtkPolydata`.
+  * adaptor `SvgAdaptor` from the module `tessagon.adaptors.svg_adaptor`. The output from the adaptor's `get_mesh` method is a string (by default, an SVG group of polygons).
   * adaptor `ListAdaptor` from the module `tessagon.adaptors.list_adaptor`. The output from the adaptor's `get_mesh` method is a dict with keys `vert_list`, `face_list` and `color_list`, which point to lists of vertices, faces (as indices into the vertex list), and color indices for each face.
 
   (Note that the `get_mesh` methods mentioned above are usually called indirectly through the `Tessagon` method `create_mesh`.)
