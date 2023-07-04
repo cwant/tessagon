@@ -11,7 +11,7 @@ Tessellate your favorite 3D surfaces (technically, 2D manifolds) with triangles,
 **You can find a Blender (3.6) pull request to add support for Tessagon in the "XYZ function" addon here:
 <https://projects.blender.org/blender/blender-addons/pulls/104726>**
 
-**Check out my presentation on the creation of Tessagon as an open source Python project here: <https://cwant.github.io/python-os-presentation>**
+**Check out my presentation on the creation of Tessagon as an open source Python project here: <https://cwant.github.io/python-os-presentation> (or watch on [YouTube](https://www.youtube.com/watch?v=R0hG9hHs9Fw))**
 
 **A demo of using Tessagon with Inkscape Simple Scripting can be found [here](https://gist.github.com/cwant/697f0c6ce07d9e14e710f5b80ca5eece).**
 

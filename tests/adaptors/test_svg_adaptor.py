@@ -13,8 +13,7 @@ class SvgToList(HTMLParser):
     def __init__(self):
         HTMLParser.__init__(self)
         self.parts = []
-        self.getting_style = False
-        self.style = ""
+        self.getting_data = False
 
     def handle_starttag(self, tag, attrs):
         self.parts.append(tag)
@@ -22,13 +21,14 @@ class SvgToList(HTMLParser):
             self.parts.append(attr[0])
             self.parts.append(attr[1])
         if tag == "style":
-            self.getting_style = True
+            self.getting_data = True
         else:
-            self.getting_style = False
+            self.getting_data = False
 
     def handle_data(self, data):
-        if self.getting_style:
-            self.style = data
+        # Just through the style info on the list
+        if self.getting_data:
+            self.parts.append(data)
 
 
 class TestSvgAdaptor:
@@ -62,17 +62,13 @@ class TestSvgAdaptor:
         parser.feed(mesh)
         parser.close()
 
-        print(parser.parts)
         assert parser.parts == ['g',
 
                                 'polygon', 'points', '0.0,1.0 3.0,2.0 5.0,4.0',
-                                'class', 'color-2',
 
                                 'polygon', 'points', '3.0,2.0 5.0,4.0 3.0,1.0',
-                                'class', 'color-0',
 
-                                'polygon', 'points', '0.0,1.0 5.0,4.0 3.0,1.0',
-                                'class', 'color-1']
+                                'polygon', 'points', '0.0,1.0 5.0,4.0 3.0,1.0']
 
     def test_get_mesh_root_tag(self):
         adaptor = SvgAdaptor(svg_root_tag=True)
@@ -83,22 +79,18 @@ class TestSvgAdaptor:
         parser.feed(mesh)
         parser.close()
 
-        print(parser.parts)
         assert parser.parts == ['svg',
                                 'xmlns', 'http://www.w3.org/2000/svg',
                                 'g',
 
                                 'polygon', 'points', '0.0,1.0 3.0,2.0 5.0,4.0',
-                                'class', 'color-2',
 
                                 'polygon', 'points', '3.0,2.0 5.0,4.0 3.0,1.0',
-                                'class', 'color-0',
 
-                                'polygon', 'points', '0.0,1.0 5.0,4.0 3.0,1.0',
-                                'class', 'color-1']
+                                'polygon', 'points', '0.0,1.0 5.0,4.0 3.0,1.0']
 
     def test_get_mesh_style(self):
-        adaptor = SvgAdaptor(svg_style='whatever;')
+        adaptor = SvgAdaptor(svg_style='fill:#555555;')
         self.setup_adaptor(adaptor)
         mesh = adaptor.get_mesh()
 
@@ -106,20 +98,15 @@ class TestSvgAdaptor:
         parser.feed(mesh)
         parser.close()
 
-        print(parser.parts)
         assert parser.parts == ['g',
                                 'style',
+                                'fill:#555555;',
 
                                 'polygon', 'points', '0.0,1.0 3.0,2.0 5.0,4.0',
-                                'class', 'color-2',
 
                                 'polygon', 'points', '3.0,2.0 5.0,4.0 3.0,1.0',
-                                'class', 'color-0',
 
-                                'polygon', 'points', '0.0,1.0 5.0,4.0 3.0,1.0',
-                                'class', 'color-1']
-
-        assert parser.style == 'whatever;'
+                                'polygon', 'points', '0.0,1.0 5.0,4.0 3.0,1.0']
 
     def test_get_mesh_style_fill_color(self):
         adaptor = SvgAdaptor(svg_fill_color='#ffffff')
@@ -130,24 +117,18 @@ class TestSvgAdaptor:
         parser.feed(mesh)
         parser.close()
 
-        print(parser.parts)
         assert parser.parts == ['g',
                                 'style',
+                                'fill:#ffffff;',
 
                                 'polygon', 'points', '0.0,1.0 3.0,2.0 5.0,4.0',
-                                'class', 'color-2',
 
                                 'polygon', 'points', '3.0,2.0 5.0,4.0 3.0,1.0',
-                                'class', 'color-0',
 
-                                'polygon', 'points', '0.0,1.0 5.0,4.0 3.0,1.0',
-                                'class', 'color-1']
-
-        assert parser.style == \
-            'polygon {\n  fill:#ffffff;\n}\n'
+                                'polygon', 'points', '0.0,1.0 5.0,4.0 3.0,1.0']
 
     def test_get_mesh_style_fill_colors(self):
-        adaptor = SvgAdaptor(svg_fill_colors=['#ffffff', '#000000'])
+        adaptor = SvgAdaptor(svg_fill_colors=['#ffffff', '#000000', '#888888'])
         self.setup_adaptor(adaptor)
         mesh = adaptor.get_mesh()
 
@@ -155,22 +136,22 @@ class TestSvgAdaptor:
         parser.feed(mesh)
         parser.close()
 
-        print(parser.parts)
         assert parser.parts == ['g',
+
+                                'g',
                                 'style',
-
-                                'polygon', 'points', '0.0,1.0 3.0,2.0 5.0,4.0',
-                                'class', 'color-2',
-
+                                'fill:#ffffff;',
                                 'polygon', 'points', '3.0,2.0 5.0,4.0 3.0,1.0',
-                                'class', 'color-0',
 
+                                'g',
+                                'style',
+                                'fill:#000000;',
                                 'polygon', 'points', '0.0,1.0 5.0,4.0 3.0,1.0',
-                                'class', 'color-1']
 
-        assert parser.style == \
-            '.color-0 {\n  fill:#ffffff;\n}\n'\
-            '.color-1 {\n  fill:#000000;\n}\n'
+                                'g',
+                                'style',
+                                'fill:#888888;',
+                                'polygon', 'points', '0.0,1.0 3.0,2.0 5.0,4.0']
 
     def test_get_mesh_style_stroke(self):
         adaptor = SvgAdaptor(svg_stroke_color='#ffffff',
@@ -182,19 +163,12 @@ class TestSvgAdaptor:
         parser.feed(mesh)
         parser.close()
 
-        print(parser.parts)
         assert parser.parts == ['g',
                                 'style',
+                                'stroke:#ffffff;stroke-width:1px;',
 
                                 'polygon', 'points', '0.0,1.0 3.0,2.0 5.0,4.0',
-                                'class', 'color-2',
 
                                 'polygon', 'points', '3.0,2.0 5.0,4.0 3.0,1.0',
-                                'class', 'color-0',
 
-                                'polygon', 'points', '0.0,1.0 5.0,4.0 3.0,1.0',
-                                'class', 'color-1']
-
-        assert parser.style == \
-            'polygon {\n  stroke:#ffffff;\n'\
-            '  stroke-width:1px;\n}\n'
+                                'polygon', 'points', '0.0,1.0 5.0,4.0 3.0,1.0']

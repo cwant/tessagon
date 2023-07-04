@@ -21,54 +21,66 @@ class SvgAdaptor(ListAdaptor):
         buffer = ""
         if self.svg_root_tag:
             if self.svg_root_tag is True:
-                buffer += '<svg xmlns="http://www.w3.org/2000/svg">'
+                buffer += '<svg xmlns="http://www.w3.org/2000/svg">\n'
             else:
                 buffer += self.svg_root_tag
-        buffer += "<g>"
 
-        style = self.make_style()
-        if style:
-            buffer += "<style>{}</style>".format(style)
+        buffer += "<g{}>\n".format(self.group_style())
 
-        for i in range(len(self.face_list)):
-            face = self.face_list[i]
-            class_string = ""
-            if len(self.color_list) > 0:
-                color = self.color_list[i]
-                class_string = ' class="color-{}"'.format(color)
-            verts = [self.vert_list[v] for v in face]
-            points_string = \
-                ' '.join(["{},{}".format(vert[0],
-                                         vert[1]) for vert in verts])
-            buffer += '<polygon points="{}"{} />'.format(points_string,
-                                                         class_string)
-        buffer += "</g>"
+        if self.style:
+            buffer += "<style>{}</style>".format(self.style)
+
+        if self.svg_fill_colors:
+            color_indices = self.make_color_indices()
+            for i in range(len(self.svg_fill_colors)):
+                if i not in color_indices:
+                    continue
+                fill_color = self.svg_fill_colors[i]
+                faces = [self.face_list[j] for j in color_indices[i]]
+                buffer += self.make_color_group(faces, fill_color)
+        else:
+            for face in self.face_list:
+                buffer += self.make_face(face)
+
+        buffer += "</g>\n"
         if self.svg_root_tag:
-            buffer += "</svg>"
+            buffer += "</svg>\n"
         return buffer
 
-    def make_style(self):
-        if self.style:
-            return self.style
-
+    def group_style(self):
         style = ""
-        polygon_style = ""
-        if self.svg_fill_colors:
-            for i in range(len(self.svg_fill_colors)):
-                style += '.color-{} {{\n  fill:{};\n}}\n'.\
-                    format(i, self.svg_fill_colors[i])
         if self.svg_stroke_color:
-            polygon_style += '  stroke:{};\n'.format(self.svg_stroke_color)
+            style += 'stroke:{};'.format(self.svg_stroke_color)
         if self.svg_stroke_width:
-            polygon_style += "  stroke-width:{};\n".\
+            style += "stroke-width:{};".\
                 format(self.svg_stroke_width)
         if self.svg_fill_color:
-            polygon_style += '  fill:{};\n'.format(self.svg_fill_color)
-
-        if len(polygon_style) > 0:
-            style += "polygon {{\n{}}}\n".format(polygon_style)
-
+            style += 'fill:{};'.format(self.svg_fill_color)
         if len(style) > 0:
-            return style
+            style = ' style="{}"'.format(style)
+        return style
 
-        return None
+    def make_color_indices(self):
+        color_indices = {}
+        for i in range(len(self.color_list)):
+            color = self.color_list[i]
+            if color not in color_indices:
+                color_indices[color] = []
+            color_indices[color].append(i)
+
+        return color_indices
+
+    def make_color_group(self, faces, fill_color):
+        buffer = '<g style="fill:{};">\n'.format(fill_color)
+        for face in faces:
+            buffer += self.make_face(face)
+        buffer += '</g>\n'
+
+        return buffer
+
+    def make_face(self, face):
+        verts = [self.vert_list[v] for v in face]
+        points_string = \
+            ' '.join(["{},{}".format(vert[0],
+                                     vert[1]) for vert in verts])
+        return '<polygon points="{}" />'.format(points_string)
