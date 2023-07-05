@@ -106,3 +106,4 @@ wire_skin
 wire_skin.py
 tmp/
 .pytest_cache/
+integrations/**/output
