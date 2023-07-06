@@ -84,7 +84,7 @@ class Tile(AbstractTile):
         return face
 
     def _make_face(self, index_keys, verts, **kwargs):
-        face = self.mesh_adaptor.create_face(verts)
+        face = self.mesh_adaptor.create_face(verts, **kwargs)
         self._set_face(index_keys, face)
 
         # The tessagon might keep a list of specific face types
@@ -181,27 +181,34 @@ class Tile(AbstractTile):
             return None
         return tile._get_vert(self._index_path(index_keys, neighbor_keys))
 
+    def rotate_90(self, u, v):
+        # Rotating around (1/2, 1/2)
+        return [1 - v, u]
+
+    def rotate_180(self, u, v):
+        # Rotating around (1/2, 1/2)
+        return [1 - u, 1 - v]
+
     def _create_symmetric_verts(self, index_keys, ratio_u, ratio_v, **kwargs):
         # The 'symmetry' keyword is just to ensure we don't recurse forever
         if 'symmetry' not in kwargs:
             extra_args = {'symmetry': True}
+
+            # This rotational stuff doesn't work yet ...
+            # See HokusaiHashesTessagon for an example of something
+            # that almost kinda works (not using this code though)
             if self.rot_symmetric == 180:
                 rot_keys = self._rotate_index(index_keys)
-                self.add_vert(rot_keys, 1.0 - ratio_u, 1 - ratio_v,
+                self.add_vert(*self.rotate_180(ratio_u, ratio_v),
                               **{**kwargs, **extra_args})
 
             elif self.rot_symmetric == 90:
-                rot_keys = self._rotate_index(index_keys)
-                self.add_vert(rot_keys, 1.0 - ratio_v, ratio_u,
-                              **{**kwargs, **extra_args})
-
-                rot_keys = self._rotate_index(rot_keys)
-                self.add_vert(rot_keys, 1.0 - ratio_u, 1 - ratio_v,
-                              **{**kwargs, **extra_args})
-
-                rot_keys = self._rotate_index(rot_keys)
-                self.add_vert(rot_keys, ratio_v, 1 - ratio_u,
-                              **{**kwargs, **extra_args})
+                uv = [ratio_u, ratio_v]
+                rot_keys = index_keys
+                for i in range(3):
+                    rot_keys = self._rotate_index(rot_keys)
+                    uv = self.rotate_90(*uv)
+                    self.add_vert(*rot_keys, uv, **{**kwargs, **extra_args})
 
             if self.u_symmetric:
                 # Add reflection about u

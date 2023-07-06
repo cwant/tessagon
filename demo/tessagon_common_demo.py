@@ -36,7 +36,8 @@ class TessagonCommonDemo:
             + find_all.with_classification('archimedean').to_list() \
             + find_all.with_classification('laves').to_list() \
             + find_all.with_classification('non_edge').to_list() \
-            + find_all.with_classification('non_convex').to_list()
+            + find_all.with_classification('non_convex').to_list() \
+            + find_all.with_classification('non_manifold').to_list()
         
         # A long row of each tiling pattern, with color patterns underneath
         offset = 15
@@ -490,4 +491,17 @@ class TessagonCommonDemo:
         }
         CloverdaleTessagon = self.method_to_class()
         return self.tessellate(sphere, CloverdaleTessagon,
+                               **{**kwargs, **options})
+
+    def hokusai_hashes_tessagon(self, position, **kwargs):
+        options = {
+            'u_range': [0.0, 1.0],
+            'v_range': [0.0, 1.0],
+            'u_num': 14,
+            'v_num': 14,
+            'v_cyclic': False,
+            'position': position
+        }
+        HokusaiHashesTessagon = self.method_to_class()
+        return self.tessellate(sphere, HokusaiHashesTessagon,
                                **{**kwargs, **options})

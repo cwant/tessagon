@@ -196,7 +196,7 @@ class AbstractTile(ValueBlend):
             return keys
         elif self.rot_symmetric == 90:
             return self._permute_value(index_keys,
-                                       ['rotate0', 'rotate90'
+                                       ['rotate0', 'rotate90',
                                         'rotate180', 'rotate270'])
 
     def _v_index(self, index_keys):

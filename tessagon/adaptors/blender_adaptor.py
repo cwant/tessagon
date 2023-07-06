@@ -4,6 +4,8 @@ import bmesh
 
 class BlenderAdaptor(BaseAdaptor):
     def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
         self.bm = None
 
     def create_empty_mesh(self):
@@ -15,7 +17,7 @@ class BlenderAdaptor(BaseAdaptor):
     def create_vert(self, coords):
         return self.bm.verts.new(coords)
 
-    def create_face(self, verts):
+    def create_face(self, verts, **kwargs):
         return self.bm.faces.new(verts)
 
     def color_face(self, face, color_index):

@@ -147,6 +147,11 @@ Additional tessagon classes can be added by deconstructing how a tessellation fi
 * [IslamicStarsCrossesTessagon](documentation/types/islamic_stars_crosses_tessagon.md) (1 color pattern)  
   [![IslamicStarsCrossesTessagon](documentation/images/types/islamic_stars_crosses_tessagon_thumb.png)](documentation/types/islamic_stars_crosses_tessagon.md)
 
+### Non-manifold tilings
+
+* [HokusaiHashesTessagon](documentation/types/hokusai_hashes_tessagon.md) (2 color patterns)  
+  [![HokusaiHashesTessagon](documentation/images/types/hokusai_hashes_tessagon_thumb.png)](documentation/types/hokusai_hashes_tessagon.md)
+
 ## Usage and Options
 
 Each tessagon class is initialized with number of keyword options, e.g.:

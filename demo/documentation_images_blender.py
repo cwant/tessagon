@@ -44,7 +44,9 @@ class DocumentationImages:
 
         'non_convex': ['StanleyParkTessagon',
                        'IslamicHexStarsTessagon',
-                       'IslamicStarsCrossesTessagon']
+                       'IslamicStarsCrossesTessagon'],
+
+        'non_manifold': ['HokusaiHashesTessagon']
     }
     CLASSES = { tiling_type: list(map(TessagonDiscovery.get_class, names)) \
                     for (tiling_type, names) in CLASS_NAMES.items() }
@@ -71,6 +73,9 @@ class DocumentationImages:
         scn.render.use_freestyle = True
         scn.render.line_thickness = 0.5
         scn.render.layers[0].freestyle_settings.linesets[0].select_edge_mark = True
+        scn.render.layers[0].freestyle_settings.linesets[0].select_material_boundary = True
+        scn.render.layers[0].freestyle_settings.linesets[0].select_silhouette = False
+        scn.render.layers[0].freestyle_settings.linesets[0].select_crease = False
 
         if 'Camera' not in bpy.data.objects:
             cam_data = bpy.data.cameras.new('Camera')
@@ -263,15 +268,18 @@ class DocumentationImages:
         # (unfortunately have to copy/paste this list by hand)
         list_fp = open(self.list_markdown_filename(), 'w')
 
+        # TODO: maybe move this mapping to TessagonDiscovery
         key_to_name = {
             'regular': 'Regular tilings',
             'archimedean': 'Archimedean tilings',
             'laves': 'Laves tilings',
             'non_edge': 'Non-edge-to-edge tilings',
-            'non_convex': 'Non-convex tilings'
+            'non_convex': 'Non-convex tilings',
+            'non_manifold': 'Non-manifold tilings'
         }
         # darn, keys aren't ordered by insertion
-        for key in ['regular', 'archimedean', 'laves', 'non_edge', 'non_convex']:
+        for key in ['regular', 'archimedean', 'laves',
+                    'non_edge', 'non_convex', 'non_manifold']:
             list_fp.write("### %s\n\n" % key_to_name[key])
 
             for cls in classes[key]:

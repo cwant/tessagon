@@ -31,6 +31,8 @@ from tessagon.types.cloverdale_tessagon import CloverdaleTessagon
 from tessagon.types.islamic_hex_stars_tessagon import IslamicHexStarsTessagon
 from tessagon.types.islamic_stars_crosses_tessagon \
     import IslamicStarsCrossesTessagon
+from tessagon.types.hokusai_hashes_tessagon \
+    import HokusaiHashesTessagon
 
 ALL = [SquareTessagon,
        HexTessagon,
@@ -64,7 +66,9 @@ ALL = [SquareTessagon,
 
        StanleyParkTessagon,
        IslamicHexStarsTessagon,
-       IslamicStarsCrossesTessagon]
+       IslamicStarsCrossesTessagon,
+
+       HokusaiHashesTessagon]
 
 
 class TessagonDiscovery:

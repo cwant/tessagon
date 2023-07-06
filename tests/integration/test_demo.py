@@ -46,7 +46,7 @@ class TestDemo:
         return len([c for c in colors if c == color])
 
     def test_demo_works(self):
-        assert len(self.meshes) == 29
+        assert len(self.meshes) == 30
 
     def test_big_hex_tri_tessagon(self):
         tessagon = 'BigHexTriTessagon'
@@ -412,3 +412,17 @@ class TestDemo:
 
         assert self.color_count(tessagon, 1, 0) == 1568
         assert self.color_count(tessagon, 1, 1) == 966
+
+    def test_hokusai_hashes_tessagon(self):
+        tessagon = 'HokusaiHashesTessagon'
+        assert self.vert_list_length(tessagon) == 3346
+        assert self.face_list_length(tessagon) == 364
+
+        assert self.color_pattern_count(tessagon) == 2
+
+        # There are 14x2 more squares due v_cyclic = False
+        assert self.color_count(tessagon, 1, 0) == 168
+        assert self.color_count(tessagon, 1, 1) == 196
+
+        assert self.color_count(tessagon, 2, 0) == 182
+        assert self.color_count(tessagon, 2, 1) == 182

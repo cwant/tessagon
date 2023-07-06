@@ -6,6 +6,8 @@ from tessagon.core.parallelogram_tile_generator \
 class Tessagon:
     tile_class = None
     metadata = None
+    # The adaptor decides if it wants to honor this
+    face_order = None
 
     def __init__(self, **kwargs):
         if 'tile_generator' in kwargs:
@@ -39,6 +41,11 @@ class Tessagon:
             for option in adaptor_class.ADAPTOR_OPTIONS:
                 if option in kwargs:
                     adaptor_options[option] = kwargs[option]
+
+            # The order the faces are created can be important
+            # E.g., when drawing an SVG file
+            if self.__class__.face_order:
+                adaptor_options['face_order'] = self.__class__.face_order
 
             self.mesh_adaptor = adaptor_class(**adaptor_options)
         else:
