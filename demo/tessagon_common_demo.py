@@ -505,3 +505,15 @@ class TessagonCommonDemo:
         HokusaiHashesTessagon = self.method_to_class()
         return self.tessellate(sphere, HokusaiHashesTessagon,
                                **{**kwargs, **options})
+
+    def hokusai_parallelograms_tessagon(self, position, **kwargs):
+        options = {
+            'u_range': [0.0, 1.0],
+            'v_range': [0.0, 1.0],
+            'u_num': 54,
+            'v_num': 8,
+            'position': position
+        }
+        HokusaiParallelogramsTessagon = self.method_to_class()
+        return self.tessellate(torus, HokusaiParallelogramsTessagon,
+                               **{**kwargs, **options})

@@ -33,6 +33,8 @@ from tessagon.types.islamic_stars_crosses_tessagon \
     import IslamicStarsCrossesTessagon
 from tessagon.types.hokusai_hashes_tessagon \
     import HokusaiHashesTessagon
+from tessagon.types.hokusai_parallelograms_tessagon \
+    import HokusaiParallelogramsTessagon
 
 ALL = [SquareTessagon,
        HexTessagon,
@@ -63,6 +65,7 @@ ALL = [SquareTessagon,
        ZigZagTessagon,
        ValemountTessagon,
        CloverdaleTessagon,
+       HokusaiParallelogramsTessagon,
 
        StanleyParkTessagon,
        IslamicHexStarsTessagon,

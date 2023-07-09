@@ -40,7 +40,8 @@ class DocumentationImages:
                      'HexBigTriTessagon',
                      'ZigZagTessagon',
                      'ValemountTessagon',
-                     'CloverdaleTessagon'],
+                     'CloverdaleTessagon',
+                     'HokusaiParallelogramsTessagon'],
 
         'non_convex': ['StanleyParkTessagon',
                        'IslamicHexStarsTessagon',

@@ -137,6 +137,8 @@ Additional tessagon classes can be added by deconstructing how a tessellation fi
   [![ValemountTessagon](documentation/images/types/valemount_tessagon_thumb.png)](documentation/types/valemount_tessagon.md)
 * [CloverdaleTessagon](documentation/types/cloverdale_tessagon.md) (1 color pattern)  
   [![CloverdaleTessagon](documentation/images/types/cloverdale_tessagon_thumb.png)](documentation/types/cloverdale_tessagon.md)
+* [HokusaiParallelogramsTessagon](documentation/types/hokusai_parallelograms_tessagon.md) (3 color patterns, 1 extra parameter)  
+  [![HokusaiParallelogramsTessagon](documentation/images/types/hokusai_parallelograms_tessagon_thumb.png)](documentation/types/hokusai_parallelograms_tessagon.md)
 
 ### Non-convex tilings
 
