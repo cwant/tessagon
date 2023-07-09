@@ -15,7 +15,7 @@ minify = False
 try:
     import python_minifier
     minify = True
-except:
+except ModuleNotFoundError:
     pass
 
 THIS_DIR = os.path.dirname(os.path.realpath(__file__))
@@ -85,9 +85,10 @@ class PackageExtension:
         directory = pathlib.Path(OUTPUT_DIR)
         with zipfile.ZipFile(OUTPUT_FILE, mode="w") as archive:
             for file_path in directory.rglob("*"):
-                archive.write(file_path,
-                              arcname=os.path.join('inkscape-tiling-extension',
-                                                   file_path.relative_to(directory)))
+                arcname = os.path.join('inkscape-tiling-extension',
+                                       file_path.relative_to(directory))
+                archive.write(file_path, arcname=arcname)
+
 
 if __name__ == "__main__":
     PackageExtension().run()

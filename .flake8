@@ -1,2 +1,11 @@
 [flake8]
-exclude = wire_skin.py
+exclude =
+    .git,
+    __pycache__,
+    wire_skin.py,
+    demo,
+    build,
+    dist,
+    venv,
+    tessagon.egg-info,
+    .pytest_cache

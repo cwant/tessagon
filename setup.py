@@ -25,7 +25,7 @@ or::
 exec(open('tessagon/version.py').read())
 setup(
     name='tessagon',
-    version=__version__,
+    version=__version__,  # noqa: F821
     description='Tessellate your favorite 2D manifolds with triangles, ' +
     'hexagons, and other interesting patterns.',
     long_description=long_description,
