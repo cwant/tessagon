@@ -6,10 +6,17 @@ import os
 import sys
 import shutil
 import glob
-import python_minifier
 import zipfile
 import pathlib
 from generate_tiling_inx import InxGenerate
+
+# Only minify if the python_minifier package is installed
+minify = False
+try:
+    import python_minifier
+    minify = True
+except:
+    pass
 
 THIS_DIR = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(THIS_DIR + '/../..')
@@ -61,7 +68,10 @@ class PackageExtension:
             print("Copying files to {}".format(dest_dir))
             for filename in glob.glob(TESSAGON_DIR + '/' + pattern):
                 output = dest_dir + '/' + os.path.basename(filename)
-                self.minify_file(filename, output)
+                if minify is True:
+                    self.minify_file(filename, output)
+                else:
+                    shutil.copy(filename, output)
 
     def minify_file(self, source, destination):
         buffer = ""
