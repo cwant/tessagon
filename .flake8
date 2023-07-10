@@ -8,4 +8,5 @@ exclude =
     dist,
     venv,
     tessagon.egg-info,
-    .pytest_cache
+    .pytest_cache,
+    integrations/inkscape/output
