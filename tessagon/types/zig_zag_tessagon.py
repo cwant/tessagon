@@ -99,21 +99,21 @@ class ZigZagTile(Tile):
                           [4, 4],
                           [4, 5]])
 
-        face = self.add_face(3, [[4, 5],
-                                 [4, 4],
-                                 [5, 4],
-                                 [5, 5],
-                                 top_tile([5, 2]),
-                                 top_tile([4, 2])])
-        self.set_equivalent_face(*top_tile(10), face)
+        self.add_face(3, [[4, 5],
+                          [4, 4],
+                          [5, 4],
+                          [5, 5],
+                          top_tile([5, 2]),
+                          top_tile([4, 2])],
+                      equivalent=[top_tile(10)])
 
         face = self.add_face(4, [[1, 3],
                                  [2, 3],
                                  [2, 4],
                                  [1, 4],
                                  left_tile([4, 4]),
-                                 left_tile([4, 3])])
-        self.set_equivalent_face(*left_tile(6), face)
+                                 left_tile([4, 3])],
+                             equivalent=[left_tile(6)])
 
         self.add_face(5, [[3, 2],
                           [3, 3],
@@ -156,8 +156,8 @@ class ZigZagTile(Tile):
                                   [4, 2],
                                   [4, 1],
                                   bottom_tile([4, 4]),
-                                  bottom_tile([5, 4])])
-        self.set_equivalent_face(*bottom_tile(3), face)
+                                  bottom_tile([5, 4])],
+                             equivalent=[bottom_tile(3)])
 
     def color_pattern1(self):
         self.color_face(1, 1)

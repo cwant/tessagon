@@ -57,58 +57,58 @@ class ValemountTile(Tile):
 
     def calculate_verts(self):
         # Top row
-        vert = self.add_vert([1], 0, 1)
-        self.set_equivalent_vert(*left_tile(4), vert)
-        self.set_equivalent_vert(*top_tile(13), vert)
-        self.set_equivalent_vert(*top_left_tile(16), vert)
+        self.add_vert([1], 0, 1,
+                      equivalent=[left_tile(4),
+                                  top_tile(13),
+                                  top_left_tile(16)])
 
-        vert = self.add_vert([2], 1/3.0, 1)
-        self.set_equivalent_vert(*top_tile(14), vert)
+        self.add_vert([2], 1/3.0, 1,
+                      equivalent=[top_tile(14)])
 
-        vert = self.add_vert([3], 2/3.0, 1)
-        self.set_equivalent_vert(*top_tile(15), vert)
+        self.add_vert([3], 2/3.0, 1,
+                      equivalent=[top_tile(15)])
 
-        vert = self.add_vert([4], 1, 1)
-        self.set_equivalent_vert(*right_tile(1), vert)
-        self.set_equivalent_vert(*top_tile(16), vert)
-        self.set_equivalent_vert(*top_right_tile(13), vert)
+        self.add_vert([4], 1, 1,
+                      equivalent=[right_tile(1),
+                                  top_tile(16),
+                                  top_right_tile(13)])
 
         # Next row
-        vert = self.add_vert([5], 0, 2/3.0)
-        self.set_equivalent_vert(*left_tile(8), vert)
+        self.add_vert([5], 0, 2/3.0,
+                      equivalent=[left_tile(8)])
 
         self.add_vert([6], 1/3.0, 2/3.0)
         self.add_vert([7], 2/3.0, 2/3.0)
 
-        vert = self.add_vert([8], 1, 2/3.0)
-        self.set_equivalent_vert(*right_tile(5), vert)
+        self.add_vert([8], 1, 2/3.0,
+                      equivalent=[right_tile(5)])
 
         # Next row
-        vert = self.add_vert([9], 0, 1/3.0)
-        self.set_equivalent_vert(*left_tile(12), vert)
+        self.add_vert([9], 0, 1/3.0,
+                      equivalent=[left_tile(12)])
 
         self.add_vert([10], 1/3.0, 1/3.0)
         self.add_vert([11], 2/3.0, 1/3.0)
 
-        vert = self.add_vert([12], 1, 1/3.0)
-        self.set_equivalent_vert(*right_tile(9), vert)
+        self.add_vert([12], 1, 1/3.0,
+                      equivalent=[right_tile(9)])
 
         # Bottom row
-        vert = self.add_vert([13], 0, 0)
-        self.set_equivalent_vert(*left_tile(16), vert)
-        self.set_equivalent_vert(*bottom_tile(1), vert)
-        self.set_equivalent_vert(*bottom_left_tile(4), vert)
+        self.add_vert([13], 0, 0,
+                      equivalent=[left_tile(16),
+                                  bottom_tile(1),
+                                  bottom_left_tile(4)])
 
-        vert = self.add_vert([14], 1/3.0, 0)
-        self.set_equivalent_vert(*bottom_tile(2), vert)
+        self.add_vert([14], 1/3.0, 0,
+                      equivalent=[bottom_tile(2)])
 
-        vert = self.add_vert([15], 2/3.0, 0)
-        self.set_equivalent_vert(*bottom_tile(3), vert)
+        self.add_vert([15], 2/3.0, 0,
+                      equivalent=[bottom_tile(3)])
 
-        vert = self.add_vert([16], 1, 0)
-        self.set_equivalent_vert(*right_tile(13), vert)
-        self.set_equivalent_vert(*bottom_tile(4), vert)
-        self.set_equivalent_vert(*bottom_right_tile(1), vert)
+        self.add_vert([16], 1, 0,
+                      equivalent=[right_tile(13),
+                                  bottom_tile(4),
+                                  bottom_right_tile(1)])
 
     def calculate_faces(self):
         self.add_face('top_left',

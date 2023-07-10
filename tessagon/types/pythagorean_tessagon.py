@@ -86,15 +86,15 @@ class PythagoreanTile(Tile):
                 7: None, 8: None, 9: None, 10: None, 11: None, 12: None}
 
     def calculate_faces(self):
-        face = self.add_face(1, [[1, 6],
-                                 [1, 5],
-                                 [2, 5],
-                                 [3, 5],
-                                 [3, 6],
-                                 top_tile([3, 2]),
-                                 top_tile([2, 2]),
-                                 top_tile([1, 2])])
-        self.set_equivalent_face(*top_tile(11), face)
+        self.add_face(1, [[1, 6],
+                          [1, 5],
+                          [2, 5],
+                          [3, 5],
+                          [3, 6],
+                          top_tile([3, 2]),
+                          top_tile([2, 2]),
+                          top_tile([1, 2])],
+                      equivalent=[top_tile(11)])
 
         self.add_face(2, [[3, 6],
                           [4, 6],
@@ -124,30 +124,30 @@ class PythagoreanTile(Tile):
                           [2, 3],
                           [2, 4]])
 
-        face = self.add_face(6, [[1, 4],
-                                 [2, 4],
-                                 [2, 3],
-                                 [2, 2],
-                                 [1, 2],
-                                 left_tile([5, 2]),
-                                 left_tile([5, 3]),
-                                 left_tile([5, 4])])
-        self.set_equivalent_face(*left_tile(8), face)
+        self.add_face(6, [[1, 4],
+                          [2, 4],
+                          [2, 3],
+                          [2, 2],
+                          [1, 2],
+                          left_tile([5, 2]),
+                          left_tile([5, 3]),
+                          left_tile([5, 4])],
+                      equivalent=[left_tile(8)])
 
         self.add_face(7, [[4, 4],
                           [5, 4],
                           [5, 3],
                           [4, 3]])
 
-        face = self.add_face(8, [[6, 4],
-                                 [5, 4],
-                                 [5, 3],
-                                 [5, 2],
-                                 [6, 2],
-                                 right_tile([2, 2]),
-                                 right_tile([2, 3]),
-                                 right_tile([2, 4])])
-        self.set_equivalent_face(*right_tile(6), face)
+        self.add_face(8, [[6, 4],
+                          [5, 4],
+                          [5, 3],
+                          [5, 2],
+                          [6, 2],
+                          right_tile([2, 2]),
+                          right_tile([2, 3]),
+                          right_tile([2, 4])],
+                      equivalent=[right_tile(6)])
 
         self.add_face(9, [[2, 3],
                           [3, 3],
@@ -163,15 +163,15 @@ class PythagoreanTile(Tile):
                            [3, 1],
                            [3, 2]])
 
-        face = self.add_face(11, [[1, 1],
-                                  [1, 2],
-                                  [2, 2],
-                                  [3, 2],
-                                  [3, 1],
-                                  bottom_tile([3, 5]),
-                                  bottom_tile([2, 5]),
-                                  bottom_tile([1, 5])])
-        self.set_equivalent_face(*bottom_tile(1), face)
+        self.add_face(11, [[1, 1],
+                           [1, 2],
+                           [2, 2],
+                           [3, 2],
+                           [3, 1],
+                           bottom_tile([3, 5]),
+                           bottom_tile([2, 5]),
+                           bottom_tile([1, 5])],
+                      equivalent=[bottom_tile(1)])
 
         self.add_face(12, [[5, 2],
                            [6, 2],

@@ -74,11 +74,11 @@ class StanleyParkTile(Tile):
                            'right': None}}
 
     def calculate_verts(self):
-        vert = self.add_vert(['top', 'left'], 2.0/6.0, 1.0)
-        self.set_equivalent_vert(*top_tile(['bottom', 'left']), vert)
-        # Reflection doesn't handle 'set_equivalent_vert' so ...
-        vert = self.add_vert(['top', 'right'], 4.0/6.0, 1.0)
-        self.set_equivalent_vert(*top_tile(['bottom', 'right']), vert)
+        self.add_vert(['top', 'left'], 2.0/6.0, 1.0,
+                      equivalent=[top_tile(['bottom', 'left'])])
+        # Reflection doesn't handle 'equivalent' so we do ...
+        self.add_vert(['top', 'right'], 4.0/6.0, 1.0,
+                      equivalent=[top_tile(['bottom', 'right'])])
 
         self.add_vert(['mid1', 'left'], 1.0/6.0, 5.0/6.0)
         self.add_vert(['mid2', 'left'], 1.0/6.0, 3.0/6.0)
@@ -87,44 +87,44 @@ class StanleyParkTile(Tile):
                       u_boundary=True)
         self.add_vert(['mid3', 'left', 'inner'], 2.0/6.0, 2.0/6.0)
 
-        vert = self.add_vert(['bottom', 'left'], 2.0/6.0, 0.0)
-        self.set_equivalent_vert(*bottom_tile(['top', 'left']), vert)
-        vert = self.add_vert(['bottom', 'right'], 4.0/6.0, 0.0)
-        self.set_equivalent_vert(*bottom_tile(['top', 'right']), vert)
+        self.add_vert(['bottom', 'left'], 2.0/6.0, 0.0,
+                      equivalent=[bottom_tile(['top', 'left'])])
+        self.add_vert(['bottom', 'right'], 4.0/6.0, 0.0,
+                      equivalent=[bottom_tile(['top', 'right'])])
 
     def calculate_faces(self):
-        face = self.add_face(['top', 'left'],
-                             [['mid3', 'left', 'outer'],
-                              ['mid2', 'left'],
-                              ['mid1', 'left'],
-                              ['top', 'left'],
-                              top_tile(['mid3', 'left', 'inner']),
-                              top_tile(['mid2', 'left']),
-                              top_tile(['mid3', 'left', 'outer']),
-                              top_left_tile(['mid2', 'right']),
-                              top_left_tile(['mid3', 'right', 'inner']),
-                              left_tile(['top', 'right']),
-                              left_tile(['mid1', 'right']),
-                              left_tile(['mid2', 'right'])],
-                             u_boundary=True)
-        self.set_equivalent_face(*top_tile(['bottom', 'left']), face)
-        self.set_equivalent_face(*top_left_tile(['bottom', 'right']), face)
-        self.set_equivalent_face(*left_tile(['top', 'right']), face)
+        self.add_face(['top', 'left'],
+                      [['mid3', 'left', 'outer'],
+                       ['mid2', 'left'],
+                       ['mid1', 'left'],
+                       ['top', 'left'],
+                       top_tile(['mid3', 'left', 'inner']),
+                       top_tile(['mid2', 'left']),
+                       top_tile(['mid3', 'left', 'outer']),
+                       top_left_tile(['mid2', 'right']),
+                       top_left_tile(['mid3', 'right', 'inner']),
+                       left_tile(['top', 'right']),
+                       left_tile(['mid1', 'right']),
+                       left_tile(['mid2', 'right'])],
+                      u_boundary=True,
+                      equivalent=[top_tile(['bottom', 'left']),
+                                  top_left_tile(['bottom', 'right']),
+                                  left_tile(['top', 'right'])])
 
-        face = self.add_face(['top', 'center'],
-                             [['top', 'left'],
-                              ['mid1', 'left'],
-                              ['mid2', 'left'],
-                              ['mid3', 'left', 'inner'],
-                              ['mid2', 'center'],
-                              ['mid3', 'right', 'inner'],
-                              ['mid2', 'right'],
-                              ['mid1', 'right'],
-                              ['top', 'right'],
-                              top_tile(['mid3', 'right', 'inner']),
-                              top_tile(['mid2', 'center']),
-                              top_tile(['mid3', 'left', 'inner'])])
-        self.set_equivalent_face(*top_tile(['bottom', 'center']), face)
+        self.add_face(['top', 'center'],
+                      [['top', 'left'],
+                       ['mid1', 'left'],
+                       ['mid2', 'left'],
+                       ['mid3', 'left', 'inner'],
+                       ['mid2', 'center'],
+                       ['mid3', 'right', 'inner'],
+                       ['mid2', 'right'],
+                       ['mid1', 'right'],
+                       ['top', 'right'],
+                       top_tile(['mid3', 'right', 'inner']),
+                       top_tile(['mid2', 'center']),
+                       top_tile(['mid3', 'left', 'inner'])],
+                      equivalent=[top_tile(['bottom', 'center'])])
 
     def color_pattern1(self):
         self.color_face(['top', 'center'], 1)
