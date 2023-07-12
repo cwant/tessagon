@@ -36,6 +36,7 @@ from tessagon.types.hokusai_hashes_tessagon \
 from tessagon.types.hokusai_parallelograms_tessagon \
     import HokusaiParallelogramsTessagon
 
+# Note that ALL is ordered in an ideal way (regular, archimedean, ...)
 ALL = [SquareTessagon,
        HexTessagon,
        TriTessagon,

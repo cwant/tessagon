@@ -22,12 +22,7 @@ class InxGenerate:
 
     def dump_tilings(self):
         # Create tiling menu with items in nice order
-        find_tilings = TessagonDiscovery()
-        tilings = find_tilings.with_classification('regular').to_list() + \
-            find_tilings.with_classification('archimedean').to_list() + \
-            find_tilings.with_classification('laves').to_list() + \
-            find_tilings.with_classification('non_edge').to_list() + \
-            find_tilings.with_classification('non_convex').to_list()
+        tilings = TessagonDiscovery().to_list()
 
         template = '        <option value="{}">{}</option>\n'
         for tiling_class in tilings:
