@@ -71,17 +71,18 @@ class Penta2Tile(Tile):
 
     def calculate_faces(self):
         self.add_face(['center', 'bottom'],
-                      [['left', 'bottom', 'corner'],
-                       ['left', 'bottom', 'u_boundary'],
-                       ['center', 'bottom'],
+                      [['right', 'bottom', 'corner'],
                        ['right', 'bottom', 'u_boundary'],
-                       ['right', 'bottom', 'corner']])
-        self.add_face(['left', 'bottom'],
-                      [['center', 'middle'],
                        ['center', 'bottom'],
                        ['left', 'bottom', 'u_boundary'],
-                       left_tile(['center', 'bottom']),
-                       left_tile(['center', 'middle'])],
+                       ['left', 'bottom', 'corner']])
+
+        self.add_face(['left', 'bottom'],
+                      [['left', 'bottom', 'u_boundary'],
+                       ['center', 'bottom'],
+                       ['center', 'middle'],
+                       left_tile(['center', 'middle']),
+                       left_tile(['center', 'bottom'])],
                       u_boundary=True)
 
     def color_pattern1(self):

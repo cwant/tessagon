@@ -296,7 +296,8 @@ class Tile(AbstractTile):
                 u_flip_keys = self._u_flip(index_keys)
                 u_flip_vert_index_keys_list \
                     = self._u_flip(vert_index_keys_list)
-                self.add_face(u_flip_keys, u_flip_vert_index_keys_list,
+                self.add_face(u_flip_keys,
+                              list(reversed(u_flip_vert_index_keys_list)),
                               **{**kwargs, **extra_args})
                 if self.v_symmetric:
                     # Add diagonally across
@@ -310,7 +311,8 @@ class Tile(AbstractTile):
                 v_flip_keys = self._v_flip(index_keys)
                 v_flip_vert_index_keys_list \
                     = self._v_flip(vert_index_keys_list)
-                self.add_face(v_flip_keys, v_flip_vert_index_keys_list,
+                self.add_face(v_flip_keys,
+                              list(reversed(v_flip_vert_index_keys_list)),
                               **{**kwargs, **extra_args})
 
     def _set_equivalent_neighbor_faces(self, index_keys, face, **kwargs):

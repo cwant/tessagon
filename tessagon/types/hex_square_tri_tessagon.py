@@ -116,22 +116,22 @@ class HexSquareTriTile(Tile):
                       face_type='square', v_boundary=True)
         # Left square
         self.add_face(['square', 'middle', 'left'],
-                      [['top', 'left', 'u_square'],
-                       ['bottom', 'left', 'u_square'],
-                       left_tile(['bottom', 'right', 'u_square']),
-                       left_tile(['top', 'right', 'u_square'])],
+                      [['bottom', 'left', 'u_square'],
+                       ['top', 'left', 'u_square'],
+                       left_tile(['top', 'right', 'u_square']),
+                       left_tile(['bottom', 'right', 'u_square'])],
                       face_type='square', u_boundary=True)
         # Interior square
         self.add_face(['square', 'top', 'left'],
-                      [['top', 'left', 'v_square'],
-                       ['top', 'center'],
+                      [['top', 'left', 'u_boundary'],
                        ['top', 'left', 'u_square'],
-                       ['top', 'left', 'u_boundary']],
+                       ['top', 'center'],
+                       ['top', 'left', 'v_square']],
                       face_type='square')
         # Upper triangle
         self.add_face(['tri', 'top', 'center'],
-                      [['top', 'center'],
-                       ['top', 'left', 'v_square'],
+                      [['top', 'left', 'v_square'],
+                       ['top', 'center'],
                        ['top', 'right', 'v_square']],
                       face_type='triangle')
         # Left triangle
@@ -142,12 +142,12 @@ class HexSquareTriTile(Tile):
                       face_type='triangle', u_boundary=True)
         # Corner hexagon
         self.add_face(['hex', 'top', 'left'],
-                      [['top', 'left', 'v_square'],
-                       ['top', 'left', 'u_boundary'],
-                       left_tile(['top', 'right', 'v_square']),
-                       left_top_tile(['bottom', 'right', 'v_square']),
+                      [['top', 'left', 'u_boundary'],
+                       ['top', 'left', 'v_square'],
+                       top_tile(['bottom', 'left', 'v_square']),
                        top_tile(['bottom', 'left', 'u_boundary']),
-                       top_tile(['bottom', 'left', 'v_square'])],
+                       left_top_tile(['bottom', 'right', 'v_square']),
+                       left_tile(['top', 'right', 'v_square'])],
                       face_type='hexagon', corner=True)
 
     def color_pattern1(self):

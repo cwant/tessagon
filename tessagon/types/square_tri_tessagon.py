@@ -2,6 +2,7 @@ from math import sqrt
 from tessagon.core.tile import Tile
 from tessagon.core.tessagon import Tessagon
 from tessagon.core.tessagon_metadata import TessagonMetadata
+from tessagon.core.tile_utils import left_tile, top_tile
 
 metadata = TessagonMetadata(name='Squares and Triangles',
                             num_color_patterns=2,
@@ -88,38 +89,38 @@ class SquareTriTile(Tile):
     def calculate_faces(self):
         # 4 internal squares (others via symmetry)
         self.add_face(['square', 'top', 'left'],
-                      [['top', 'left', 'u_boundary'],
-                       ['top', 'left', 'v_boundary'],
+                      [['middle', 'left'],
                        ['top', 'center'],
-                       ['middle', 'left']],
+                       ['top', 'left', 'v_boundary'],
+                       ['top', 'left', 'u_boundary']],
                       face_type='square')
 
         # 4 u-boundary triangles
         self.add_face(['tri', 'top', 'left', 'u_boundary'],
-                      [['top', 'left', 'v_boundary'],
-                       ['top', 'left', 'u_boundary'],
-                       [['left'], ['top', 'right', 'v_boundary']]],
+                      [['top', 'left', 'u_boundary'],
+                       ['top', 'left', 'v_boundary'],
+                       left_tile(['top', 'right', 'v_boundary'])],
                       face_type='triangle', u_boundary=True)
 
         # 4 v-boundary triangles
         self.add_face(['tri', 'top', 'left', 'v_boundary'],
                       [['top', 'left', 'v_boundary'],
                        ['top', 'center'],
-                       [['top'], ['bottom', 'center']]],
+                       top_tile(['bottom', 'center'])],
                       face_type='triangle', v_boundary=True)
 
         # 2 internal center triangles
         self.add_face(['tri', 'top', 'center'],
-                      [['top', 'center'],
-                       ['middle', 'right'],
+                      [['middle', 'right'],
+                       ['top', 'center'],
                        ['middle', 'left']],
                       face_type='triangle')
 
         # 2 internal middle triangles
         self.add_face(['tri', 'middle', 'left'],
-                      [['middle', 'left'],
+                      [['top', 'left', 'u_boundary'],
                        ['bottom', 'left', 'u_boundary'],
-                       ['top', 'left', 'u_boundary']],
+                       ['middle', 'left']],
                       face_type='triangle')
 
     def color_pattern1(self):

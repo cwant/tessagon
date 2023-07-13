@@ -125,33 +125,33 @@ class DodecaTile(Tile):
     def calculate_faces(self):
         # Top left Dodecagon
         self.add_face(['dodec', 'top', 'left'],
-                      [['top', 'left', 'v_square'],
+                      [['top', 'left', 'sq3'],
                        ['top', 'left', 'sq4'],
-                       ['top', 'left', 'sq3'],
-                       left_tile(['top', 'right', 'sq3']),
-                       left_tile(['top', 'right', 'sq4']),
-                       left_tile(['top', 'right', 'v_square']),
-                       left_top_tile(['bottom', 'right', 'v_square']),
-                       left_top_tile(['bottom', 'right', 'sq4']),
-                       left_top_tile(['bottom', 'right', 'sq3']),
-                       top_tile(['bottom', 'left', 'sq3']),
+                       ['top', 'left', 'v_square'],
+                       top_tile(['bottom', 'left', 'v_square']),
                        top_tile(['bottom', 'left', 'sq4']),
-                       top_tile(['bottom', 'left', 'v_square'])],
+                       top_tile(['bottom', 'left', 'sq3']),
+                       left_top_tile(['bottom', 'right', 'sq3']),
+                       left_top_tile(['bottom', 'right', 'sq4']),
+                       left_top_tile(['bottom', 'right', 'v_square']),
+                       left_tile(['top', 'right', 'v_square']),
+                       left_tile(['top', 'right', 'sq4']),
+                       left_tile(['top', 'right', 'sq3'])],
                       face_type='dodecagon', corner=True)
         # Middle Dodecagon
         self.add_face(['dodec', 'middle'],
-                      [['top', 'left', 'u_square'],
-                       ['top', 'left', 'sq1'],
-                       ['top', 'left', 'sq2'],
-                       ['top', 'right', 'sq2'],
-                       ['top', 'right', 'sq1'],
-                       ['top', 'right', 'u_square'],
-                       ['bottom', 'right', 'u_square'],
-                       ['bottom', 'right', 'sq1'],
-                       ['bottom', 'right', 'sq2'],
-                       ['bottom', 'left', 'sq2'],
+                      [['bottom', 'left', 'u_square'],
                        ['bottom', 'left', 'sq1'],
-                       ['bottom', 'left', 'u_square']],
+                       ['bottom', 'left', 'sq2'],
+                       ['bottom', 'right', 'sq2'],
+                       ['bottom', 'right', 'sq1'],
+                       ['bottom', 'right', 'u_square'],
+                       ['top', 'right', 'u_square'],
+                       ['top', 'right', 'sq1'],
+                       ['top', 'right', 'sq2'],
+                       ['top', 'left', 'sq2'],
+                       ['top', 'left', 'sq1'],
+                       ['top', 'left', 'u_square']],
                       face_type='dodecagon')
         # Upper square
         self.add_face(['square', 'top', 'center'],
@@ -162,10 +162,10 @@ class DodecaTile(Tile):
                       face_type='square', v_boundary=True)
         # Left square
         self.add_face(['square', 'middle', 'left'],
-                      [['top', 'left', 'u_square'],
-                       ['bottom', 'left', 'u_square'],
-                       left_tile(['bottom', 'right', 'u_square']),
-                       left_tile(['top', 'right', 'u_square'])],
+                      [['bottom', 'left', 'u_square'],
+                       ['top', 'left', 'u_square'],
+                       left_tile(['top', 'right', 'u_square']),
+                       left_tile(['bottom', 'right', 'u_square'])],
                       face_type='square', u_boundary=True)
         # Interior square
         self.add_face(['square', 'top', 'left'],
@@ -176,21 +176,21 @@ class DodecaTile(Tile):
                       face_type='square')
         # Top Hex
         self.add_face(['hex', 'top', 'center'],
-                      [['top', 'left', 'sq2'],
-                       ['top', 'left', 'sq4'],
-                       ['top', 'left', 'v_square'],
-                       ['top', 'right', 'v_square'],
+                      [['top', 'right', 'sq2'],
                        ['top', 'right', 'sq4'],
-                       ['top', 'right', 'sq2']],
+                       ['top', 'right', 'v_square'],
+                       ['top', 'left', 'v_square'],
+                       ['top', 'left', 'sq4'],
+                       ['top', 'left', 'sq2']],
                       face_type='hexagon')
         # Left Hex
         self.add_face(['hex', 'top', 'left'],
-                      [['top', 'left', 'sq3'],
+                      [['top', 'left', 'u_square'],
                        ['top', 'left', 'sq1'],
-                       ['top', 'left', 'u_square'],
-                       left_tile(['top', 'right', 'u_square']),
+                       ['top', 'left', 'sq3'],
+                       left_tile(['top', 'right', 'sq3']),
                        left_tile(['top', 'right', 'sq1']),
-                       left_tile(['top', 'right', 'sq3'])],
+                       left_tile(['top', 'right', 'u_square'])],
                       face_type='hexagon', u_boundary=True)
 
     def color_pattern1(self):

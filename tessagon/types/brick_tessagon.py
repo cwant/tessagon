@@ -44,13 +44,13 @@ class BrickTile(Tile):
     def calculate_faces(self):
         # Add left, symmetry gives the right side face
         self.add_face('left',
-                      [['left', 'top'],
+                      [['left', 'bottom'],
                        ['left', 'middle'],
-                       ['left', 'bottom'],
+                       ['left', 'top'],
                        # Verts on neighbor tiles:
-                       left_tile(['right', 'bottom']),
+                       left_tile(['right', 'top']),
                        left_tile(['right', 'middle']),
-                       left_tile(['right', 'top'])],
+                       left_tile(['right', 'bottom'])],
                       u_boundary=True)
 
         # Add bottom, symmetry gives the top face

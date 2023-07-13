@@ -110,29 +110,29 @@ class DissectedHexQuadTile(Tile):
 
     def calculate_faces(self):
         self.add_face(['left', 'top', 'v_boundary'],
-                      [['left', 'top', 'corner'],
-                       ['center', 'top', 'v_boundary'],
+                      [['left', 'top', 'interior'],
                        ['center', 'top', 'interior'],
-                       ['left', 'top', 'interior']])
+                       ['center', 'top', 'v_boundary'],
+                       ['left', 'top', 'corner']])
 
         self.add_face(['left', 'top', 'u_boundary'],
-                      [['left', 'top', 'corner'],
+                      [['left', 'top', 'u_boundary'],
                        ['left', 'top', 'interior'],
-                       ['left', 'top', 'u_boundary'],
+                       ['left', 'top', 'corner'],
                        left_tile(['right', 'top', 'interior'])],
                       u_boundary=True)
 
         self.add_face(['left', 'top', 'middle'],
-                      [['left', 'top', 'interior'],
-                       ['center', 'middle'],
+                      [['left', 'top', 'u_boundary'],
                        ['left', 'middle'],
-                       ['left', 'top', 'u_boundary']])
+                       ['center', 'middle'],
+                       ['left', 'top', 'interior']])
 
         self.add_face(['center', 'top'],
-                      [['center', 'middle'],
-                       ['left', 'top', 'interior'],
+                      [['right', 'top', 'interior'],
                        ['center', 'top', 'interior'],
-                       ['right', 'top', 'interior']])
+                       ['left', 'top', 'interior'],
+                       ['center', 'middle']])
 
     def color_pattern1(self):
         self.color_paths([['left', 'top', 'middle'],

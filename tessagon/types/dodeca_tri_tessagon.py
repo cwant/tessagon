@@ -91,18 +91,18 @@ class DodecaTriTile(Tile):
     def calculate_faces(self):
         # Top left Dodecagon
         self.add_face(['dodec', 'left', 'bottom'],
-                      [['left', 'middle'],
+                      [['left', 'bottom', 'diag'],
                        ['left', 'bottom', 'tri'],
-                       ['left', 'bottom', 'diag'],
-                       bottom_tile(['left', 'top', 'diag']),
-                       bottom_tile(['left', 'top', 'tri']),
-                       bottom_tile(['left', 'middle']),
-                       bottom_left_tile(['right', 'middle']),
-                       bottom_left_tile(['right', 'top', 'tri']),
-                       bottom_left_tile(['right', 'top', 'diag']),
-                       left_tile(['right', 'bottom', 'diag']),
+                       ['left', 'middle'],
+                       left_tile(['right', 'middle']),
                        left_tile(['right', 'bottom', 'tri']),
-                       left_tile(['right', 'middle'])],
+                       left_tile(['right', 'bottom', 'diag']),
+                       bottom_left_tile(['right', 'top', 'diag']),
+                       bottom_left_tile(['right', 'top', 'tri']),
+                       bottom_left_tile(['right', 'middle']),
+                       bottom_tile(['left', 'middle']),
+                       bottom_tile(['left', 'top', 'tri']),
+                       bottom_tile(['left', 'top', 'diag'])],
                       face_type='dodecagon', corner=True)
 
         # Middle Dodecagon
@@ -123,15 +123,15 @@ class DodecaTriTile(Tile):
 
         # Left triangle
         self.add_face(['tri', 'left', 'middle'],
-                      [['left', 'top', 'tri'],
-                       ['left', 'bottom', 'tri'],
+                      [['left', 'bottom', 'tri'],
+                       ['left', 'top', 'tri'],
                        ['left', 'middle']],
                       face_type='triangle')
 
         # bottom-left triangle
         self.add_face(['tri', 'left', 'bottom'],
-                      [['left', 'bottom', 'diag'],
-                       ['left', 'bottom', 'v_boundary'],
+                      [['left', 'bottom', 'v_boundary'],
+                       ['left', 'bottom', 'diag'],
                        bottom_tile(['left', 'top', 'diag'])],
                       face_type='triangle', v_boundary=True)
 

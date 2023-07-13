@@ -93,8 +93,8 @@ class DissectedTriangleTile(Tile):
                        ['left', 'bottom', 'corner']])
 
         self.add_face(['left', 'top', 'center'],
-                      [['center'],
-                       ['left', 'top', 'v_boundary'],
+                      [['left', 'top', 'v_boundary'],
+                       ['center'],
                        top_tile(['center'])], v_boundary=True)
 
         self.add_face(['left', 'top', 'interior1'],
@@ -103,8 +103,8 @@ class DissectedTriangleTile(Tile):
                        ['left', 'top', 'corner']])
 
         self.add_face(['left', 'top', 'interior2'],
-                      [['center'],
-                       ['left', 'middle'],
+                      [['left', 'middle'],
+                       ['center'],
                        ['left', 'top', 'corner']])
 
     def color_pattern1(self):

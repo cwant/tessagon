@@ -112,15 +112,15 @@ class ValemountTile(Tile):
 
     def calculate_faces(self):
         self.add_face('top_left',
-                      [1, 2, 6, 10, 9, 5])
+                      [5, 9, 10, 6, 2, 1])
         self.add_face('top_right',
-                      [2, 3, 4, 8, 7, 6])
+                      [6, 7, 8, 4, 3, 2])
         self.add_face('bottom_left',
-                      [9, 10, 11, 15, 14, 13])
+                      [13, 14, 15, 11, 10, 9])
         self.add_face('bottom_right',
-                      [7, 8, 12, 16, 15, 11])
+                      [11, 15, 16, 12, 8, 7])
         self.add_face('center',
-                      [6, 7, 11, 10])
+                      [10, 11, 7, 6])
 
     def color_pattern1(self):
         self.color_paths([

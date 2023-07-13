@@ -102,11 +102,11 @@ class PentaTile(Tile):
                       u_boundary=True)
 
         self.add_face(['left', 'bottom', 'v_boundary'],
-                      [['left', 'bottom', 'u_boundary'],
+                      [['left', 'bottom', 'v_boundary'],
                        ['left', 'bottom', 'interior'],
-                       ['left', 'bottom', 'v_boundary'],
-                       bottom_tile(['left', 'top', 'interior']),
-                       bottom_tile(['left', 'top', 'u_boundary'])],
+                       ['left', 'bottom', 'u_boundary'],
+                       bottom_tile(['left', 'top', 'u_boundary']),
+                       bottom_tile(['left', 'top', 'interior'])],
                       v_boundary=True)
 
         self.add_face(['left', 'middle'],
@@ -117,11 +117,11 @@ class PentaTile(Tile):
                        ['left', 'top', 'interior']])
 
         self.add_face(['center', 'bottom'],
-                      [['left', 'bottom', 'interior'],
-                       ['center', 'bottom'],
-                       ['right', 'bottom', 'interior'],
+                      [['left', 'bottom', 'v_boundary'],
                        ['right', 'bottom', 'v_boundary'],
-                       ['left', 'bottom', 'v_boundary']])
+                       ['right', 'bottom', 'interior'],
+                       ['center', 'bottom'],
+                       ['left', 'bottom', 'interior']])
 
     def color_pattern1(self):
         self.color_paths([

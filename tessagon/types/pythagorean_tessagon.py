@@ -96,48 +96,48 @@ class PythagoreanTile(Tile):
                           top_tile([1, 2])],
                       equivalent=[top_tile(11)])
 
-        self.add_face(2, [[3, 6],
+        self.add_face(2, [[3, 5],
+                          [4, 5],
                           [4, 6],
-                          [4, 5],
-                          [3, 5]])
+                          [3, 6]])
 
-        self.add_face(3, [[4, 6],
-                          [5, 6],
-                          [6, 6],
-                          [6, 5],
-                          [6, 4],
+        self.add_face(3, [[4, 5],
+                          [4, 4],
                           [5, 4],
-                          [4, 4],
-                          [4, 5]])
+                          [6, 4],
+                          [6, 5],
+                          [6, 6],
+                          [5, 6],
+                          [4, 6]])
 
-        self.add_face(4, [[1, 5],
+        self.add_face(4, [[1, 4],
+                          [2, 4],
                           [2, 5],
-                          [2, 4],
-                          [1, 4]])
+                          [1, 5]])
 
-        self.add_face(5, [[2, 5],
-                          [3, 5],
-                          [4, 5],
-                          [4, 4],
-                          [4, 3],
+        self.add_face(5, [[2, 4],
+                          [2, 3],
                           [3, 3],
-                          [2, 3],
-                          [2, 4]])
+                          [4, 3],
+                          [4, 4],
+                          [4, 5],
+                          [3, 5],
+                          [2, 5]])
 
-        self.add_face(6, [[1, 4],
-                          [2, 4],
-                          [2, 3],
+        self.add_face(6, [[1, 2],
                           [2, 2],
-                          [1, 2],
-                          left_tile([5, 2]),
+                          [2, 3],
+                          [2, 4],
+                          [1, 4],
+                          left_tile([5, 4]),
                           left_tile([5, 3]),
-                          left_tile([5, 4])],
+                          left_tile([5, 2])],
                       equivalent=[left_tile(8)])
 
-        self.add_face(7, [[4, 4],
-                          [5, 4],
+        self.add_face(7, [[4, 3],
                           [5, 3],
-                          [4, 3]])
+                          [5, 4],
+                          [4, 4]])
 
         self.add_face(8, [[6, 4],
                           [5, 4],
@@ -149,34 +149,34 @@ class PythagoreanTile(Tile):
                           right_tile([2, 4])],
                       equivalent=[right_tile(6)])
 
-        self.add_face(9, [[2, 3],
-                          [3, 3],
+        self.add_face(9, [[2, 2],
                           [3, 2],
-                          [2, 2]])
+                          [3, 3],
+                          [2, 3]])
 
-        self.add_face(10, [[3, 3],
-                           [4, 3],
-                           [5, 3],
-                           [5, 2],
-                           [5, 1],
+        self.add_face(10, [[3, 2],
+                           [3, 1],
                            [4, 1],
-                           [3, 1],
-                           [3, 2]])
+                           [5, 1],
+                           [5, 2],
+                           [5, 3],
+                           [4, 3],
+                           [3, 3]])
 
-        self.add_face(11, [[1, 1],
-                           [1, 2],
-                           [2, 2],
+        self.add_face(11, [[3, 1],
                            [3, 2],
-                           [3, 1],
-                           bottom_tile([3, 5]),
+                           [2, 2],
+                           [1, 2],
+                           [1, 1],
+                           bottom_tile([1, 5]),
                            bottom_tile([2, 5]),
-                           bottom_tile([1, 5])],
+                           bottom_tile([3, 5])],
                       equivalent=[bottom_tile(1)])
 
-        self.add_face(12, [[5, 2],
-                           [6, 2],
+        self.add_face(12, [[5, 1],
                            [6, 1],
-                           [5, 1]])
+                           [6, 2],
+                           [5, 2]])
 
     def color_pattern1(self):
         # Color the big ones

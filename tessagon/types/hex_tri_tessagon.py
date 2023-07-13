@@ -64,6 +64,7 @@ class HexTriTile(Tile):
                        ['right', 'middle'],
                        ['right', 'top']],
                       face_type='hexagon')
+
         # Interior top triangle
         self.add_face(['center', 'top'],
                       [['top'],
@@ -73,21 +74,21 @@ class HexTriTile(Tile):
 
         # Exterior left triangle
         self.add_face(['left', 'top', 'triangle'],
-                      [['left', 'top'],
-                       ['left', 'middle'],
+                      [['left', 'middle'],
+                       ['left', 'top'],
                        # Verts on neighbor tiles
                        left_tile(['right', 'top'])],
                       face_type='triangle', u_boundary=True)
 
         # Exterior top-left hexagon
         self.add_face(['left', 'top', 'hexagon'],
-                      [['top'],
-                       ['left', 'top'],
+                      [['left', 'top'],
+                       ['top'],
                        # Verts on neighbor tiles
-                       left_tile(['right', 'top']),
-                       left_tile('top'),
+                       top_tile(['left', 'bottom']),
                        left_top_tile(['right', 'bottom']),
-                       top_tile(['left', 'bottom'])],
+                       left_tile('top'),
+                       left_tile(['right', 'top'])],
                       face_type='hexagon', corner=True)
 
     def color_pattern1(self):

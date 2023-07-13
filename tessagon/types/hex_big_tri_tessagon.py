@@ -86,11 +86,11 @@ class HexBigTriTile(AlternatingTile):
         # Top Hexagon
         self.add_face('A',
                       [0,
-                       left_tile(3),
-                       left_tile(2),
-                       top_left_tile(1),
+                       top_tile(5),
                        top_tile(4),
-                       top_tile(5)],
+                       top_left_tile(1),
+                       left_tile(2),
+                       left_tile(3)],
                       equivalent=[left_tile('F'),
                                   top_left_tile('D'),
                                   top_tile('I')])

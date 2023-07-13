@@ -29,9 +29,9 @@ class SquareTile(Tile):
 
     def calculate_faces(self):
         self.add_face('middle', [['top', 'left'],
-                                 ['top', 'right'],
+                                 ['bottom', 'left'],
                                  ['bottom', 'right'],
-                                 ['bottom', 'left']])
+                                 ['top', 'right']])
 
     def color_pattern1(self):
         if (self.fingerprint[0] + self.fingerprint[1]) % 2 == 0:

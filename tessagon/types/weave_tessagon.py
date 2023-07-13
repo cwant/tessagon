@@ -93,48 +93,48 @@ class WeaveTile(Tile):
     def calculate_faces(self):
         # 4 internal squares (via symmetry)
         self.add_face(['square', 'top', 'left'],
-                      [['top', 'left', 'u_outer', 'v_outer'],
-                       ['top', 'left', 'u_inner', 'v_outer'],
+                      [['top', 'left', 'u_outer', 'v_inner'],
                        ['top', 'left', 'u_inner', 'v_inner'],
-                       ['top', 'left', 'u_outer', 'v_inner']],
+                       ['top', 'left', 'u_inner', 'v_outer'],
+                       ['top', 'left', 'u_outer', 'v_outer']],
                       face_type='square')
 
         # 1 interior strip
         self.add_face(['oct', 'middle', 'center'],
-                      [['top', 'left', 'u_outer', 'v_inner'],
-                       ['top', 'left', 'u_inner', 'v_inner'],
-                       ['top', 'right', 'u_inner', 'v_inner'],
-                       ['top', 'right', 'u_outer', 'v_inner'],
-                       ['bottom', 'right', 'u_outer', 'v_inner'],
-                       ['bottom', 'right', 'u_inner', 'v_inner'],
+                      [['bottom', 'left', 'u_outer', 'v_inner'],
                        ['bottom', 'left', 'u_inner', 'v_inner'],
-                       ['bottom', 'left', 'u_outer', 'v_inner']],
+                       ['bottom', 'right', 'u_inner', 'v_inner'],
+                       ['bottom', 'right', 'u_outer', 'v_inner'],
+                       ['top', 'right', 'u_outer', 'v_inner'],
+                       ['top', 'right', 'u_inner', 'v_inner'],
+                       ['top', 'left', 'u_inner', 'v_inner'],
+                       ['top', 'left', 'u_outer', 'v_inner']],
                       face_type='oct')
 
         # 4 corner strips
         self.add_face(['oct', 'top', 'left'],
-                      [['top', 'left', 'u_inner', 'v_outer'],
-                       ['top', 'left', 'u_outer', 'v_outer'],
-                       left_tile(['top', 'right', 'u_outer', 'v_outer']),
-                       left_tile(['top', 'right', 'u_inner', 'v_outer']),
-                       left_top_tile(['bottom', 'right',
-                                      'u_inner', 'v_outer']),
+                      [['top', 'left', 'u_outer', 'v_outer'],
+                       ['top', 'left', 'u_inner', 'v_outer'],
+                       top_tile(['bottom', 'left', 'u_inner', 'v_outer']),
+                       top_tile(['bottom', 'left', 'u_outer', 'v_outer']),
                        left_top_tile(['bottom', 'right',
                                       'u_outer', 'v_outer']),
-                       top_tile(['bottom', 'left', 'u_outer', 'v_outer']),
-                       top_tile(['bottom', 'left', 'u_inner', 'v_outer'])],
+                       left_top_tile(['bottom', 'right',
+                                      'u_inner', 'v_outer']),
+                       left_tile(['top', 'right', 'u_inner', 'v_outer']),
+                       left_tile(['top', 'right', 'u_outer', 'v_outer'])],
                       face_type='oct', corner=True)
 
         # 2 side strips
         self.add_face(['oct', 'middle', 'left'],
-                      [['top', 'left', 'u_outer', 'v_outer'],
-                       ['top', 'left', 'u_outer', 'v_inner'],
+                      [['bottom', 'left', 'u_outer', 'v_outer'],
                        ['bottom', 'left', 'u_outer', 'v_inner'],
-                       ['bottom', 'left', 'u_outer', 'v_outer'],
-                       left_tile(['bottom', 'right', 'u_outer', 'v_outer']),
-                       left_tile(['bottom', 'right', 'u_outer', 'v_inner']),
+                       ['top', 'left', 'u_outer', 'v_inner'],
+                       ['top', 'left', 'u_outer', 'v_outer'],
+                       left_tile(['top', 'right', 'u_outer', 'v_outer']),
                        left_tile(['top', 'right', 'u_outer', 'v_inner']),
-                       left_tile(['top', 'right', 'u_outer', 'v_outer'])],
+                       left_tile(['bottom', 'right', 'u_outer', 'v_inner']),
+                       left_tile(['bottom', 'right', 'u_outer', 'v_outer'])],
                       face_type='oct', u_boundary=True)
 
         # 2 top/bottom strips

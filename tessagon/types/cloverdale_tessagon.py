@@ -89,44 +89,42 @@ class CloverdaleTile(Tile):
         self.add_vert(['center', 'middle'], 0.5, 0.5)
 
     def calculate_faces(self):
-        # Middle star
         self.add_face(['left', 'top', 'square'],
-                      [['left', 'top', 'v_border'],
+                      [['left', 'top', 'u_border'],
                        ['left', 'top', 'outer'],
-                       ['left', 'top', 'u_border'],
-                       left_tile(['right', 'top', 'outer']),
-                       left_tile(['right', 'top', 'v_border']),
-                       top_left_tile(['right', 'bottom', 'outer']),
+                       ['left', 'top', 'v_border'],
+                       top_tile(['left', 'bottom', 'outer']),
                        top_tile(['left', 'bottom', 'u_border']),
-                       top_tile(['left', 'bottom', 'outer'])],
-                      face_type='star',
+                       top_left_tile(['right', 'bottom', 'outer']),
+                       left_tile(['right', 'top', 'v_border']),
+                       left_tile(['right', 'top', 'outer'])],
                       corner=True)
 
         self.add_face(['left', 'top', 'u_pentagon'],
-                      [['left', 'top', 'u_border'],
-                       ['left', 'top', 'outer'],
-                       ['left', 'top', 'inner'],
+                      [['left', 'middle', 'outer'],
                        ['left', 'middle', 'inner'],
-                       ['left', 'middle', 'outer']])
+                       ['left', 'top', 'inner'],
+                       ['left', 'top', 'outer'],
+                       ['left', 'top', 'u_border']])
 
         self.add_face(['left', 'top', 'v_pentagon'],
-                      [['left', 'top', 'v_border'],
-                       ['center', 'top', 'outer'],
-                       ['center', 'top', 'inner'],
+                      [['left', 'top', 'outer'],
                        ['left', 'top', 'inner'],
-                       ['left', 'top', 'outer']])
+                       ['center', 'top', 'inner'],
+                       ['center', 'top', 'outer'],
+                       ['left', 'top', 'v_border']])
 
         self.add_face(['center', 'top', 'square'],
-                      [['center', 'middle'],
-                       ['left', 'top', 'inner'],
+                      [['right', 'top', 'inner'],
                        ['center', 'top', 'inner'],
-                       ['right', 'top', 'inner']])
+                       ['left', 'top', 'inner'],
+                       ['center', 'middle']])
 
         self.add_face(['left', 'middle', 'square'],
-                      [['center', 'middle'],
-                       ['left', 'bottom', 'inner'],
+                      [['left', 'top', 'inner'],
                        ['left', 'middle', 'inner'],
-                       ['left', 'top', 'inner']])
+                       ['left', 'bottom', 'inner'],
+                       ['center', 'middle']])
 
     def color_pattern1(self):
         self.color_face(['left', 'top', 'square'], 1)

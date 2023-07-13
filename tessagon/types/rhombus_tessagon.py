@@ -66,11 +66,11 @@ class RhombusTile(Tile):
                        ['left', 'middle'],
                        ['center', 'top', 'interior']], face_type='upward')
         self.add_face(['left', 'top', 'exterior'],
-                      [['center', 'top', 'boundary'],
-                       ['left', 'top'],
+                      [['left', 'top'],
+                       ['center', 'top', 'boundary'],
                        # Verts on neighbor tile
-                       left_tile(['center', 'top', 'boundary']),
-                       top_tile(['left', 'bottom'])],
+                       top_tile(['left', 'bottom']),
+                       left_tile(['center', 'top', 'boundary'])],
                       face_type='horizontal', corner=True)
 
     def color_pattern1(self):

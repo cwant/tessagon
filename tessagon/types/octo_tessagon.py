@@ -57,22 +57,23 @@ class OctoTile(Tile):
 
     def calculate_faces(self):
         # Middle interior face
-        self.add_face('middle', [['left', 'top', 'v_boundary'],
-                                 ['left', 'top', 'u_boundary'],
-                                 ['left', 'bottom', 'u_boundary'],
-                                 ['left', 'bottom', 'v_boundary'],
-                                 ['right', 'bottom', 'v_boundary'],
-                                 ['right', 'bottom', 'u_boundary'],
-                                 ['right', 'top', 'u_boundary'],
-                                 ['right', 'top', 'v_boundary']])
+        self.add_face('middle',
+                      [['left', 'top', 'v_boundary'],
+                       ['left', 'top', 'u_boundary'],
+                       ['left', 'bottom', 'u_boundary'],
+                       ['left', 'bottom', 'v_boundary'],
+                       ['right', 'bottom', 'v_boundary'],
+                       ['right', 'bottom', 'u_boundary'],
+                       ['right', 'top', 'u_boundary'],
+                       ['right', 'top', 'v_boundary']])
 
         # Four faces, define top left corner, others via symmetry
         self.add_face(['left', 'top'],
-                      [['left', 'top', 'v_boundary'],
-                       ['left', 'top', 'u_boundary'],
+                      [['left', 'top', 'u_boundary'],
+                       ['left', 'top', 'v_boundary'],
                        # Verts on neighbor tiles
-                       left_tile(['right', 'top', 'v_boundary']),
-                       top_tile(['left', 'bottom', 'u_boundary'])],
+                       top_tile(['left', 'bottom', 'u_boundary']),
+                       left_tile(['right', 'top', 'v_boundary'])],
                       corner=True)
 
     def color_pattern1(self):
