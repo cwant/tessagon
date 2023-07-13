@@ -213,16 +213,25 @@ class Tile(AbstractTile):
             if self.u_symmetric:
                 # Add reflection about u
                 u_flip_keys = self._u_flip(index_keys)
+                if 'equivalent' in kwargs:
+                    u_flip_equivalent_keys = self._u_flip(kwargs['equivalent'])
+                    extra_args['equivalent'] = u_flip_equivalent_keys
                 self.add_vert(u_flip_keys, 1.0 - ratio_u, ratio_v,
                               **{**kwargs, **extra_args})
                 if self.v_symmetric:
                     # Add diagonally across
                     uv_flip_keys = self._v_flip(u_flip_keys)
+                    if 'equivalent' in kwargs:
+                        uv_flip_equivalent_keys = self._v_flip(u_flip_equivalent_keys)
+                        extra_args['equivalent'] = uv_flip_equivalent_keys
                     self.add_vert(uv_flip_keys, 1.0 - ratio_u, 1.0 - ratio_v,
                                   **{**kwargs, **extra_args})
             if self.v_symmetric:
                 # Add reflection about v
                 v_flip_keys = self._v_flip(index_keys)
+                if 'equivalent' in kwargs:
+                    v_flip_equivalent_keys = self._v_flip(kwargs['equivalent'])
+                    extra_args['equivalent'] = v_flip_equivalent_keys
                 self.add_vert(v_flip_keys, ratio_u, 1.0 - ratio_v,
                               **{**kwargs, **extra_args})
 
