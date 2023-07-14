@@ -11,6 +11,7 @@ import bpy
 from tessagon import TessagonDiscovery
 
 class DocumentationImages:
+    # Todo: let TessagonDiscovery figure this out
     CLASS_NAMES = {
         'regular':  ['SquareTessagon',
                      'HexTessagon',
@@ -41,7 +42,8 @@ class DocumentationImages:
                      'ZigZagTessagon',
                      'ValemountTessagon',
                      'CloverdaleTessagon',
-                     'HokusaiParallelogramsTessagon'],
+                     'HokusaiParallelogramsTessagon',
+                     'SlatsTessagon'],
 
         'non_convex': ['StanleyParkTessagon',
                        'IslamicHexStarsTessagon',
@@ -185,10 +187,9 @@ class DocumentationImages:
             parameter_info = cls.metadata.extra_parameters[parameter]
             parameter_page_part = {'parameter': parameter,
                                     'parameter_info': parameter_info}
-            if parameter_info['type'] == 'float':
-                values = dict(
-                    low=(parameter_info['default'] + parameter_info['min']) / 2.0,
-                    high=(parameter_info['default'] + parameter_info['max']) / 2.0)
+            if parameter_info['type'] in ['float', 'int']:
+                values = dict(low=self.parameter_min(parameter_info),
+                              high=self.parameter_max(parameter_info))
                 for value_name in values:
                     value = round(values[value_name], 2)
                     object_name = "{}-{}={}".format(class_name, parameter, value)
@@ -202,6 +203,16 @@ class DocumentationImages:
             page_parts['extra_parameters'] = parameter_page_parts
 
         self.page_parts[class_name].update(page_parts)
+
+    def parameter_min(self, parameter_info):
+        if 'demo_min' in parameter_info:
+            return parameter_info['demo_min']
+        return (parameter_info['default'] + parameter_info['min']) / 2.0
+
+    def parameter_max(self, parameter_info):
+        if 'demo_max' in parameter_info:
+            return parameter_info['demo_max']
+        return (parameter_info['default'] + parameter_info['max']) / 2.0
 
     def render_object(self, name, **kwargs):
         if isinstance(name, list):

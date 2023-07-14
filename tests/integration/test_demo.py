@@ -46,7 +46,7 @@ class TestDemo:
         return len([c for c in colors if c == color])
 
     def test_demo_works(self):
-        assert len(self.meshes) == 31
+        assert len(self.meshes) == 32
 
     def test_big_hex_tri_tessagon(self):
         tessagon = 'BigHexTriTessagon'
@@ -446,3 +446,16 @@ class TestDemo:
         assert self.color_count(tessagon, 3, 1) == 216
         assert self.color_count(tessagon, 3, 2) == 216
         assert self.color_count(tessagon, 3, 3) == 432
+
+    def test_slats(self):
+        tessagon = 'SlatsTessagon'
+        assert self.vert_list_length(tessagon) == 2880
+        assert self.face_list_length(tessagon) == 1728
+
+        assert self.color_pattern_count(tessagon) == 2
+
+        assert self.color_count(tessagon, 1, 0) == 864
+        assert self.color_count(tessagon, 1, 1) == 864
+
+        assert self.color_count(tessagon, 2, 0) == 864
+        assert self.color_count(tessagon, 2, 1) == 864

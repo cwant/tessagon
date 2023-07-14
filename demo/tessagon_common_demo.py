@@ -70,10 +70,9 @@ class TessagonCommonDemo:
             for parameter in cls.metadata.extra_parameters:
                 parameter_info = cls.metadata.extra_parameters[parameter]
                 meshes[key]['extra_parameters'][parameter] = {}
-                if parameter_info['type'] == 'float':
-                    values = dict(
-                        low=(parameter_info['default'] + parameter_info['min']) / 2.0,
-                        high=(parameter_info['default'] + parameter_info['max']) / 2.0)
+                if parameter_info['type'] in ['float', 'int']:
+                    values = dict(low=self.parameter_min(parameter_info),
+                                  high=self.parameter_max(parameter_info))
                     for value_name in values:
                         value = values[value_name]
                         row -= offset
@@ -84,6 +83,16 @@ class TessagonCommonDemo:
             column += offset
 
         return meshes
+
+    def parameter_min(self, parameter_info):
+        if 'demo_min' in parameter_info:
+            return parameter_info['demo_min']
+        return (parameter_info['default'] + parameter_info['min']) / 2.0
+
+    def parameter_max(self, parameter_info):
+        if 'demo_max' in parameter_info:
+            return parameter_info['demo_max']
+        return (parameter_info['default'] + parameter_info['max']) / 2.0
 
     def hex_tessagon(self, position, **kwargs):
         options = {
@@ -516,4 +525,16 @@ class TessagonCommonDemo:
         }
         HokusaiParallelogramsTessagon = self.method_to_class()
         return self.tessellate(torus, HokusaiParallelogramsTessagon,
+                               **{**kwargs, **options})
+
+    def slats_tessagon(self, position, **kwargs):
+        options = {
+            'u_range': [0.0, 1.0],
+            'v_range': [0.0, 1.0],
+            'u_num': 48,
+            'v_num': 12,
+            'position': position
+        }
+        SlatsTessagon = self.method_to_class()
+        return self.tessellate(torus, SlatsTessagon,
                                **{**kwargs, **options})

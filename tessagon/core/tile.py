@@ -222,7 +222,8 @@ class Tile(AbstractTile):
                     # Add diagonally across
                     uv_flip_keys = self._v_flip(u_flip_keys)
                     if 'equivalent' in kwargs:
-                        uv_flip_equivalent_keys = self._v_flip(u_flip_equivalent_keys)
+                        uv_flip_equivalent_keys = \
+                            self._v_flip(u_flip_equivalent_keys)
                         extra_args['equivalent'] = uv_flip_equivalent_keys
                     self.add_vert(uv_flip_keys, 1.0 - ratio_u, 1.0 - ratio_v,
                                   **{**kwargs, **extra_args})

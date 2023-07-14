@@ -35,6 +35,8 @@ from tessagon.types.hokusai_hashes_tessagon \
     import HokusaiHashesTessagon
 from tessagon.types.hokusai_parallelograms_tessagon \
     import HokusaiParallelogramsTessagon
+from tessagon.types.slats_tessagon \
+    import SlatsTessagon
 
 # Note that ALL is ordered in an ideal way (regular, archimedean, ...)
 ALL = [SquareTessagon,
@@ -67,6 +69,7 @@ ALL = [SquareTessagon,
        ValemountTessagon,
        CloverdaleTessagon,
        HokusaiParallelogramsTessagon,
+       SlatsTessagon,
 
        StanleyParkTessagon,
        IslamicHexStarsTessagon,

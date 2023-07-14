@@ -158,12 +158,13 @@ class Tessagon:
             if parameter not in kwargs:
                 continue
             value = kwargs.get(parameter)
-            if parameter_info['type'] == 'float':
-                self._process_float_extra_parameter(parameter,
-                                                    value,
-                                                    parameter_info)
+            if parameter_info['type'] in ['float', 'int']:
+                self._process_numerical_extra_parameter(parameter,
+                                                        value,
+                                                        parameter_info)
 
-    def _process_float_extra_parameter(self, parameter, value, parameter_info):
+    def _process_numerical_extra_parameter(self, parameter, value,
+                                           parameter_info):
         max_value = parameter_info.get('max')
         min_value = parameter_info.get('min')
         if max_value is not None and value > max_value:
