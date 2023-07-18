@@ -31,7 +31,7 @@ class VtkAdaptor(BaseAdaptor):
         self.point_count += 1
         return index
 
-    def create_face(self, verts, **kwargs):
+    def create_face(self, verts):
         self.polys.InsertNextCell(len(verts), verts)
         index = self.face_count
         self.face_count += 1

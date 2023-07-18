@@ -17,7 +17,7 @@ class BlenderAdaptor(BaseAdaptor):
     def create_vert(self, coords):
         return self.bm.verts.new(coords)
 
-    def create_face(self, verts, **kwargs):
+    def create_face(self, verts):
         return self.bm.faces.new(verts)
 
     def color_face(self, face, color_index):

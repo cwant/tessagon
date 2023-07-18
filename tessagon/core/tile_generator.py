@@ -36,6 +36,7 @@ class TileGenerator(ValueBlend):
         self.fingerprint_offset = kwargs.get('fingerprint_offset') or None
 
         self.color_pattern = kwargs.get('color_pattern') or None
+        self._process_extra_parameters(**kwargs)
 
     def create_tile(self, u, v, corners, **kwargs):
         extra_args = {'corners': corners,
@@ -50,10 +51,9 @@ class TileGenerator(ValueBlend):
         if self.color_pattern:
             extra_args['color_pattern'] = self.color_pattern
 
-        extra_parameters = self.tessagon.extra_parameters
-        if extra_parameters:
-            for parameter in extra_parameters:
-                extra_args[parameter] = extra_parameters[parameter]
+        if self.extra_parameters:
+            for parameter in self.extra_parameters:
+                extra_args[parameter] = self.extra_parameters[parameter]
 
         tile_class = self.tessagon.__class__.tile_class
         return tile_class(self.tessagon,
@@ -67,3 +67,34 @@ class TileGenerator(ValueBlend):
             tile.validate()
 
         return tiles
+
+    def _process_extra_parameters(self, **kwargs):
+        self.extra_parameters = {}
+        if not self.tessagon.metadata:
+            return
+
+        parameters_info = self.tessagon.metadata.extra_parameters
+        if not parameters_info:
+            return
+
+        for parameter in parameters_info:
+            parameter_info = parameters_info[parameter]
+            if parameter not in kwargs:
+                continue
+            value = kwargs.get(parameter)
+            if parameter_info['type'] in ['float', 'int']:
+                self._process_numerical_extra_parameter(parameter,
+                                                        value,
+                                                        parameter_info)
+
+    def _process_numerical_extra_parameter(self, parameter, value,
+                                           parameter_info):
+        max_value = parameter_info.get('max')
+        min_value = parameter_info.get('min')
+        if max_value is not None and value > max_value:
+            raise ValueError('Parameter {} ({}) exceeds maximum ({})'
+                             .format(parameter, value, max_value))
+        if min_value is not None and value < min_value:
+            raise ValueError('Parameter {} ({}) below minimum ({})'
+                             .format(parameter, value, min_value))
+        self.extra_parameters[parameter] = value

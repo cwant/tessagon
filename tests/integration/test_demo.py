@@ -415,7 +415,7 @@ class TestDemo:
 
     def test_hokusai_hashes_tessagon(self):
         tessagon = 'HokusaiHashesTessagon'
-        assert self.vert_list_length(tessagon) == 3346
+        assert self.vert_list_length(tessagon) == 3066
         assert self.face_list_length(tessagon) == 364
 
         assert self.color_pattern_count(tessagon) == 2

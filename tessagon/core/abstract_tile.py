@@ -4,7 +4,6 @@ from tessagon.core.value_blend import ValueBlend
 class AbstractTile(ValueBlend):
     def __init__(self, tessagon, **kwargs):
         self.tessagon = tessagon
-        self.f = tessagon.f
 
         # Verts/faces indexed with 'left', 'right', 'center'
         self.u_symmetric = kwargs.get('u_symmetric', False)

@@ -11,7 +11,7 @@ class CoreTestsBase:
     pass
 
 
-class FakeAdaptor:
+class FakeUVMeshMaker:
     def __init__(self):
         self.verts = []
         self.faces = []
@@ -37,9 +37,10 @@ class FakeTileSubClass(Tile):
 
 class FakeTessagon:
     tile_class = FakeTileSubClass
+    metadata = None
 
     def __init__(self):
-        self.mesh_adaptor = FakeAdaptor()
+        self.uv_mesh_maker = FakeUVMeshMaker()
         self.extra_parameters = {}
 
     def f(self, u, v):

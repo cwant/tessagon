@@ -6,7 +6,7 @@ class Tile(AbstractTile):
     def __init__(self, tessagon, **kwargs):
         super().__init__(tessagon, **kwargs)
 
-        self.mesh_adaptor = tessagon.mesh_adaptor
+        self.uv_mesh_maker = tessagon.uv_mesh_maker
 
         self.verts = self.init_verts()
         self.faces = self.init_faces()
@@ -19,12 +19,12 @@ class Tile(AbstractTile):
         pass
 
     def add_vert(self, index_keys, ratio_u, ratio_v, **kwargs):
-        # Use the mesh adaptor to create a vertex.
+        # Use the UVMeshMaker to create a vertex.
         # In reality, multiple vertices may get defined if symmetry is declared
         vert = self._get_vert(index_keys)
         if vert is None:
-            coords = self.f(*self.blend(ratio_u, ratio_v))
-            vert = self.mesh_adaptor.create_vert(coords)
+            uv = self.blend(ratio_u, ratio_v)
+            vert = self.uv_mesh_maker.create_vert(uv)
 
             self._set_vert(index_keys, vert)
             if 'vert_type' in kwargs:
@@ -61,7 +61,7 @@ class Tile(AbstractTile):
         tile._set_vert(self._index_path(index_keys, neighbor_keys), vert)
 
     def add_face(self, index_keys, vert_index_keys_list, **kwargs):
-        # Use the mesh adaptor to create a face.
+        # Use the UVMeshMaker to create a face.
         # In reality, multiple faces may get defined if symmetry is declared
         face = self._get_face(index_keys)
 
@@ -84,14 +84,8 @@ class Tile(AbstractTile):
         return face
 
     def _make_face(self, index_keys, verts, **kwargs):
-        face = self.mesh_adaptor.create_face(verts, **kwargs)
+        face = self.uv_mesh_maker.create_face(verts, **kwargs)
         self._set_face(index_keys, face)
-
-        # The tessagon might keep a list of specific face types
-        if 'face_type' in kwargs:
-            if not kwargs['face_type'] in self.tessagon.face_types:
-                self.tessagon.face_types[kwargs['face_type']] = []
-            self.tessagon.face_types[kwargs['face_type']].append(face)
 
         # On the boundary, make sure equivalent faces are set on neighbor tiles
         self._set_equivalent_neighbor_faces(index_keys, face, **kwargs)
@@ -116,7 +110,7 @@ class Tile(AbstractTile):
         face = self._get_face(index_keys)
         if face is None:
             return
-        self.mesh_adaptor.color_face(face, color_index)
+        self.uv_mesh_maker.color_face(face, color_index)
 
     def set_equivalent_face(self, neighbor_keys, index_keys, face, **kwargs):
         # On boundary, the face on a neighbor is equivalent to this face
