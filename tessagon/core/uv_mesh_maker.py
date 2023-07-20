@@ -1,7 +1,7 @@
 from tessagon.core.grid_tile_generator import GridTileGenerator
 from tessagon.core.parallelogram_tile_generator \
     import ParallelogramTileGenerator
-
+from tessagon.core.uv_post_process import UVPostProcess
 
 class UVMeshMaker:
 
@@ -9,6 +9,7 @@ class UVMeshMaker:
         self.tessagon = tessagon
         self.tile_generator = self._get_tile_generator(**kwargs)
         self.color_pattern = kwargs.get('color_pattern') or None
+        self.post_process = UVPostProcess(**kwargs)
 
         self.tiles = None
 
@@ -22,6 +23,10 @@ class UVMeshMaker:
     @property
     def v_num(self):
         return self.tile_generator.v_num
+
+    @property
+    def corners(self):
+        return self.tile_generator.corners
 
     @property
     def extra_parameters(self):
@@ -54,12 +59,15 @@ class UVMeshMaker:
         if self.color_pattern:
             self._calculate_colors()
 
+        self.post_process.run(self)
+
         self._finish_mesh()
 
     def inspect(self):
         print("\n=== %s ===\n" % (self.__class__.__name__))
         for i in range(len(self.tiles)):
             self.tiles[i].inspect(tile_number=i)
+
 
     def _get_tile_generator(self, **kwargs):
         if 'tile_generator' in kwargs:
@@ -102,6 +110,7 @@ class UVMeshMaker:
         self.color_faces = []
         self.face_types = {}
         self.vert_types = {}
+
 
     def _finish_mesh(self):
         self._reduce_unused_verts()

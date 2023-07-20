@@ -37,3 +37,19 @@ class Tessagon:
     @property
     def extra_parameters(self):
         return self.uv_mesh_maker.extra_parameters
+
+    @property
+    def f(self):
+        return self.xyz_mesh_maker.f
+
+    @property
+    def u_num(self):
+        return self.uv_mesh_maker.u_num
+
+    @property
+    def v_num(self):
+        return self.uv_mesh_maker.v_num
+
+    @property
+    def corners(self):
+        return self.uv_mesh_maker.corners
