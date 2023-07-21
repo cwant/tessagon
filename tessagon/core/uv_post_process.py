@@ -17,37 +17,36 @@ class UVPostProcess:
         self.uv_mesh_maker = None
         self.disjoint_faces = kwargs.get('disjoint_faces', False)
 
-        self.random_offset_radius = kwargs.get('uv_random_offset_radius')
+        self.random_vert_offset_radius = kwargs.get('uv_random_vert_offset_radius')
+
+        self.random_face_offset_radius = kwargs.get('uv_random_face_offset_radius')
+        if self.random_face_offset_radius:
+            self.disjoint_faces = True
 
         rotate_faces_degrees = kwargs.get('uv_rotate_faces_degrees')
         if rotate_faces_degrees:
-            if not self.disjoint_faces:
-                raise ValueError('rotate_faces_degrees only works with disjoint_faces')
-            else:
-                self.rotate_faces_radians = radians(rotate_faces_degrees)
+            self.rotate_faces_radians = radians(rotate_faces_degrees)
+            self.disjoint_faces = True
         else:
             self.rotate_faces_radians = None
 
         rotate_faces_random_degrees = kwargs.get('uv_rotate_faces_random_degrees')
         if rotate_faces_random_degrees:
-            if not self.disjoint_faces:
-                raise ValueError('rotate_faces_random_degrees only '\
-                                 'works with disjoint_faces')
-            else:
-                self.rotate_faces_random_radians = \
-                    radians(rotate_faces_random_degrees)
+            self.rotate_faces_random_radians = \
+                radians(rotate_faces_random_degrees)
+            self.disjoint_faces = True
         else:
             self.rotate_faces_random_radians = None
 
         # 1.0 means no scaling
         self.scale_faces = kwargs.get('uv_scale_faces')
-        if self.scale_faces and not self.disjoint_faces:
-            raise ValueError('rotate_faces_degrees only works with disjoint_faces')
+        if self.scale_faces:
+            self.disjoint_faces = True
 
         # [min, max]
         self.scale_faces_random_range = kwargs.get('uv_scale_faces_random_range')
-        if self.scale_faces_random_range and not self.disjoint_faces:
-            raise ValueError('scale_faces_random_range only works with disjoint_faces')
+        if self.scale_faces_random_range:
+            self.disjoint_faces = True
 
     @property
     def verts(self):
@@ -107,9 +106,17 @@ class UVPostProcess:
                 self._rotate_face_about_centroid(face, theta)
 
     def _random_offset_verts(self):
-        if self.random_offset_radius:
+        if self.random_face_offset_radius:
+            for face in self.faces:
+                radius = random() * self.random_face_offset_radius
+                theta = 2 * pi * random()
+                for vert_index in face:
+                    self.verts[vert_index][0] += (radius * cos(theta))
+                    self.verts[vert_index][1] += (radius * sin(theta))
+
+        if self.random_vert_offset_radius:
             for i in range(len(self.verts)):
-                radius = random() * self.random_offset_radius
+                radius = random() * self.random_vert_offset_radius
                 theta = 2 * pi * random()
                 self.verts[i][0] += (radius * cos(theta))
                 self.verts[i][1] += (radius * sin(theta))
