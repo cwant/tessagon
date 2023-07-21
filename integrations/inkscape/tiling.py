@@ -89,6 +89,18 @@ class Tiling(inkex.EffectExtension):
                           help="Random scale polygons maximum "
                           "(1.0 is no scaling)")
 
+        pars.add_argument("--svg_randomize_h",
+                          type=float, default=0.0,
+                          help="Randomize fill hue")
+
+        pars.add_argument("--svg_randomize_s",
+                          type=float, default=0.0,
+                          help="Randomize fill saturation")
+
+        pars.add_argument("--svg_randomize_v",
+                          type=float, default=0.0,
+                          help="Randomize fill value")
+
     def effect(self):
         layer = self.svg.get_current_layer()
         group = self.draw_tessagon_group(self.options)
@@ -179,6 +191,13 @@ class Tiling(inkex.EffectExtension):
             kwargs['uv_scale_faces_random_range'] = \
                 [options.uv_scale_faces_random_min,
                  options.uv_scale_faces_random_max]
+
+        if options.svg_randomize_h > self.TOLERANCE:
+            kwargs['svg_randomize_h'] = options.svg_randomize_h
+        if options.svg_randomize_s > self.TOLERANCE:
+            kwargs['svg_randomize_s'] = options.svg_randomize_s
+        if options.svg_randomize_v > self.TOLERANCE:
+            kwargs['svg_randomize_v'] = options.svg_randomize_v
 
         this_tessagon = tessagon_class(**kwargs)
         svg = this_tessagon.create_mesh()

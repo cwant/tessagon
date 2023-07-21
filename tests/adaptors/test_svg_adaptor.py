@@ -138,20 +138,20 @@ class TestSvgAdaptor:
 
         assert parser.parts == ['g',
 
-                                'g',
-                                'style',
-                                'fill:#ffffff;',
-                                'polygon', 'points', '3.0,2.0 5.0,4.0 3.0,1.0',
-
-                                'g',
-                                'style',
-                                'fill:#000000;',
-                                'polygon', 'points', '0.0,1.0 5.0,4.0 3.0,1.0',
-
-                                'g',
+                                'polygon',
                                 'style',
                                 'fill:#888888;',
-                                'polygon', 'points', '0.0,1.0 3.0,2.0 5.0,4.0']
+                                'points', '0.0,1.0 3.0,2.0 5.0,4.0',
+
+                                'polygon',
+                                'style',
+                                'fill:#ffffff;',
+                                'points', '3.0,2.0 5.0,4.0 3.0,1.0',
+
+                                'polygon',
+                                'style',
+                                'fill:#000000;',
+                                'points', '0.0,1.0 5.0,4.0 3.0,1.0']
 
     def test_get_mesh_style_stroke(self):
         adaptor = SvgAdaptor(svg_stroke_color='#ffffff',

@@ -72,11 +72,11 @@
 
     <page name="post_processing" gui-text="Post-processing Options">
       <param name="uv_random_vert_offset_radius"
-             type="float" min="0.0" precision="3"
+             type="float" min="0.0"
              gui-text="Random vertex offset radius:">0.0</param>
 
       <param name="uv_random_face_offset_radius"
-             type="float" min="0.0" precision="3"
+             type="float" min="0.0"
              gui-text="Random polygon offset radius:">0.0</param>
 
       <separator />
@@ -102,6 +102,21 @@
       <param name="uv_scale_faces_random_max"
              type="float" min="0.0"
              gui-text="Random scale polygons maximum (1.0 is no scaling):">1.0</param>
+
+      <separator />
+
+      <param name="svg_randomize_h"
+             type="float" min="0.0" max="1.0" precision="2"
+             gui-text="Randomize fill hue:">0.0</param>
+
+      <param name="svg_randomize_s"
+             type="float" min="0.0" max="1.0" precision="2"
+             gui-text="Randomize fill saturation:">0.0</param>
+
+      <param name="svg_randomize_v"
+             type="float" min="0.0" max="1.0" precision="2"
+             gui-text="Randomize fill value:">0.0</param>
+
     </page>
 
   </param>
