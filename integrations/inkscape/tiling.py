@@ -28,6 +28,8 @@ class Tiling(inkex.EffectExtension):
                       0x214478FF,
                       0x162D50FF]
 
+    TOLERANCE = 0.0000001
+
     def add_arguments(self, pars):
         pars.add_argument("--tab")
         pars.add_argument("--class_name", default="HexTessagon",
@@ -57,10 +59,35 @@ class Tiling(inkex.EffectExtension):
                           help="Now to handle fill colors")
         pars.add_argument("--color_pattern", type=int, default=1,
                           help="Which color pattern to use")
+
         for i in range(1, 9):
             pars.add_argument("--color_{}".format(i), type=inkex.Color,
                               default=inkex.Color(self.DEFAULT_COLORS[i - 1]),
                               help="Color {}".format(i))
+
+        pars.add_argument("--uv_random_vert_offset_radius",
+                          type=float, default=0.0,
+                          help="Random vertex offset radius")
+        pars.add_argument("--uv_random_face_offset_radius",
+                          type=float, default=0.0,
+                          help="Random face offset radius")
+        pars.add_argument("--uv_rotate_faces_degrees",
+                          type=float, default=0.0,
+                          help="Rotate polygons (degrees)")
+        pars.add_argument("--uv_rotate_faces_random_degrees",
+                          type=float, default=0.0,
+                          help="Rotate polygons randomly (max degrees)")
+        pars.add_argument("--uv_scale_faces",
+                          type=float, default=1.0,
+                          help="Scale polygons (1.0 is no scaling)")
+        pars.add_argument("--uv_scale_faces_random_min",
+                          type=float, default=1.0,
+                          help="Random scale polygons minimum "
+                          "(1.0 is no scaling)")
+        pars.add_argument("--uv_scale_faces_random_max",
+                          type=float, default=1.0,
+                          help="Random scale polygons maximum "
+                          "(1.0 is no scaling)")
 
     def effect(self):
         layer = self.svg.get_current_layer()
@@ -90,6 +117,12 @@ class Tiling(inkex.EffectExtension):
         if self.options.y_max <= self.options.y_min:
             inkex.errormsg("Lower bounding box extent must be "
                            "less than upper bound box (Y)")
+            return False
+
+        if self.options.uv_scale_faces_random_max < \
+           self.options.uv_scale_faces_random_min:
+            inkex.errormsg("Minimum of random scale range must be "
+                           "less than maximum")
             return False
 
         return True
@@ -126,6 +159,25 @@ class Tiling(inkex.EffectExtension):
             kwargs['svg_stroke_color'] = str(options.stroke_color)
             kwargs['svg_stroke_width'] = \
                 "{}{}".format(options.stroke_width, options.stroke_type_unit)
+
+        if options.uv_random_vert_offset_radius > self.TOLERANCE:
+            kwargs['uv_random_vert_offset_radius'] = \
+                options.uv_random_vert_offset_radius
+        if options.uv_random_face_offset_radius > self.TOLERANCE:
+            kwargs['uv_random_face_offset_radius'] = \
+                options.uv_random_face_offset_radius
+        if abs(options.uv_rotate_faces_degrees) > self.TOLERANCE:
+            kwargs['uv_rotate_faces_degrees'] = options.uv_rotate_faces_degrees
+        if abs(options.uv_rotate_faces_random_degrees) > self.TOLERANCE:
+            kwargs['uv_rotate_faces_random_degrees'] = \
+                options.uv_rotate_faces_random_degrees
+        if abs(1.0 - options.uv_scale_faces) > self.TOLERANCE:
+            kwargs['uv_scale_faces'] = options.uv_scale_faces
+        if abs(1.0 - options.uv_scale_faces_random_min) > self.TOLERANCE or \
+           abs(1.0 - options.uv_scale_faces_random_max) > self.TOLERANCE:
+            kwargs['uv_scale_faces_random_range'] = \
+                [options.uv_scale_faces_random_min,
+                 options.uv_scale_faces_random_max]
 
         this_tessagon = tessagon_class(**kwargs)
         svg = this_tessagon.create_mesh()
