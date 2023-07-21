@@ -2,6 +2,7 @@ from random import random, uniform
 from math import sin, cos, pi, radians, sqrt
 
 
+# TODO: centralize these?
 def _scale_vert(vert, about, factor):
     diff = [vert[i] - about[i] for i in [0, 1]]
     return [about[i] + factor * diff[i] for i in [0, 1]]
@@ -17,7 +18,8 @@ def _rotate_vert_aspect(vert, about, theta, uv_ratio):
     diff = [vert[0] - about[0],
             (vert[1] - about[1]) * uv_ratio]
     return [about[0] + (cos(theta) * diff[0] - sin(theta) * diff[1]),
-            about[1] + (1.0 / uv_ratio) * (sin(theta) * diff[0] + cos(theta) * diff[1])]
+            about[1] + (1.0 / uv_ratio) * (sin(theta) * diff[0] +
+                                           cos(theta) * diff[1])]
 
 
 class UVPostProcess:
@@ -124,20 +126,48 @@ class UVPostProcess:
                 self._rotate_face_about_centroid(face, theta)
 
     def _random_offset_verts(self):
+        # We scale this proportionate to average edge length
+        # (or else it's a mess).
+        average = self._mean_edge_lengths()
         if self.random_face_offset_radius:
+            magnitude = average * self.random_face_offset_radius
             for face in self.faces:
-                radius = random() * self.random_face_offset_radius
+                radius = random() * magnitude
                 theta = 2 * pi * random()
                 for vert_index in face:
                     self.verts[vert_index][0] += (radius * cos(theta))
                     self.verts[vert_index][1] += (radius * sin(theta))
 
         if self.random_vert_offset_radius:
+            magnitude = average * self.random_vert_offset_radius
             for i in range(len(self.verts)):
-                radius = random() * self.random_vert_offset_radius
+                radius = random() * magnitude
                 theta = 2 * pi * random()
                 self.verts[i][0] += (radius * cos(theta))
                 self.verts[i][1] += (radius * sin(theta))
+
+    def _mean_edge_lengths(self):
+        total = 0
+        # Don't double count edges on other faces
+        edge_seen = {}
+
+        for face in self.faces:
+            for i in range(len(face)):
+                vert_index = face[i]
+                next_vert_index = face[(i+1) % len(face)]
+                v1 = min(vert_index, next_vert_index)
+                v2 = max(vert_index, next_vert_index)
+                key = "{}-{}".format(v1, v2)
+                if key in edge_seen:
+                    continue
+
+                edge_seen[key] = True
+                vert1 = self.verts[vert_index]
+                vert2 = self.verts[next_vert_index]
+                diff = [vert1[i] - vert2[i] for i in [0, 1]]
+                magnitude = sqrt(diff[0]**2 + diff[1]**2)
+                total += magnitude
+        return total / len(edge_seen)
 
     def _face_centroid(self, face):
         (u, v) = (0, 0)
@@ -161,7 +191,8 @@ class UVPostProcess:
         for vert_index in face:
             vert = self.verts[vert_index]
             if self.aspect_ratio_adjust:
-                new_vert = _rotate_vert_aspect(vert, centroid, theta, 1.0 / self.uv_ratio)
+                new_vert = _rotate_vert_aspect(vert, centroid, theta,
+                                               1.0 / self.uv_ratio)
             else:
                 new_vert = _rotate_vert(vert, centroid, theta)
             self.verts[vert_index] = new_vert
