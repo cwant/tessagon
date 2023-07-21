@@ -3,8 +3,8 @@ from tessagon.core.parallelogram_tile_generator \
     import ParallelogramTileGenerator
 from tessagon.core.uv_post_process import UVPostProcess
 
-class UVMeshMaker:
 
+class UVMeshMaker:
     def __init__(self, tessagon, **kwargs):
         self.tessagon = tessagon
         self.tile_generator = self._get_tile_generator(**kwargs)
@@ -68,7 +68,6 @@ class UVMeshMaker:
         for i in range(len(self.tiles)):
             self.tiles[i].inspect(tile_number=i)
 
-
     def _get_tile_generator(self, **kwargs):
         if 'tile_generator' in kwargs:
             return kwargs['tile_generator'](self.tessagon, **kwargs)
@@ -110,7 +109,6 @@ class UVMeshMaker:
         self.color_faces = []
         self.face_types = {}
         self.vert_types = {}
-
 
     def _finish_mesh(self):
         self._reduce_unused_verts()

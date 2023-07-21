@@ -3,23 +3,26 @@ from math import sin, cos, pi, radians
 
 
 def _scale_vert(vert, about, factor):
-    diff = [vert[i] - about[i] for i in [0,1]]
+    diff = [vert[i] - about[i] for i in [0, 1]]
     return [about[i] + factor * diff[i] for i in [0, 1]]
 
 
 def _rotate_vert(vert, about, theta):
-    diff = [vert[i] - about[i] for i in [0,1]]
+    diff = [vert[i] - about[i] for i in [0, 1]]
     return [about[0] + (cos(theta) * diff[0] - sin(theta) * diff[1]),
             about[1] + (sin(theta) * diff[0] + cos(theta) * diff[1])]
+
 
 class UVPostProcess:
     def __init__(self, **kwargs):
         self.uv_mesh_maker = None
         self.disjoint_faces = kwargs.get('disjoint_faces', False)
 
-        self.random_vert_offset_radius = kwargs.get('uv_random_vert_offset_radius')
+        self.random_vert_offset_radius = \
+            kwargs.get('uv_random_vert_offset_radius')
 
-        self.random_face_offset_radius = kwargs.get('uv_random_face_offset_radius')
+        self.random_face_offset_radius = \
+            kwargs.get('uv_random_face_offset_radius')
         if self.random_face_offset_radius:
             self.disjoint_faces = True
 
@@ -30,7 +33,8 @@ class UVPostProcess:
         else:
             self.rotate_faces_radians = None
 
-        rotate_faces_random_degrees = kwargs.get('uv_rotate_faces_random_degrees')
+        rotate_faces_random_degrees = \
+            kwargs.get('uv_rotate_faces_random_degrees')
         if rotate_faces_random_degrees:
             self.rotate_faces_random_radians = \
                 radians(rotate_faces_random_degrees)
@@ -44,7 +48,8 @@ class UVPostProcess:
             self.disjoint_faces = True
 
         # [min, max]
-        self.scale_faces_random_range = kwargs.get('uv_scale_faces_random_range')
+        self.scale_faces_random_range = \
+            kwargs.get('uv_scale_faces_random_range')
         if self.scale_faces_random_range:
             self.disjoint_faces = True
 
@@ -98,7 +103,8 @@ class UVPostProcess:
     def _rotate_verts_about_faces(self):
         if self.rotate_faces_radians:
             for face in self.faces:
-                self._rotate_face_about_centroid(face, self.rotate_faces_radians)
+                self._rotate_face_about_centroid(face,
+                                                 self.rotate_faces_radians)
 
         if self.rotate_faces_random_radians:
             for face in self.faces:
@@ -136,7 +142,6 @@ class UVPostProcess:
         for vert_index in face:
             vert = self.verts[vert_index]
             new_vert = _scale_vert(vert, centroid, scale)
-            # raise ValueError(str(centroid) + '-' + str(vert) + '-' +str(new_vert))
             self.verts[vert_index] = new_vert
 
     def _rotate_face_about_centroid(self, face, theta):
