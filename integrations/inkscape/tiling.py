@@ -143,6 +143,7 @@ class Tiling(inkex.EffectExtension):
                       v_range=[0, 1],
                       u_cyclic=False,
                       v_cyclic=False,
+                      uv_aspect_ratio_adjust=True,
                       adaptor_class=SvgAdaptor)
 
         if options.fill_type == "pattern":

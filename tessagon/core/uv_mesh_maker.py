@@ -32,6 +32,10 @@ class UVMeshMaker:
     def extra_parameters(self):
         return self.tile_generator.extra_parameters
 
+    @property
+    def uv_ratio(self):
+        return self.tessagon.uv_ratio
+
     def create_vert(self, coords):
         self.verts.append(coords)
         return (len(self.verts) - 1)

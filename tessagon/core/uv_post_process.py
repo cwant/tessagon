@@ -1,5 +1,5 @@
 from random import random, uniform
-from math import sin, cos, pi, radians
+from math import sin, cos, pi, radians, sqrt
 
 
 def _scale_vert(vert, about, factor):
@@ -13,10 +13,18 @@ def _rotate_vert(vert, about, theta):
             about[1] + (sin(theta) * diff[0] + cos(theta) * diff[1])]
 
 
+def _rotate_vert_aspect(vert, about, theta, uv_ratio):
+    diff = [vert[0] - about[0],
+            (vert[1] - about[1]) * uv_ratio]
+    return [about[0] + (cos(theta) * diff[0] - sin(theta) * diff[1]),
+            about[1] + (1.0 / uv_ratio) * (sin(theta) * diff[0] + cos(theta) * diff[1])]
+
+
 class UVPostProcess:
     def __init__(self, **kwargs):
         self.uv_mesh_maker = None
         self.disjoint_faces = kwargs.get('disjoint_faces', False)
+        self.aspect_ratio_adjust = kwargs.get('uv_aspect_ratio_adjust', False)
 
         self.random_vert_offset_radius = \
             kwargs.get('uv_random_vert_offset_radius')
@@ -60,6 +68,10 @@ class UVPostProcess:
     @property
     def faces(self):
         return self.uv_mesh_maker.faces
+
+    @property
+    def uv_ratio(self):
+        return self.uv_mesh_maker.uv_ratio
 
     def run(self, uv_mesh_maker):
         self.uv_mesh_maker = uv_mesh_maker
@@ -148,5 +160,8 @@ class UVPostProcess:
         centroid = self._face_centroid(face)
         for vert_index in face:
             vert = self.verts[vert_index]
-            new_vert = _rotate_vert(vert, centroid, theta)
+            if self.aspect_ratio_adjust:
+                new_vert = _rotate_vert_aspect(vert, centroid, theta, 1.0 / self.uv_ratio)
+            else:
+                new_vert = _rotate_vert(vert, centroid, theta)
             self.verts[vert_index] = new_vert

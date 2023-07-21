@@ -53,3 +53,11 @@ class Tessagon:
     @property
     def corners(self):
         return self.uv_mesh_maker.corners
+
+    @property
+    def metadata(self):
+        return self.__class__.metadata
+
+    @property
+    def uv_ratio(self):
+        return self.metadata.uv_ratio
