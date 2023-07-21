@@ -91,7 +91,7 @@ class SlatsTile(AlternatingTile):
 
         bottom_verts = [['corner', 'bottom', 'left']]
         top_verts = [['corner', 'top', 'left']]
-        for i in range(1, self.num_slats - 1):
+        for i in range(1, self.num_slats):
             bottom_verts.append(['bottom', i])
             top_verts.append(['top', i])
 
@@ -115,7 +115,7 @@ class SlatsTile(AlternatingTile):
 
         left_verts = [['corner', 'bottom', 'left']]
         right_verts = [['corner', 'bottom', 'right']]
-        for i in range(1, self.num_slats - 1):
+        for i in range(1, self.num_slats):
             left_verts.append(['left', i])
             right_verts.append(['right', i])
 

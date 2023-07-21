@@ -62,7 +62,6 @@ def make_test_method(tessagon_class):
     def make_and_test_tessagon(self):
         edge_faces = EdgeBuilder(tessagon_class).run()
         assert len(edge_faces) > 0
-
         for edge in edge_faces:
             faces = edge_faces[edge]
             assert len(faces) == 2
@@ -71,6 +70,6 @@ def make_test_method(tessagon_class):
 
 for tessagon_class in test_classes:
     name = class_to_method_name(tessagon_class,
-                                prefix='test_non_manifold_')
+                                prefix='test_manifold_')
 
     setattr(TestManifold, name, make_test_method(tessagon_class))
