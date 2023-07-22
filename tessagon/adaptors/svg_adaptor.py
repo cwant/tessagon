@@ -120,12 +120,12 @@ class SvgAdaptor(ListAdaptor):
             upper = _unit_clamp(h + self.svg_randomize_h)
             h = uniform(lower, upper)
         if self.svg_randomize_s:
-            lower = _unit_clamp(h - self.svg_randomize_s)
-            upper = _unit_clamp(h + self.svg_randomize_s)
+            lower = _unit_clamp(s - self.svg_randomize_s)
+            upper = _unit_clamp(s + self.svg_randomize_s)
             s = uniform(lower, upper)
         if self.svg_randomize_v:
-            lower = _unit_clamp(h - self.svg_randomize_v)
-            upper = _unit_clamp(h + self.svg_randomize_v)
+            lower = _unit_clamp(v - self.svg_randomize_v)
+            upper = _unit_clamp(v + self.svg_randomize_v)
             v = uniform(lower, upper)
 
         return _rgb_to_hex(*hsv_to_rgb(h, s, v))
