@@ -144,11 +144,9 @@ class Tiling(inkex.EffectExtension):
         if not self.validate_options(tessagon_class):
             return None
 
-        multiplier = self.bb_multiplier(tessagon_class)
         kwargs = dict(simple_2d=True,
-                      multiplier_2d=multiplier,
-                      translate_2d=[options.x_min,
-                                    options.y_min],
+                      bounding_box_2d=[[options.x_min, options.x_max],
+                                       [options.y_min, options.y_max]],
                       u_num=options.x_num,
                       v_num=options.y_num,
                       u_range=[0, 1],
@@ -208,22 +206,6 @@ class Tiling(inkex.EffectExtension):
     def options_to_colors(self):
         return [str(getattr(self.options, "color_{}".format(i)))
                 for i in range(1, 9)]
-
-    def bb_multiplier(self, tessagon_class):
-        xy_ratio = tessagon_class.metadata.uv_ratio
-
-        x_span = self.options.x_max - self.options.x_min
-        y_span = self.options.y_max - self.options.y_min
-        tile_aspect = self.options.y_num / self.options.x_num
-
-        y_prime = x_span * tile_aspect / xy_ratio
-        y_factor = y_prime / y_span
-
-        # If won't fit in the y direction, scale back
-        if y_factor > 1.0:
-            return x_span / y_factor
-
-        return x_span
 
 
 if __name__ == "__main__":

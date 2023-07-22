@@ -13,6 +13,18 @@ class XYZMeshMaker:
         self._initialize_function(**kwargs)
         self._initialize_output()
 
+    @property
+    def uv_ratio(self):
+        return self.tessagon.uv_ratio
+
+    @property
+    def u_num(self):
+        return self.tessagon.u_num
+
+    @property
+    def v_num(self):
+        return self.tessagon.v_num
+
     def get_mesh_adaptor(self, **kwargs):
         if 'adaptor_class' in kwargs:
             adaptor_class = kwargs['adaptor_class']
@@ -59,29 +71,56 @@ class XYZMeshMaker:
             raise ValueError('Must specify a function')
 
     def _initialize_simple_2d_function(self, **kwargs):
-        metadata = self.tessagon.metadata
+        if not self._initialize_bounding_box_2d(**kwargs):
+            self.multiplier_2d = kwargs.get('multiplier_2d', 1.0)
+            self.translate_2d = kwargs.get('translate_2d', (0, 0))
 
         u_multiplier_2d = 1.0
-        if metadata and metadata.uv_ratio:
-            v_multiplier_2d = 1.0 / metadata.uv_ratio
-        else:
-            v_multiplier_2d = 1.0
+        v_multiplier_2d = 1.0 / self.uv_ratio
 
-        tile_aspect = self.uv_mesh_maker.v_num / self.uv_mesh_maker.u_num
-        multiplier_2d = kwargs.get('multiplier_2d', 1.0)
-        u_multiplier_2d *= multiplier_2d
-        v_multiplier_2d *= multiplier_2d * tile_aspect
+        tile_aspect = self.v_num / self.u_num
+        u_multiplier_2d *= self.multiplier_2d
+        v_multiplier_2d *= self.multiplier_2d * tile_aspect
 
-        translate_2d = kwargs.get('translate_2d', (0, 0))
         # Simple xy-plane
-        return lambda u, v: (translate_2d[0] + u_multiplier_2d * u,
-                             translate_2d[1] + v_multiplier_2d * v,
+        return lambda u, v: (self.translate_2d[0] + u_multiplier_2d * u,
+                             self.translate_2d[1] + v_multiplier_2d * v,
                              0.0)
 
         # Just to test how the corners are going to map ...
         # top_left = self.tile_generator.corners[0]
         # bottom_right = self.tile_generator.corners[3]
         # print(self.f(*top_left), self.f(*bottom_right))
+
+    def _initialize_bounding_box_2d(self, **kwargs):
+        # TODO: this could probably be simplified
+        # (it sort of inverts the stuff in the above method)
+        bounding_box = kwargs.get('bounding_box_2d', None)
+        if not bounding_box:
+            return False
+
+        (x_min, x_max) = bounding_box[0]
+        (y_min, y_max) = bounding_box[1]
+        if (x_min >= x_max) or (y_min >= y_max):
+            raise ValueError("Malformed 2D bounding box, expecting: "
+                             "[[x_min, x_max], [y_min, y_max]]")
+
+        self.translate_2d = [x_min, y_min]
+
+        x_span = x_max - x_min
+        y_span = y_max - y_min
+        tile_aspect = self.v_num / self.u_num
+
+        y_prime = x_span * tile_aspect / self.uv_ratio
+        y_factor = y_prime / y_span
+
+        # If won't fit in the y direction, scale back
+        if y_factor > 1.0:
+            self.multiplier_2d = x_span / y_factor
+        else:
+            self.multiplier_2d = x_span
+
+        return True
 
     def _initialize_output(self):
         self.verts = []
