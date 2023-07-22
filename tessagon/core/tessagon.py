@@ -1,3 +1,4 @@
+import random
 from tessagon.core.uv_mesh_maker import UVMeshMaker
 from tessagon.core.xyz_mesh_maker import XYZMeshMaker
 
@@ -9,6 +10,7 @@ class Tessagon:
     face_order = None
 
     def __init__(self, **kwargs):
+        self._initialize_randomness(**kwargs)
         self.uv_mesh_maker = UVMeshMaker(self, **kwargs)
         self.xyz_mesh_maker = XYZMeshMaker(self, **kwargs)
 
@@ -61,3 +63,10 @@ class Tessagon:
     @property
     def uv_ratio(self):
         return self.metadata.uv_ratio
+
+    def _initialize_randomness(self, **kwargs):
+        seed = kwargs.get('random_seed', -1)
+        if seed < 0:
+            return
+
+        random.seed(seed)

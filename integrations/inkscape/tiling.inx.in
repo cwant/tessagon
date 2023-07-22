@@ -71,6 +71,12 @@
     </page>
 
     <page name="post_processing" gui-text="Post-processing Options">
+      <param name="random_seed"
+             type="int" min="-1"
+             gui-text="Random seed (-1 for none):">-1</param>
+
+      <separator />
+
       <param name="uv_random_vert_offset_radius"
              type="float" min="0.0"
              gui-text="Random vertex offset radius:">0.0</param>

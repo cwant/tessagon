@@ -65,6 +65,9 @@ class Tiling(inkex.EffectExtension):
                               default=inkex.Color(self.DEFAULT_COLORS[i - 1]),
                               help="Color {}".format(i))
 
+        pars.add_argument("--random_seed",
+                          type=int, default=-1,
+                          help="Random seed (-1 for none)")
         pars.add_argument("--uv_random_vert_offset_radius",
                           type=float, default=0.0,
                           help="Random vertex offset radius")
@@ -154,6 +157,7 @@ class Tiling(inkex.EffectExtension):
                       u_cyclic=False,
                       v_cyclic=False,
                       uv_aspect_ratio_adjust=True,
+                      random_seed=options.random_seed,
                       adaptor_class=SvgAdaptor)
 
         if options.fill_type == "pattern":
