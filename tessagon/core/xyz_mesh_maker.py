@@ -71,54 +71,56 @@ class XYZMeshMaker:
             raise ValueError('Must specify a function')
 
     def _initialize_simple_2d_function(self, **kwargs):
+        # multiplier_2d is the total width of the 2d output
+        # We strive to maintain the correct aspect ratio
+
         if not self._initialize_bounding_box_2d(**kwargs):
             self.multiplier_2d = kwargs.get('multiplier_2d', 1.0)
             self.translate_2d = kwargs.get('translate_2d', (0, 0))
 
-        u_multiplier_2d = 1.0
-        v_multiplier_2d = 1.0 / self.uv_ratio
+        total_width = self.multiplier_2d
+        tile_width = total_width / self.u_num
+        tile_height = tile_width / self.uv_ratio
+        total_height = tile_height * self.v_num
 
-        tile_aspect = self.v_num / self.u_num
-        u_multiplier_2d *= self.multiplier_2d
-        v_multiplier_2d *= self.multiplier_2d * tile_aspect
-
-        # Simple xy-plane
-        return lambda u, v: (self.translate_2d[0] + u_multiplier_2d * u,
-                             self.translate_2d[1] + v_multiplier_2d * v,
+        # Map to xy-plane
+        return lambda u, v: (self.translate_2d[0] + total_width * u,
+                             self.translate_2d[1] + total_height * v,
                              0.0)
 
-        # Just to test how the corners are going to map ...
-        # top_left = self.tile_generator.corners[0]
-        # bottom_right = self.tile_generator.corners[3]
-        # print(self.f(*top_left), self.f(*bottom_right))
-
     def _initialize_bounding_box_2d(self, **kwargs):
-        # TODO: this could probably be simplified
-        # (it sort of inverts the stuff in the above method)
+        # We try to fit the output in the bounding box, optionally centered
         bounding_box = kwargs.get('bounding_box_2d', None)
+        center_bounding_box = kwargs.get('center_bounding_box_2d', False)
+
         if not bounding_box:
             return False
 
         (x_min, x_max) = bounding_box[0]
         (y_min, y_max) = bounding_box[1]
+
         if (x_min >= x_max) or (y_min >= y_max):
             raise ValueError("Malformed 2D bounding box, expecting: "
                              "[[x_min, x_max], [y_min, y_max]]")
 
         self.translate_2d = [x_min, y_min]
 
-        x_span = x_max - x_min
-        y_span = y_max - y_min
-        tile_aspect = self.v_num / self.u_num
+        width = x_max - x_min
+        height = y_max - y_min
 
-        y_prime = x_span * tile_aspect / self.uv_ratio
-        y_factor = y_prime / y_span
-
-        # If won't fit in the y direction, scale back
-        if y_factor > 1.0:
-            self.multiplier_2d = x_span / y_factor
+        tile_width = width / self.u_num
+        tile_height = tile_width / self.uv_ratio
+        total_height = tile_height * self.v_num
+        if total_height > height:
+            # Scale back to fit the y direction
+            total_width = width * (height / total_height)
+            self.multiplier_2d = total_width
+            if center_bounding_box:
+                self.translate_2d[0] += ((width - total_width) / 2)
         else:
-            self.multiplier_2d = x_span
+            self.multiplier_2d = width
+            if center_bounding_box:
+                self.translate_2d[1] += ((height - total_height) / 2)
 
         return True
 
