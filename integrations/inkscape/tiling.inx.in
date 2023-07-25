@@ -36,8 +36,13 @@
       </param>
       <param name="stroke_width" type="float" min="0" max="1000"
              gui-text="Stroke Width:">1</param>
-      <param name="stroke_color" type="color" appearance="colorbutton"
-             gui-text="Stroke Color:">0x000000FF</param>
+
+      <param name="tab" type="notebook">
+        <page name="strokecolor" gui-text="Stroke Color">
+          <param name="stroke_color" type="color" appearance="color"
+                 gui-text="Stroke Color:">0x000000FF</param>
+        </page>
+      </param>
     </page>
 
     <page name="fill_options" gui-text="Fill Options">
@@ -52,22 +57,40 @@
       <param name="color_pattern" type="int" min="1" max="10"
              gui-text="Which color pattern to use:">1</param>
 
-      <param name="color_1" type="color" appearance="colorbutton"
-             gui-text="Color 1:">0xD7E3F4FF</param>
-      <param name="color_2" type="color" appearance="colorbutton"
-             gui-text="Color 2:">0xAFC6E9FF</param>
-      <param name="color_3" type="color" appearance="colorbutton"
-             gui-text="Color 3:">0x87AADEFF</param>
-      <param name="color_4" type="color" appearance="colorbutton"
-             gui-text="Color 4:">0x5F8DD3FF</param>
-      <param name="color_5" type="color" appearance="colorbutton"
-             gui-text="Color 5:">0x3771C8FF</param>
-      <param name="color_6" type="color" appearance="colorbutton"
-             gui-text="Color 6:">0x2C5AA0FF</param>
-      <param name="color_7" type="color" appearance="colorbutton"
-             gui-text="Color 7:">0x214478FF</param>
-      <param name="color_8" type="color" appearance="colorbutton"
-             gui-text="Color 8:">0x162D50FF</param>
+      <param name="tab" type="notebook">
+        <page name="color1" gui-text="Color 1">
+          <param name="color_1" type="color" appearance="color"
+                 gui-text="Color 1:">0xD7E3F4FF</param>
+        </page>
+        <page name="color2" gui-text="Color 2">
+          <param name="color_2" type="color" appearance="color"
+                 gui-text="Color 2:">0xAFC6E9FF</param>
+        </page>
+        <page name="color3" gui-text="Color 3">
+          <param name="color_3" type="color" appearance="color"
+                 gui-text="Color 3:">0x87AADEFF</param>
+        </page>
+        <page name="color4" gui-text="Color 4">
+          <param name="color_4" type="color" appearance="color"
+                 gui-text="Color 4:">0x5F8DD3FF</param>
+        </page>
+        <page name="color5" gui-text="Color 5">
+          <param name="color_5" type="color" appearance="color"
+                 gui-text="Color 5:">0x3771C8FF</param>
+        </page>
+        <page name="color6" gui-text="Color 6">
+          <param name="color_6" type="color" appearance="color"
+                 gui-text="Color 6:">0x2C5AA0FF</param>
+        </page>
+        <page name="color7" gui-text="Color 7">
+          <param name="color_7" type="color" appearance="color"
+                 gui-text="Color 7:">0x214478FF</param>
+        </page>
+        <page name="color8" gui-text="Color 8">
+          <param name="color_8" type="color" appearance="color"
+                 gui-text="Color 8:">0x162D50FF</param>
+        </page>
+      </param>
     </page>
 
     <page name="post_processing" gui-text="Post-processing Options">
