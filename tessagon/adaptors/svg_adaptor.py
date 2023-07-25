@@ -108,6 +108,9 @@ class SvgAdaptor(ListAdaptor):
         return '<polygon {} points="{}" />'.format(style, points_string)
 
     def _randomize_color(self, rgb_hex):
+        if rgb_hex == 'none':
+            return 'none'
+
         if not (self.svg_randomize_h or self.svg_randomize_s or
                 self.svg_randomize_v):
             return rgb_hex
