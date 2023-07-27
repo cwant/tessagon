@@ -3,17 +3,33 @@ from random import uniform
 from tessagon.adaptors.list_adaptor import ListAdaptor
 
 
-def _hex_to_rgb(hex):
-    rgb = []
-    for i in (1, 3, 5):
+def _str_to_rgba(color_str):
+    if color_str[0] == '#':
+        return _hex_to_rgba(color_str)
+    list_str = color_str.translate({ord(i): None for i in 'rgba() '}).\
+        split(',')
+    if len(list_str) in [3, 4]:
+        list_float = [float(c) for c in list_str]
+        for i in range(3):
+            list_float[i] = (list_float[i] / 255.0)
+        return list_float
+
+    raise ValueError('Unrecognized color: {}'.format(color_str))
+
+
+def _hex_to_rgba(hex):
+    if len(hex) < 8:
+        hex = hex + 'FF'
+    rgba = []
+    for i in (1, 3, 5, 7):
         decimal = int(hex[i:i+2], 16)
-        rgb.append(decimal / 255)
-    return tuple(rgb)
+        rgba.append(decimal / 255)
+    return list(rgba)
 
 
-def _rgb_to_hex(r, g, b):
-    rgb = [round(255 * c) for c in [r, g, b]]
-    return '#{:02x}{:02x}{:02x}'.format(*rgb)
+def _rgba_to_fill_style(r, g, b, a=1.0):
+    rgba = [round(255 * c) for c in [r, g, b]] + [a]
+    return 'fill:rgb({},{},{});fill-opacity:{};'.format(*rgba)
 
 
 def _unit_clamp(v):
@@ -89,8 +105,7 @@ class SvgAdaptor(ListAdaptor):
             style += "stroke-width:{};".\
                 format(self.svg_stroke_width)
         if self.svg_fill_color:
-            color = self._randomize_color(self.svg_fill_color)
-            style += 'fill:{};'.format(color)
+            style += self._randomize_fill_style(self.svg_fill_color)
         if len(style) > 0:
             style = ' style="{}"'.format(style)
         return style
@@ -98,8 +113,7 @@ class SvgAdaptor(ListAdaptor):
     def make_face(self, face, fill_color=None):
         style = ''
         if fill_color:
-            fill_color = self._randomize_color(fill_color)
-            style = 'style="fill:{};"'.format(fill_color)
+            style = 'style="{}"'.format(self._randomize_fill_style(fill_color))
 
         verts = [self.vert_list[v] for v in face]
         points_string = \
@@ -107,16 +121,17 @@ class SvgAdaptor(ListAdaptor):
                                      vert[1]) for vert in verts])
         return '<polygon {} points="{}" />'.format(style, points_string)
 
-    def _randomize_color(self, rgb_hex):
-        if rgb_hex == 'none':
-            return 'none'
+    def _randomize_fill_style(self, rgba_hex):
+        if rgba_hex == 'none':
+            return 'fill:none;'
 
         if not (self.svg_randomize_h or self.svg_randomize_s or
                 self.svg_randomize_v):
-            return rgb_hex
+            return rgba_hex
 
-        rgb = _hex_to_rgb(rgb_hex)
-        (h, s, v) = rgb_to_hsv(*rgb)
+        rgba = _str_to_rgba(rgba_hex)
+        (h, s, v) = rgb_to_hsv(*rgba[0:3])
+        a = rgba[3]
 
         if self.svg_randomize_h:
             lower = _unit_clamp(h - self.svg_randomize_h)
@@ -131,4 +146,4 @@ class SvgAdaptor(ListAdaptor):
             upper = _unit_clamp(v + self.svg_randomize_v)
             v = uniform(lower, upper)
 
-        return _rgb_to_hex(*hsv_to_rgb(h, s, v))
+        return _rgba_to_fill_style(*(list(hsv_to_rgb(h, s, v)) + [a]))
