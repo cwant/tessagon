@@ -17,7 +17,8 @@ class DissectedHexQuadTile(Tile):
         self.v_symmetric = False
 
 
-class DissectedHexQuadTile1(DissectedHexQuadTile):
+# The verts can be reused for DissectedHexTri tiles
+class DissectedHexQuadTile1Verts(Tile):
 
     def init_verts(self):
         return {0: None,
@@ -27,12 +28,6 @@ class DissectedHexQuadTile1(DissectedHexQuadTile):
                 4: None,
                 5: None,
                 6: None}
-
-    def init_faces(self):
-        return {'A': None,
-                'B': None,
-                'C': None,
-                'D': None}
 
     def calculate_verts(self):
         self.add_vert(0, 0, 0, equivalent=[left_tile(8),
@@ -50,6 +45,16 @@ class DissectedHexQuadTile1(DissectedHexQuadTile):
         self.add_vert(6, 1, 1, equivalent=[right_tile(12),
                                            top_right_tile(0),
                                            top_tile(8)])
+
+
+class DissectedHexQuadTile1(DissectedHexQuadTile,
+                            DissectedHexQuadTile1Verts):
+
+    def init_faces(self):
+        return {'A': None,
+                'B': None,
+                'C': None,
+                'D': None}
 
     def calculate_faces(self):
         self.add_face('A', [0,
@@ -88,7 +93,7 @@ class DissectedHexQuadTile1(DissectedHexQuadTile):
             self.color_face('B', 1)
 
 
-class DissectedHexQuadTile2(DissectedHexQuadTile):
+class DissectedHexQuadTile2Verts(Tile):
 
     def init_verts(self):
         return {7: None,
@@ -98,12 +103,6 @@ class DissectedHexQuadTile2(DissectedHexQuadTile):
                 11: None,
                 12: None,
                 13: None}
-
-    def init_faces(self):
-        return {'E': None,
-                'F': None,
-                'G': None,
-                'H': None}
 
     def calculate_verts(self):
         self.add_vert(7, 0, 0, equivalent=[left_tile(1),
@@ -121,6 +120,15 @@ class DissectedHexQuadTile2(DissectedHexQuadTile):
         self.add_vert(13, 1, 1, equivalent=[right_tile(5),
                                             top_right_tile(7),
                                             top_tile(1)])
+
+
+class DissectedHexQuadTile2(DissectedHexQuadTile,
+                            DissectedHexQuadTile2Verts):
+    def init_faces(self):
+        return {'E': None,
+                'F': None,
+                'G': None,
+                'H': None}
 
     def calculate_faces(self):
         self.add_face('E', [7,
