@@ -14,6 +14,10 @@ class Tile(AbstractTile):
         if self.faces and self.color_pattern:
             self.face_paths = self.all_face_paths()
 
+    @property
+    def uv_ratio(self):
+        return self.__class__.uv_ratio
+
     def validate(self):
         # Subclass decides if this should be done
         pass

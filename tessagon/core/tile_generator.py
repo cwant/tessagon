@@ -55,7 +55,7 @@ class TileGenerator(ValueBlend):
             for parameter in self.extra_parameters:
                 extra_args[parameter] = self.extra_parameters[parameter]
 
-        tile_class = self.tessagon.__class__.tile_class
+        tile_class = self.tessagon.get_tile_class(extra_args['fingerprint'])
         return tile_class(self.tessagon,
                           **{**kwargs, **extra_args})
 

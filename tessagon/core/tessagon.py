@@ -4,7 +4,7 @@ from tessagon.core.xyz_mesh_maker import XYZMeshMaker
 
 
 class Tessagon:
-    tile_class = None
+    tile_classes = None
     metadata = None
     # The adaptor decides if it wants to honor this
     face_order = None
@@ -62,7 +62,11 @@ class Tessagon:
 
     @property
     def uv_ratio(self):
-        return self.metadata.uv_ratio
+        return self.tile_classes[0].uv_ratio
+
+    def get_tile_class(self, fingerprint):
+        # Perhaps overridden in subclass ...
+        return self.__class__.tile_classes[0]
 
     def _initialize_randomness(self, **kwargs):
         seed = kwargs.get('random_seed', -1)
