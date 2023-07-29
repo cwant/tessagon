@@ -150,7 +150,7 @@ class TessagonCommonDemo:
         return self.tessellate(self.rhombus_klein, RhombusTessagon,
                                **{**kwargs, **options})
 
-    def octo_tessagon(self, position, **kwargs):
+    def octa_tessagon(self, position, **kwargs):
         options = {
             'u_range': [0.0, 1.0],
             'v_range': [0.0, 1.0],
@@ -161,8 +161,8 @@ class TessagonCommonDemo:
             'u_twist': True,
             'position': position
         }
-        OctoTessagon = self.method_to_class()
-        return self.tessellate(mobius, OctoTessagon,
+        OctaTessagon = self.method_to_class()
+        return self.tessellate(mobius, OctaTessagon,
                                **{**kwargs, **options})
 
     def hex_tri_tessagon(self, position, **kwargs):

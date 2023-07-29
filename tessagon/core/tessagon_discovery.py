@@ -1,6 +1,6 @@
 from tessagon.types.hex_tessagon import HexTessagon
 from tessagon.types.tri_tessagon import TriTessagon
-from tessagon.types.octo_tessagon import OctoTessagon
+from tessagon.types.octa_tessagon import OctaTessagon
 from tessagon.types.rhombus_tessagon import RhombusTessagon
 from tessagon.types.hex_tri_tessagon import HexTriTessagon
 from tessagon.types.hex_square_tri_tessagon import HexSquareTriTessagon
@@ -43,7 +43,7 @@ ALL = [SquareTessagon,
        HexTessagon,
        TriTessagon,
 
-       OctoTessagon,
+       OctaTessagon,
        HexTriTessagon,
        HexSquareTriTessagon,
        DodecaTessagon,

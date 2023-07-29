@@ -205,9 +205,9 @@ class TestDemo:
         assert self.color_count(tessagon, 1, 0) == 580
         assert self.color_count(tessagon, 1, 1) == 276
 
-    def test_octo_tessagon(self):
+    def test_octa_tessagon(self):
         # Mobius strip ...
-        tessagon = 'OctoTessagon'
+        tessagon = 'OctaTessagon'
         assert self.vert_list_length(tessagon) == 720
         assert self.face_list_length(tessagon) == 280
 

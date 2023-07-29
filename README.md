@@ -85,8 +85,8 @@ Additional tessagon classes can be added by deconstructing how a tessellation fi
 
 ### Archimedean tilings
 
-* [OctoTessagon](documentation/types/octo_tessagon.md) (1 color pattern)  
-  [![OctoTessagon](documentation/images/types/octo_tessagon_thumb.png)](documentation/types/octo_tessagon.md)
+* [OctaTessagon](documentation/types/octa_tessagon.md) (1 color pattern)  
+  [![OctaTessagon](documentation/images/types/octa_tessagon_thumb.png)](documentation/types/octa_tessagon.md)
 * [HexTriTessagon](documentation/types/hex_tri_tessagon.md) (1 color pattern)  
   [![HexTriTessagon](documentation/images/types/hex_tri_tessagon_thumb.png)](documentation/types/hex_tri_tessagon.md)
 * [HexSquareTriTessagon](documentation/types/hex_square_tri_tessagon.md) (1 color pattern)  

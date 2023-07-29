@@ -17,7 +17,7 @@ class DocumentationImages:
                      'HexTessagon',
                      'TriTessagon'],
 
-        'archimedean': ['OctoTessagon',
+        'archimedean': ['OctaTessagon',
                         'HexTriTessagon',
                         'HexSquareTriTessagon',
                         'DodecaTessagon',

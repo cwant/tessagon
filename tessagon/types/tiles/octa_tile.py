@@ -1,29 +1,20 @@
 from math import sqrt
 from tessagon.core.tile import Tile
-from tessagon.core.tessagon import Tessagon
-from tessagon.core.tessagon_metadata import TessagonMetadata
 from tessagon.core.tile_utils import left_tile, top_tile
 
-# TODO: gulp, 'octagon' does not begin with 'octo'
+# ^  ..o-o..
+# |  ./...\.
+# |  o.....o
+# |  |.....|
+# |  o.....o
+# |  .\.../.
+#    ..o-o..
+# V
+#    U ---->
 
-metadata = TessagonMetadata(name='Octagons and Squares',
-                            num_color_patterns=1,
-                            classification='archimedean',
-                            shapes=['octagons', 'squares'],
-                            sides=[8, 4],
-                            uv_ratio=1.0)
 
-
-class OctoTile(Tile):
-    # ^  ..o-o..
-    # |  ./...\.
-    # |  o.....o
-    # |  |.....|
-    # |  o.....o
-    # |  .\.../.
-    #    ..o-o..
-    # V
-    #    U ---->
+class OctaTile(Tile):
+    uv_ratio = 1.0
 
     CORNER_TO_VERT_RATIO = 1.0 / (2.0 + sqrt(2))
 
@@ -78,8 +69,3 @@ class OctoTile(Tile):
 
     def color_pattern1(self):
         self.color_face(['middle'], 1)
-
-
-class OctoTessagon(Tessagon):
-    tile_class = OctoTile
-    metadata = metadata
