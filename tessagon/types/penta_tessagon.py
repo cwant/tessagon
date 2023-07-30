@@ -1,5 +1,6 @@
-from tessagon.types.tiles.penta_tile import PentaTile
-from tessagon.core.tessagon import Tessagon
+from tessagon.types.tiles.penta_tiles import \
+    PentaTile1, PentaTile2
+from tessagon.core.alternating_tessagon import AlternatingTessagon
 from tessagon.core.tessagon_metadata import TessagonMetadata
 
 metadata = TessagonMetadata(name='Pentagons',
@@ -9,6 +10,6 @@ metadata = TessagonMetadata(name='Pentagons',
                             sides=[5])
 
 
-class PentaTessagon(Tessagon):
-    tile_classes = [PentaTile]
+class PentaTessagon(AlternatingTessagon):
+    tile_classes = [PentaTile1, PentaTile2]
     metadata = metadata
