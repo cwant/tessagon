@@ -32,7 +32,8 @@ TESSAGON_FILES = ['tessagon/*.py',
                   'tessagon/adaptors/base_*.py',
                   'tessagon/adaptors/list_*.py',
                   'tessagon/adaptors/svg_*.py',
-                  'tessagon/types/*.py']
+                  'tessagon/types/*.py',
+                  'tessagon/types/tiles/*.py']
 
 
 class PackageExtension:
