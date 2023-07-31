@@ -19,8 +19,7 @@ class Tile(AbstractTile):
         return self.__class__.uv_ratio
 
     def validate(self):
-        # Subclass decides if this should be done
-        pass
+        self.tessagon.validate_tile(self)
 
     def add_vert(self, index_keys, ratio_u, ratio_v, **kwargs):
         # Use the UVMeshMaker to create a vertex.

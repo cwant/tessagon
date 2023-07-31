@@ -94,12 +94,12 @@ class ZigZagTile1(ZigZagTile):
                             right_tile(17)],
                       equivalent=[right_tile('D')])
 
-        self.add_face('C', [4,
-                            3,
+        self.add_face('C', [5,
                             8,
-                            5,
-                            top_tile(17),
-                            top_tile(12)],
+                            3,
+                            4,
+                            top_tile(12),
+                            top_tile(17)],
                       equivalent=[top_tile('E')])
 
     def color_pattern1(self):

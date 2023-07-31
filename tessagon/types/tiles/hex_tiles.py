@@ -8,7 +8,7 @@ from tessagon.core.tile_utils import left_tile, right_tile, \
 
 
 class HexTile(Tile):
-    uv_ratio = 1.0/sqrt(3.0)
+    uv_ratio = 1.0 / sqrt(3.0)
 
     def __init__(self, tessagon, **kwargs):
         super().__init__(tessagon, **kwargs)

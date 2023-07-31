@@ -130,13 +130,13 @@ class TestDemo:
 
     def test_dodeca_tri_tessagon(self):
         tessagon = 'DodecaTriTessagon'
-        assert self.vert_list_length(tessagon) == 720
-        assert self.face_list_length(tessagon) == 340
+        assert self.vert_list_length(tessagon) == 930
+        assert self.face_list_length(tessagon) == 405
 
         assert self.color_pattern_count(tessagon) == 1
 
-        assert self.color_count(tessagon, 1, 0) == 240
-        assert self.color_count(tessagon, 1, 1) == 100
+        assert self.color_count(tessagon, 1, 0) == 270
+        assert self.color_count(tessagon, 1, 1) == 135
 
     def test_floret_tessagon(self):
         tessagon = 'FloretTessagon'
@@ -341,14 +341,14 @@ class TestDemo:
 
     def test_weave_tessagon(self):
         tessagon = 'WeaveTessagon'
-        assert self.vert_list_length(tessagon) == 1408
-        assert self.face_list_length(tessagon) == 672
+        assert self.vert_list_length(tessagon) == 1472
+        assert self.face_list_length(tessagon) == 704
 
         assert self.color_pattern_count(tessagon) == 1
 
-        assert self.color_count(tessagon, 1, 0) == 352
+        assert self.color_count(tessagon, 1, 0) == 368
         assert self.color_count(tessagon, 1, 1) == 160
-        assert self.color_count(tessagon, 1, 2) == 160
+        assert self.color_count(tessagon, 1, 2) == 176
 
     def test_zig_zag_tessagon(self):
         tessagon = 'ZigZagTessagon'

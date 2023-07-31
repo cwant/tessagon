@@ -68,6 +68,10 @@ class Tessagon:
         # Perhaps overridden in subclass ...
         return self.__class__.tile_classes[0]
 
+    def validate_tile(self, tile):
+        # Subclass might want to do tests
+        pass
+
     def _initialize_randomness(self, **kwargs):
         seed = kwargs.get('random_seed', -1)
         if seed < 0:

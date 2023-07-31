@@ -98,8 +98,8 @@ class TessagonCommonDemo:
         options = {
             'u_range': [0.0, 1.0],
             'v_range': [0.0, 1.0],
-            'u_num': 45,
-            'v_num': 3,
+            'u_num': 90,
+            'v_num': 6,
             'u_cyclic': True,
             'v_cyclic': False,
             'position': position
@@ -112,12 +112,12 @@ class TessagonCommonDemo:
         options = {
             'u_range': [0.0, 1.0],
             'v_range': [0.0, 1.0],
-            'u_num': 36,
-            'v_num': 12,
+            'u_num': 24,
+            'v_num': 72,
             'position': position
         }
         TriTessagon = self.method_to_class()
-        return self.tessellate(torus, TriTessagon,
+        return self.tessellate(self.torus2, TriTessagon,
                                **{**kwargs, **options})
 
     def square_tessagon(self, position, **kwargs):
@@ -141,9 +141,10 @@ class TessagonCommonDemo:
         options = {
             'u_range': [0.0, 1.0],
             'v_range': [0.0, 1.0],
-            'u_num': 40,
-            'v_num': 6,
-            'v_twist': True,
+            'u_num': 80,
+            'v_num': 12,
+            # v_twist is currently broken, hopefully can turn this on again soon.
+            # 'v_twist': True,
             'position': position
         }
         RhombusTessagon = self.method_to_class()
@@ -169,8 +170,8 @@ class TessagonCommonDemo:
         options = {
             'u_range': [-1.0, 1.0],
             'v_range': [-1.0, 1.0],
-            'u_num': 15,
-            'v_num': 10,
+            'u_num': 30,
+            'v_num': 20,
             'u_cyclic': False,
             'v_cyclic': False,
             'position': position
@@ -183,8 +184,8 @@ class TessagonCommonDemo:
         options = {
             'u_range': [0.0, 1.0],
             'v_range': [0.0, 1.0],
-            'u_num': 45,
-            'v_num': 5,
+            'u_num': 90,
+            'v_num': 10,
             'position': position
         }
         HexSquareTriTessagon = self.method_to_class()
@@ -197,6 +198,7 @@ class TessagonCommonDemo:
             'v_range': [0.0, 1.0],
             'u_num': 25,
             'v_num': 6,
+            'rot_factor': 2,
             'position': position
         }
         PythagoreanTessagon = self.method_to_class()
@@ -220,8 +222,8 @@ class TessagonCommonDemo:
         options = {
             'u_range': [-1.0, 1.0],
             'v_range': [0.0, 1.0],
-            'u_num': 4,
-            'v_num': 10,
+            'u_num': 8,
+            'v_num': 20,
             'u_cyclic': False,
             'v_cyclic': True,
             'position': position
@@ -246,8 +248,8 @@ class TessagonCommonDemo:
         options = {
             'u_range': [0.0, 1.0],
             'v_range': [0.0, 1.0],
-            'u_num': 20,
-            'v_num': 4,
+            'u_num': 40,
+            'v_num': 8,
             'position': position
         }
         SquareTriTessagon = self.method_to_class()
@@ -258,8 +260,8 @@ class TessagonCommonDemo:
         options = {
             'u_range': [0.0, 1.0],
             'v_range': [0.0, 1.0],
-            'u_num': 8,
-            'v_num': 6,
+            'u_num': 16,
+            'v_num': 12,
             'v_cyclic': False,
             'rot_factor': 1,
             'position': position
@@ -307,8 +309,8 @@ class TessagonCommonDemo:
         options = {
             'u_range': [0.0, 1.0],
             'v_range': [0.0, 1.0],
-            'u_num': 10,
-            'v_num': 2,
+            'u_num': 20,
+            'v_num': 4,
             'rot_factor': 2,
             'position': position
         }
@@ -320,8 +322,8 @@ class TessagonCommonDemo:
         options = {
             'u_range': [0.0, 1.0],
             'v_range': [0.0, 1.0],
-            'u_num': 32,
-            'v_num': 4,
+            'u_num': 64,
+            'v_num': 8,
             'u_cyclic': True,
             'v_cyclic': False,
             'position': position
@@ -334,8 +336,8 @@ class TessagonCommonDemo:
         options = {
             'u_range': [0.0, 1.0],
             'v_range': [0.0, 1.0],
-            'u_num': 35,
-            'v_num': 3,
+            'u_num': 70,
+            'v_num': 6,
             'v_cyclic': False,
             'position': position
         }
@@ -347,8 +349,8 @@ class TessagonCommonDemo:
         options = {
             'u_range': [-1.0, 1.0],
             'v_range': [0.0, 1.0],
-            'u_num': 3,
-            'v_num': 20,
+            'u_num': 10,
+            'v_num': 30,
             'u_cyclic': False,
             'v_cyclic': True,
             'position': position
@@ -357,39 +359,29 @@ class TessagonCommonDemo:
         return self.tessellate(one_sheet_hyperboloid, DodecaTriTessagon,
                                **{**kwargs, **options})
 
-    def dissected_triangle2_tessagon(self, position, **kwargs):
-        options = {
-            'u_range': [0.0, 1.0],
-            'v_range': [0.0, 1.0],
-            'u_num': 10,
-            'v_num': 2,
-            'rot_factor': 2,
-            'position': position
-        }
-        DissectedTriangeTessagon = self.method_to_class()
-        return self.tessellate(torus, DissectedTriangleTessagon,
-                               **{**kwargs, **options})
+    def cylinder2(self, u, v):
+        return cylinder(v, u)
 
     def dissected_triangle_tessagon(self, position, **kwargs):
         options = {
             'u_range': [0.0, 1.0],
             'v_range': [0.0, 1.0],
-            'u_num': 16,
-            'v_num': 3,
-            'u_cyclic': True,
-            'v_cyclic': False,
+            'u_num': 6,
+            'v_num': 32,
+            'u_cyclic': False,
+            'v_cyclic': True,
             'position': position
         }
         DissectedTriangleTessagon = self.method_to_class()
-        return self.tessellate(cylinder, DissectedTriangleTessagon,
+        return self.tessellate(self.cylinder2, DissectedTriangleTessagon,
                                **{**kwargs, **options})
 
     def dissected_hex_quad_tessagon(self, position, **kwargs):
         options = {
             'u_range': [0.0, 1.0],
             'v_range': [0.0, 1.0],
-            'u_num': 12,
-            'v_num': 24,
+            'u_num': 24,
+            'v_num': 48,
             'u_cyclic': True,
             'v_cyclic': True,
             'position': position
@@ -402,8 +394,8 @@ class TessagonCommonDemo:
         options = {
             'u_range': [0.0, 1.0],
             'v_range': [0.0, 1.0],
-            'u_num': 10,
-            'v_num': 20,
+            'u_num': 20,
+            'v_num': 40,
             'u_cyclic': True,
             'v_cyclic': True,
             'position': position
@@ -416,8 +408,8 @@ class TessagonCommonDemo:
         options = {
             'u_range': [0.0, 1.0],
             'v_range': [0.0, 1.0],
-            'u_num': 20,
-            'v_num': 4,
+            'u_num': 40,
+            'v_num': 8,
             'position': position
         }
         PentaTessagon = self.method_to_class()
@@ -428,24 +420,27 @@ class TessagonCommonDemo:
         options = {
             'u_range': [0.0, 1.0],
             'v_range': [0.0, 1.0],
-            'u_num': 50,
-            'v_num': 4,
+            'u_num': 100,
+            'v_num': 8,
             'position': position
         }
         Penta2Tessagon = self.method_to_class()
         return self.tessellate(torus, Penta2Tessagon,
                                **{**kwargs, **options})
 
+    def torus2(self, u, v):
+        return torus(v, u)
+
     def stanley_park_tessagon(self, position, **kwargs):
         options = {
             'u_range': [0.0, 1.0],
             'v_range': [0.0, 1.0],
-            'u_num': 25,
-            'v_num': 10,
+            'u_num': 10,
+            'v_num': 25,
             'position': position
         }
         StanleyParkTessagon = self.method_to_class()
-        return self.tessellate(torus, StanleyParkTessagon,
+        return self.tessellate(self.torus2, StanleyParkTessagon,
                                **{**kwargs, **options})
 
     def valemount_tessagon(self, position, **kwargs):
@@ -465,8 +460,8 @@ class TessagonCommonDemo:
         options = {
             'u_range': [0.0, 1.0],
             'v_range': [0.0, 1.0],
-            'u_num': 4,
-            'v_num': 1,
+            'u_num': 8,
+            'v_num': 2,
             'rot_factor': 5,
             'position': position
         }

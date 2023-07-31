@@ -84,12 +84,12 @@ class IslamicHexStarsTile1(IslamicHexStarsTile):
                             right_tile(9)],
                       equilalent=[right_tile('E')])
 
-        self.add_face('C', [6,
-                            5,
+        self.add_face('C', [0,
                             1,
-                            0,
-                            left_tile(9),
-                            left_tile(12)],
+                            5,
+                            6,
+                            left_tile(12),
+                            left_tile(9)],
                       equilalent=[left_tile('H')])
 
     def color_pattern1(self):

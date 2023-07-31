@@ -67,6 +67,15 @@ class AbstractTile(ValueBlend):
             tile = tile.neighbors[key]
         return tile
 
+    def get_neighbor_tiles(self):
+        neighbors = []
+        for name in self.neighbors:
+            neighbor = self.neighbors[name]
+            if neighbor:
+                neighbors.append(neighbor)
+
+        return neighbors
+
     @property
     def left(self):
         return self.get_neighbor_tile(["left"])

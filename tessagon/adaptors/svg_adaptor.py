@@ -127,7 +127,7 @@ class SvgAdaptor(ListAdaptor):
 
         if not (self.svg_randomize_h or self.svg_randomize_s or
                 self.svg_randomize_v):
-            return rgba_hex
+            return 'fill:{};'.format(rgba_hex)
 
         rgba = _str_to_rgba(rgba_hex)
         (h, s, v) = rgb_to_hsv(*rgba[0:3])

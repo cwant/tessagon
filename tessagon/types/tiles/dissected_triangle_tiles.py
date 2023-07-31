@@ -57,7 +57,7 @@ class DissectedTriangleTile1(DissectedTriangleTile):
         self.add_face('B', [0, 1, 3])
         self.add_face('C', [1, 0, right_tile(5)],
                       equivalent=[right_tile('E')])
-        self.add_face('D', [2, 3, left_tile(7)],
+        self.add_face('D', [2, 3, left_tile(6)],
                       equivalent=[left_tile('H')])
 
     def color_pattern1(self):

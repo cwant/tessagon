@@ -36,7 +36,7 @@ class FakeTileSubClass(Tile):
 
 
 class FakeTessagon:
-    tile_class = FakeTileSubClass
+    tile_classes = [FakeTileSubClass]
     metadata = None
 
     def __init__(self):
@@ -45,3 +45,9 @@ class FakeTessagon:
 
     def f(self, u, v):
         return [u, u*v, v]
+
+    def get_tile_class(self, fingerprint):
+        return FakeTileSubClass
+
+    def validate_tile(self, tile):
+        pass
