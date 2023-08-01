@@ -14,7 +14,7 @@ from tessagon import TessagonDiscovery
 
 LIGHT_GREYS = ['#eeeeee', '#dddddd', '#cccccc']
 
-class InkscapeSimpleDemo:
+class InkscapeSwatchesDemo:
     def __init__(self):
         self.x = 0
         self.y = 0
@@ -65,7 +65,14 @@ class InkscapeSimpleDemo:
     def num_tiles(self, tessagon_class):
         u_num = 4
         v_num = 4
-        uv_ratio = tessagon_class.metadata.uv_ratio
+
+        if len(tessagon_class.tile_classes) > 1:
+            u_num += 1
+            v_num += 1
+
+        # TODO: 'uv_ratio' ideally would be a class method of Tessagon, but
+        # there is already a instance method of that name.
+        uv_ratio = tessagon_class.tile_classes[0].uv_ratio
 
         ratio = u_num * uv_ratio / v_num
         if ratio > 1:
@@ -75,6 +82,8 @@ class InkscapeSimpleDemo:
             v_num -= 1
         elif ratio < 1:
             while (ratio < 1):
+                if u_num > 12:
+                    break
                 u_num += 1
                 ratio = u_num * uv_ratio / v_num
             u_num -= 1
@@ -144,4 +153,4 @@ class InkscapeSimpleDemo:
             g.append(p)
         return g
 
-InkscapeSimpleDemo().main()
+InkscapeSwatchesDemo().main()
