@@ -1,104 +1,78 @@
-from tessagon.types.hex_tessagon import HexTessagon
-from tessagon.types.tri_tessagon import TriTessagon
-from tessagon.types.octa_tessagon import OctaTessagon
-from tessagon.types.rhombus_tessagon import RhombusTessagon
-from tessagon.types.hex_tri_tessagon import HexTriTessagon
-from tessagon.types.hex_square_tri_tessagon import HexSquareTriTessagon
-from tessagon.types.square_tessagon import SquareTessagon
-from tessagon.types.pythagorean_tessagon import PythagoreanTessagon
-from tessagon.types.brick_tessagon import BrickTessagon
-from tessagon.types.dodeca_tessagon import DodecaTessagon
-from tessagon.types.square_tri_tessagon import SquareTriTessagon
-from tessagon.types.weave_tessagon import WeaveTessagon
-from tessagon.types.floret_tessagon import FloretTessagon
-from tessagon.types.hex_big_tri_tessagon import HexBigTriTessagon
-from tessagon.types.zig_zag_tessagon import ZigZagTessagon
-from tessagon.types.dissected_square_tessagon import DissectedSquareTessagon
-from tessagon.types.square_tri2_tessagon import SquareTri2Tessagon
-from tessagon.types.dodeca_tri_tessagon import DodecaTriTessagon
-from tessagon.types.dissected_triangle_tessagon \
-    import DissectedTriangleTessagon
-from tessagon.types.dissected_hex_quad_tessagon \
-    import DissectedHexQuadTessagon
-from tessagon.types.dissected_hex_tri_tessagon \
-    import DissectedHexTriTessagon
-from tessagon.types.penta_tessagon import PentaTessagon
-from tessagon.types.penta2_tessagon import Penta2Tessagon
-from tessagon.types.big_hex_tri_tessagon import BigHexTriTessagon
-from tessagon.types.stanley_park_tessagon import StanleyParkTessagon
-from tessagon.types.valemount_tessagon import ValemountTessagon
-from tessagon.types.cloverdale_tessagon import CloverdaleTessagon
-from tessagon.types.islamic_hex_stars_tessagon import IslamicHexStarsTessagon
-from tessagon.types.islamic_stars_crosses_tessagon \
-    import IslamicStarsCrossesTessagon
-from tessagon.types.hokusai_hashes_tessagon \
-    import HokusaiHashesTessagon
-from tessagon.types.hokusai_parallelograms_tessagon \
-    import HokusaiParallelogramsTessagon
-from tessagon.types.slats_tessagon \
-    import SlatsTessagon
+import importlib
+from tessagon.core import class_name_to_method_name
 
 # Note that ALL is ordered in an ideal way (regular, archimedean, ...)
-ALL = [SquareTessagon,
-       HexTessagon,
-       TriTessagon,
+ALL = ['SquareTessagon',
+       'HexTessagon',
+       'TriTessagon',
 
-       OctaTessagon,
-       HexTriTessagon,
-       HexSquareTriTessagon,
-       DodecaTessagon,
-       SquareTriTessagon,
-       SquareTri2Tessagon,
-       DodecaTriTessagon,
-       BigHexTriTessagon,
+       'OctaTessagon',
+       'HexTriTessagon',
+       'HexSquareTriTessagon',
+       'DodecaTessagon',
+       'SquareTriTessagon',
+       'SquareTri2Tessagon',
+       'DodecaTriTessagon',
+       'BigHexTriTessagon',
 
-       RhombusTessagon,
-       FloretTessagon,
-       DissectedSquareTessagon,
-       DissectedTriangleTessagon,
-       DissectedHexQuadTessagon,
-       DissectedHexTriTessagon,
-       PentaTessagon,
-       Penta2Tessagon,
+       'RhombusTessagon',
+       'FloretTessagon',
+       'DissectedSquareTessagon',
+       'DissectedTriangleTessagon',
+       'DissectedHexQuadTessagon',
+       'DissectedHexTriTessagon',
+       'PentaTessagon',
+       'Penta2Tessagon',
 
-       PythagoreanTessagon,
-       BrickTessagon,
-       WeaveTessagon,
-       HexBigTriTessagon,
-       ZigZagTessagon,
-       ValemountTessagon,
-       CloverdaleTessagon,
-       HokusaiParallelogramsTessagon,
-       SlatsTessagon,
+       'PythagoreanTessagon',
+       'BrickTessagon',
+       'WeaveTessagon',
+       'HexBigTriTessagon',
+       'ZigZagTessagon',
+       'ValemountTessagon',
+       'CloverdaleTessagon',
+       'HokusaiParallelogramsTessagon',
+       'SlatsTessagon',
 
-       StanleyParkTessagon,
-       IslamicHexStarsTessagon,
-       IslamicStarsCrossesTessagon,
+       'StanleyParkTessagon',
+       'IslamicHexStarsTessagon',
+       'IslamicStarsCrossesTessagon',
 
-       HokusaiHashesTessagon]
+       'HokusaiHashesTessagon']
 
 
 class TessagonDiscovery:
     def __init__(self, **kwargs):
-        self.classes = kwargs.get('classes', ALL)
+        self.names = kwargs.get('names', ALL)
+        self._classes = None
+
+    @property
+    def classes(self):
+        if self._classes is None:
+            self._classes = []
+            for name in self.names:
+                klass = self.__class__.get_class(name, verify=False)
+                self._classes.append(klass)
+
+        return self._classes
 
     def count(self):
-        return len(self.classes)
+        return len(self.names)
 
     def to_list(self):
         return self.classes
 
     def inverse(self):
-        other_classes = list(set(ALL) - set(self.classes))
-        return TessagonDiscovery(classes=other_classes)
+        other_names = list(set(ALL) - set(self.names))
+        return TessagonDiscovery(names=other_names)
 
     def __add__(self, other):
-        new_classes = list(set(self.classes) | set(other.classes))
-        return TessagonDiscovery(classes=new_classes)
+        new_names = list(set(self.names) | set(other.names))
+        return TessagonDiscovery(names=new_names)
 
     def __sub__(self, other):
-        new_classes = list(set(self.classes) - set(other.classes))
-        return TessagonDiscovery(classes=new_classes)
+        new_names = list(set(self.names) - set(other.names))
+        return TessagonDiscovery(names=new_names)
 
     def with_color_patterns(self):
         results = []
@@ -106,8 +80,8 @@ class TessagonDiscovery:
             if klass.metadata is None:
                 continue
             if klass.metadata.has_color_patterns:
-                results.append(klass)
-        return TessagonDiscovery(classes=results)
+                results.append(klass.__name__)
+        return TessagonDiscovery(names=results)
 
     def with_classification(self, classification):
         results = []
@@ -115,13 +89,15 @@ class TessagonDiscovery:
             if klass.metadata is None:
                 continue
             if klass.metadata.has_classification(classification):
-                results.append(klass)
-        return TessagonDiscovery(classes=results)
+                results.append(klass.__name__)
+        return TessagonDiscovery(names=results)
 
     @classmethod
-    def get_class(cls, class_name):
-        if class_name in globals():
-            klass = globals()[class_name]
-            if klass in ALL:
-                return klass
-        raise ValueError(class_name + ' is not recognized by Tessagon')
+    def get_class(cls, class_name, verify=True):
+        if verify and (class_name not in ALL):
+            raise ValueError(class_name + ' is not recognized by Tessagon')
+
+        module_name = class_name_to_method_name(class_name)
+        module_path = 'tessagon.types.{}'.format(module_name)
+        module = importlib.import_module(module_path)
+        return getattr(module, class_name)
