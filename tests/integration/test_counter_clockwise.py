@@ -7,10 +7,10 @@ sys.path.append(this_dir + '/../..')
 
 from tessagon.adaptors.list_adaptor import ListAdaptor  # noqa: E402
 from tessagon.core.tessagon_discovery import TessagonDiscovery  # noqa: E402
-from tessagon.core import class_to_method_name  # noqa: E402
+from tessagon.core import class_name_to_method_name  # noqa: E402
 
 find_all = TessagonDiscovery()
-test_classes = find_all.to_list()
+test_class_names = find_all.names
 
 
 class CounterClockwiseTester():
@@ -102,14 +102,15 @@ class TestCounterClockwise:
     pass
 
 
-def make_test_method(tessagon_class):
+def make_test_method(tessagon_class_name):
+    tessagon_class = TessagonDiscovery.get_class(tessagon_class_name)
     def make_and_test_tessagon(self):
         CounterClockwiseTester(tessagon_class).run()
     return make_and_test_tessagon
 
 
-for tessagon_class in test_classes:
-    name = class_to_method_name(tessagon_class,
-                                prefix='test_counter_clockwise_')
+for tessagon_class_name in test_class_names:
+    name = class_name_to_method_name(tessagon_class_name,
+                                     prefix='test_counter_clockwise_')
 
-    setattr(TestCounterClockwise, name, make_test_method(tessagon_class))
+    setattr(TestCounterClockwise, name, make_test_method(tessagon_class_name))

@@ -8,11 +8,11 @@ sys.path.append(this_dir + '/../..')
 from tessagon.adaptors.list_adaptor import ListAdaptor  # noqa: E402
 from tessagon.core.tessagon_discovery import TessagonDiscovery  # noqa: E402
 from tessagon.misc.shapes import torus  # noqa: E402
-from tessagon.core import class_to_method_name  # noqa: E402
+from tessagon.core import class_name_to_method_name  # noqa: E402
 
 find_all = TessagonDiscovery()
 non_manifold = find_all.with_classification('non_manifold')
-test_classes = (find_all - non_manifold).to_list()
+test_class_names = (find_all - non_manifold).names
 
 
 class EdgeBuilder():
@@ -29,7 +29,7 @@ class EdgeBuilder():
                   'v_num': 6,
                   'u_cyclic': True,
                   'v_cyclic': True}
-        tessagon = tessagon_class(**kwargs)
+        tessagon = self.tessagon_class(**kwargs)
         self.mesh = tessagon.create_mesh()
 
     def create_edge_faces(self):
@@ -58,8 +58,9 @@ class TestManifold:
     pass
 
 
-def make_test_method(tessagon_class):
+def make_test_method(tessagon_class_name):
     def make_and_test_tessagon(self):
+        tessagon_class = TessagonDiscovery.get_class(tessagon_class_name)
         edge_faces = EdgeBuilder(tessagon_class).run()
         assert len(edge_faces) > 0
         for edge in edge_faces:
@@ -68,8 +69,8 @@ def make_test_method(tessagon_class):
     return make_and_test_tessagon
 
 
-for tessagon_class in test_classes:
-    name = class_to_method_name(tessagon_class,
-                                prefix='test_manifold_')
+for tessagon_class_name in test_class_names:
+    name = class_name_to_method_name(tessagon_class_name,
+                                     prefix='test_manifold_')
 
-    setattr(TestManifold, name, make_test_method(tessagon_class))
+    setattr(TestManifold, name, make_test_method(tessagon_class_name))
