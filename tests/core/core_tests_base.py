@@ -27,17 +27,22 @@ class FakeUVMeshMaker:
 
 
 class FakeTileSubClass(Tile):
+    BOUNDARY = {'top': ['face-1', 'split', 'face-2'],
+                'left': ['face-1', 'vert-1', 'edge', 'vert-2', 'face-2'],
+                'bottom': ['face-1', 'split', 'face-2'],
+                'right': ['face-1', 'vert-1', 'edge', 'vert-2', 'face-2']}
+
     def init_verts(self):
-        return {'top': {'left': None,
-                        'right': None},
-                'bottom': {'left': None,
-                           'right': None}}
+        return {0: None,
+                1: None,
+                2: None,
+                3: None}
 
     def init_faces(self):
-        return {'top': {'left': None,
-                        'right': None},
-                'bottom': {'left': None,
-                           'right': None}}
+        return {'A': None,
+                'B': None,
+                'C': None,
+                'D': None}
 
 
 class FakeTessagon:

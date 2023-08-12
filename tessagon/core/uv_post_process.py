@@ -167,6 +167,10 @@ class UVPostProcess:
                 diff = [vert1[i] - vert2[i] for i in [0, 1]]
                 magnitude = sqrt(diff[0]**2 + diff[1]**2)
                 total += magnitude
+
+        if len(edge_seen) == 0:
+            return 0
+
         return total / len(edge_seen)
 
     def _face_centroid(self, face):

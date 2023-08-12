@@ -86,10 +86,14 @@ class UnitMeshMaker:
     def _calculate_verts(self):
         for tile in self.tiles:
             tile.calculate_verts()
+        for tile in self.tiles:
+            tile.calculate_shared_verts()
 
     def _calculate_faces(self):
         for tile in self.tiles:
             tile.calculate_faces()
+        for tile in self.tiles:
+            tile.calculate_shared_faces()
 
     def _initialize_colors(self):
         self.color_faces = [0]*len(self.faces)
@@ -140,6 +144,8 @@ class UnitMeshMaker:
         ordered_indices = []
         index = 0
         for face_type in self.tessagon.face_order:
+            if face_type not in self.face_types:
+                continue
             ordered_indices.extend(self.face_types[face_type])
 
             num_faces = len(self.face_types[face_type])

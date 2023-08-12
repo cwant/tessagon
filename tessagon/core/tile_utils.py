@@ -1,3 +1,19 @@
+def left_boundary(boundary_key):
+    return [['boundary'], 'left', boundary_key]
+
+
+def right_boundary(boundary_key):
+    return [['boundary'], 'right', boundary_key]
+
+
+def top_boundary(boundary_key):
+    return [['boundary'], 'top', boundary_key]
+
+
+def bottom_boundary(boundary_key):
+    return [['boundary'], 'bottom', boundary_key]
+
+
 def right_tile(index_keys):
     return [['right'], index_keys]
 

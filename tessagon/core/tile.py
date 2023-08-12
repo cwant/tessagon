@@ -1,4 +1,6 @@
 from tessagon.core.abstract_tile import AbstractTile
+from tessagon.core.tile_boundary import \
+    TileBoundary, SharedVert, SharedFace
 
 
 class Tile(AbstractTile):
@@ -13,87 +15,121 @@ class Tile(AbstractTile):
         self.color_pattern = kwargs.get('color_pattern') or None
         if self.faces and self.color_pattern:
             self.face_paths = self.all_face_paths()
+        self.init_boundary()
+
+    def init_boundary(self):
+        # Subclass might override (e.g., SlatsTessagon has dynamic boundary)
+        self.boundary = TileBoundary(self,
+                                     **self.__class__.BOUNDARY)
+
+    def validate(self):
+        self.tessagon.validate_tile(self)
+        self.boundary.validate()
 
     @property
     def uv_ratio(self):
         return self.__class__.uv_ratio
 
-    def validate(self):
-        self.tessagon.validate_tile(self)
-
     def add_vert(self, index_keys, ratio_u, ratio_v, **kwargs):
-        # Use the UVMeshMaker to create a vertex.
-        # In reality, multiple vertices may get defined if symmetry is declared
         vert = self._get_vert(index_keys)
         if vert is None:
             uv = self.blend(ratio_u, ratio_v)
-            vert = self.unit_mesh_maker.create_vert(uv)
+            shared_vert = \
+                self.get_shared_vert(index_keys, ratio_u, ratio_v,
+                                     **kwargs)
+            if shared_vert:
+                # We calculate this later when we have more information
+                return
 
-            self._set_vert(index_keys, vert)
+            vert = self.make_vert(index_keys, uv)
+
             if 'vert_type' in kwargs:
                 if not kwargs['vert_type'] in self.tessagon.vert_types:
                     self.tessagon.vert_types[kwargs['vert_type']] = []
                 self.tessagon.vert_types[kwargs['vert_type']].append(vert)
 
-        if vert is not None:
-            equivalent_verts = kwargs.get('equivalent', [])
-            for equivalent_vert in equivalent_verts:
-                self.set_equivalent_vert(*equivalent_vert, vert)
+        return vert
 
-        # We add additional vertices by flipping 'left', 'right' etc
-        # if the tile has some kind of symmetry defined
-        self._create_symmetric_verts(index_keys, ratio_u, ratio_v, **kwargs)
-
-        # On the boundary, make sure equivalent vertices are set on
-        # neighbor tiles
-        self._set_equivalent_neighbor_verts(index_keys, vert, **kwargs)
+    def make_vert(self, index_keys, uv):
+        vert = self.unit_mesh_maker.create_vert(uv)
+        self._set_vert(index_keys, vert)
 
         return vert
 
-    def set_equivalent_vert(self, neighbor_keys, index_keys, vert, **kwargs):
+    def get_shared_vert(self, index_keys, ratio_u, ratio_v, **kwargs):
+        for side in TileBoundary.SIDES:
+            arg = '{}_boundary'.format(side)
+            if arg in kwargs:
+                feature = kwargs[arg]
+                uv = self.blend(ratio_u, ratio_v)
+                return SharedVert(self, side, feature, index_keys,
+                                  uv, **kwargs)
+
+        return None
+
+    def calculate_shared_verts(self):
+        for shared_vert in self.boundary.get_shared_verts():
+            shared_vert.calculate_vert()
+
+    def set_equivalent_vert(self, index_keys, vert, **kwargs):
         # On boundary, the vert on a neighbor is equivalent to this vert
-        # This is usually only called indirectly via add_vert, but check out
-        # PythagoreanTile for an example of direct usage
         if vert is None:
             return None
 
-        tile = self.get_neighbor_tile(neighbor_keys)
-        if tile is None:
-            return None
-
-        tile._set_vert(self._index_path(index_keys, neighbor_keys), vert)
+        self._set_vert(index_keys, vert)
 
     def add_face(self, index_keys, vert_index_keys_list, **kwargs):
         # Use the UVMeshMaker to create a face.
-        # In reality, multiple faces may get defined if symmetry is declared
+
+        # Does it exist already?
         face = self._get_face(index_keys)
 
         if face is None:
+            shared_face = \
+                self.get_shared_face(index_keys,
+                                     vert_index_keys_list,
+                                     **kwargs)
+
+            if shared_face:
+                # We calculate this later when we have more information
+                return None
+
             verts = self._get_verts_from_list(vert_index_keys_list)
             if verts is not None:
                 face = \
-                    self._make_face(index_keys, verts, **kwargs)
-
-        if face is not None:
-            equivalent_faces = kwargs.get('equivalent', [])
-            for equivalent_face in equivalent_faces:
-                self.set_equivalent_face(*equivalent_face, face)
-
-        # We add additional faces by flipping 'left', 'right' etc
-        # if the tile has some kind of symmetry defined
-        self._create_symmetric_faces(index_keys, vert_index_keys_list,
-                                     **kwargs)
+                    self.make_face(index_keys, verts, **kwargs)
 
         return face
 
-    def _make_face(self, index_keys, verts, **kwargs):
+    def make_face(self, index_keys, verts, **kwargs):
         face = self.unit_mesh_maker.create_face(verts, **kwargs)
         self._set_face(index_keys, face)
 
-        # On the boundary, make sure equivalent faces are set on neighbor tiles
-        self._set_equivalent_neighbor_faces(index_keys, face, **kwargs)
-
         return face
+
+    def get_shared_face(self, index_keys, vert_index_keys_list,
+                        **kwargs):
+        shared_faces = []
+        vert_index_buffer = []
+        args = kwargs.copy()
+        for key in vert_index_keys_list:
+            vert_index_buffer.append(key)
+            if type(key) == list and key[0] == ['boundary']:
+                side = key[1]
+                feature = key[2]
+                shared_faces.append(SharedFace(self, side, feature, index_keys,
+                                               vert_index_keys_list, **args))
+                return shared_faces[0]
+                args['indirect'] = True
+                vert_index_buffer = []
+        if len(shared_faces) > 0:
+            return shared_faces[0]
+
+        return None
+
+    def calculate_shared_faces(self):
+        for shared_face in self.boundary.get_shared_faces():
+            shared_face.calculate_face()
 
     def num_color_patterns(self):
         return self.tessagon.num_color_patterns()
@@ -115,14 +151,11 @@ class Tile(AbstractTile):
             return
         self.unit_mesh_maker.color_face(face, color_index)
 
-    def set_equivalent_face(self, neighbor_keys, index_keys, face, **kwargs):
+    def set_equivalent_face(self, index_keys, face, **kwargs):
         # On boundary, the face on a neighbor is equivalent to this face
         # This is usually only called indirectly via add_face, but check out
         # PythagoreanTile for an example of direct usage
-        tile = self.get_neighbor_tile(neighbor_keys)
-        if tile is None:
-            return None
-        tile._set_face(self._index_path(index_keys, neighbor_keys), face)
+        self._set_face(index_keys, face)
 
     def all_face_paths(self, faces=None, base_path=None):
         if faces is None:
@@ -178,92 +211,6 @@ class Tile(AbstractTile):
             return None
         return tile._get_vert(self._index_path(index_keys, neighbor_keys))
 
-    def rotate_90(self, u, v):
-        # Rotating around (1/2, 1/2)
-        return [1 - v, u]
-
-    def rotate_180(self, u, v):
-        # Rotating around (1/2, 1/2)
-        return [1 - u, 1 - v]
-
-    def _create_symmetric_verts(self, index_keys, ratio_u, ratio_v, **kwargs):
-        # The 'symmetry' keyword is just to ensure we don't recurse forever
-        if 'symmetry' not in kwargs:
-            extra_args = {'symmetry': True}
-
-            # This rotational stuff doesn't work yet ...
-            # See HokusaiHashesTessagon for an example of something
-            # that almost kinda works (not using this code though)
-            if self.rot_symmetric == 180:
-                rot_keys = self._rotate_index(index_keys)
-                self.add_vert(*self.rotate_180(ratio_u, ratio_v),
-                              **{**kwargs, **extra_args})
-
-            elif self.rot_symmetric == 90:
-                uv = [ratio_u, ratio_v]
-                rot_keys = index_keys
-                for i in range(3):
-                    rot_keys = self._rotate_index(rot_keys)
-                    uv = self.rotate_90(*uv)
-                    self.add_vert(*rot_keys, uv, **{**kwargs, **extra_args})
-
-            if self.u_symmetric:
-                # Add reflection about u
-                u_flip_keys = self._u_flip(index_keys)
-                if 'equivalent' in kwargs:
-                    u_flip_equivalent_keys = self._u_flip(kwargs['equivalent'])
-                    extra_args['equivalent'] = u_flip_equivalent_keys
-                self.add_vert(u_flip_keys, 1.0 - ratio_u, ratio_v,
-                              **{**kwargs, **extra_args})
-                if self.v_symmetric:
-                    # Add diagonally across
-                    uv_flip_keys = self._v_flip(u_flip_keys)
-                    if 'equivalent' in kwargs:
-                        uv_flip_equivalent_keys = \
-                            self._v_flip(u_flip_equivalent_keys)
-                        extra_args['equivalent'] = uv_flip_equivalent_keys
-                    self.add_vert(uv_flip_keys, 1.0 - ratio_u, 1.0 - ratio_v,
-                                  **{**kwargs, **extra_args})
-            if self.v_symmetric:
-                # Add reflection about v
-                v_flip_keys = self._v_flip(index_keys)
-                if 'equivalent' in kwargs:
-                    v_flip_equivalent_keys = self._v_flip(kwargs['equivalent'])
-                    extra_args['equivalent'] = v_flip_equivalent_keys
-                self.add_vert(v_flip_keys, ratio_u, 1.0 - ratio_v,
-                              **{**kwargs, **extra_args})
-
-    def _set_equivalent_neighbor_verts(self, index_keys, vert, **kwargs):
-        if 'u_boundary' in kwargs:
-            self._set_u_equivalent_vert(index_keys, vert, **kwargs)
-        if 'v_boundary' in kwargs:
-            self._set_v_equivalent_vert(index_keys, vert, **kwargs)
-        if 'corner' in kwargs:
-            self._set_u_equivalent_vert(index_keys, vert, **kwargs)
-            self._set_v_equivalent_vert(index_keys, vert, **kwargs)
-            self._set_uv_equivalent_vert(index_keys, vert, **kwargs)
-
-    # Handle vert on left/right boundary
-    def _set_u_equivalent_vert(self, index_keys, vert, **kwargs):
-        u_index = self._u_index(index_keys)
-        u_flip_keys = self._u_flip(index_keys)
-        self.set_equivalent_vert([u_index], u_flip_keys, vert, **kwargs)
-
-    # Handle vert on top/bottom boundary
-    def _set_v_equivalent_vert(self, index_keys, vert, **kwargs):
-        v_index = self._v_index(index_keys)
-        v_flip_keys = self._v_flip(index_keys)
-        self.set_equivalent_vert([v_index], v_flip_keys, vert, **kwargs)
-
-    # Handle vert on corner, equivalent to vert on diagonal tile
-    def _set_uv_equivalent_vert(self, index_keys, vert, **kwargs):
-        u_index = self._u_index(index_keys)
-        v_index = self._v_index(index_keys)
-        u_flip_keys = self._u_flip(index_keys)
-        uv_flip_keys = self._v_flip(u_flip_keys)
-        self.set_equivalent_vert([u_index, v_index], uv_flip_keys, vert,
-                                 **kwargs)
-
     def _get_verts_from_list(self, vert_index_keys_list):
         verts = []
         for vert_index_keys in vert_index_keys_list:
@@ -279,76 +226,3 @@ class Tile(AbstractTile):
             verts.append(vert)
 
         return verts
-
-    def _create_symmetric_faces(self, index_keys, vert_index_keys_list,
-                                **kwargs):
-        # The 'symmetry' keyword is just to ensure we don't recurse forever
-        if 'symmetry' not in kwargs:
-            extra_args = {'symmetry': True}
-            if self.rot_symmetric == 180:
-                rot_keys = self._rotate_index(index_keys)
-                rot_vert_index_keys_list \
-                    = self._rotate_index(vert_index_keys_list)
-                if 'equivalent' in kwargs:
-                    equivalent_faces = kwargs['equivalent']
-                    kwargs = kwargs.copy()
-                    kwargs['equivalent'] = \
-                        [self._rotate_index(equivalent_face)
-                         for equivalent_face in equivalent_faces]
-
-                self.add_face(rot_keys, rot_vert_index_keys_list,
-                              **{**kwargs, **extra_args})
-            if self.u_symmetric:
-                # Add reflection about u
-                u_flip_keys = self._u_flip(index_keys)
-                u_flip_vert_index_keys_list \
-                    = self._u_flip(vert_index_keys_list)
-                self.add_face(u_flip_keys,
-                              list(reversed(u_flip_vert_index_keys_list)),
-                              **{**kwargs, **extra_args})
-                if self.v_symmetric:
-                    # Add diagonally across
-                    uv_flip_keys = self._v_flip(u_flip_keys)
-                    uv_flip_vert_index_keys_list \
-                        = self._v_flip(u_flip_vert_index_keys_list)
-                    self.add_face(uv_flip_keys, uv_flip_vert_index_keys_list,
-                                  **{**kwargs, **extra_args})
-            if self.v_symmetric:
-                # Add reflection about v
-                v_flip_keys = self._v_flip(index_keys)
-                v_flip_vert_index_keys_list \
-                    = self._v_flip(vert_index_keys_list)
-                self.add_face(v_flip_keys,
-                              list(reversed(v_flip_vert_index_keys_list)),
-                              **{**kwargs, **extra_args})
-
-    def _set_equivalent_neighbor_faces(self, index_keys, face, **kwargs):
-        if 'u_boundary' in kwargs:
-            self._set_u_equivalent_face(index_keys, face, **kwargs)
-        if 'v_boundary' in kwargs:
-            self._set_v_equivalent_face(index_keys, face, **kwargs)
-        if 'corner' in kwargs:
-            self._set_u_equivalent_face(index_keys, face, **kwargs)
-            self._set_v_equivalent_face(index_keys, face, **kwargs)
-            self._set_uv_equivalent_face(index_keys, face, **kwargs)
-
-    # Handle face on left/right boundary
-    def _set_u_equivalent_face(self, index_keys, face, **kwargs):
-        u_index = self._u_index(index_keys)
-        u_flip_keys = self._u_flip(index_keys)
-        self.set_equivalent_face([u_index], u_flip_keys, face, **kwargs)
-
-    # Handle face on top/bottom boundary
-    def _set_v_equivalent_face(self, index_keys, face, **kwargs):
-        v_index = self._v_index(index_keys)
-        v_flip_keys = self._v_flip(index_keys)
-        self.set_equivalent_face([v_index], v_flip_keys, face, **kwargs)
-
-    # Handle face on corner, equivalent to face on diagonal tile
-    def _set_uv_equivalent_face(self, index_keys, face, **kwargs):
-        u_index = self._u_index(index_keys)
-        v_index = self._v_index(index_keys)
-        u_flip_keys = self._u_flip(index_keys)
-        uv_flip_keys = self._v_flip(u_flip_keys)
-        self.set_equivalent_face([u_index, v_index], uv_flip_keys, face,
-                                 **kwargs)

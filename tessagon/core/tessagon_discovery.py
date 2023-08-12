@@ -71,7 +71,10 @@ class TessagonDiscovery:
         return TessagonDiscovery(names=new_names)
 
     def __sub__(self, other):
-        new_names = list(set(self.names) - set(other.names))
+        if type(other) == str:
+            new_names = list(set(self.names) - set([other]))
+        else:
+            new_names = list(set(self.names) - set(other.names))
         return TessagonDiscovery(names=new_names)
 
     def with_color_patterns(self):
