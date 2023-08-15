@@ -4,6 +4,7 @@ from tessagon.core.tile_boundary import \
 
 
 class Tile(AbstractTile):
+    rotate = None
 
     def __init__(self, tessagon, **kwargs):
         super().__init__(tessagon, **kwargs)
@@ -19,8 +20,9 @@ class Tile(AbstractTile):
 
     def init_boundary(self):
         # Subclass might override (e.g., SlatsTessagon has dynamic boundary)
-        self.boundary = TileBoundary(self,
-                                     **self.__class__.BOUNDARY)
+
+        self.boundary = TileBoundary(self, **self.__class__.BOUNDARY,
+                                     rotate=self.rotate)
 
     def validate(self):
         self.tessagon.validate_tile(self)
@@ -33,10 +35,9 @@ class Tile(AbstractTile):
     def add_vert(self, index_keys, ratio_u, ratio_v, **kwargs):
         vert = self._get_vert(index_keys)
         if vert is None:
-            uv = self.blend(ratio_u, ratio_v)
+            uv = self.blend(ratio_u, ratio_v, rotate=self.rotate)
             shared_vert = \
-                self.get_shared_vert(index_keys, ratio_u, ratio_v,
-                                     **kwargs)
+                self.get_shared_vert(index_keys, uv, **kwargs)
             if shared_vert:
                 # We calculate this later when we have more information
                 return
@@ -56,12 +57,11 @@ class Tile(AbstractTile):
 
         return vert
 
-    def get_shared_vert(self, index_keys, ratio_u, ratio_v, **kwargs):
+    def get_shared_vert(self, index_keys, uv, **kwargs):
         for side in TileBoundary.SIDES:
             arg = '{}_boundary'.format(side)
             if arg in kwargs:
                 feature = kwargs[arg]
-                uv = self.blend(ratio_u, ratio_v)
                 return SharedVert(self, side, feature, index_keys,
                                   uv, **kwargs)
 

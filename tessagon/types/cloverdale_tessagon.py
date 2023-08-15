@@ -1,5 +1,6 @@
-from tessagon.types.tiles.cloverdale_tile import CloverdaleTile
-from tessagon.core.tessagon import Tessagon
+from tessagon.types.tiles.cloverdale_tiles import \
+    CloverdaleTile1, CloverdaleTile2, CloverdaleTile3, CloverdaleTile4
+from tessagon.core.rotating_tessagon import RotatingTessagon
 from tessagon.core.tessagon_metadata import TessagonMetadata
 
 metadata = TessagonMetadata(name='Cloverdale',
@@ -9,6 +10,7 @@ metadata = TessagonMetadata(name='Cloverdale',
                             sides=[4, 5])
 
 
-class CloverdaleTessagon(Tessagon):
-    tile_classes = [CloverdaleTile]
+class CloverdaleTessagon(RotatingTessagon):
+    tile_classes = [CloverdaleTile1, CloverdaleTile2,
+                    CloverdaleTile3, CloverdaleTile4]
     metadata = metadata

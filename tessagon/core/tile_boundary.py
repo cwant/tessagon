@@ -36,13 +36,24 @@ class BoundaryBase:
     def rotate_side(self, key):
         return self.ROTATIONS[key]
 
+    def tile_rotate_side(self, side):
+        if self.tile.rotate == 90:
+            return self.rotate_side(side)
+        elif self.tile.rotate == 180:
+            return self.invert_side(side)
+        elif self.tile.rotate == 270:
+            return self.rotate_side(self.invert_side(side))
+        return side
+
 
 class SharedVert(BoundaryBase):
 
     def __init__(self, tile, side, feature, index_keys,
                  uv, **kwargs):
         self.tile = tile
-        self.side = side
+
+        self.side = self.tile_rotate_side(side)
+
         self.feature = feature
         self.index_keys = index_keys
         self.uv = uv
@@ -53,7 +64,7 @@ class SharedVert(BoundaryBase):
 
         self.corner = False
 
-        self.tile.boundary.values[side][feature] = self
+        self.tile.boundary.values[self.side][feature] = self
 
     def calculate_vert(self):
         vert = self.tile._get_vert(self.index_keys)
@@ -165,6 +176,14 @@ class SharedFace(BoundaryBase):
                  vert_index_keys_list, **kwargs):
         self.tile = tile
         self.side = side
+
+        if self.tile.rotate == 90:
+            self.side = self.rotate_side(side)
+        elif self.tile.rotate == 180:
+            self.side = self.invert_side(side)
+        elif self.tile.rotate == 270:
+            self.side = self.rotate_side(self.invert_side(side))
+
         self.feature = feature
         self.index_keys = index_keys
         self.vert_index_keys_list = vert_index_keys_list
@@ -174,7 +193,7 @@ class SharedFace(BoundaryBase):
         self.tiles = []
         self.face_index_keys = []
 
-        self.tile.boundary.values[side][feature] = self
+        self.tile.boundary.values[self.side][feature] = self
 
     def calculate_face(self):
         if self.kwargs.get('indirect') is True:
@@ -223,7 +242,7 @@ class SharedFace(BoundaryBase):
                 first_vert = first_shared_face.verts[0]
 
             if type(vert_index) == list and vert_index[0] == ["boundary"]:
-                this_side = vert_index[1]
+                this_side = self.tile_rotate_side(vert_index[1])
                 this_feature = vert_index[2]
 
                 other_shared_face = \
@@ -289,9 +308,13 @@ class TileBoundary(BoundaryBase):
         self.values = {}
         self.num_verts = {}
         self.num_faces = {}
+        self.rotate = kwargs.get('rotate')
 
         for side in self.SIDES:
-            self.prototype[side] = kwargs.get(side)
+            prototype = kwargs.get(side)
+            side = self.tile_rotate_side(side)
+
+            self.prototype[side] = prototype
             self.values[side] = {}
 
             self.num_verts[side] = 0

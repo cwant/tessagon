@@ -1,6 +1,7 @@
-from tessagon.types.tiles.islamic_stars_crosses_tile import \
-    IslamicStarsCrossesTile
-from tessagon.core.tessagon import Tessagon
+from tessagon.types.tiles.islamic_stars_crosses_tiles import \
+    IslamicStarsCrossesTile1, IslamicStarsCrossesTile2, \
+    IslamicStarsCrossesTile3, IslamicStarsCrossesTile4
+from tessagon.core.rotating_tessagon import RotatingTessagon
 from tessagon.core.tessagon_metadata import TessagonMetadata
 
 metadata = TessagonMetadata(name='Islamic Stars and Crosses',
@@ -10,6 +11,7 @@ metadata = TessagonMetadata(name='Islamic Stars and Crosses',
                             sides=[16])
 
 
-class IslamicStarsCrossesTessagon(Tessagon):
-    tile_classes = [IslamicStarsCrossesTile]
+class IslamicStarsCrossesTessagon(RotatingTessagon):
+    tile_classes = [IslamicStarsCrossesTile1, IslamicStarsCrossesTile2,
+                    IslamicStarsCrossesTile3, IslamicStarsCrossesTile4]
     metadata = metadata
