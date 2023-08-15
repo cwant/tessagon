@@ -1,7 +1,7 @@
 from math import sqrt
 from tessagon.core.tile import Tile
-from tessagon.core.tile_utils import left_tile, right_tile, \
-    bottom_tile, bottom_left_tile
+from tessagon.core.tile_utils import left_boundary, right_boundary, \
+    top_boundary, bottom_boundary
 
 # See the SVG for decomposition:
 # https://raw.githubusercontent.com/cwant/tessagon/master/documentation/code/square_tri2.svg
@@ -24,6 +24,12 @@ class SquareTri2Tile(Tile):
 
 
 class SquareTri2Tile1(SquareTri2Tile):
+    BOUNDARY = dict(
+        top=['face', 'split'],
+        left=['edge', 'vert', 'face-1', 'split', 'face-2'],
+        bottom=['face', 'split'],
+        right=['edge', 'vert', 'face-1', 'split', 'face-2']
+    )
 
     def init_verts(self):
         return {0: None,
@@ -40,39 +46,42 @@ class SquareTri2Tile1(SquareTri2Tile):
 
         self.add_vert(0,
                       1.0, v1,
-                      equivalent=[right_tile(2)])
+                      right_boundary='vert')
 
         self.add_vert(1,
                       0.0, v2,
-                      equivalent=[left_tile(3)])
+                      left_boundary='vert')
 
     def calculate_faces(self):
         self.add_face('A', [0,
-                            left_tile(2),
-                            bottom_left_tile(1),
-                            bottom_tile(3)],
-                      equivalent=[left_tile('E'),
-                                  bottom_left_tile('D'),
-                                  bottom_tile('H')],
+                            left_boundary('face-2')],
                       face_type='square')
 
         self.add_face('B', [0,
                             1,
-                            left_tile(2)],
-                      equivalent=[left_tile('F')],
+                            left_boundary('face-1')],
                       face_type='triangle')
 
         self.add_face('C', [1,
                             0,
-                            right_tile(3)],
-                      equivalent=[left_tile('G')],
+                            right_boundary('face-1')],
                       face_type='triangle')
+
+        self.add_face('D', [1,
+                            right_boundary('face-2')],
+                      face_type='square')
 
     def color_pattern1(self):
         self.color_face('A', 1)
 
 
 class SquareTri2Tile2(SquareTri2Tile):
+    BOUNDARY = dict(
+        top=['split', 'face'],
+        left=['face-1', 'split', 'face-2', 'vert', 'edge'],
+        bottom=['split', 'face'],
+        right=['face-1', 'split', 'face-2', 'vert', 'edge']
+    )
 
     def init_verts(self):
         return {2: None,
@@ -89,14 +98,30 @@ class SquareTri2Tile2(SquareTri2Tile):
 
         self.add_vert(2,
                       0.0, v1,
-                      equivalent=[left_tile(0)])
+                      left_boundary='vert')
 
         self.add_vert(3,
                       1.0, v2,
-                      equivalent=[right_tile(1)])
+                      right_boundary='vert')
 
     def calculate_faces(self):
-        pass
+        self.add_face('E', [2,
+                            bottom_boundary('face')],
+                      face_type='square')
+
+        self.add_face('F', [3,
+                            2,
+                            right_boundary('face-2')],
+                      face_type='triangle')
+
+        self.add_face('G', [2,
+                            3,
+                            left_boundary('face-2')],
+                      face_type='triangle')
+
+        self.add_face('H', [3,
+                            top_boundary('face')],
+                      face_type='square')
 
     def color_pattern1(self):
         pass

@@ -104,6 +104,7 @@ class TestCounterClockwise:
 
 def make_test_method(tessagon_class_name):
     tessagon_class = TessagonDiscovery.get_class(tessagon_class_name)
+
     def make_and_test_tessagon(self):
         CounterClockwiseTester(tessagon_class).run()
     return make_and_test_tessagon

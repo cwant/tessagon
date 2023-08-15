@@ -1,7 +1,7 @@
 from math import sqrt
 from tessagon.core.tile import Tile
-from tessagon.core.tile_utils import left_tile, right_tile, \
-    bottom_tile, bottom_left_tile
+from tessagon.core.tile_utils import left_boundary, right_boundary, \
+    top_boundary, bottom_boundary
 
 # See the SVG for decomposition:
 # https://raw.githubusercontent.com/cwant/tessagon/master/documentation/code/dodeca_tri.svg
@@ -39,6 +39,12 @@ class DodecaTriTile(Tile):
 
 
 class DodecaTriTile1(DodecaTriTile):
+    BOUNDARY = dict(
+        top=['face', 'split'],
+        left=['edge', 'vert', 'face-1', 'split', 'face-2'],
+        bottom=['face', 'split'],
+        right=['edge', 'vert', 'face-1', 'split', 'face-2']
+    )
 
     def init_verts(self):
         return {0: None,
@@ -56,44 +62,50 @@ class DodecaTriTile1(DodecaTriTile):
         (u1, u2, u3, u4) = self.u_units()
         (v1, v2, v3, v4) = self.v_units()
 
-        self.add_vert(0, u1, v4,
-                      equivalent=[left_tile(7)])
-        self.add_vert(1, u2, v3)
-        self.add_vert(2, u3, v2)
-        self.add_vert(3, u4, v1,
-                      equivalent=[right_tile(4)])
+        self.add_vert(0,
+                      u1, v4,
+                      left_boundary='vert')
+
+        self.add_vert(1,
+                      u2, v3)
+
+        self.add_vert(2,
+                      u3, v2)
+
+        self.add_vert(3,
+                      u4, v1,
+                      right_boundary='vert')
 
     def calculate_faces(self):
         self.add_face('A', [3,
                             2,
                             1,
-                            left_tile(6),
-                            left_tile(5),
-                            left_tile(4),
-                            bottom_left_tile(0),
-                            bottom_left_tile(1),
-                            bottom_left_tile(2),
-                            bottom_tile(5),
-                            bottom_tile(6),
-                            bottom_tile(7)],
-                      equivalent=[left_tile('E'),
-                                  bottom_left_tile('D'),
-                                  bottom_tile('H')])
+                            left_boundary('face-2')])
+
         self.add_face('B', [1,
                             0,
-                            left_tile(6)],
-                      equivalent=[left_tile('G')])
+                            left_boundary('face-1')])
 
         self.add_face('C', [2,
                             3,
-                            right_tile(5)],
-                      equivalent=[left_tile('F')])
+                            right_boundary('face-1')])
+
+        self.add_face('D', [0,
+                            1,
+                            2,
+                            right_boundary('face-2')])
 
     def color_pattern1(self):
         self.color_face('A', 1)
 
 
 class DodecaTriTile2(DodecaTriTile):
+    BOUNDARY = dict(
+        top=['split', 'face'],
+        left=['face-1', 'split', 'face-2', 'vert', 'edge'],
+        bottom=['split', 'face'],
+        right=['face-1', 'split', 'face-2', 'vert', 'edge']
+    )
 
     def init_verts(self):
         return {4: None,
@@ -111,15 +123,38 @@ class DodecaTriTile2(DodecaTriTile):
         (u1, u2, u3, u4) = self.u_units()
         (v1, v2, v3, v4) = self.v_units()
 
-        self.add_vert(4, u1, v1,
-                      equivalent=[left_tile(3)])
-        self.add_vert(5, u2, v2)
-        self.add_vert(6, u3, v3)
-        self.add_vert(7, u4, v4,
-                      equivalent=[right_tile(0)])
+        self.add_vert(4,
+                      u1, v1,
+                      left_boundary='vert')
+
+        self.add_vert(5,
+                      u2, v2)
+
+        self.add_vert(6,
+                      u3, v3)
+
+        self.add_vert(7,
+                      u4, v4,
+                      right_boundary='vert')
 
     def calculate_faces(self):
-        pass
+        self.add_face('E', [6,
+                            5,
+                            4,
+                            bottom_boundary('face')])
+
+        self.add_face('F', [4,
+                            5,
+                            left_boundary('face-2')])
+
+        self.add_face('G', [7,
+                            6,
+                            right_boundary('face-2')])
+
+        self.add_face('H', [5,
+                            6,
+                            7,
+                            top_boundary('face')])
 
     def color_pattern1(self):
         pass

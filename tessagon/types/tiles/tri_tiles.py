@@ -1,12 +1,12 @@
 from math import sqrt
 from tessagon.core.tile import Tile
-from tessagon.core.tile_utils import left_tile, right_tile, \
-    bottom_tile, bottom_left_tile, bottom_right_tile, \
-    top_tile, top_left_tile, top_right_tile
+from tessagon.core.tile_utils import left_boundary, right_boundary
+
+# See the SVG for decomposition:
+# https://raw.githubusercontent.com/cwant/tessagon/master/documentation/code/tri.svg
 
 
 class TriTile(Tile):
-
     uv_ratio = 1.0 / sqrt(3.0)
 
     def __init__(self, tessagon, **kwargs):
@@ -16,6 +16,12 @@ class TriTile(Tile):
 
 
 class TriTile1(TriTile):
+    BOUNDARY = dict(
+        top=['vert', 'edge'],
+        left=['split', 'face', 'vert'],
+        bottom=['vert', 'edge'],
+        right=['split', 'face', 'vert'],
+    )
 
     def init_verts(self):
         return {0: None,
@@ -26,23 +32,22 @@ class TriTile1(TriTile):
                 'B': None}
 
     def calculate_verts(self):
-        self.add_vert(0, 0, 0, equivalent=[left_tile(3),
-                                           bottom_left_tile(1),
-                                           bottom_tile(2)])
-        self.add_vert(1, 1, 1, equivalent=[right_tile(2),
-                                           top_right_tile(0),
-                                           top_tile(3)])
+        self.add_vert(0,
+                      0, 0,
+                      left_boundary='vert')
+
+        self.add_vert(1,
+                      1, 1,
+                      right_boundary='vert')
 
     def calculate_faces(self):
         self.add_face('A', [0,
                             1,
-                            left_tile(2)],
-                      equivalent=[left_tile('D')])
+                            left_boundary('face')])
 
         self.add_face('B', [1,
                             0,
-                            right_tile(3)],
-                      equivalent=[right_tile('C')])
+                            right_boundary('face')])
 
     def color_pattern1(self):
         self.color_face('B', 1)
@@ -70,6 +75,12 @@ class TriTile1(TriTile):
 
 
 class TriTile2(TriTile):
+    BOUNDARY = dict(
+        top=['edge', 'vert'],
+        left=['vert', 'face', 'split'],
+        bottom=['edge', 'vert'],
+        right=['vert', 'face', 'split']
+    )
 
     def init_verts(self):
         return {2: None,
@@ -80,23 +91,21 @@ class TriTile2(TriTile):
                 'D': None}
 
     def calculate_verts(self):
-        self.add_vert(2, 0, 1, equivalent=[left_tile(1),
-                                           top_left_tile(3),
-                                           top_tile(0)])
-        self.add_vert(3, 1, 0, equivalent=[right_tile(0),
-                                           bottom_right_tile(2),
-                                           bottom_tile(1)])
+        self.add_vert(2,
+                      0, 1,
+                      top_boundary='vert')
+        self.add_vert(3,
+                      1, 0,
+                      bottom_boundary='vert')
 
     def calculate_faces(self):
         self.add_face('C', [3,
                             2,
-                            left_tile(0)],
-                      equivalent=[left_tile('B')])
+                            left_boundary('face')])
 
         self.add_face('D', [2,
                             3,
-                            right_tile(1)],
-                      equivalent=[right_tile('A')])
+                            right_boundary('face')])
 
     def color_pattern1(self):
         pass

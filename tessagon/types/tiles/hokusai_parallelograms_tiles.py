@@ -1,8 +1,7 @@
 from math import asin, sqrt, sin, cos, pi, tan
 from tessagon.core.tile import Tile
-from tessagon.core.tile_utils import right_tile, left_tile, \
-    top_tile, top_left_tile, bottom_tile, bottom_left_tile, \
-    top_right_tile, bottom_right_tile
+from tessagon.core.tile_utils import left_boundary, right_boundary, \
+    top_boundary, bottom_boundary
 
 # From: https://gallica.bnf.fr/ark:/12148/btv1b105092395/f11.item
 # See the SVG for decomposition:
@@ -47,6 +46,13 @@ class HokusaiParallelogramsTile(Tile):
 
 
 class HokusaiParallelogramsTile1(HokusaiParallelogramsTile):
+    BOUNDARY = dict(
+        top=['vert', 'face'],
+        left=['face-1', 'split', 'face-2', 'split', 'face-3', 'vert'],
+        bottom=['vert', 'face'],
+        right=['face-1', 'split', 'face-2', 'split', 'face-3', 'vert']
+    )
+
     def init_verts(self):
         return {0: None,
                 1: None,
@@ -55,36 +61,52 @@ class HokusaiParallelogramsTile1(HokusaiParallelogramsTile):
 
     def init_faces(self):
         return {'A': None,
-                'B': None}
+                'B': None,
+                'C': None,
+                'D': None,
+                'E': None}
 
     def calculate_verts(self):
-        self.add_vert([0], 0, 0,
-                      equivalent=[left_tile(4),
-                                  bottom_tile(9),
-                                  bottom_left_tile(3)])
-        self.add_vert([1], *self.hex_vert_coord([0, 0], 0))
-        self.add_vert([2], *self.hex_vert_coord([1, 1], 3))
-        self.add_vert([3], 1, 1,
-                      equivalent=[right_tile(9),
-                                  top_tile(4),
-                                  top_right_tile(0)])
+        self.add_vert(0,
+                      0, 0,
+                      left_boundary='vert')
+
+        self.add_vert(1,
+                      *self.hex_vert_coord([0, 0], 0))
+
+        self.add_vert(2,
+                      *self.hex_vert_coord([1, 1], 3))
+
+        self.add_vert(3,
+                      1, 1,
+                      right_boundary='vert')
 
     def calculate_faces(self):
         self.add_face('A',
                       [0,
                        1,
-                       right_tile(7),
+                       right_boundary('face-3'),
                        3,
                        2,
-                       left_tile(6)])
+                       left_boundary('face-3')])
 
         self.add_face('B',
                       [1,
                        0,
-                       bottom_tile(8),
-                       bottom_right_tile(2),
-                       right_tile(4),
-                       right_tile(5)])
+                       bottom_boundary('face')])
+
+        self.add_face('C',
+                      [1,
+                       right_boundary('face-2')])
+
+        self.add_face('D',
+                      [2,
+                       left_boundary('face-2')])
+
+        self.add_face('E',
+                      [2,
+                       3,
+                       top_boundary('face')])
 
     def color_pattern1(self):
         pass
@@ -101,6 +123,13 @@ class HokusaiParallelogramsTile1(HokusaiParallelogramsTile):
 
 
 class HokusaiParallelogramsTile2(HokusaiParallelogramsTile):
+    BOUNDARY = dict(
+        top=['face', 'vert'],
+        left=['vert', 'face-1', 'split', 'face-2', 'split', 'face-3'],
+        bottom=['face', 'vert'],
+        right=['vert', 'face-1', 'split', 'face-2', 'split', 'face-3']
+    )
+
     def init_verts(self):
         return {4: None,
                 5: None,
@@ -110,31 +139,47 @@ class HokusaiParallelogramsTile2(HokusaiParallelogramsTile):
                 9: None}
 
     def init_faces(self):
-        return {'C': None,
-                'D': None,
-                'E': None}
+        return {'F': None,
+                'G': None,
+                'H': None,
+                'I': None,
+                'J': None,
+                'K': None,
+                'L': None}
 
     def calculate_verts(self):
-        self.add_vert([4], 1, 0,
-                      equivalent=[right_tile(0),
-                                  bottom_tile(3),
-                                  bottom_right_tile(9)])
-        self.add_vert([5], *self.hex_vert_coord([1, 0], 2))
-        self.add_vert([6], *self.hex_vert_coord([1, 0], 1))
-        self.add_vert([7], *self.hex_vert_coord([0, 1], 4))
-        self.add_vert([8], *self.hex_vert_coord([0, 1], 5))
-        self.add_vert([9], 0, 1,
-                      equivalent=[left_tile(3),
-                                  top_tile(0),
-                                  top_left_tile(4)])
+        self.add_vert(4,
+                      1, 0,
+                      bottom_boundary='vert')
+
+        self.add_vert(5,
+                      *self.hex_vert_coord([1, 0], 2))
+
+        self.add_vert(6,
+                      *self.hex_vert_coord([1, 0], 1))
+
+        self.add_vert(7,
+                      *self.hex_vert_coord([0, 1], 4))
+
+        self.add_vert(8,
+                      *self.hex_vert_coord([0, 1], 5))
+
+        self.add_vert(9,
+                      0, 1,
+                      top_boundary='vert')
 
     def calculate_faces(self):
-        self.add_face('C',
+        self.add_face('F',
+                      [4,
+                       5,
+                       left_boundary('face-3')])
+
+        self.add_face('G',
                       [5,
                        7,
-                       left_tile(1)])
+                       left_boundary('face-2')])
 
-        self.add_face('D',
+        self.add_face('H',
                       [4,
                        6,
                        8,
@@ -142,23 +187,40 @@ class HokusaiParallelogramsTile2(HokusaiParallelogramsTile):
                        7,
                        5])
 
-        self.add_face('E',
+        self.add_face('I',
+                      [6,
+                       4,
+                       right_boundary('face-1')],
+                      indirect=True)
+
+        self.add_face('J',
+                      [7,
+                       9,
+                       left_boundary('face-1')],
+                      indirect=True)
+
+        self.add_face('K',
                       [8,
                        6,
-                       right_tile(2)])
+                       right_boundary('face-2')])
+
+        self.add_face('L',
+                      [9,
+                       8,
+                       right_boundary('face-3')])
 
     def color_pattern1(self):
-        self.color_face('C', 1)
-        self.color_face('E', 1)
+        self.color_face('G', 1)
+        self.color_face('K', 1)
 
     def color_pattern2(self):
-        self.color_face('C', 3)
-        self.color_face('E', 3)
+        self.color_face('G', 3)
+        self.color_face('K', 3)
 
         color = ((self.fingerprint[0] // 2 + self.fingerprint[1] % 2)) % 3
-        self.color_face('D', color)
+        self.color_face('H', color)
 
     def color_pattern3(self):
-        self.color_face('C', 3)
-        self.color_face('E', 3)
-        self.color_face('D', 2)
+        self.color_face('G', 3)
+        self.color_face('K', 3)
+        self.color_face('H', 2)

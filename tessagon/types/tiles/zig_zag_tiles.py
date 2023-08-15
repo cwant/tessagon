@@ -1,7 +1,6 @@
 from tessagon.core.tile import Tile
-from tessagon.core.tile_utils import left_tile, right_tile, \
-    top_tile, top_left_tile, top_right_tile, \
-    bottom_tile, bottom_left_tile, bottom_right_tile
+from tessagon.core.tile_utils import left_boundary, right_boundary, \
+    top_boundary, bottom_boundary
 
 # See the SVG for decomposition:
 # https://raw.githubusercontent.com/cwant/tessagon/master/documentation/code/zig_zag.svg
@@ -17,6 +16,12 @@ class ZigZagTile(Tile):
 
 
 class ZigZagTile1(ZigZagTile):
+    BOUNDARY = dict(
+        top=['vert-1', 'face', 'vert-2', 'edge', 'vert-3'],
+        left=['vert-1', 'edge', 'vert-2', 'edge', 'vert-3'],
+        bottom=['vert-1', 'edge', 'vert-2', 'edge', 'vert-3'],
+        right=['vert-1', 'face', 'vert-2', 'edge', 'vert-3'],
+    )
 
     def init_verts(self):
         return {0: None,
@@ -37,43 +42,35 @@ class ZigZagTile1(ZigZagTile):
     def calculate_verts(self):
         self.add_vert(0,
                       0, 0,
-                      equivalent=[left_tile(11),
-                                  bottom_left_tile(4),
-                                  bottom_tile(15)])
+                      left_boundary='vert-3')
 
         self.add_vert(1,
                       0.5, 0,
-                      equivalent=[bottom_tile(14)])
+                      bottom_boundary='vert-2')
 
         self.add_vert(2,
                       1, 0,
-                      equivalent=[right_tile(9),
-                                  bottom_right_tile(6),
-                                  bottom_tile(13)])
+                      bottom_boundary='vert-3')
 
         self.add_vert(3,
                       1, 0.5,
-                      equivalent=[right_tile(16)])
+                      right_boundary='vert-2')
 
         self.add_vert(4,
                       1, 1,
-                      equivalent=[right_tile(15),
-                                  top_right_tile(0),
-                                  top_tile(11)])
+                      right_boundary='vert-3')
 
         self.add_vert(5,
                       0.5, 1,
-                      equivalent=[top_tile(10)])
+                      top_boundary='vert-2')
 
         self.add_vert(6,
                       0, 1,
-                      equivalent=[left_tile(13),
-                                  top_left_tile(2),
-                                  top_tile(9)])
+                      top_boundary='vert-3')
 
         self.add_vert(7,
                       0, 0.5,
-                      equivalent=[left_tile(12)])
+                      left_boundary='vert-2')
 
         self.add_vert(8,
                       0.5, 0.5)
@@ -90,23 +87,25 @@ class ZigZagTile1(ZigZagTile):
                             8,
                             1,
                             2,
-                            right_tile(10),
-                            right_tile(17)],
-                      equivalent=[right_tile('D')])
+                            right_boundary('face')])
 
         self.add_face('C', [5,
                             8,
                             3,
                             4,
-                            top_tile(12),
-                            top_tile(17)],
-                      equivalent=[top_tile('E')])
+                            top_boundary('face')])
 
     def color_pattern1(self):
         self.color_face('A', 1)
 
 
 class ZigZagTile2(ZigZagTile):
+    BOUNDARY = dict(
+        top=['vert-1', 'edge', 'vert-2', 'edge', 'vert-3'],
+        left=['vert-1', 'edge', 'vert-2', 'face', 'vert-3'],
+        bottom=['vert-1', 'edge', 'vert-2', 'face', 'vert-3'],
+        right=['vert-1', 'edge', 'vert-2', 'edge', 'vert-3'],
+    )
 
     def init_verts(self):
         return {9: None,
@@ -127,48 +126,52 @@ class ZigZagTile2(ZigZagTile):
     def calculate_verts(self):
         self.add_vert(9,
                       0, 0,
-                      equivalent=[left_tile(11),
-                                  bottom_left_tile(4),
-                                  bottom_tile(15)])
+                      left_boundary='vert-3')
 
         self.add_vert(10,
                       0.5, 0,
-                      equivalent=[bottom_tile(14)])
+                      bottom_boundary='vert-2')
 
         self.add_vert(11,
                       1, 0,
-                      equivalent=[right_tile(9),
-                                  bottom_right_tile(6),
-                                  bottom_tile(13)])
+                      bottom_boundary='vert-3')
 
         self.add_vert(12,
                       1, 0.5,
-                      equivalent=[right_tile(16)])
+                      right_boundary='vert-2')
 
         self.add_vert(13,
                       1, 1,
-                      equivalent=[right_tile(15),
-                                  top_right_tile(0),
-                                  top_tile(11)])
+                      right_boundary='vert-3')
 
         self.add_vert(14,
                       0.5, 1,
-                      equivalent=[top_tile(10)])
+                      top_boundary='vert-2')
 
         self.add_vert(15,
                       0, 1,
-                      equivalent=[left_tile(13),
-                                  top_left_tile(2),
-                                  top_tile(9)])
+                      top_boundary='vert-3')
 
         self.add_vert(16,
                       0, 0.5,
-                      equivalent=[left_tile(12)])
+                      left_boundary='vert-2')
 
         self.add_vert(17,
                       0.5, 0.5)
 
     def calculate_faces(self):
+        self.add_face('D', [9,
+                            10,
+                            17,
+                            16,
+                            left_boundary('face')])
+
+        self.add_face('E', [11,
+                            12,
+                            17,
+                            10,
+                            bottom_boundary('face')])
+
         self.add_face('F', [12,
                             13,
                             14,

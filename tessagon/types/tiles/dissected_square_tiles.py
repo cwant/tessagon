@@ -1,13 +1,17 @@
 from tessagon.core.tile import Tile
-from tessagon.core.tile_utils import left_tile, right_tile, \
-    top_tile, bottom_tile, bottom_left_tile, bottom_right_tile, \
-    top_left_tile, top_right_tile
 
 # See the SVG for decomposition:
 # https://raw.githubusercontent.com/cwant/tessagon/master/documentation/code/dissected_square.svg
 
 
 class DissectedSquareTile(Tile):
+    BOUNDARY = dict(
+        top=['vert-1', 'edge', 'vert-2'],
+        left=['vert-1', 'edge', 'vert-2'],
+        bottom=['vert-1', 'edge', 'vert-2'],
+        right=['vert-1', 'edge', 'vert-2']
+    )
+
     uv_ratio = 1.0
 
     def __init__(self, tessagon, **kwargs):
@@ -31,27 +35,19 @@ class DissectedSquareTile1(DissectedSquareTile):
     def calculate_verts(self):
         self.add_vert(0,
                       0, 0,
-                      equivalent=[left_tile(5),
-                                  bottom_left_tile(3),
-                                  bottom_tile(6)])
+                      left_boundary='vert-2')
 
         self.add_vert(1,
                       1, 0,
-                      equivalent=[right_tile(4),
-                                  bottom_right_tile(2),
-                                  bottom_tile(7)])
+                      bottom_boundary='vert-2')
 
         self.add_vert(2,
                       0, 1,
-                      equivalent=[left_tile(7),
-                                  top_left_tile(1),
-                                  top_tile(4)])
+                      top_boundary='vert-2')
 
         self.add_vert(3,
                       1, 1,
-                      equivalent=[right_tile(6),
-                                  top_right_tile(0),
-                                  top_tile(5)])
+                      right_boundary='vert-2')
 
     def calculate_faces(self):
         self.add_face('A',
@@ -93,27 +89,19 @@ class DissectedSquareTile2(DissectedSquareTile):
     def calculate_verts(self):
         self.add_vert(4,
                       0, 0,
-                      equivalent=[left_tile(1),
-                                  bottom_left_tile(7),
-                                  bottom_tile(2)])
+                      left_boundary='vert-2')
 
         self.add_vert(5,
                       1, 0,
-                      equivalent=[right_tile(0),
-                                  bottom_right_tile(6),
-                                  bottom_tile(3)])
+                      bottom_boundary='vert-2')
 
         self.add_vert(6,
                       0, 1,
-                      equivalent=[left_tile(3),
-                                  top_left_tile(5),
-                                  top_tile(0)])
+                      top_boundary='vert-2')
 
         self.add_vert(7,
                       1, 1,
-                      equivalent=[right_tile(2),
-                                  top_right_tile(4),
-                                  top_tile(1)])
+                      right_boundary='vert-2')
 
     def calculate_faces(self):
         self.add_face('C',

@@ -1,7 +1,7 @@
 from math import sqrt
 from tessagon.core.tile import Tile
-from tessagon.core.tile_utils import left_tile, right_tile, \
-    bottom_tile, top_tile
+from tessagon.core.tile_utils import left_boundary, right_boundary, \
+    top_boundary, bottom_boundary
 
 # See the SVG for decomposition:
 # https://raw.githubusercontent.com/cwant/tessagon/master/documentation/code/square_tri.svg
@@ -27,6 +27,12 @@ class SquareTriTile(Tile):
 
 
 class SquareTriTile1(SquareTriTile):
+    BOUNDARY = dict(
+        top=['edge', 'vert', 'face', 'split'],
+        left=['edge', 'vert', 'face', 'split'],
+        bottom=['edge', 'vert', 'face', 'split'],
+        right=['edge', 'vert', 'face', 'split'],
+    )
 
     def init_verts(self):
         return {0: None,
@@ -46,43 +52,39 @@ class SquareTriTile1(SquareTriTile):
 
         self.add_vert(0,
                       a1, 0,
-                      equivalent=[bottom_tile(6)])
+                      bottom_boundary='vert')
 
         self.add_vert(1,
                       1, a1,
-                      equivalent=[right_tile(7)])
+                      right_boundary='vert')
 
         self.add_vert(2,
                       a2, 1,
-                      equivalent=[top_tile(4)])
+                      top_boundary='vert')
 
         self.add_vert(3,
                       0, a2,
-                      equivalent=[left_tile(5)])
+                      left_boundary='vert')
 
     def calculate_faces(self):
         self.add_face('A', [0,
                             3,
-                            left_tile(4)],
-                      equivalent=[left_tile('G')],
+                            left_boundary('face')],
                       face_type='triangle')
 
         self.add_face('B', [1,
                             0,
-                            bottom_tile(5)],
-                      equivalent=[bottom_tile('H')],
+                            bottom_boundary('face')],
                       face_type='triangle')
 
         self.add_face('C', [2,
                             1,
-                            right_tile(6)],
-                      equivalent=[right_tile('I')],
+                            right_boundary('face')],
                       face_type='triangle')
 
         self.add_face('D', [3,
                             2,
-                            top_tile(7)],
-                      equivalent=[top_tile('F')],
+                            top_boundary('face')],
                       face_type='triangle')
 
         self.add_face('E', [0,
@@ -102,6 +104,12 @@ class SquareTriTile1(SquareTriTile):
 
 
 class SquareTriTile2(SquareTriTile):
+    BOUNDARY = dict(
+        top=['split', 'face', 'vert', 'edge'],
+        left=['split', 'face', 'vert', 'edge'],
+        bottom=['split', 'face', 'vert', 'edge'],
+        right=['split', 'face', 'vert', 'edge']
+    )
 
     def init_verts(self):
         return {4: None,
@@ -121,21 +129,41 @@ class SquareTriTile2(SquareTriTile):
 
         self.add_vert(4,
                       a2, 0,
-                      equivalent=[bottom_tile(2)])
+                      bottom_boundary='vert')
 
         self.add_vert(5,
                       1, a2,
-                      equivalent=[right_tile(3)])
+                      right_boundary='vert')
 
         self.add_vert(6,
                       a1, 1,
-                      equivalent=[top_tile(0)])
+                      top_boundary='vert')
 
         self.add_vert(7,
                       0, a1,
-                      equivalent=[left_tile(1)])
+                      left_boundary='vert')
 
     def calculate_faces(self):
+        self.add_face('F', [4,
+                            7,
+                            bottom_boundary('face')],
+                      face_type='triangle')
+
+        self.add_face('G', [5,
+                            4,
+                            right_boundary('face')],
+                      face_type='triangle')
+
+        self.add_face('H', [6,
+                            5,
+                            top_boundary('face')],
+                      face_type='triangle')
+
+        self.add_face('I', [7,
+                            6,
+                            left_boundary('face')],
+                      face_type='triangle')
+
         self.add_face('J', [4,
                             5,
                             6,

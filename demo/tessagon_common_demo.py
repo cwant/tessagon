@@ -209,8 +209,8 @@ class TessagonCommonDemo:
         options = {
             'u_range': [0.0, 1.0],
             'v_range': [0.0, 1.0],
-            'u_num': 15,
-            'v_num': 3,
+            'u_num': 30,
+            'v_num': 6,
             'rot_factor': 3,
             'position': position
         }
@@ -473,8 +473,8 @@ class TessagonCommonDemo:
         options = {
             'u_range': [-1.0, 1.0],
             'v_range': [0.0, 1.0],
-            'u_num': 3,
-            'v_num': 15,
+            'u_num': 6,
+            'v_num': 30,
             'rot_factor': 2,
             'u_cyclic': False,
             'v_cyclic': True,
@@ -488,8 +488,8 @@ class TessagonCommonDemo:
         options = {
             'u_range': [0.0, 1.0],
             'v_range': [0.0, 1.0],
-            'u_num': 14,
-            'v_num': 14,
+            'u_num': 28,
+            'v_num': 28,
             'v_cyclic': False,
             'position': position
         }

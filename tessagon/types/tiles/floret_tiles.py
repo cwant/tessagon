@@ -1,8 +1,7 @@
 from math import atan2, sqrt, sin, cos, pi
 from tessagon.core.tile import Tile
-from tessagon.core.tile_utils import right_tile, left_tile, \
-    top_tile, top_left_tile, top_right_tile, \
-    bottom_tile, bottom_right_tile
+from tessagon.core.tile_utils import left_boundary, right_boundary, \
+    top_boundary, bottom_boundary
 
 #  See the SVG for decomposition:
 # https://raw.githubusercontent.com/cwant/tessagon/master/documentation/code/floret.svg
@@ -66,6 +65,13 @@ class FloretTile(Tile):
 
 
 class FloretTile1(FloretTile):
+    BOUNDARY = dict(
+        top=['vert', 'face', 'tangent-split'],
+        left=['tangent-split', 'face-1', 'vert-1', 'face-2', 'vert-2'],
+        bottom=['vert', 'face', 'tangent-split'],
+        right=['tangent-split', 'face-1', 'vert-1', 'face-2', 'vert-2']
+    )
+
     def init_verts(self):
         return {i: None for i in range(6)}
 
@@ -73,11 +79,50 @@ class FloretTile1(FloretTile):
         return {c: None for c in ['A', 'B', 'C', 'D']}
 
     def calculate_verts(self):
-        self.add_vert([2], *self.hex_vert_coord(0, [0, 0], 0))
-        self.add_vert([3], *self.hex_vert_coord(0, [1, 1], 3))
+        self.add_vert(0,
+                      0, 0,
+                      left_boundary='vert-2')
+
+        self.add_vert(1,
+                      *self.hex_vert_coord(1, [1, 1], 4),
+                      right_boundary='vert-1')
+
+        self.add_vert(2,
+                      *self.hex_vert_coord(0, [0, 0], 0))
+
+        self.add_vert(3,
+                      *self.hex_vert_coord(0, [1, 1], 3))
+
+        self.add_vert(4,
+                      *self.hex_vert_coord(1, [0, 0], 1),
+                      left_boundary='vert-1')
+
+        self.add_vert(5,
+                      1, 1,
+                      right_boundary='vert-2')
 
     def calculate_faces(self):
-        pass
+        self.add_face('A', [1,
+                            2,
+                            0,
+                            bottom_boundary('face')])
+
+        self.add_face('B', [0,
+                            2,
+                            3,
+                            4,
+                            left_boundary('face-2')])
+
+        self.add_face('C', [5,
+                            3,
+                            2,
+                            1,
+                            right_boundary('face-2')])
+
+        self.add_face('D', [4,
+                            3,
+                            5,
+                            top_boundary('face')])
 
     def color_pattern1(self):
         pattern = [0, 0, 1]
@@ -106,6 +151,13 @@ class FloretTile1(FloretTile):
 
 
 class FloretTile2(FloretTile):
+    BOUNDARY = dict(
+        top=['split', 'face', 'vert'],
+        left=['vert-1', 'face-1', 'vert-2', 'face-2', 'split'],
+        bottom=['split', 'face', 'vert'],
+        right=['vert-1', 'face-1', 'vert-2', 'face-2', 'split']
+    )
+
     def init_verts(self):
         return {i: None for i in range(6, 14)}
 
@@ -113,26 +165,43 @@ class FloretTile2(FloretTile):
         return {c: None for c in ['E', 'F', 'G', 'H', 'I', 'J', 'K', 'L']}
 
     def calculate_verts(self):
-        self.add_vert([6], 1, 0,
-                      equivalent=[right_tile(0),
-                                  bottom_right_tile(13),
-                                  bottom_tile(5)])
-        self.add_vert([7], *self.hex_vert_coord(0, [1, 0], 2))
-        self.add_vert([8], *self.hex_vert_coord(1, [0, 1], 4),
-                      equivalent=[left_tile(1)])
-        self.add_vert([9], *self.hex_vert_coord(0, [0, 1], 4))
-        self.add_vert([10], *self.hex_vert_coord(0, [1, 0], 1))
-        self.add_vert([11], *self.hex_vert_coord(1, [0, 1], 5),
-                      equivalent=[right_tile(4)])
-        self.add_vert([12], *self.hex_vert_coord(0, [0, 1], 5))
-        self.add_vert([13], 0, 1,
-                      equivalent=[left_tile(5),
-                                  top_left_tile(6),
-                                  top_tile(0)])
+        self.add_vert(6,
+                      1, 0,
+                      bottom_boundary='vert')
+
+        self.add_vert(7,
+                      *self.hex_vert_coord(0, [1, 0], 2))
+
+        self.add_vert(8,
+                      *self.hex_vert_coord(1, [0, 1], 4),
+                      left_boundary='vert-2')
+
+        self.add_vert(9,
+                      *self.hex_vert_coord(0, [0, 1], 4))
+
+        self.add_vert(10,
+                      *self.hex_vert_coord(0, [1, 0], 1))
+
+        self.add_vert(11,
+                      *self.hex_vert_coord(1, [0, 1], 5),
+                      right_boundary='vert-2')
+
+        self.add_vert(12,
+                      *self.hex_vert_coord(0, [0, 1], 5))
+
+        self.add_vert(13,
+                      0, 1,
+                      top_boundary='vert')
 
     def calculate_faces(self):
-        # Tile 'E' is handled as Tile 'K' on another tile
-        # Tile 'F' is handled as Tile 'L' on another tile
+        self.add_face('E', [6,
+                            7,
+                            bottom_boundary('face')])
+
+        self.add_face('F', [7,
+                            8,
+                            left_boundary('face-2')])
+
         self.add_face('G', [6,
                             10,
                             9,
@@ -142,16 +211,12 @@ class FloretTile2(FloretTile):
         self.add_face('H', [11,
                             10,
                             6,
-                            right_tile(2),
-                            right_tile(3)],
-                      equivalent=[right_tile('B')])
+                            right_boundary('face-1')])
 
         self.add_face('I', [8,
                             9,
                             13,
-                            left_tile(3),
-                            left_tile(2)],
-                      equivalent=[left_tile('C')])
+                            left_boundary('face-1')])
 
         self.add_face('J', [13,
                             9,
@@ -161,19 +226,11 @@ class FloretTile2(FloretTile):
 
         self.add_face('K', [12,
                             11,
-                            right_tile(3),
-                            right_tile(5),
-                            top_right_tile(7)],
-                      equivalent=[right_tile('D'),
-                                  top_right_tile('E')])
+                            right_boundary('face-2')])
 
         self.add_face('L', [13,
                             12,
-                            top_right_tile(7),
-                            top_tile(1),
-                            top_tile(2)],
-                      equivalent=[top_right_tile('F'),
-                                  top_tile('A')])
+                            top_boundary('face')])
 
     def color_pattern1(self):
         pattern = [0, 0, 1]

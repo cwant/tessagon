@@ -8,7 +8,7 @@
    version="1.1"
    id="svg5"
    sodipodi:docname="big_hex_tri.svg"
-   inkscape:version="1.2.2 (1:1.2.2+202305151914+b0a8486541)"
+   inkscape:version="1.3 (1:1.3+202307231459+0e150ed6c4)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -23,13 +23,13 @@
      inkscape:pagecheckerboard="0"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="1.8581159"
-     inkscape:cx="674.33899"
-     inkscape:cy="421.1255"
+     inkscape:zoom="1.5330312"
+     inkscape:cx="688.17909"
+     inkscape:cy="388.11996"
      inkscape:window-width="1550"
-     inkscape:window-height="1082"
+     inkscape:window-height="1056"
      inkscape:window-x="1964"
-     inkscape:window-y="37"
+     inkscape:window-y="0"
      inkscape:window-maximized="0"
      inkscape:current-layer="layer1"
      inkscape:showpageshadow="2"
@@ -1847,97 +1847,6 @@
          y="44.007622"
          id="tspan152718" /></text>
     <g
-       id="g11135">
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="192.04501"
-         y="111.61163"
-         id="text34793"><tspan
-           sodipodi:role="line"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
-           x="192.04501"
-           y="111.61163"
-           id="tspan34791">E</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="191.21521"
-         y="124.96099"
-         id="text103379"><tspan
-           sodipodi:role="line"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
-           x="191.21521"
-           y="124.96099"
-           id="tspan103377">G</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="198.51128"
-         y="109.75323"
-         id="text152566"><tspan
-           sodipodi:role="line"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
-           x="198.51128"
-           y="109.75323"
-           id="tspan152564">D</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="188.40863"
-         y="98.195366"
-         id="text152570"><tspan
-           sodipodi:role="line"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
-           x="188.40863"
-           y="98.195366"
-           id="tspan152568">A</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="200.77748"
-         y="101.66544"
-         id="text152578"><tspan
-           sodipodi:role="line"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
-           x="200.77748"
-           y="101.66544"
-           id="tspan152576">C</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="198.79556"
-         y="95.019814"
-         id="text152590"><tspan
-           sodipodi:role="line"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
-           x="198.79556"
-           y="95.019814"
-           id="tspan152588">B</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="189.82867"
-         y="118.47688"
-         id="text152598"><tspan
-           sodipodi:role="line"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
-           x="189.82867"
-           y="118.47688"
-           id="tspan152596">F</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="201.06004"
-         y="122.5177"
-         id="text152614"><tspan
-           sodipodi:role="line"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
-           x="201.06004"
-           y="122.5177"
-           id="tspan152612">H</tspan></text>
-    </g>
-    <g
        id="g11135-7"
        transform="translate(26.145747,33.050766)">
       <text
@@ -1950,7 +1859,7 @@
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
            x="192.04501"
            y="111.61163"
-           id="tspan34791-5">E</tspan></text>
+           id="tspan34791-5">P</tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -1961,7 +1870,7 @@
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
            x="191.21521"
            y="124.96099"
-           id="tspan103377-9">G</tspan></text>
+           id="tspan103377-9">N</tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -1972,7 +1881,7 @@
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
            x="198.51128"
            y="109.75323"
-           id="tspan152564-7">D</tspan></text>
+           id="tspan152564-7">Q</tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -1983,7 +1892,7 @@
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
            x="188.40863"
            y="98.195366"
-           id="tspan152568-5">A</tspan></text>
+           id="tspan152568-5">T</tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -1994,7 +1903,7 @@
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
            x="200.77748"
            y="101.66544"
-           id="tspan152576-5">C</tspan></text>
+           id="tspan152576-5">R</tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -2005,7 +1914,7 @@
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
            x="198.79556"
            y="95.019814"
-           id="tspan152588-7">B</tspan></text>
+           id="tspan152588-7">S</tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -2016,7 +1925,7 @@
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
            x="189.82867"
            y="118.47688"
-           id="tspan152596-4">F</tspan></text>
+           id="tspan152596-4">O</tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -2027,44 +1936,99 @@
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
            x="201.06004"
            y="122.5177"
-           id="tspan152612-0">H</tspan></text>
+           id="tspan152612-0">M</tspan></text>
     </g>
     <g
-       id="g6025">
-      <circle
-         style="fill:#00ffff;stroke:#999999;stroke-width:0.464438;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
-         id="circle11621"
-         cx="131.5661"
-         cy="75.122887"
-         r="1.7012168" />
-      <circle
-         style="fill:#00ffff;stroke:#999999;stroke-width:0.464438;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
-         id="circle11627"
-         cx="131.67896"
-         cy="91.585587"
-         r="1.7012168" />
+       id="g11135-7-2"
+       transform="translate(-0.13473663,0.19745971)">
       <text
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103012px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';letter-spacing:0px;word-spacing:0px;fill:#008080;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
-         x="125.67712"
-         y="72.866486"
-         id="text152650"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="192.04501"
+         y="111.61163"
+         id="text34793-6-8"><tspan
            sodipodi:role="line"
-           id="tspan152648"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103012px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';fill:#008080;stroke:none;stroke-width:2.31854px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
-           x="125.67712"
-           y="72.866486">0</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
+           x="192.04501"
+           y="111.61163"
+           id="tspan34791-5-5">P</tspan></text>
       <text
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103012px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';letter-spacing:0px;word-spacing:0px;fill:#008080;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
-         x="127.14339"
-         y="86.902588"
-         id="text152654"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="191.21521"
+         y="124.96099"
+         id="text103379-6-9"><tspan
            sodipodi:role="line"
-           id="tspan152652"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103012px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';fill:#008080;stroke:none;stroke-width:2.31854px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
-           x="127.14339"
-           y="86.902588">1</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
+           x="191.21521"
+           y="124.96099"
+           id="tspan103377-9-2">N</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="198.51128"
+         y="109.75323"
+         id="text152566-3-0"><tspan
+           sodipodi:role="line"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
+           x="198.51128"
+           y="109.75323"
+           id="tspan152564-7-3">Q</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="188.40863"
+         y="98.195366"
+         id="text152570-4-4"><tspan
+           sodipodi:role="line"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
+           x="188.40863"
+           y="98.195366"
+           id="tspan152568-5-7">T</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="200.77748"
+         y="101.66544"
+         id="text152578-2-7"><tspan
+           sodipodi:role="line"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
+           x="200.77748"
+           y="101.66544"
+           id="tspan152576-5-1">R</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="198.79556"
+         y="95.019814"
+         id="text152590-4-6"><tspan
+           sodipodi:role="line"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
+           x="198.79556"
+           y="95.019814"
+           id="tspan152588-7-5">S</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="189.82867"
+         y="118.47688"
+         id="text152598-4-5"><tspan
+           sodipodi:role="line"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
+           x="189.82867"
+           y="118.47688"
+           id="tspan152596-4-4">O</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="201.06004"
+         y="122.5177"
+         id="text152614-3-6"><tspan
+           sodipodi:role="line"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
+           x="201.06004"
+           y="122.5177"
+           id="tspan152612-0-8">M</tspan></text>
     </g>
     <g
        id="g6025-7"
@@ -2083,97 +2047,64 @@
          r="1.7012168" />
       <text
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103012px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';letter-spacing:0px;word-spacing:0px;fill:#008080;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#008080;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          x="125.67712"
          y="72.866486"
          id="text152650-5"><tspan
            sodipodi:role="line"
            id="tspan152648-6"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103012px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';fill:#008080;stroke:none;stroke-width:2.31854px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#008080;stroke:none;stroke-width:2.31854px"
            x="125.67712"
-           y="72.866486">0</tspan></text>
+           y="72.866486">5</tspan></text>
       <text
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103012px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';letter-spacing:0px;word-spacing:0px;fill:#008080;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#008080;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          x="127.14339"
          y="86.902588"
          id="text152654-2"><tspan
            sodipodi:role="line"
            id="tspan152652-9"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103012px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';fill:#008080;stroke:none;stroke-width:2.31854px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#008080;stroke:none;stroke-width:2.31854px"
            x="127.14339"
-           y="86.902588">1</tspan></text>
+           y="86.902588">4</tspan></text>
     </g>
     <g
-       id="g6091">
+       id="g6025-7-6"
+       transform="translate(-0.10736107,-0.03409566)">
       <circle
          style="fill:#00ffff;stroke:#999999;stroke-width:0.464438;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
-         id="circle11619"
-         cx="144.43648"
-         cy="66.882683"
+         id="circle11621-5-8"
+         cx="131.5661"
+         cy="75.122887"
          r="1.7012168" />
       <circle
          style="fill:#00ffff;stroke:#999999;stroke-width:0.464438;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
-         id="circle11623"
-         cx="157.56947"
-         cy="75.182693"
-         r="1.7012168" />
-      <circle
-         style="fill:#00ffff;stroke:#999999;stroke-width:0.464438;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
-         id="circle11625"
-         cx="144.54453"
-         cy="83.053047"
-         r="1.7012168" />
-      <circle
-         style="fill:#00ffff;stroke:#999999;stroke-width:0.464438;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
-         id="circle11635"
-         cx="158.08118"
-         cy="91.889114"
+         id="circle11627-3-1"
+         cx="131.67896"
+         cy="91.585587"
          r="1.7012168" />
       <text
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103012px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';letter-spacing:0px;word-spacing:0px;fill:#008080;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
-         x="147.98375"
-         y="85.098831"
-         id="text68867"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#008080;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="125.67712"
+         y="72.866486"
+         id="text152650-5-8"><tspan
            sodipodi:role="line"
-           id="tspan68865"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103012px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';fill:#008080;stroke:none;stroke-width:2.31854px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
-           x="147.98375"
-           y="85.098831">4</tspan></text>
+           id="tspan152648-6-9"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#008080;stroke:none;stroke-width:2.31854px"
+           x="125.67712"
+           y="72.866486">5</tspan></text>
       <text
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103012px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';letter-spacing:0px;word-spacing:0px;fill:#008080;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
-         x="151.48012"
-         y="94.650513"
-         id="text68895"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#008080;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="127.14339"
+         y="86.902588"
+         id="text152654-2-3"><tspan
            sodipodi:role="line"
-           id="tspan68893"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103012px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';fill:#008080;stroke:none;stroke-width:2.31854px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
-           x="151.48012"
-           y="94.650513">5</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103012px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';letter-spacing:0px;word-spacing:0px;fill:#008080;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
-         x="147.02838"
-         y="68.163994"
-         id="text152658"><tspan
-           sodipodi:role="line"
-           id="tspan152656"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103012px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';fill:#008080;stroke:none;stroke-width:2.31854px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
-           x="147.02838"
-           y="68.163994">2</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103012px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';letter-spacing:0px;word-spacing:0px;fill:#008080;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
-         x="150.18437"
-         y="77.271889"
-         id="text152674"><tspan
-           sodipodi:role="line"
-           id="tspan152672"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103012px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';fill:#008080;stroke:none;stroke-width:2.31854px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
-           x="150.18437"
-           y="77.271889">3</tspan></text>
+           id="tspan152652-9-7"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#008080;stroke:none;stroke-width:2.31854px"
+           x="127.14339"
+           y="86.902588">4</tspan></text>
     </g>
     <g
        id="g6091-1"
@@ -2204,48 +2135,120 @@
          r="1.7012168" />
       <text
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103012px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';letter-spacing:0px;word-spacing:0px;fill:#008080;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#008080;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          x="147.98375"
          y="85.098831"
          id="text68867-3"><tspan
            sodipodi:role="line"
            id="tspan68865-6"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103012px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';fill:#008080;stroke:none;stroke-width:2.31854px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#008080;stroke:none;stroke-width:2.31854px"
            x="147.98375"
-           y="85.098831">4</tspan></text>
+           y="85.098831">1</tspan></text>
       <text
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103012px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';letter-spacing:0px;word-spacing:0px;fill:#008080;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#008080;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          x="151.48012"
          y="94.650513"
          id="text68895-0"><tspan
            sodipodi:role="line"
            id="tspan68893-6"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103012px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';fill:#008080;stroke:none;stroke-width:2.31854px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#008080;stroke:none;stroke-width:2.31854px"
            x="151.48012"
-           y="94.650513">5</tspan></text>
+           y="94.650513">0</tspan></text>
       <text
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103012px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';letter-spacing:0px;word-spacing:0px;fill:#008080;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#008080;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          x="147.02838"
          y="68.163994"
          id="text152658-2"><tspan
            sodipodi:role="line"
            id="tspan152656-6"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103012px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';fill:#008080;stroke:none;stroke-width:2.31854px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#008080;stroke:none;stroke-width:2.31854px"
            x="147.02838"
-           y="68.163994">2</tspan></text>
+           y="68.163994">3</tspan></text>
       <text
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103012px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';letter-spacing:0px;word-spacing:0px;fill:#008080;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#008080;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          x="150.18437"
          y="77.271889"
          id="text152674-1"><tspan
            sodipodi:role="line"
            id="tspan152672-8"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103012px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';fill:#008080;stroke:none;stroke-width:2.31854px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#008080;stroke:none;stroke-width:2.31854px"
            x="150.18437"
-           y="77.271889">3</tspan></text>
+           y="77.271889">2</tspan></text>
+    </g>
+    <g
+       id="g6091-1-2"
+       transform="translate(0.17822673,-0.09390248)">
+      <circle
+         style="fill:#00ffff;stroke:#999999;stroke-width:0.464438;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
+         id="circle11619-2-7"
+         cx="144.43648"
+         cy="66.882683"
+         r="1.7012168" />
+      <circle
+         style="fill:#00ffff;stroke:#999999;stroke-width:0.464438;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
+         id="circle11623-7-0"
+         cx="157.56947"
+         cy="75.182693"
+         r="1.7012168" />
+      <circle
+         style="fill:#00ffff;stroke:#999999;stroke-width:0.464438;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
+         id="circle11625-0-6"
+         cx="144.54453"
+         cy="83.053047"
+         r="1.7012168" />
+      <circle
+         style="fill:#00ffff;stroke:#999999;stroke-width:0.464438;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stop-color:#000000"
+         id="circle11635-9-4"
+         cx="158.08118"
+         cy="91.889114"
+         r="1.7012168" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#008080;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="147.98375"
+         y="85.098831"
+         id="text68867-3-7"><tspan
+           sodipodi:role="line"
+           id="tspan68865-6-0"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#008080;stroke:none;stroke-width:2.31854px"
+           x="147.98375"
+           y="85.098831">1</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#008080;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="151.48012"
+         y="94.650513"
+         id="text68895-0-2"><tspan
+           sodipodi:role="line"
+           id="tspan68893-6-9"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#008080;stroke:none;stroke-width:2.31854px"
+           x="151.48012"
+           y="94.650513">0</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#008080;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="147.02838"
+         y="68.163994"
+         id="text152658-2-1"><tspan
+           sodipodi:role="line"
+           id="tspan152656-6-6"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#008080;stroke:none;stroke-width:2.31854px"
+           x="147.02838"
+           y="68.163994">3</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#008080;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="150.18437"
+         y="77.271889"
+         id="text152674-1-3"><tspan
+           sodipodi:role="line"
+           id="tspan152672-8-8"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#008080;stroke:none;stroke-width:2.31854px"
+           x="150.18437"
+           y="77.271889">2</tspan></text>
     </g>
     <g
        id="g2610"
@@ -2437,141 +2440,6 @@
          id="path10366" />
     </g>
     <g
-       id="g16383">
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="208.17175"
-         y="91.087746"
-         id="text34789"><tspan
-           sodipodi:role="line"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
-           x="208.17175"
-           y="91.087746"
-           id="tspan34787">J</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="222.34763"
-         y="102.76751"
-         id="text34833"><tspan
-           sodipodi:role="line"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
-           x="222.34763"
-           y="102.76751"
-           id="tspan34831">P</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="216.79492"
-         y="91.519394"
-         id="text152562"><tspan
-           sodipodi:role="line"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
-           x="216.79492"
-           y="91.519394"
-           id="tspan152560">I</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="207.71465"
-         y="111.00128"
-         id="text152574"><tspan
-           sodipodi:role="line"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
-           x="207.71465"
-           y="111.00128"
-           id="tspan152572">M</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="204.84335"
-         y="94.31031"
-         id="text152582"><tspan
-           sodipodi:role="line"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
-           x="204.84335"
-           y="94.31031"
-           id="tspan152580">K</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="206.34782"
-         y="101.01867"
-         id="text152586"><tspan
-           sodipodi:role="line"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
-           x="206.34782"
-           y="101.01867"
-           id="tspan152584">L</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="212.17494"
-         y="102.06792"
-         id="text152594"><tspan
-           sodipodi:role="line"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
-           x="212.17494"
-           y="102.06792"
-           id="tspan152592">N</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="216.79492"
-         y="107.95"
-         id="text152602"><tspan
-           sodipodi:role="line"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
-           x="216.79492"
-           y="107.95"
-           id="tspan152600">O</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="222.31873"
-         y="110.53667"
-         id="text152610"><tspan
-           sodipodi:role="line"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
-           x="222.31873"
-           y="110.53667"
-           id="tspan152608">Q</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="224.24936"
-         y="117.62075"
-         id="text152626"><tspan
-           sodipodi:role="line"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
-           x="224.24936"
-           y="117.62075"
-           id="tspan152624">R</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="221.99792"
-         y="120.94857"
-         id="text14920"><tspan
-           sodipodi:role="line"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
-           x="221.99792"
-           y="120.94857"
-           id="tspan14918">S</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="213.05861"
-         y="119.63681"
-         id="text16357"><tspan
-           sodipodi:role="line"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
-           x="213.05861"
-           y="119.63681"
-           id="tspan16355">T</tspan></text>
-    </g>
-    <g
        id="g16433"
        transform="translate(-12.806275,40.830987)">
       <text
@@ -2584,7 +2452,7 @@
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
            x="208.17175"
            y="91.087746"
-           id="tspan16385">J</tspan></text>
+           id="tspan16385">B</tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -2595,7 +2463,7 @@
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
            x="222.34763"
            y="102.76751"
-           id="tspan16389">P</tspan></text>
+           id="tspan16389">H</tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -2606,7 +2474,7 @@
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
            x="216.79492"
            y="91.519394"
-           id="tspan16393">I</tspan></text>
+           id="tspan16393">L</tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -2617,7 +2485,7 @@
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
            x="207.71465"
            y="111.00128"
-           id="tspan16397">M</tspan></text>
+           id="tspan16397">E</tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -2628,7 +2496,7 @@
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
            x="204.84335"
            y="94.31031"
-           id="tspan16401">K</tspan></text>
+           id="tspan16401">C</tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -2639,7 +2507,7 @@
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
            x="206.34782"
            y="101.01867"
-           id="tspan16405">L</tspan></text>
+           id="tspan16405">D</tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -2650,7 +2518,7 @@
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
            x="212.17494"
            y="102.06792"
-           id="tspan16409">N</tspan></text>
+           id="tspan16409">F</tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -2661,29 +2529,29 @@
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
            x="216.79492"
            y="107.95"
-           id="tspan16413">O</tspan></text>
+           id="tspan16413">G</tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="222.31873"
-         y="110.53667"
+         x="223.89897"
+         y="110.92014"
          id="text16419"><tspan
            sodipodi:role="line"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
-           x="222.31873"
-           y="110.53667"
-           id="tspan16417">Q</tspan></text>
+           x="223.89897"
+           y="110.92014"
+           id="tspan16417">I</tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         x="224.24936"
-         y="117.62075"
+         x="226.16245"
+         y="117.74804"
          id="text16423"><tspan
            sodipodi:role="line"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
-           x="224.24936"
-           y="117.62075"
-           id="tspan16421">R</tspan></text>
+           x="226.16245"
+           y="117.74804"
+           id="tspan16421">J</tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -2694,7 +2562,7 @@
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
            x="221.99792"
            y="120.94857"
-           id="tspan16425">S</tspan></text>
+           id="tspan16425">K</tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -2705,7 +2573,143 @@
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
            x="213.05861"
            y="119.63681"
-           id="tspan16429">T</tspan></text>
+           id="tspan16429">A</tspan></text>
+    </g>
+    <g
+       id="g16433-1"
+       transform="translate(0.1704939,-0.20959969)">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="208.17175"
+         y="91.087746"
+         id="text16387-0"><tspan
+           sodipodi:role="line"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
+           x="208.17175"
+           y="91.087746"
+           id="tspan16385-5">B</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="222.34763"
+         y="102.76751"
+         id="text16391-1"><tspan
+           sodipodi:role="line"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
+           x="222.34763"
+           y="102.76751"
+           id="tspan16389-8">H</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="216.79492"
+         y="91.519394"
+         id="text16395-9"><tspan
+           sodipodi:role="line"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
+           x="216.79492"
+           y="91.519394"
+           id="tspan16393-1">L</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="207.71465"
+         y="111.00128"
+         id="text16399-8"><tspan
+           sodipodi:role="line"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
+           x="207.71465"
+           y="111.00128"
+           id="tspan16397-1">E</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="204.84335"
+         y="94.31031"
+         id="text16403-0"><tspan
+           sodipodi:role="line"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
+           x="204.84335"
+           y="94.31031"
+           id="tspan16401-9">C</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="206.34782"
+         y="101.01867"
+         id="text16407-7"><tspan
+           sodipodi:role="line"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
+           x="206.34782"
+           y="101.01867"
+           id="tspan16405-3">D</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="212.17494"
+         y="102.06792"
+         id="text16411-9"><tspan
+           sodipodi:role="line"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
+           x="212.17494"
+           y="102.06792"
+           id="tspan16409-1">F</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="216.79492"
+         y="107.95"
+         id="text16415-2"><tspan
+           sodipodi:role="line"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
+           x="216.79492"
+           y="107.95"
+           id="tspan16413-6">G</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="223.89897"
+         y="110.92014"
+         id="text16419-2"><tspan
+           sodipodi:role="line"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
+           x="223.89897"
+           y="110.92014"
+           id="tspan16417-6">I</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="226.16245"
+         y="117.74804"
+         id="text16423-6"><tspan
+           sodipodi:role="line"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
+           x="226.16245"
+           y="117.74804"
+           id="tspan16421-5">J</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="221.99792"
+         y="120.94857"
+         id="text16427-0"><tspan
+           sodipodi:role="line"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
+           x="221.99792"
+           y="120.94857"
+           id="tspan16425-5">K</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;line-height:125%;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#800000;stroke:none;stroke-width:2.31854px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="213.05861"
+         y="119.63681"
+         id="text16431-4"><tspan
+           sodipodi:role="line"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.10103px;font-family:'Bitstream Vera Sans';-inkscape-font-specification:'Bitstream Vera Sans, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#800000;stroke:none;stroke-width:2.31854px"
+           x="213.05861"
+           y="119.63681"
+           id="tspan16429-3">A</tspan></text>
     </g>
   </g>
 </svg>

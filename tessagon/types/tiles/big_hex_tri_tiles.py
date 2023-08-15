@@ -1,7 +1,7 @@
 from math import atan2, sqrt, sin, cos, pi
 from tessagon.core.tile import Tile
-from tessagon.core.tile_utils import right_tile, left_tile, \
-    top_tile, top_left_tile, bottom_tile
+from tessagon.core.tile_utils import left_boundary, right_boundary, \
+    top_boundary, bottom_boundary
 
 # See the SVG for decomposition:
 # https://raw.githubusercontent.com/cwant/tessagon/master/documentation/code/big_hex_tri.svg
@@ -34,10 +34,21 @@ class BigHexTriTile(Tile):
 
 
 class BigHexTriTile1(BigHexTriTile):
+    BOUNDARY = dict(
+        top=['face-1', 'split', 'face-2', 'split'],
+        left=['split', 'face-1', 'split', 'face-2',
+              'split', 'face-3', 'split', 'face-4'],
+        bottom=['face-1', 'split', 'face-2', 'split'],
+        right=['split', 'face-1', 'split', 'face-2',
+               'split', 'face-3', 'split', 'face-4'],
+    )
 
     def init_verts(self):
         verts = {0: None,
-                 1: None}
+                 1: None,
+                 2: None,
+                 3: None}
+
         return verts
 
     def init_faces(self):
@@ -48,110 +59,153 @@ class BigHexTriTile1(BigHexTriTile):
                  'E': None,
                  'F': None,
                  'G': None,
-                 'H': None}
+                 'H': None,
+                 'I': None,
+                 'J': None,
+                 'K': None,
+                 'L': None}
 
         return faces
 
     def calculate_verts(self):
-        self.add_vert([0], *self.hex_vert_coord([0, 1], 5))
-        self.add_vert([1], *self.hex_vert_coord([1, 0], 2))
+        self.add_vert(0,
+                      *self.hex_vert_coord([0, 0], 0))
+        self.add_vert(1,
+                      *self.hex_vert_coord([0, 0], 1))
+        self.add_vert(2,
+                      *self.hex_vert_coord([1, 1], 4))
+        self.add_vert(3,
+                      *self.hex_vert_coord([1, 1], 3))
 
     def calculate_faces(self):
         self.add_face('A',
                       [0,
-                       top_tile(5),
-                       top_tile(4),
-                       top_left_tile(1),
-                       left_tile(2),
-                       left_tile(3)],
-                      equivalent=[top_tile('T'),
-                                  top_left_tile('H'),
-                                  left_tile('I')])
+                       1,
+                       left_boundary('face-4')])
 
         self.add_face('B',
-                      [0,
-                       right_tile(2),
-                       top_tile(5)],
-                      equivalent=[top_tile('S'),
-                                  right_tile('K')])
+                      [3,
+                       top_boundary('face-2')])
 
         self.add_face('C',
-                      [0,
-                       right_tile(4),
-                       right_tile(2)],
-                      equivalent=[right_tile('L')])
+                      [3,
+                       left_boundary('face-1')])
+        # TODO: skip=True ? No verts to add there
+        # (diagonal edge on tile corner)
 
         self.add_face('D',
-                      [0,
-                       1,
-                       right_tile(4)],
-                      equivalent=[right_tile('M')])
+                      [1,
+                       3,
+                       left_boundary('face-2')])
 
         self.add_face('E',
                       [1,
-                       0,
-                       left_tile(3)],
-                      equivalent=[left_tile('P')])
+                       left_boundary('face-3')])
 
         self.add_face('F',
-                      [1,
-                       left_tile(3),
-                       left_tile(5)],
-                      equivalent=[left_tile('Q')])
+                      [2,
+                       3,
+                       1])
 
         self.add_face('G',
-                      [1,
-                       left_tile(5),
-                       bottom_tile(2)],
-                      equivalent=[left_tile('R')])
+                      [2,
+                       1,
+                       0])
+
+        self.add_face('H',
+                      [2,
+                       right_boundary('face-3')])
+
+        self.add_face('I',
+                      [2,
+                       0,
+                       right_boundary('face-2')])
+
+        self.add_face('J',
+                      [0,
+                       right_boundary('face-1')])
+
+        self.add_face('K',
+                      [0,
+                       bottom_boundary('face-2')])
+
+        self.add_face('L',
+                      [3,
+                       2,
+                       right_boundary('face-4')])
 
     def color_pattern1(self):
-        self.color_face('A', 2)
-        self.color_face('B', 1)
-        self.color_face('D', 1)
         self.color_face('F', 1)
 
 
 class BigHexTriTile2(BigHexTriTile):
+    BOUNDARY = dict(
+        top=['tangent-split', 'face-1', 'split', 'face-2'],
+        left=['face-1', 'split', 'face-2', 'split',
+              'face-3', 'split', 'face-4', 'tangent-split'],
+        bottom=['tangent-split', 'face-1', 'split', 'face-2'],
+        right=['face-1', 'split', 'face-2', 'split',
+               'face-3', 'split', 'face-4', 'tangent-split']
+    )
 
     def init_verts(self):
-        verts = {2: None,
-                 3: None,
-                 4: None,
+        verts = {4: None,
                  5: None}
-
         return verts
 
     def init_faces(self):
-        faces = {'I': None,
-                 'J': None,
-                 'K': None,
-                 'L': None,
-                 'M': None,
+        faces = {'M': None,
                  'N': None,
                  'O': None,
                  'P': None,
                  'Q': None,
-                 'R': None}
+                 'R': None,
+                 'S': None,
+                 'T': None}
 
         return faces
 
     def calculate_verts(self):
-        self.add_vert([2], *self.hex_vert_coord([1, 1], 3))
-        self.add_vert([3], *self.hex_vert_coord([1, 1], 4))
-        self.add_vert([4], *self.hex_vert_coord([0, 0], 1))
-        self.add_vert([5], *self.hex_vert_coord([0, 0], 0))
+        self.add_vert(4, *self.hex_vert_coord([1, 0], 2))
+        self.add_vert(5, *self.hex_vert_coord([0, 1], 5))
 
     def calculate_faces(self):
+        self.add_face('M',
+                      [4,
+                       bottom_boundary('face-2')])
+
         self.add_face('N',
-                      [2,
-                       4,
-                       3])
+                      [4,
+                       left_boundary('face-4')])
 
         self.add_face('O',
-                      [3,
+                      [4,
+                       left_boundary('face-3')])
+
+        self.add_face('P',
+                      [4,
+                       5,
+                       left_boundary('face-2')])
+
+        self.add_face('Q',
+                      [5,
                        4,
-                       5])
+                       right_boundary('face-2')])
+
+        self.add_face('R',
+                      [5,
+                       right_boundary('face-3')])
+
+        self.add_face('S',
+                      [5,
+                       right_boundary('face-4')])
+
+        self.add_face('T',
+                      [5,
+                       top_boundary('face-2')])
 
     def color_pattern1(self):
-        self.color_face('N', 1)
+        self.color_face('O', 1)
+        self.color_face('Q', 1)
+        self.color_face('S', 1)
+        self.color_face('T', 2)

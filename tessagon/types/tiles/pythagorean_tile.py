@@ -1,13 +1,18 @@
 from tessagon.core.tile import Tile
-from tessagon.core.tile_utils import bottom_tile, left_tile, \
-    bottom_left_tile
-
+from tessagon.core.tile_utils import left_boundary, right_boundary, \
+    top_boundary, bottom_boundary
 
 # See the SVG for decomposition:
 # https://raw.githubusercontent.com/cwant/tessagon/master/documentation/code/pythagorean.svg
 
 
 class PythagoreanTile(Tile):
+    BOUNDARY = dict(
+        top=['face-1', 'split', 'face-2'],
+        left=['face-1', 'split', 'face-2'],
+        bottom=['face-1', 'split', 'face-2'],
+        right=['face-1', 'split', 'face-2']
+    )
     uv_ratio = 1.0
     TOLERANCE = 0.0000001
 
@@ -51,23 +56,35 @@ class PythagoreanTile(Tile):
 
     def calculate_verts(self):
         (u0, v0) = self.vert0()
-        self.add_vert(0, u0, v0)
-        self.add_vert(1, 1 - v0, u0)
-        self.add_vert(2, 1 - u0, 1 - v0)
-        self.add_vert(3, v0, 1 - u0)
+
+        self.add_vert(0,
+                      u0, v0)
+
+        self.add_vert(1,
+                      1 - v0, u0)
+
+        self.add_vert(2,
+                      1 - u0, 1 - v0)
+
+        self.add_vert(3,
+                      v0, 1 - u0)
 
     def calculate_faces(self):
         self.add_face('A', [1,
                             0,
-                            left_tile(2),
-                            left_tile(1),
-                            bottom_left_tile(3),
-                            bottom_left_tile(2),
-                            bottom_tile(0),
-                            bottom_tile(3)],
-                      equivalent=[left_tile('B'),
-                                  bottom_left_tile('D'),
-                                  bottom_tile('C')])
+                            left_boundary('face-2')])
+
+        self.add_face('B', [2,
+                            1,
+                            bottom_boundary('face-2')])
+
+        self.add_face('C', [3,
+                            2,
+                            right_boundary('face-2')])
+
+        self.add_face('D', [0,
+                            3,
+                            top_boundary('face-2')])
 
         self.add_face('E', [0,
                             1,

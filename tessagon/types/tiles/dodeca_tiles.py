@@ -1,13 +1,20 @@
 from math import sqrt
 from tessagon.core.tile import Tile
-from tessagon.core.tile_utils import left_tile, right_tile, \
-    bottom_tile, bottom_left_tile, bottom_right_tile
+from tessagon.core.tile_utils import left_boundary, right_boundary, \
+    top_boundary, bottom_boundary
 
 # See the SVG for decomposition:
 # https://raw.githubusercontent.com/cwant/tessagon/master/documentation/code/dodeca.svg
 
 
 class DodecaTile(Tile):
+    BOUNDARY = dict(
+        top=['face-1', 'split', 'face-2'],
+        left=['face-1', 'split', 'face-2', 'split', 'face-3'],
+        bottom=['face-1', 'split', 'face-2'],
+        right=['face-1', 'split', 'face-2', 'split', 'face-3']
+    )
+
     uv_ratio = 1.0 / sqrt(3.0)
 
     def __init__(self, tessagon, **kwargs):
@@ -74,26 +81,12 @@ class DodecaTile1(DodecaTile):
         self.add_face('A', [2,
                             1,
                             0,
-                            left_tile(8),
-                            left_tile(7),
-                            left_tile(6),
-                            bottom_left_tile(3),
-                            bottom_left_tile(4),
-                            bottom_left_tile(5),
-                            bottom_tile(9),
-                            bottom_tile(10),
-                            bottom_tile(11)],
-                      equivalent=[left_tile('I'),
-                                  bottom_left_tile('G'),
-                                  bottom_tile('M')])
+                            left_boundary('face-3')])
 
         self.add_face('B', [0,
                             4,
                             3,
-                            left_tile(11),
-                            left_tile(10),
-                            left_tile(8)],
-                      equivalent=[left_tile('L')])
+                            left_boundary('face-2')])
 
         self.add_face('C', [0,
                             1,
@@ -103,18 +96,18 @@ class DodecaTile1(DodecaTile):
         self.add_face('D', [5,
                             1,
                             2,
-                            right_tile(6),
-                            right_tile(7),
-                            right_tile(9)],
-                      equivalent=[right_tile('J')])
+                            right_boundary('face-2')])
 
         self.add_face('E', [2,
-                            bottom_tile(11),
-                            bottom_right_tile(3),
-                            right_tile(6)],
-                      equivalent=[bottom_tile('N'),
-                                  bottom_right_tile('F'),
-                                  right_tile('H')])
+                            bottom_boundary('face-2')])
+
+        self.add_face('F', [3,
+                            top_boundary('face-2')])
+
+        self.add_face('G', [3,
+                            4,
+                            5,
+                            right_boundary('face-3')])
 
     def color_pattern1(self):
         self.color_face('A', 1)
@@ -153,10 +146,36 @@ class DodecaTile2(DodecaTile):
         self.add_vert(11, u4, v6)
 
     def calculate_faces(self):
+        self.add_face('H', [6,
+                            left_boundary('face-3')])
+
+        self.add_face('I', [8,
+                            7,
+                            6,
+                            bottom_boundary('face-2')])
+
+        self.add_face('J', [6,
+                            7,
+                            9,
+                            left_boundary('face-2')])
+
         self.add_face('K', [7,
                             8,
                             10,
                             9])
+
+        self.add_face('L', [11,
+                            10,
+                            8,
+                            right_boundary('face-2')])
+
+        self.add_face('M', [9,
+                            10,
+                            11,
+                            top_boundary('face-2')])
+
+        self.add_face('N', [11,
+                            right_boundary('face-3')])
 
     def color_pattern1(self):
         pass

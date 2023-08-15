@@ -1,7 +1,7 @@
 from math import sqrt
 from tessagon.core.tile import Tile
-from tessagon.core.tile_utils import top_tile, bottom_tile, \
-    left_tile, bottom_left_tile
+from tessagon.core.tile_utils import left_boundary, right_boundary, \
+    top_boundary, bottom_boundary
 
 # Non-convex pattern. Might work better for 2D than 3D
 # See the SVG for decomposition:
@@ -9,6 +9,13 @@ from tessagon.core.tile_utils import top_tile, bottom_tile, \
 
 
 class StanleyParkTile(Tile):
+    BOUNDARY = dict(
+        top=['face-1', 'vert', 'face-2'],
+        left=['face-1', 'split', 'face-2', 'split', 'face-3'],
+        bottom=['face-1', 'vert', 'face-2'],
+        right=['face-1', 'split', 'face-2', 'split', 'face-3'],
+    )
+
     uv_ratio = 1.0 / sqrt(3.0)
 
     def __init__(self, tessagon, **kwargs):
@@ -40,7 +47,7 @@ class StanleyParkTile(Tile):
     def calculate_verts(self):
         self.add_vert(0,
                       7.0 / 12.0, 0,
-                      equivalent=[bottom_tile(10)])
+                      bottom_boundary='vert')
 
         self.add_vert(1,
                       1.0 / 12.0, 1.0 / 6.0)
@@ -71,24 +78,19 @@ class StanleyParkTile(Tile):
 
         self.add_vert(10,
                       7.0 / 12.0, 1,
-                      equivalent=[top_tile(0)])
+                      top_boundary='vert')
 
     def calculate_faces(self):
         self.add_face('A', [0,
                             2,
                             1,
-                            left_tile(4),
-                            left_tile(3),
-                            left_tile(2),
-                            left_tile(0),
-                            bottom_left_tile(7),
-                            bottom_left_tile(8),
-                            bottom_left_tile(9),
-                            bottom_tile(6),
-                            bottom_tile(7)],
-                      equivalent=[left_tile('B'),
-                                  bottom_left_tile('F'),
-                                  bottom_tile('E')])
+                            left_boundary('face-3')])
+
+        self.add_face('B', [4,
+                            3,
+                            2,
+                            0,
+                            bottom_boundary('face-2')])
 
         self.add_face('C', [1,
                             2,
@@ -97,12 +99,25 @@ class StanleyParkTile(Tile):
                             8,
                             7,
                             6,
-                            left_tile(9),
-                            left_tile(8),
-                            left_tile(5),
-                            left_tile(3),
-                            left_tile(4)],
-                      equivalent=[left_tile('D')])
+                            left_boundary('face-2')])
+
+        self.add_face('D', [9,
+                            8,
+                            5,
+                            3,
+                            4,
+                            right_boundary('face-2')])
+
+        self.add_face('E', [6,
+                            7,
+                            10,
+                            top_boundary('face-2')])
+
+        self.add_face('F', [10,
+                            7,
+                            8,
+                            9,
+                            right_boundary('face-3')])
 
     def color_pattern1(self):
         self.color_face('C', 1)

@@ -8,6 +8,13 @@ from tessagon.types.tiles.dissected_hex_quad_tiles import \
 
 
 class DissectedHexTriTile(Tile):
+    BOUNDARY = dict(
+        top=['vert-1', 'edge', 'vert-2'],
+        left=['vert-1', 'edge', 'vert-2', 'edge', 'vert-3'],
+        bottom=['vert-1', 'edge', 'vert-2'],
+        right=['vert-1', 'edge', 'vert-2', 'edge', 'vert-3'],
+    )
+
     uv_ratio = 1.0 / sqrt(3.0)
 
     def __init__(self, tessagon, **kwargs):

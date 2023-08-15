@@ -1,7 +1,7 @@
 from math import sqrt
 from tessagon.core.tile import Tile
-from tessagon.core.tile_utils import left_tile, right_tile, \
-    bottom_tile, top_tile
+from tessagon.core.tile_utils import left_boundary, right_boundary, \
+    top_boundary, bottom_boundary
 
 # See the SVG for decomposition:
 # https://raw.githubusercontent.com/cwant/tessagon/master/documentation/code/penta.svg
@@ -27,6 +27,12 @@ class PentaTile(Tile):
 
 
 class PentaTile1(PentaTile):
+    BOUNDARY = dict(
+        top=['split', 'face', 'vert', 'edge'],
+        left=['split', 'face', 'vert', 'edge'],
+        bottom=['split', 'face', 'vert', 'edge'],
+        right=['split', 'face', 'vert', 'edge']
+    )
 
     def init_verts(self):
         return {0: None,
@@ -46,19 +52,19 @@ class PentaTile1(PentaTile):
 
         self.add_vert(0,
                       0, a1,
-                      equivalent=[left_tile(7)])
+                      left_boundary='vert')
 
         self.add_vert(1,
                       a2, 0,
-                      equivalent=[bottom_tile(8)])
+                      bottom_boundary='vert')
 
         self.add_vert(2,
                       1, a2,
-                      equivalent=[right_tile(5)])
+                      right_boundary='vert')
 
         self.add_vert(3,
                       a1, 1,
-                      equivalent=[top_tile(6)])
+                      top_boundary='vert')
 
         self.add_vert(4,
                       0.5, 0.5)
@@ -67,30 +73,22 @@ class PentaTile1(PentaTile):
         self.add_face('A', [1,
                             4,
                             0,
-                            bottom_tile(5),
-                            bottom_tile(9)],
-                      equivalent=[bottom_tile('G')])
+                            bottom_boundary('face')])
 
         self.add_face('B', [2,
                             4,
                             1,
-                            right_tile(6),
-                            right_tile(9)],
-                      equivalent=[right_tile('H')])
+                            right_boundary('face')])
 
         self.add_face('C', [3,
                             4,
                             2,
-                            top_tile(7),
-                            top_tile(9)],
-                      equivalent=[top_tile('E')])
+                            top_boundary('face')])
 
         self.add_face('D', [0,
                             4,
                             3,
-                            left_tile(8),
-                            left_tile(9)],
-                      equivalent=[left_tile('F')])
+                            left_boundary('face')])
 
     def color_pattern1(self):
         if self.fingerprint[0] % 2 == 0 and \
@@ -102,6 +100,12 @@ class PentaTile1(PentaTile):
 
 
 class PentaTile2(PentaTile):
+    BOUNDARY = dict(
+        top=['edge', 'vert', 'face', 'split'],
+        left=['edge', 'vert', 'face', 'split'],
+        bottom=['edge', 'vert', 'face', 'split'],
+        right=['edge', 'vert', 'face', 'split']
+    )
 
     def init_verts(self):
         return {5: None,
@@ -121,25 +125,43 @@ class PentaTile2(PentaTile):
 
         self.add_vert(5,
                       0, a2,
-                      equivalent=[left_tile(2)])
+                      left_boundary='vert')
 
         self.add_vert(6,
                       a1, 0,
-                      equivalent=[bottom_tile(3)])
+                      bottom_boundary='vert')
 
         self.add_vert(7,
                       1, a1,
-                      equivalent=[right_tile(0)])
+                      right_boundary='vert')
 
         self.add_vert(8,
                       a2, 1,
-                      equivalent=[top_tile(1)])
+                      top_boundary='vert')
 
         self.add_vert(9,
                       0.5, 0.5)
 
     def calculate_faces(self):
-        pass
+        self.add_face('E', [7,
+                            9,
+                            6,
+                            bottom_boundary('face')])
+
+        self.add_face('F', [8,
+                            9,
+                            7,
+                            right_boundary('face')])
+
+        self.add_face('G', [5,
+                            9,
+                            8,
+                            top_boundary('face')])
+
+        self.add_face('H', [6,
+                            9,
+                            5,
+                            left_boundary('face')])
 
     def color_pattern1(self):
         pass

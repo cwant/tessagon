@@ -1,8 +1,7 @@
 from math import sqrt
 from tessagon.core.tile import Tile
-from tessagon.core.tile_utils import left_tile, right_tile, \
-    bottom_tile, bottom_left_tile, bottom_right_tile, \
-    top_tile, top_left_tile, top_right_tile
+from tessagon.core.tile_utils import left_boundary, right_boundary, \
+    top_boundary, bottom_boundary
 
 # See page 3 of "Islamic Design" by Daud Sutton
 # See the SVG for decomposition:
@@ -19,6 +18,12 @@ class IslamicHexStarsTile(Tile):
 
 
 class IslamicHexStarsTile1(IslamicHexStarsTile):
+    BOUNDARY = dict(
+        top=['face', 'vert'],
+        left=['vert-1', 'face-1', 'vert-2', 'face-2'],
+        bottom=['face', 'vert'],
+        right=['vert-1', 'face-1', 'vert-2', 'face-2']
+    )
 
     def init_verts(self):
         return {0: None,
@@ -38,65 +43,65 @@ class IslamicHexStarsTile1(IslamicHexStarsTile):
     def calculate_verts(self):
         self.add_vert(0,
                       0.0, 1.0 / 3.0,
-                      equivalent=[left_tile(11)])
+                      left_boundary='vert-2')
+
         self.add_vert(1,
                       0.5, 0.5)
+
         self.add_vert(2,
                       0.5, 1.0 / 6.0)
+
         self.add_vert(3,
                       1.0, 0.0,
-                      equivalent=[right_tile(7),
-                                  bottom_right_tile(6),
-                                  bottom_tile(13)])
+                      bottom_boundary='vert')
+
         self.add_vert(4,
                       1.0, 2.0 / 3.0,
-                      equivalent=[right_tile(10)])
+                      right_boundary='vert-2')
+
         self.add_vert(5,
                       0.5, 5.0 / 6.0)
+
         self.add_vert(6,
                       0.0, 1.0,
-                      equivalent=[left_tile(13),
-                                  top_left_tile(3),
-                                  top_tile(7)])
+                      top_boundary='vert')
 
     def calculate_faces(self):
         self.add_face('A', [3,
                             2,
                             1,
                             0,
-                            left_tile(9),
-                            left_tile(8),
-                            left_tile(7),
-                            bottom_left_tile(5),
-                            bottom_left_tile(1),
-                            bottom_tile(10),
-                            bottom_tile(9),
-                            bottom_tile(12)],
-                      equilalent=[left_tile('F'),
-                                  bottom_left_tile('D'),
-                                  bottom_tile('G')])
+                            left_boundary('face-2')])
 
         self.add_face('B', [4,
                             1,
                             2,
                             3,
-                            right_tile(8),
-                            right_tile(9)],
-                      equilalent=[right_tile('E')])
+                            right_boundary('face-1')])
 
         self.add_face('C', [0,
                             1,
                             5,
                             6,
-                            left_tile(12),
-                            left_tile(9)],
-                      equilalent=[left_tile('H')])
+                            left_boundary('face-1')])
+
+        self.add_face('D', [6,
+                            5,
+                            1,
+                            4,
+                            right_boundary('face-2')])
 
     def color_pattern1(self):
         self.color_face('A', 1)
 
 
 class IslamicHexStarsTile2(IslamicHexStarsTile):
+    BOUNDARY = dict(
+        top=['vert', 'face'],
+        left=['face-1', 'vert-1', 'face-2', 'vert-2'],
+        bottom=['vert', 'face'],
+        right=['face-1', 'vert-1', 'face-2', 'vert-2']
+    )
 
     def init_verts(self):
         return {7: None,
@@ -116,29 +121,53 @@ class IslamicHexStarsTile2(IslamicHexStarsTile):
     def calculate_verts(self):
         self.add_vert(7,
                       0.0, 0.0,
-                      equivalent=[left_tile(3),
-                                  bottom_left_tile(13),
-                                  bottom_tile(6)])
+                      left_boundary='vert-2')
+
         self.add_vert(8,
                       0.5, 1.0 / 6.0)
+
         self.add_vert(9,
                       0.5, 0.5)
+
         self.add_vert(10,
                       0.0, 2.0 / 3.0,
-                      equivalent=[left_tile(4)])
+                      left_boundary='vert-1')
+
         self.add_vert(11,
                       1.0, 1.0 / 3.0,
-                      equivalent=[right_tile(0)])
+                      right_boundary='vert-1')
+
         self.add_vert(12,
                       0.5, 5.0 / 6.0)
+
         self.add_vert(13,
                       1.0, 1.0,
-                      equivalent=[right_tile(6),
-                                  top_right_tile(7),
-                                  top_tile(3)])
+                      right_boundary='vert-2')
 
     def calculate_faces(self):
-        pass
+        self.add_face('E', [7,
+                            8,
+                            9,
+                            10,
+                            left_boundary('face-2')])
+
+        self.add_face('F', [11,
+                            9,
+                            8,
+                            7,
+                            bottom_boundary('face')])
+
+        self.add_face('G', [10,
+                            9,
+                            12,
+                            13,
+                            top_boundary('face')])
+
+        self.add_face('H', [13,
+                            12,
+                            9,
+                            11,
+                            right_boundary('face-2')])
 
     def color_pattern1(self):
         pass

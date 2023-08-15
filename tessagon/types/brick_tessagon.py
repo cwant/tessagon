@@ -1,5 +1,5 @@
-from tessagon.types.tiles.brick_tile import BrickTile
-from tessagon.core.tessagon import Tessagon
+from tessagon.types.tiles.brick_tiles import BrickTile1, BrickTile2
+from tessagon.core.alternating_tessagon import AlternatingTessagon
 from tessagon.core.tessagon_metadata import TessagonMetadata
 
 metadata = TessagonMetadata(name='Bricks',
@@ -9,6 +9,6 @@ metadata = TessagonMetadata(name='Bricks',
                             sides=[4])
 
 
-class BrickTessagon(Tessagon):
-    tile_classes = [BrickTile]
+class BrickTessagon(AlternatingTessagon):
+    tile_classes = [BrickTile1, BrickTile2]
     metadata = metadata

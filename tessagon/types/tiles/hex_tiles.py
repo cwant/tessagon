@@ -1,7 +1,7 @@
 from math import sqrt
 from tessagon.core.tile import Tile
-from tessagon.core.tile_utils import left_tile, right_tile, \
-    bottom_tile, bottom_left_tile
+from tessagon.core.tile_utils import left_boundary, right_boundary, \
+    top_boundary, bottom_boundary
 
 # See the SVG for decomposition:
 # https://raw.githubusercontent.com/cwant/tessagon/master/documentation/code/hex.svg
@@ -17,6 +17,12 @@ class HexTile(Tile):
 
 
 class HexTile1(HexTile):
+    BOUNDARY = dict(
+        top=['face', 'split'],
+        left=['edge', 'vert', 'face'],
+        bottom=['face', 'split'],
+        right=['edge', 'vert', 'face'],
+    )
 
     def init_verts(self):
         return {0: None,
@@ -27,19 +33,21 @@ class HexTile1(HexTile):
                 'B': None}
 
     def calculate_verts(self):
-        self.add_vert(0, 0, 2.0/3.0, equivalent=[left_tile(3)])
-        self.add_vert(1, 1, 1.0/3.0, equivalent=[right_tile(2)])
+        self.add_vert(0,
+                      0, 2.0/3.0,
+                      left_boundary='vert')
+        self.add_vert(1,
+                      1, 1.0/3.0,
+                      right_boundary='vert')
 
     def calculate_faces(self):
         self.add_face('A', [1,
                             0,
-                            left_tile(2),
-                            bottom_left_tile(0),
-                            bottom_tile(2),
-                            bottom_tile(3)],
-                      equivalent=[left_tile('C'),
-                                  bottom_left_tile('B'),
-                                  bottom_tile('D')])
+                            left_boundary('face')])
+
+        self.add_face('B', [0,
+                            1,
+                            right_boundary('face')])
 
     def color_pattern1(self):
         if self.fingerprint[0] % 6 == 0:
@@ -52,6 +60,12 @@ class HexTile1(HexTile):
 
 
 class HexTile2(HexTile):
+    BOUNDARY = dict(
+        top=['split', 'face'],
+        left=['face', 'vert', 'edge'],
+        bottom=['split', 'face'],
+        right=['face', 'vert', 'edge'],
+    )
 
     def init_verts(self):
         return {2: None,
@@ -62,11 +76,21 @@ class HexTile2(HexTile):
                 'D': None}
 
     def calculate_verts(self):
-        self.add_vert(2, 0, 1.0/3.0, eqivalent=[left_tile(1)])
-        self.add_vert(3, 1, 2.0/3.0, interface=[right_tile(0)])
+        self.add_vert(2,
+                      0, 1.0/3.0,
+                      left_boundary='vert')
+        self.add_vert(3,
+                      1, 2.0/3.0,
+                      right_boundary='vert')
 
     def calculate_faces(self):
-        pass
+        self.add_face('C', [3,
+                            2,
+                            bottom_boundary('face')])
+
+        self.add_face('D', [2,
+                            3,
+                            top_boundary('face')])
 
     def color_pattern1(self):
         if self.fingerprint[0] % 6 == 3:

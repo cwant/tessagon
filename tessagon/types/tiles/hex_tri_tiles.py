@@ -1,8 +1,7 @@
 from math import sqrt
 from tessagon.core.tile import Tile
-from tessagon.core.tile_utils import left_tile, right_tile, \
-    top_tile, top_left_tile, top_right_tile, \
-    bottom_tile, bottom_left_tile, bottom_right_tile
+from tessagon.core.tile_utils import left_boundary, right_boundary, \
+    top_boundary, bottom_boundary
 
 # See the SVG for decomposition:
 # https://raw.githubusercontent.com/cwant/tessagon/master/documentation/code/hex_tri.svg
@@ -18,6 +17,12 @@ class HexTriTile(Tile):
 
 
 class HexTriTile1(HexTriTile):
+    BOUNDARY = dict(
+        top=['face', 'vert'],
+        left=['vert', 'face-1', 'split', 'face-2'],
+        bottom=['face', 'vert'],
+        right=['vert', 'face-1', 'split', 'face-2'],
+    )
 
     def init_verts(self):
         return {0: None,
@@ -33,45 +38,43 @@ class HexTriTile1(HexTriTile):
     def calculate_verts(self):
         self.add_vert(0,
                       0, 1,
-                      equivalent=[left_tile(5),
-                                  top_left_tile(2),
-                                  top_tile(3)])
+                      top_boundary='vert')
 
         self.add_vert(1,
                       0.5, 0.5)
 
         self.add_vert(2,
                       1, 0,
-                      equivalent=[right_tile(3),
-                                  bottom_right_tile(0),
-                                  bottom_tile(5)])
+                      bottom_boundary='vert')
 
     def calculate_faces(self):
         self.add_face('A', [1,
                             0,
-                            left_tile(4)],
-                      equivalent=[left_tile('G')])
+                            left_boundary('face-1')])
 
         self.add_face('B', [2,
                             1,
-                            left_tile(4),
-                            left_tile(3),
-                            bottom_left_tile(1),
-                            bottom_tile(4)],
-                      equivalent=[left_tile('H'),
-                                  bottom_left_tile('D'),
-                                  bottom_tile('F')])
+                            left_boundary('face-2')])
 
         self.add_face('C', [1,
                             2,
-                            right_tile(4)],
-                      equivalent=[left_tile('E')])
+                            right_boundary('face-1')])
+
+        self.add_face('D', [0,
+                            1,
+                            right_boundary('face-2')])
 
     def color_pattern1(self):
         self.color_face('B', 1)
 
 
 class HexTriTile2(HexTriTile):
+    BOUNDARY = dict(
+        top=['vert', 'face'],
+        left=['face-1', 'split', 'face-2', 'vert'],
+        bottom=['vert', 'face'],
+        right=['face-1', 'split', 'face-2', 'vert'],
+    )
 
     def init_verts(self):
         return {3: None,
@@ -87,21 +90,31 @@ class HexTriTile2(HexTriTile):
     def calculate_verts(self):
         self.add_vert(3,
                       0, 0,
-                      equivalent=[left_tile(2),
-                                  bottom_left_tile(5),
-                                  bottom_tile(0)])
+                      left_boundary='vert')
 
         self.add_vert(4,
                       0.5, 0.5)
 
         self.add_vert(5,
                       1, 1,
-                      equivalent=[right_tile(0),
-                                  top_right_tile(3),
-                                  top_tile(2)])
+                      right_boundary='vert')
 
     def calculate_faces(self):
-        pass
+        self.add_face('E', [3,
+                            4,
+                            left_boundary('face-2')])
+
+        self.add_face('F', [4,
+                            5,
+                            top_boundary('face')])
+
+        self.add_face('G', [5,
+                            4,
+                            right_boundary('face-2')])
+
+        self.add_face('H', [4,
+                            3,
+                            bottom_boundary('face')])
 
     def color_pattern1(self):
         pass

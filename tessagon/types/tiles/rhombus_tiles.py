@@ -1,8 +1,7 @@
 from math import sqrt
 from tessagon.core.tile import Tile
-from tessagon.core.tile_utils import left_tile, right_tile, \
-    bottom_tile, bottom_left_tile, bottom_right_tile, \
-    top_tile, top_left_tile, top_right_tile
+from tessagon.core.tile_utils import left_boundary, right_boundary, \
+    top_boundary, bottom_boundary
 
 # See the SVG for decomposition:
 # https://raw.githubusercontent.com/cwant/tessagon/master/documentation/code/rhombus.svg
@@ -18,6 +17,12 @@ class RhombusTile(Tile):
 
 
 class RhombusTile1(RhombusTile):
+    BOUNDARY = dict(
+        top=['face', 'vert'],
+        left=['vert-1', 'edge', 'vert-2', 'face'],
+        bottom=['face', 'vert'],
+        right=['vert-1', 'edge', 'vert-2', 'face']
+    )
 
     def init_verts(self):
         return {0: None,
@@ -33,37 +38,33 @@ class RhombusTile1(RhombusTile):
     def calculate_verts(self):
         self.add_vert(0,
                       0.0, 1.0 / 3.0,
-                      equivalent=[left_tile(5)])
+                      left_boundary='vert-2')
 
         self.add_vert(1,
                       1.0, 0.0,
-                      equivalent=[right_tile(4),
-                                  bottom_right_tile(2),
-                                  bottom_tile(7)])
+                      bottom_boundary='vert')
 
         self.add_vert(2,
                       0.0, 1.0,
-                      equivalent=[left_tile(7),
-                                  top_left_tile(1),
-                                  top_tile(4)])
+                      top_boundary='vert')
 
         self.add_vert(3,
                       1.0, 2.0 / 3.0,
-                      equivalent=[right_tile(6)])
+                      right_boundary='vert-2')
 
     def calculate_faces(self):
         self.add_face('A', [1,
                             0,
-                            left_tile(4),
-                            bottom_tile(6)],
-                      equivalent=[left_tile('D'),
-                                  bottom_left_tile('C'),
-                                  bottom_tile('F')])
+                            left_boundary('face')])
 
         self.add_face('B', [0,
                             1,
                             3,
                             2])
+
+        self.add_face('C', [2,
+                            3,
+                            right_boundary('face')])
 
     def color_pattern1(self):
         self.color_face('A', 1)
@@ -76,6 +77,12 @@ class RhombusTile1(RhombusTile):
 
 
 class RhombusTile2(RhombusTile):
+    BOUNDARY = dict(
+        top=['vert', 'face'],
+        left=['face', 'vert-1', 'edge', 'vert-2'],
+        bottom=['vert', 'face'],
+        right=['face', 'vert-1', 'edge', 'vert-2']
+    )
 
     def init_verts(self):
         return {4: None,
@@ -91,29 +98,33 @@ class RhombusTile2(RhombusTile):
     def calculate_verts(self):
         self.add_vert(4,
                       0.0, 0.0,
-                      equivalent=[left_tile(1),
-                                  bottom_left_tile(7),
-                                  bottom_tile(2)])
+                      left_boundary='vert-2')
 
         self.add_vert(5,
                       1.0, 1.0 / 3.0,
-                      equivalent=[right_tile(0)])
+                      right_boundary='vert-1')
 
         self.add_vert(6,
                       0.0, 2.0 / 3.0,
-                      equivalent=[left_tile(3)])
+                      left_boundary='vert-1')
 
         self.add_vert(7,
                       1.0, 1.0,
-                      equivalent=[right_tile(2),
-                                  top_right_tile(4),
-                                  top_tile(1)])
+                      right_boundary='vert-2')
 
     def calculate_faces(self):
+        self.add_face('D', [5,
+                            4,
+                            bottom_boundary('face')])
+
         self.add_face('E', [4,
                             5,
                             7,
                             6])
+
+        self.add_face('F', [6,
+                            7,
+                            top_boundary('face')])
 
     def color_pattern1(self):
         self.color_face('E', 2)

@@ -1,8 +1,6 @@
 from math import sqrt
 from tessagon.core.tile import Tile
-from tessagon.core.tile_utils import left_tile, right_tile, \
-    bottom_tile, bottom_left_tile, bottom_right_tile, \
-    top_tile, top_left_tile, top_right_tile
+from tessagon.core.tile_utils import left_boundary, right_boundary
 
 # See the SVG for decomposition:
 # https://raw.githubusercontent.com/cwant/tessagon/master/documentation/code/penta2.svg
@@ -27,6 +25,12 @@ class Penta2Tile(Tile):
 
 
 class Penta2Tile1(Penta2Tile):
+    BOUNDARY = dict(
+        top=['vert', 'edge'],
+        left=['split', 'face', 'vert-1', 'edge', 'vert-2'],
+        bottom=['vert', 'edge'],
+        right=['split', 'face', 'vert-1', 'edge', 'vert-2']
+    )
 
     def init_verts(self):
         return {0: None,
@@ -43,44 +47,42 @@ class Penta2Tile1(Penta2Tile):
 
         self.add_vert(0,
                       0, v1,
-                      equivalent=[left_tile(4),
-                                  bottom_left_tile(3),
-                                  bottom_tile(7)])
+                      left_boundary='vert-2')
 
         self.add_vert(1,
                       0, v2,
-                      equivalent=[left_tile(5)])
+                      left_boundary='vert-1')
 
         self.add_vert(2,
                       1, v3,
-                      equivalent=[right_tile(6)])
+                      right_boundary='vert-1')
 
         self.add_vert(3,
                       1, v4,
-                      equivalent=[right_tile(7),
-                                  top_right_tile(0),
-                                  top_tile(4)])
+                      right_boundary='vert-2')
 
     def calculate_faces(self):
         self.add_face('A', [2,
                             1,
                             0,
-                            right_tile(4),
-                            right_tile(5)],
-                      equivalent=[right_tile('C')])
+                            right_boundary('face')])
 
         self.add_face('B', [1,
                             2,
                             3,
-                            left_tile(7),
-                            left_tile(6)],
-                      equivalent=[left_tile('D')])
+                            left_boundary('face')])
 
     def color_pattern1(self):
         self.color_face('B', 1)
 
 
 class Penta2Tile2(Penta2Tile):
+    BOUNDARY = dict(
+        top=['edge', 'vert'],
+        left=['vert-1', 'edge', 'vert-2', 'face', 'split'],
+        bottom=['edge', 'vert'],
+        right=['vert-1', 'edge', 'vert-2', 'face', 'split']
+    )
 
     def init_verts(self):
         return {4: None,
@@ -97,26 +99,30 @@ class Penta2Tile2(Penta2Tile):
 
         self.add_vert(4,
                       1, v1,
-                      equivalent=[right_tile(0),
-                                  bottom_right_tile(7),
-                                  bottom_tile(3)])
+                      bottom_boundary='vert')
 
         self.add_vert(5,
                       1, v2,
-                      equivalent=[right_tile(1)])
+                      right_boundary='vert-2')
 
         self.add_vert(6,
                       0, v3,
-                      equivalent=[left_tile(2)])
+                      left_boundary='vert-2')
 
         self.add_vert(7,
                       0, v4,
-                      equivalent=[left_tile(3),
-                                  top_left_tile(4),
-                                  top_tile(0)])
+                      top_boundary='vert')
 
     def calculate_faces(self):
-        pass
+        self.add_face('C', [4,
+                            5,
+                            6,
+                            left_boundary('face')])
+
+        self.add_face('D', [7,
+                            6,
+                            5,
+                            right_boundary('face')])
 
     def color_pattern1(self):
         pass

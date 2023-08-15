@@ -1,7 +1,7 @@
 from math import sqrt
 from tessagon.core.tile import Tile
-from tessagon.core.tile_utils import left_tile, right_tile, \
-    bottom_tile, bottom_left_tile, bottom_right_tile
+from tessagon.core.tile_utils import left_boundary, right_boundary, \
+    top_boundary, bottom_boundary
 
 # See the SVG for decomposition:
 # https://raw.githubusercontent.com/cwant/tessagon/master/documentation/code/hex_square_tri.svg
@@ -37,6 +37,12 @@ class HexSquareTriTile(Tile):
 
 
 class HexSquareTriTile1(HexSquareTriTile):
+    BOUNDARY = dict(
+        top=['face-1', 'split', 'face-2'],
+        left=['face-1', 'split', 'face-2', 'vert', 'face-3'],
+        bottom=['face-1', 'split', 'face-2'],
+        right=['face-1', 'split', 'face-2', 'vert', 'face-3']
+    )
 
     def init_verts(self):
         return {0: None,
@@ -57,36 +63,31 @@ class HexSquareTriTile1(HexSquareTriTile):
         (u1, u2, u3, u4) = self.u_units()
         (v1, v2, v3, v4) = self.v_units()
 
-        self.add_vert(0, u1, v2,
-                      equivalent=[left_tile(7)])
-        self.add_vert(1, u2, v4)
-        self.add_vert(2, u3, v1)
-        self.add_vert(3, u4, v3,
-                      equivalent=[right_tile(4)])
+        self.add_vert(0,
+                      u1, v2,
+                      left_boundary='vert')
+
+        self.add_vert(1,
+                      u2, v4)
+
+        self.add_vert(2,
+                      u3, v1)
+
+        self.add_vert(3,
+                      u4, v3,
+                      right_boundary='vert')
 
     def calculate_faces(self):
         self.add_face('A', [2,
                             0,
-                            left_tile(5),
-                            bottom_left_tile(1),
-                            bottom_tile(4),
-                            bottom_tile(6)],
-                      equivalent=[left_tile('I'),
-                                  bottom_left_tile('G'),
-                                  bottom_tile('M')])
+                            left_boundary('face-3')])
 
         self.add_face('B', [2,
-                            bottom_tile(6),
-                            bottom_right_tile(1),
-                            right_tile(5)],
-                      equivalent=[bottom_tile('N'),
-                                  bottom_right_tile('F'),
-                                  right_tile('H')])
+                            bottom_boundary('face-2')])
 
         self.add_face('C', [0,
                             1,
-                            left_tile(6)],
-                      equivalent=[left_tile('L')])
+                            left_boundary('face-2')])
 
         self.add_face('D', [0,
                             2,
@@ -95,8 +96,14 @@ class HexSquareTriTile1(HexSquareTriTile):
 
         self.add_face('E', [3,
                             2,
-                            right_tile(5)],
-                      equivalent=[right_tile('J')])
+                            right_boundary('face-2')])
+
+        self.add_face('F', [1,
+                            top_boundary('face-2')])
+
+        self.add_face('G', [1,
+                            3,
+                            right_boundary('face-3')])
 
     def color_pattern1(self):
         self.color_face('A', 1)
@@ -105,6 +112,12 @@ class HexSquareTriTile1(HexSquareTriTile):
 
 
 class HexSquareTriTile2(HexSquareTriTile):
+    BOUNDARY = dict(
+        top=['face-1', 'split', 'face-2'],
+        left=['face-1', 'vert', 'face-2', 'split', 'face-3'],
+        bottom=['face-1', 'split', 'face-2'],
+        right=['face-1', 'vert', 'face-2', 'split', 'face-3']
+    )
 
     def init_verts(self):
         return {4: None,
@@ -125,18 +138,47 @@ class HexSquareTriTile2(HexSquareTriTile):
         (u1, u2, u3, u4) = self.u_units()
         (v1, v2, v3, v4) = self.v_units()
 
-        self.add_vert(4, u1, v3,
-                      equivalent=[left_tile(3)])
-        self.add_vert(5, u2, v1)
-        self.add_vert(6, u3, v4)
-        self.add_vert(7, u4, v2,
-                      equivalent=[right_tile(0)])
+        self.add_vert(4,
+                      u1, v3,
+                      left_boundary='vert')
+
+        self.add_vert(5,
+                      u2, v1)
+
+        self.add_vert(6,
+                      u3, v4)
+
+        self.add_vert(7,
+                      u4, v2,
+                      right_boundary='vert')
 
     def calculate_faces(self):
+        self.add_face('H', [5,
+                            left_boundary('face-3')])
+
+        self.add_face('I', [7,
+                            5,
+                            bottom_boundary('face-2')])
+
+        self.add_face('J', [5,
+                            4,
+                            left_boundary('face-2')])
+
         self.add_face('K', [4,
                             5,
                             7,
                             6])
+
+        self.add_face('L', [6,
+                            7,
+                            right_boundary('face-2')])
+
+        self.add_face('M', [4,
+                            6,
+                            top_boundary('face-2')])
+
+        self.add_face('N', [6,
+                            right_boundary('face-3')])
 
     def color_pattern1(self):
         self.color_face('K', 2)
