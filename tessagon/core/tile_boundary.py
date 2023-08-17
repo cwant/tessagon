@@ -3,18 +3,17 @@
 # always listed in counter-clockwise order.
 # Features are strings, and have the values:
 #   Vertices: 'vert' (if only one vert), 'vert-1', 'vert-2', etc.
-#   'split' (this descibes if an edge crosses a boundary,
+#   'split' (this describes if an edge crosses a boundary,
 #            without connecting to a vert on the boundary)
+#   'tangent-split' this describes a split on a corner where neither vertex
+#          of the edge is in the tile
 #   'edge' if an edge goes along the boundary (not crossing it)
 #   Faces: 'face' (if only one face), 'face-1', 'face-2', etc
-#   Only vertices and faces are used for connecting to neighboring tiles,
+#   Only vertices and faces are directly used for connecting to neighboring
+#   tiles,
 #   split and edge are there to ensure the boundary is consistenent
-#   with neighboring tiles.
-
-
-def dprint(*args):
-    return
-    print(*args)
+#   with neighboring tiles, and sometimes to help figure out how faces
+#   are constructed
 
 
 class BoundaryBase:
@@ -62,37 +61,37 @@ class SharedVert(BoundaryBase):
         self.tiles = []
         self.vert_index_keys = []
 
-        self.corner = False
+        self.u_boundary = kwargs.get('u_boundary', False)
+        self.v_boundary = kwargs.get('v_boundary', False)
 
         self.tile.boundary.values[self.side][feature] = self
 
     def calculate_vert(self):
         vert = self.tile._get_vert(self.index_keys)
         if vert:
-            dprint("--- done ({}): ".format(vert),
-                   self.tile.fingerprint, self.index_keys, vert)
             return vert
 
         uvs = self.calculate_vert_uvs()
         if uvs is None:
             return None
 
-        uv = [0, 0]
-        uv[0] = sum([uv[0] for uv in uvs]) / len(uvs)
-        uv[1] = sum([uv[1] for uv in uvs]) / len(uvs)
+        # uv = [0, 0]
+        # if self.u_boundary:
+        #     uv[0] = uvs[0][0]
+        # else:
+        #     uv[0] = sum([uv[0] for uv in uvs]) / len(uvs)
+        # if self.v_boundary:
+        #     uv[1] = uvs[0][1]
+        # else:
+        #     uv[1] = sum([uv[1] for uv in uvs]) / len(uvs)
 
-        # Avoid potential precision inaccuracies ...
-        if (uv[0] - uvs[0][0])**2 + (uv[1] - uvs[0][1])**2 < self.TOLERANCE:
-            uv = uvs[0]
+        # TODO: figure out the above, causes occasional defects
+        uv = uvs[0]
 
         vert = self.tile.make_vert(self.index_keys, uv)
-        dprint("*** vert ({}): ".format(vert),
-               self.tile.fingerprint, self.index_keys)
         for i in range(len(self.tiles)):
             tile = self.tiles[i]
             index_keys = self.vert_index_keys[i]
-            dprint("    equivalent: ", tile.fingerprint, index_keys)
-
             tile.set_equivalent_vert(index_keys, vert)
 
         return vert
@@ -175,14 +174,7 @@ class SharedFace(BoundaryBase):
     def __init__(self, tile, side, feature, index_keys,
                  vert_index_keys_list, **kwargs):
         self.tile = tile
-        self.side = side
-
-        if self.tile.rotate == 90:
-            self.side = self.rotate_side(side)
-        elif self.tile.rotate == 180:
-            self.side = self.invert_side(side)
-        elif self.tile.rotate == 270:
-            self.side = self.rotate_side(self.invert_side(side))
+        self.side = self.tile_rotate_side(side)
 
         self.feature = feature
         self.index_keys = index_keys
@@ -193,7 +185,19 @@ class SharedFace(BoundaryBase):
         self.tiles = []
         self.face_index_keys = []
 
+        # For really complex paths ...
+        self.next_shared_face = None
+
         self.tile.boundary.values[self.side][feature] = self
+
+    def __str__(self):
+        return "<{} (Tile: {}, {}, {}) index_keys: {}, vert_indices: {}>".\
+            format(self.__class__.__name__,
+                   self.tile.fingerprint,
+                   self.side,
+                   self.feature,
+                   self.index_keys,
+                   self.vert_index_keys_list)
 
     def calculate_face(self):
         if self.kwargs.get('indirect') is True:
@@ -202,8 +206,6 @@ class SharedFace(BoundaryBase):
         face = self.tile._get_face(self.index_keys)
         if face is not None:
             return face
-
-        # dprint('* faces:', self.tile.fingerprint, self.tile.faces)
 
         self.verts = []
         self.tiles = []
@@ -214,43 +216,46 @@ class SharedFace(BoundaryBase):
             return None
 
         face = self.tile.make_face(self.index_keys, verts, **self.kwargs)
-        dprint("****** Added face: ",
-               self.tile.fingerprint, self.index_keys, verts)
         for i in range(len(self.tiles)):
             tile = self.tiles[i]
             index_keys = self.face_index_keys[i]
-            # dprint("** Setting equivalent:", tile.fingerprint, index_keys)
             tile.set_equivalent_face(index_keys, face)
 
-    def calculate_face_verts(self, first_shared_face=None):
+    def is_boundary(self, vert_index):
+        return (type(vert_index) == list and vert_index[0] == ["boundary"])
+
+    def get_other_shared_face(self, vert_index):
+        this_side = self.tile_rotate_side(vert_index[1])
+        this_feature = vert_index[2]
+
+        return self.tile.boundary.get_other_value(this_side,
+                                                  this_feature)
+
+    def calculate_face_verts(self, first_shared_face=None,
+                             next_shared_face=None):
         first_vert = None
 
         for i in range(len(self.vert_index_keys_list)):
             vert_index = self.vert_index_keys_list[i]
             if first_shared_face is None:
-                # dprint("***", self.index_keys,
-                #       vert_index, self.tile.fingerprint)
                 first_shared_face = self
-            else:
-                pass
-                # dprint("   ", self.index_keys,
-                #      vert_index, self.tile.fingerprint,
-                #      i, len(self.vert_index_keys_list))
-            # dprint("    verts:", first_shared_face.verts)
 
             if len(first_shared_face.verts) > 0:
                 first_vert = first_shared_face.verts[0]
 
-            if type(vert_index) == list and vert_index[0] == ["boundary"]:
-                this_side = self.tile_rotate_side(vert_index[1])
-                this_feature = vert_index[2]
-
-                other_shared_face = \
-                    self.tile.boundary.get_other_value(this_side,
-                                                       this_feature)
-
+            if self.is_boundary(vert_index):
+                other_shared_face = self.get_other_shared_face(vert_index)
                 if other_shared_face is None:
                     return None
+
+                if next_shared_face is not None:
+                    if other_shared_face.index_keys == \
+                       next_shared_face.index_keys:
+                        other_shared_face = next_shared_face
+                        next_shared_face = None
+                else:
+                    if self.next_shared_face is not None:
+                        next_shared_face = self.next_shared_face
 
                 do_other_verts = True
 
@@ -260,7 +265,8 @@ class SharedFace(BoundaryBase):
 
                 if do_other_verts:
                     verts = other_shared_face.\
-                        calculate_face_verts(first_shared_face)
+                        calculate_face_verts(first_shared_face,
+                                             next_shared_face)
 
                     if verts is None:
                         return None
@@ -293,7 +299,6 @@ class SharedFace(BoundaryBase):
                 if first_vert is None:
                     first_vert = vert
                 if append_vert:
-                    # dprint("    appended")
                     first_shared_face.verts.append(vert)
 
         return self.verts
@@ -330,21 +335,60 @@ class TileBoundary(BoundaryBase):
         self._validate_prototype()
         self._validate_neighbor_prototypes()
 
+    def is_last_corner(self, side, feature):
+        return (feature == self.prototype[side][-1])
+
+    def is_approaching_tangent_split(self, side, feature):
+        other_tile = self.tile.neighbors[side]
+        other_prototype = other_tile.boundary.prototype
+        rotate_side = self.rotate_side(side)
+        return (feature == self.prototype[side][-2]) and \
+            (self.prototype[side][-1] == 'split') and \
+            (other_prototype[rotate_side][-1] == 'tangent-split')
+
+    def should_skip_over_tile(self, side, feature):
+        other_tile = self.tile.neighbors[side]
+        other_prototype = other_tile.boundary.prototype
+        invert_side = self.invert_side(side)
+        return (feature == self.prototype[side][1]) and \
+            (self.prototype[side][0] == 'split') and \
+            (other_prototype[invert_side][-1] == 'tangent-split')
+        pass
+
     def get_other_value(self, side, feature):
         other_tile = self.tile.neighbors[side]
         if other_tile is None:
             return None
+
+        other_prototype = other_tile.boundary.prototype
         other_values = other_tile.boundary.values
+        rotate_side = self.rotate_side(side)
+        invert_side = self.invert_side(side)
+        rotate_invert_side = self.rotate_side(invert_side)
+
         # Corners are special, everything is counter-clockwise
-        if feature == self.prototype[side][-1]:
-            other_side = self.rotate_side(side)
+        # Corners with a split/tangent-split can also be special
+        # This is confusing, some more information here:
+        # https://raw.githubusercontent.com/cwant/tessagon/master/documentation/code/tangent-split.svg
+
+        if self.is_last_corner(side, feature):
+            other_side = rotate_side
             other_feature = other_tile.boundary.prototype[other_side][-1]
+        elif self.is_approaching_tangent_split(side, feature):
+            other_side = rotate_side
+            other_feature = other_tile.boundary.prototype[other_side][-2]
+        elif self.should_skip_over_tile(side, feature):
+            # Skip to the tile after the next one
+            other_tile = other_tile.neighbors[rotate_invert_side]
+            if other_tile is None:
+                return None
+            other_prototype = other_tile.boundary.prototype
+            other_values = other_tile.boundary.values
+            other_side = rotate_side
+            other_feature = other_prototype[other_side][-2]
         else:
             other_side = self.invert_side(side)
             other_feature = self.get_other_feature(side, feature)
-
-        # dprint(other_side, other_feature)
-        # dprint(other_values[other_side])
 
         return other_values[other_side][other_feature]
 
@@ -352,7 +396,7 @@ class TileBoundary(BoundaryBase):
         # If the side is 'left' and the feature is 'face-m',
         # we return the boundary with side 'right'
         # and feature 'face-(n-m+1)' from the left tile.
-        if feature in ['vert', 'face', 'edge', 'split']:
+        if feature in ['vert', 'face', 'edge', 'split', 'tangent-split']:
             return feature
 
         (feature_type, num) = feature.split('-')
@@ -362,19 +406,6 @@ class TileBoundary(BoundaryBase):
             num = self.num_faces[side] - int(num) + 1
 
         return '{}-{}'.format(feature_type, num)
-
-    def set_feature_value(self, side, feature, index_keys, value):
-        # we put a list that has:
-        #   * the specified value
-        #   * the index_keys for the tile (vert or face)
-        #   * a pointer to the cooresponding feature on the other tile
-        if self.values[side][feature] is None:
-            self.values[side][feature] = []
-        elif len(self.values[side][feature]) > 0:
-            raise ValueError('Boundary value ({}, {}) already set'.
-                             format(side, feature))
-        other_feature = self.get_or_set_other_feature(side, feature)
-        self.values[side][feature].extend([value, index_keys, other_feature])
 
     def get_shared_verts(self):
         out = []
@@ -446,7 +477,7 @@ class TileBoundary(BoundaryBase):
 
     def _validate_other_features(self, side):
         for key in side:
-            if key not in ['edge', 'split']:
+            if key not in ['edge', 'split', 'tangent-split']:
                 if 'vert' not in key and 'face' not in key:
                     ValueError('{} is not a valid boundary feature'.
                                format(key))
@@ -458,13 +489,22 @@ class TileBoundary(BoundaryBase):
                 other_side = self.invert_side(side)
                 other_prototype = other_tile.boundary.prototype[other_side]
 
-                if other_prototype != self.reverse_prototype(side):
+                if self.clean_prototype(other_prototype) != \
+                   self.clean_prototype(self.reverse_prototype(side)):
                     this_class = self.tile.__class__.__name__
                     other_class = other_tile.__class__.__name__
                     raise ValueError('{}/{} tile boundary is '
                                      'inconsistent: {}/{}'.
                                      format(side, other_side,
                                             this_class, other_class))
+
+    def clean_prototype(self, prototype):
+        out = []
+        for feature in prototype:
+            if feature == 'tangent-split':
+                feature = 'split'
+            out.append(feature)
+        return out
 
     def reverse_prototype(self, side):
         out = []
@@ -494,6 +534,10 @@ class TileBoundary(BoundaryBase):
             if (this_corner == 'split') and (next_corner not in
                                              ['edge', 'split']):
                 okay = False
+            if (this_corner == 'tangent-split') and \
+               (next_corner != 'tangent-split'):
+                okay = False
+
             if not okay:
                 raise ValueError('Bad {}/{} corner in boundary: {}/{}'.
                                  format(this_side, next_side,

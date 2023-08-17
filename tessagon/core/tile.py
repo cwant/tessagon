@@ -4,6 +4,7 @@ from tessagon.core.tile_boundary import \
 
 
 class Tile(AbstractTile):
+    TOLERANCE = 0.0000001
     rotate = None
 
     def __init__(self, tessagon, **kwargs):
@@ -32,10 +33,23 @@ class Tile(AbstractTile):
     def uv_ratio(self):
         return self.__class__.uv_ratio
 
+    def is_boundary(self, u_or_v):
+        if abs(u_or_v) < self.TOLERANCE:
+            return True
+        if abs(u_or_v - 1) < self.TOLERANCE:
+            return True
+        return False
+
     def add_vert(self, index_keys, ratio_u, ratio_v, **kwargs):
         vert = self._get_vert(index_keys)
         if vert is None:
             uv = self.blend(ratio_u, ratio_v, rotate=self.rotate)
+
+            if self.is_boundary(ratio_u):
+                kwargs['u_boundary'] = True
+            if self.is_boundary(ratio_v):
+                kwargs['v_boundary'] = True
+
             shared_vert = \
                 self.get_shared_vert(index_keys, uv, **kwargs)
             if shared_vert:
@@ -117,11 +131,18 @@ class Tile(AbstractTile):
             if type(key) == list and key[0] == ['boundary']:
                 side = key[1]
                 feature = key[2]
+                if len(shared_faces) > 0:
+                    args['indirect'] = True
                 shared_faces.append(SharedFace(self, side, feature, index_keys,
-                                               vert_index_keys_list, **args))
-                return shared_faces[0]
-                args['indirect'] = True
+                                               vert_index_buffer, **args))
                 vert_index_buffer = []
+
+        for i in range(len(shared_faces)):
+            if len(shared_faces) < 2:
+                break
+            i_next = (i + 1) % len(shared_faces)
+            shared_faces[i].next_shared_face = shared_faces[i_next]
+
         if len(shared_faces) > 0:
             return shared_faces[0]
 
