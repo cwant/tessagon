@@ -67,15 +67,6 @@ class AbstractTile(ValueBlend):
             tile = tile.neighbors[key]
         return tile
 
-    def get_neighbor_tiles(self):
-        neighbors = []
-        for name in self.neighbors:
-            neighbor = self.neighbors[name]
-            if neighbor:
-                neighbors.append(neighbor)
-
-        return neighbors
-
     @property
     def left(self):
         return self.get_neighbor_tile(["left"])
@@ -157,14 +148,6 @@ class AbstractTile(ValueBlend):
                 return [neighbor_keys[1], neighbor_keys[0]]
         return neighbor_keys
 
-    def _index_path(self, index_keys, neighbor_keys):
-        path = index_keys
-        if self._should_twist_u(neighbor_keys):
-            path = self._u_flip(path)
-        if self._should_twist_v(neighbor_keys):
-            path = self._v_flip(path)
-        return path
-
     def _permute_value(self, index_keys, vals):
         # abstract function to permute values in a list
         # e.g., 'left' and 'right' in u_flip below
@@ -192,20 +175,6 @@ class AbstractTile(ValueBlend):
         if not self.v_symmetric:
             return index_keys
         return self._swap_value(index_keys, 'bottom', 'top')
-
-    def _rotate_index(self, index_keys):
-        # rotate
-        if not self.rot_symmetric:
-            return index_keys
-        elif self.rot_symmetric == 180:
-            keys = self._permute_value(index_keys, ['rotate0', 'rotate180'])
-            keys = self._permute_value(keys, ['left', 'right'])
-            keys = self._permute_value(keys, ['top', 'bottom'])
-            return keys
-        elif self.rot_symmetric == 90:
-            return self._permute_value(index_keys,
-                                       ['rotate0', 'rotate90',
-                                        'rotate180', 'rotate270'])
 
     def _v_index(self, index_keys):
         # find either 'top' or 'bottom' in the list
