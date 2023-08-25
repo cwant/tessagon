@@ -107,7 +107,7 @@ class ParallelogramTileGenerator(TileGenerator):
     def make_corner(self, u, v):
         c0 = self.inverse[0][0] * u + self.inverse[0][1] * v
         c1 = self.inverse[1][0] * u + self.inverse[1][1] * v
-        return self.blend(c0, c1)
+        return [c0, c1]
 
     def valid_fingerprint(self, u, v):
         # Valid = all corners of tile with this fingerprint

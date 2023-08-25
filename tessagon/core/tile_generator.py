@@ -8,11 +8,6 @@ class TileGenerator(ValueBlend):
     def __init__(self, tessagon, **kwargs):
         self.tessagon = tessagon
 
-        # Corners is list of tuples:
-        #   [topleft, topright, bottomleft, bottomright]
-        self.corners = None
-        self._init_corners(**kwargs)
-
         self.u_num = kwargs.get('u_num')
         self.v_num = kwargs.get('v_num')
         if not self.u_num or not self.v_num:

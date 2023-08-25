@@ -11,7 +11,7 @@ class CoreTestsBase:
     pass
 
 
-class FakeUVMeshMaker:
+class FakeUnitMeshMaker:
     def __init__(self):
         self.verts = []
         self.faces = []
@@ -19,6 +19,11 @@ class FakeUVMeshMaker:
     def create_vert(self, coords):
         self.verts.append(coords)
         return coords
+
+
+class FakeUVMeshMaker:
+    def __init__(self):
+        self.unit_mesh_maker = FakeUnitMeshMaker()
 
 
 class FakeTileSubClass(Tile):
@@ -41,6 +46,7 @@ class FakeTessagon:
 
     def __init__(self):
         self.uv_mesh_maker = FakeUVMeshMaker()
+        self.unit_mesh_maker = self.uv_mesh_maker.unit_mesh_maker
         self.extra_parameters = {}
 
     def f(self, u, v):

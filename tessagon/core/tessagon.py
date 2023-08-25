@@ -33,12 +33,16 @@ class Tessagon:
         return len(cls.metadata.extra_parameters)
 
     @property
+    def unit_mesh_maker(self):
+        return self.uv_mesh_maker.unit_mesh_maker
+
+    @property
     def color_pattern(self):
-        return self.uv_mesh_maker.color_pattern
+        return self.unit_mesh_maker.color_pattern
 
     @property
     def extra_parameters(self):
-        return self.uv_mesh_maker.extra_parameters
+        return self.unit_mesh_maker.extra_parameters
 
     @property
     def f(self):
@@ -46,11 +50,11 @@ class Tessagon:
 
     @property
     def u_num(self):
-        return self.uv_mesh_maker.u_num
+        return self.unit_mesh_maker.u_num
 
     @property
     def v_num(self):
-        return self.uv_mesh_maker.v_num
+        return self.unit_mesh_maker.v_num
 
     @property
     def corners(self):

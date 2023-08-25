@@ -6,7 +6,7 @@ class Tile(AbstractTile):
     def __init__(self, tessagon, **kwargs):
         super().__init__(tessagon, **kwargs)
 
-        self.uv_mesh_maker = tessagon.uv_mesh_maker
+        self.unit_mesh_maker = tessagon.unit_mesh_maker
 
         self.verts = self.init_verts()
         self.faces = self.init_faces()
@@ -27,7 +27,7 @@ class Tile(AbstractTile):
         vert = self._get_vert(index_keys)
         if vert is None:
             uv = self.blend(ratio_u, ratio_v)
-            vert = self.uv_mesh_maker.create_vert(uv)
+            vert = self.unit_mesh_maker.create_vert(uv)
 
             self._set_vert(index_keys, vert)
             if 'vert_type' in kwargs:
@@ -87,7 +87,7 @@ class Tile(AbstractTile):
         return face
 
     def _make_face(self, index_keys, verts, **kwargs):
-        face = self.uv_mesh_maker.create_face(verts, **kwargs)
+        face = self.unit_mesh_maker.create_face(verts, **kwargs)
         self._set_face(index_keys, face)
 
         # On the boundary, make sure equivalent faces are set on neighbor tiles
@@ -113,7 +113,7 @@ class Tile(AbstractTile):
         face = self._get_face(index_keys)
         if face is None:
             return
-        self.uv_mesh_maker.color_face(face, color_index)
+        self.unit_mesh_maker.color_face(face, color_index)
 
     def set_equivalent_face(self, neighbor_keys, index_keys, face, **kwargs):
         # On boundary, the face on a neighbor is equivalent to this face

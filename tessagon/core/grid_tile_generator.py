@@ -8,6 +8,7 @@ class GridTileGenerator(TileGenerator):
         self.tiles = None
 
     def initialize_tiles(self, **kwargs):
+        # The tiles fit in [0, 1] x [0, 1]
         tiles = [[None for i in range(self.v_num)] for j in range(self.u_num)]
 
         for u in range(self.u_num):
@@ -20,14 +21,14 @@ class GridTileGenerator(TileGenerator):
                 v_ratio1 = float(v + 1) / self.v_num
                 u_shear0 = v * self.u_shear
                 u_shear1 = (v + 1) * self.u_shear
-                corners = [self.blend(u_ratio0 + u_shear0 + self.u_phase,
-                                      v_ratio0 + v_shear0 + self.v_phase),
-                           self.blend(u_ratio1 + u_shear0 + self.u_phase,
-                                      v_ratio0 + v_shear1 + self.v_phase),
-                           self.blend(u_ratio0 + u_shear1 + self.u_phase,
-                                      v_ratio1 + v_shear0 + self.v_phase),
-                           self.blend(u_ratio1 + u_shear1 + self.u_phase,
-                                      v_ratio1 + v_shear1 + self.v_phase)]
+                corners = [[u_ratio0 + u_shear0 + self.u_phase,
+                            v_ratio0 + v_shear0 + self.v_phase],
+                           [u_ratio1 + u_shear0 + self.u_phase,
+                            v_ratio0 + v_shear1 + self.v_phase],
+                           [u_ratio0 + u_shear1 + self.u_phase,
+                            v_ratio1 + v_shear0 + self.v_phase],
+                           [u_ratio1 + u_shear1 + self.u_phase,
+                            v_ratio1 + v_shear1 + self.v_phase]]
 
                 tiles[u][v] = self.create_tile(u, v, corners, **kwargs)
 
