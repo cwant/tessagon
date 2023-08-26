@@ -4,7 +4,6 @@ from tessagon.core.tile_boundary import \
 
 
 class Tile(AbstractTile):
-    TOLERANCE = 0.0000001
     rotate = None
 
     def __init__(self, tessagon, **kwargs):
@@ -18,6 +17,17 @@ class Tile(AbstractTile):
         if self.faces and self.color_pattern:
             self.face_paths = self.all_face_paths()
         self.init_boundary()
+
+    def __repr__(self):
+        return "<{} [{}]>".\
+            format(self.__class__.__name__,
+                   self.fingerprint)
+
+    def __str__(self):
+        return "<{} [{}] (neighbors: {}>".\
+            format(self.__class__.__name__,
+                   self.fingerprint,
+                   self.neighbors)
 
     def init_boundary(self):
         # Subclass might override (e.g., SlatsTessagon has dynamic boundary)
@@ -33,6 +43,10 @@ class Tile(AbstractTile):
     def uv_ratio(self):
         return self.__class__.uv_ratio
 
+    @property
+    def tile_generator(self):
+        return self.unit_mesh_maker.tile_generator
+
     def is_boundary(self, u_or_v):
         if abs(u_or_v) < self.TOLERANCE:
             return True
@@ -40,18 +54,38 @@ class Tile(AbstractTile):
             return True
         return False
 
+    def _clean_u_or_v(self, u_or_v):
+        if u_or_v < 0 - self.TOLERANCE:
+            return u_or_v + 1
+        if u_or_v > 1 + self.TOLERANCE:
+            return u_or_v - 1
+
+        return u_or_v
+
+    def _clean_uv(self, uv):
+        if self.tile_generator.u_cyclic:
+            uv[0] = self._clean_u_or_v(uv[0])
+
+        if self.tile_generator.v_cyclic:
+            uv[1] = self._clean_u_or_v(uv[1])
+
+        return uv
+
     def add_vert(self, index_keys, ratio_u, ratio_v, **kwargs):
         vert = self._get_vert(index_keys)
         if vert is None:
             uv = self.blend(ratio_u, ratio_v, rotate=self.rotate)
+            uv = self._clean_uv(uv)
 
             if self.is_boundary(ratio_u):
                 kwargs['u_boundary'] = True
+
             if self.is_boundary(ratio_v):
                 kwargs['v_boundary'] = True
 
             shared_vert = \
                 self.get_shared_vert(index_keys, uv, **kwargs)
+
             if shared_vert:
                 # We calculate this later when we have more information
                 return

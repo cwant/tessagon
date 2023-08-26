@@ -10,15 +10,30 @@ from tessagon.core.tile import Tile  # noqa: E402
 class CoreTestsBase:
     pass
 
+# TODO: What follows is basically crap ...
+
 
 class FakeUnitMeshMaker:
     def __init__(self):
         self.verts = []
         self.faces = []
+        self.tile_generator = FakeTileGenerator()
 
     def create_vert(self, coords):
         self.verts.append(coords)
         return coords
+
+
+class FakeTileGenerator:
+    def __init__(self, **kwargs):
+        self.u_cyclic = False
+        self.v_cyclic = False
+
+    def on_u_boundary(self, ratio_u, ratio_v):
+        return False
+
+    def on_v_boundary(self, ratio_u, ratio_v):
+        return False
 
 
 class FakeUVMeshMaker:

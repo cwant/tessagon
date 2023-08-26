@@ -1,4 +1,5 @@
 class ValueBlend:
+    TOLERANCE = 0.0000001
 
     def _init_corners(self, **kwargs):
         # Corners is list of tuples:

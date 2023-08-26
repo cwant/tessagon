@@ -52,47 +52,69 @@ class SharedVert(BoundaryBase):
         self.tile = tile
 
         self.side = self.tile_rotate_side(side)
-
         self.feature = feature
         self.index_keys = index_keys
-        self.uv = uv
         self.kwargs = kwargs
 
-        self.tiles = []
-        self.vert_index_keys = []
+        self.vert = None
+        self.uv = uv
+        self.equivalent_shared_verts = []
 
         self.u_boundary = kwargs.get('u_boundary', False)
         self.v_boundary = kwargs.get('v_boundary', False)
 
         self.tile.boundary.values[self.side][feature] = self
 
+    def __repr__(self):
+        return "<{} ({}: {}) side: {}, feature: {}>".\
+            format(self.__class__.__name__,
+                   self.tile.__class__.__name__,
+                   self.tile.fingerprint,
+                   self.side,
+                   self.feature)
+
+    def __str__(self):
+        return "<{} ({}: {}) side: {}, feature: {}, index_keys: {}>".\
+            format(self.__class__.__name__,
+                   self.tile.__class__.__name__,
+                   self.tile.fingerprint,
+                   self.side,
+                   self.feature,
+                   self.index_keys)
+
     def calculate_vert(self):
+        if self.vert:
+            return self.vert
+
         vert = self.tile._get_vert(self.index_keys)
         if vert:
+            self.vert = vert
             return vert
 
-        uvs = self.calculate_vert_uvs()
-        if uvs is None:
-            return None
+        self.gather_equivalent_shared_verts()
 
-        # uv = [0, 0]
-        # if self.u_boundary:
-        #     uv[0] = uvs[0][0]
-        # else:
-        #     uv[0] = sum([uv[0] for uv in uvs]) / len(uvs)
-        # if self.v_boundary:
-        #     uv[1] = uvs[0][1]
-        # else:
-        #     uv[1] = sum([uv[1] for uv in uvs]) / len(uvs)
+        uv = self.uv.copy()
 
-        # TODO: figure out the above, causes occasional defects
-        uv = uvs[0]
+        if len(self.equivalent_shared_verts) > 0:
+            uvs = [self.uv] + [shared_vert.uv for shared_vert in
+                               self.equivalent_shared_verts]
+
+            # TODO: This probably needs a re-think
+            if not self.u_boundary:
+                us = [uv[0] for uv in uvs]
+                if max(us) - min(us) < 1.0 - self.TOLERANCE:
+                    uv[0] = sum(us) / len(us)
+            if not self.v_boundary:
+                vs = [uv[1] for uv in uvs]
+                if max(vs) - min(vs) < 1.0 - self.TOLERANCE:
+                    uv[1] = sum(vs) / len(vs)
 
         vert = self.tile.make_vert(self.index_keys, uv)
-        for i in range(len(self.tiles)):
-            tile = self.tiles[i]
-            index_keys = self.vert_index_keys[i]
-            tile.set_equivalent_vert(index_keys, vert)
+        self.vert = vert
+
+        for shared_vert in self.equivalent_shared_verts:
+            shared_vert.tile.set_equivalent_vert(shared_vert.index_keys, vert)
+            shared_vert.vert = vert
 
         return vert
 
@@ -103,22 +125,22 @@ class SharedVert(BoundaryBase):
 
         return False
 
-    def calculate_corner(self, tile, side, is_first_on_side):
+    def get_equivalent_corner_shared_vert(self, tile, side, is_first_on_side):
         if tile is None:
-            return
+            return None
 
         index = -1
         if is_first_on_side:
             index = 0
         other_feature = tile.boundary.prototype[side][index]
         other_shared_vert = tile.boundary.values[side][other_feature]
-        if other_shared_vert is None:
-            return
 
-        self.tiles.append(tile)
-        self.vert_index_keys.append(other_shared_vert.index_keys)
+        if other_shared_vert:
+            self.equivalent_shared_verts.append(other_shared_vert)
 
-    def calculate_corner_uvs(self):
+        return other_shared_vert
+
+    def gather_equivalent_corner_shared_verts(self):
         prototype_side = self.tile.boundary.prototype[self.side]
 
         is_first_on_side = (self.feature == prototype_side[0])
@@ -127,47 +149,31 @@ class SharedVert(BoundaryBase):
         prev_side = self.rotate_side(self.side)
         next_tile = self.tile.neighbors[next_side]
         prev_tile = self.tile.neighbors[prev_side]
-
-        opposite_tile = None
-        if next_tile is not None:
-            opposite_tile = next_tile.neighbors[prev_side]
-        if opposite_tile is None and prev_tile is not None:
-            opposite_tile = prev_tile.neighbors[next_side]
+        opposite_tile = self.tile.get_neighbor_tile([next_side, prev_side])
+        if opposite_tile is None:
+            opposite_tile = self.tile.get_neighbor_tile([prev_side, next_side])
 
         side = self.rotate_side(self.side)
-        self.calculate_corner(next_tile, side, is_first_on_side)
+        self.get_equivalent_corner_shared_vert(next_tile, side,
+                                               is_first_on_side)
         side = self.rotate_side(side)
-        self.calculate_corner(opposite_tile, side, is_first_on_side)
+        self.get_equivalent_corner_shared_vert(opposite_tile, side,
+                                               is_first_on_side)
         side = self.rotate_side(side)
-        self.calculate_corner(prev_tile, side, is_first_on_side)
+        self.get_equivalent_corner_shared_vert(prev_tile, side,
+                                               is_first_on_side)
 
-        return [self.uv]
-
-    def calculate_vert_uvs(self, first_shared_vert=None):
-        if first_shared_vert == self:
-            return []
-
-        if first_shared_vert is None:
-            first_shared_vert = self
-
-            if self.is_corner():
-                return self.calculate_corner_uvs()
+    def gather_equivalent_shared_verts(self):
+        if self.is_corner():
+            self.gather_equivalent_corner_shared_verts()
+            return
 
         other_shared_vert = \
             self.tile.boundary.get_other_value(self.side,
                                                self.feature)
 
-        uvs = [self.uv]
         if other_shared_vert is not None:
-            verts = other_shared_vert.calculate_vert_uvs(first_shared_vert)
-            uvs.extend(verts)
-
-            first_shared_vert.tiles.\
-                append(other_shared_vert.tile)
-            first_shared_vert.vert_index_keys.\
-                append(other_shared_vert.index_keys)
-
-        return uvs
+            self.equivalent_shared_verts.append(other_shared_vert)
 
 
 class SharedFace(BoundaryBase):
@@ -185,14 +191,24 @@ class SharedFace(BoundaryBase):
         self.tiles = []
         self.face_index_keys = []
 
-        # For really complex paths ...
+        # For really complex paths ... (involving tangent-vert))
         self.next_shared_face = None
 
         self.tile.boundary.values[self.side][feature] = self
 
-    def __str__(self):
-        return "<{} (Tile: {}, {}, {}) index_keys: {}, vert_indices: {}>".\
+    def __repr__(self):
+        return "<{} ({}: {}) side: {}, feature: {}>".\
             format(self.__class__.__name__,
+                   self.tile.__class__.__name__,
+                   self.tile.fingerprint,
+                   self.side,
+                   self.feature)
+
+    def __str__(self):
+        return "<{} ({}: {}) side: {}, feature: {}, "\
+            "index_keys: {}, vert_indices: {}>".\
+            format(self.__class__.__name__,
+                   self.tile.__class__.__name__,
                    self.tile.fingerprint,
                    self.side,
                    self.feature,
@@ -325,11 +341,27 @@ class TileBoundary(BoundaryBase):
             self.num_verts[side] = 0
             self.num_faces[side] = 0
             for feature in self.prototype[side]:
-                self.values[side][feature] = None
                 if 'vert' in feature:
+                    self.values[side][feature] = None
                     self.num_verts[side] += 1
                 if 'face' in feature:
+                    self.values[side][feature] = None
                     self.num_faces[side] += 1
+
+    def __repr__(self):
+        return "<{} ({}: {})>".\
+            format(self.__class__.__name__,
+                   self.tile.__class__.__name__,
+                   self.tile.fingerprint)
+
+    def __str__(self):
+        from pprint import pformat
+        return "<{} ({}: {})\n{}>".\
+            format(self.__class__.__name__,
+                   self.tile.__class__.__name__,
+                   self.tile.fingerprint,
+                   pformat({'prototype': self.prototype,
+                            'values': self.values}, indent=2))
 
     def validate(self):
         self._validate_prototype()
